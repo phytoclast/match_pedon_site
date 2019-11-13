@@ -1,0 +1,363 @@
+Observation_Label	Observation_Type	Latitude	Longitude	Year	Mon	Day	State	County
+Ionia County RCA Site	Low Intensity Plot: Cover	42.95241667	-85.15947222	2011	06	20	Michigan	Ionia County
+Newaygo County	Low Intensity Plot: Cover	43.62458333	-85.94636111	2011	06	30	Michigan	Newaygo County
+Barry County -Tenkink woods	Community	42.48388889	-85.23583333	2011	07	14	Michigan	Barry County
+Barry County - Houghton swamp	Low Intensity Plot: Cover	42.48694444	-85.23861111	2011	07	14	Michigan	Barry County
+Allegan County RCA Site: Newton	Low Intensity Plot: Cover	42.67005555	-85.87130555	2011	07	15	Michigan	Allegan County
+Ionia County Shallow Sandy Site 1	Low Intensity Plot: Cover	42.976749	-84.995823	2011	06	06	Michigan	Ionia County
+Allegan County RCA Site: Morocco	Low Intensity Plot: Cover	42.5319	-86.0464	2011	06	07	Michigan	Allegan County
+Van Buren County RCA Site	Low Intensity Plot: Cover	42.15855	-86.087391	2011	06	08	Michigan	Van Buren County
+Lake County RCA Site	Community	43.900262	-85.898901	2011	06	09	Michigan	Lake County
+Calhoun County County RCA Site	Low Intensity Plot: Cover	42.12333564	-84.92244495	2011	06	13	Michigan	Calhoun County
+Mason County	Low Intensity Plot: Cover	44.02833333	-86.26888889	2011	06	23	Michigan	Mason County
+Oceana County	Low Intensity Plot: Cover	43.73152778	-86.28838889	2011	07	19	Michigan	Oceana County
+Berrien County	Community	42.02471667	-86.4531	2011	07	29	Michigan	Berrien County
+Allegan County RCA Site: Oakville	Low Intensity Plot: Cover	42.55485278	-85.89639722	2011	08	10	Michigan	Allegan County
+Coastal Plain Marsh 1	Low Intensity Plot: Cover	43.50021667	-85.792	2011	08	12	Michigan	Newaygo County
+Coastal Plain Marsh 2	Low Intensity Plot: Cover	43.50321667	-85.80003333	2011	08	12	Michigan	Newaygo County
+Manistee RCA Site: Benona	General	44.40833333	-86.18951667	2011	06	29	Michigan	Manistee County
+Oceana RCA Site: Benona	Low Intensity Plot: Cover	43.6297741	-86.50968802	2011	07	12	Michigan	Oceana County
+Ionia County Shallow Sandy Site 2	Soil	42.97744444	-84.99488889	2011	06	06	Michigan	Ionia County
+Sand Dunes	General	43.127018	-86.273811	2011	09	28	Michigan	Muskegon County
+Sandy Lake Plain	General	43.03411111	-86.10863889	2011	09	28	Michigan	Ottawa County
+Sandy Outwash Plain	General	43.24831278	-86.12099972	2011	09	28	Michigan	Muskegon County
+MM01.02	Low Intensity Plot: Cover	42.97938333	-85.83063333	2012	04	16	Michigan	Ottawa County
+S12042504	Low Intensity Plot: Cover	42.9897	-86.06925	2012	04	25	Michigan	Ottawa County
+S12042505	Low Intensity Plot: Cover	42.98533333	-86.07953333	2012	04	25	Michigan	Ottawa County
+S12042601	Low Intensity Plot: Cover	42.59465	-85.94333333	2012	04	26	Michigan	Allegan County
+S12050801	Low Intensity Plot: Cover	42.89133333	-86.05148333	2012	05	08	Michigan	Ottawa County
+S12051101	Low Intensity Plot: Cover	42.95096667	-85.8828	2012	05	11	Michigan	Ottawa County
+S12051102	Low Intensity Plot: Cover	42.953	-85.88123333	2012	05	11	Michigan	Ottawa County
+S12051103	Low Intensity Plot: Cover	42.95238423	-85.8815	2012	05	11	Michigan	Ottawa County
+S12051801	Low Intensity Plot: Cover	40.84726667	-87.04686667	2012	05	18	Indiana	White County
+S12052301	Low Intensity Plot: Cover	42.97208333	-86.13405	2012	05	23	Michigan	Ottawa County
+S12052302	Low Intensity Plot: Cover	42.98376667	-86.06975	2012	05	23	Michigan	Ottawa County
+MM01.A	Low Intensity Plot: Cover	42.97975	-85.8368	2012	04	16	Michigan	Ottawa County
+S12052401	Low Intensity Plot: Cover	43.29635	-85.357	2012	05	24	Michigan	Montcalm County
+S12052402	Low Intensity Plot: Cover	43.29916667	-85.35646667	2012	05	24	Michigan	Montcalm County
+S12052403	Low Intensity Plot: Cover	43.14119444	-85.19380556	2012	05	24	Michigan	Montcalm County
+S12053101	Low Intensity Plot: Cover	43.01815	-85.62688333	2012	05	31	Michigan	Kent County
+S12060401	Low Intensity Plot: Cover	42.98686667	-85.3594	2012	06	04	Michigan	Kent County
+S12060402	Low Intensity Plot: Cover	42.92816667	-85.28675	2012	06	04	Michigan	Ionia County
+S12060501	Low Intensity Plot: Cover	42.87791667	-85.32381667	2012	06	05	Michigan	Kent County
+S12060502	Low Intensity Plot: Cover	42.77103333	-85.62341667	2012	06	05	Michigan	Kent County
+S12060503	Low Intensity Plot: Cover	42.77081667	-85.62336667	2012	06	05	Michigan	Kent County
+S12061301	Low Intensity Plot: Cover	41.70791667	-86.60746667	2012	06	13	Indiana	LaPorte County
+MM01.01	Low Intensity Plot: Cover	42.976745	-85.836789	2012	04	16	Michigan	Ottawa County
+S12061302	Low Intensity Plot: Cover	41.75141667	-86.4046	2012	06	13	Indiana	Saint Joseph County
+S12060701	Low Intensity Plot: Cover	42.34765	-86.00471667	2012	06	07	Michigan	Van Buren County
+S12060702	Low Intensity Plot: Cover	42.33891667	-86.02008333	2012	06	07	Michigan	Van Buren County
+S12060703	Low Intensity Plot: Cover	42.33923333	-86.01951667	2012	06	07	Michigan	Van Buren County
+S12062501	Low Intensity Plot: Cover	42.77011667	-84.38518333	2012	06	25	Michigan	Clinton County
+S12062502	Low Intensity Plot: Cover	42.7701	-84.38521667	2012	06	25	Michigan	Clinton County
+S12062503	Low Intensity Plot: Cover	42.79506667	-84.38263333	2012	06	25	Michigan	Clinton County
+S12062504	Low Intensity Plot: Cover	42.7957	-84.3822	2012	06	25	Michigan	Clinton County
+S12062801	Low Intensity Plot: Cover	42.50748333	-85.71011667	2012	06	28	Michigan	Allegan County
+S12062802	Low Intensity Plot: Cover	42.50736667	-85.7103	2012	06	28	Michigan	Allegan County
+ML18.04	Low Intensity Plot: Cover	42.56515	-86.02086667	2012	04	19	Michigan	Allegan County
+S12062901	Low Intensity Plot: Cover	42.49195	-85.83363333	2012	06	29	Michigan	Allegan County
+S12062902	Low Intensity Plot: Cover	42.49731667	-85.82331667	2012	06	29	Michigan	Allegan County
+S12062903	Low Intensity Plot: Cover	42.49621667	-85.82578333	2012	06	29	Michigan	Allegan County
+S12070201	Low Intensity Plot: Cover	42.00826667	-85.96568333	2012	07	02	Michigan	Cass County
+S12070202	Low Intensity Plot: Cover	42.00786667	-85.96676667	2012	07	02	Michigan	Cass County
+S12070203	Low Intensity Plot: Cover	41.99836667	-85.95995	2012	07	02	Michigan	Cass County
+S12071301	Low Intensity Plot: Cover	42.27313333	-86.04176667	2012	07	13	Michigan	Van Buren County
+S12092504	Low Intensity Plot: Cover	42.73116667	-85.4295	2012	09	25	Michigan	Barry County
+S12092601	Low Intensity Plot: Cover	42.85515	-85.85046667	2012	09	26	Michigan	Ottawa County
+S12092602	Low Intensity Plot: Cover	42.85495	-85.84948333	2012	09	26	Michigan	Ottawa County
+ML18.09	Low Intensity Plot: Cover	42.50761667	-86.00718333	2012	04	19	Michigan	Allegan County
+S12092501	Low Intensity Plot: Cover	42.72835	-85.42823333	2012	09	25	Michigan	Barry County
+S12092502	Low Intensity Plot: Cover	42.72858333	-85.42866667	2012	09	25	Michigan	Barry County
+S12092503	Low Intensity Plot: Cover	42.73031667	-85.4284	2012	09	25	Michigan	Barry County
+S12092603	Low Intensity Plot: Cover	42.85481667	-85.84976667	2012	09	26	Michigan	Ottawa County
+S12092604	Low Intensity Plot: Cover	42.85456667	-85.84981667	2012	09	26	Michigan	Ottawa County
+S12090701	Low Intensity Plot: Cover	43.24295	-85.8292	2012	09	07	Michigan	Muskegon County
+S12090702	Low Intensity Plot: Cover	43.06405	-85.7878	2012	09	07	Michigan	Kent County
+S12090703	Low Intensity Plot: Cover	43.0639	-85.78731667	2012	09	07	Michigan	Ottawa County
+S12091904	Low Intensity Plot: Cover	43.08603333	-86.07131667	2012	09	19	Michigan	Ottawa County
+S12092001	Low Intensity Plot: Cover	43.05323333	-86.06753333	2012	09	20	Michigan	Ottawa County
+S12042301	Low Intensity Plot: Cover	42.9071	-85.99055	2012	04	23	Michigan	Ottawa County
+S12092002	Low Intensity Plot: Cover	43.05006667	-86.07066667	2012	09	20	Michigan	Ottawa County
+S12091901	Low Intensity Plot: Cover	43.08495	-86.0686	2012	09	20	Michigan	Ottawa County
+S12091902	Low Intensity Plot: Cover	43.08503333	-86.06953333	2012	09	19	Michigan	Ottawa County
+S12091903	Low Intensity Plot: Cover	43.08561667	-86.07005	2012	09	19	Michigan	Ottawa County
+S12082801	Low Intensity Plot: Cover	43.42906667	-86.35321667	2012	08	28	Michigan	Muskegon County
+S12071001	Low Intensity Plot: Cover	42.6296	-85.84355	2012	07	10	Michigan	Allegan County
+S12071002	Low Intensity Plot: Cover	42.47391667	-85.7706	2012	07	10	Michigan	Allegan County
+S12071302	Low Intensity Plot: Cover	42.27726667	-86.04225	2012	07	13	Michigan	Van Buren County
+S12071303	Low Intensity Plot: Cover	42.277	-86.039	2012	07	13	Michigan	Van Buren County
+S12071304	Low Intensity Plot: Cover	42.28095	-86.03658333	2012	07	13	Michigan	Van Buren County
+S12042501	Low Intensity Plot: Cover	43.00513333	-86.06356667	2012	04	25	Michigan	Ottawa County
+S12061201	Low Intensity Plot: Cover	42.95963333	-85.7913	2012	06	12	Michigan	Ottawa County
+S12050802	Low Intensity Plot: Cover	42.89125	-86.05183333	2012	05	08	Michigan	Ottawa County
+S12050803	Low Intensity Plot: Cover	42.89113333	-86.05183333	2012	05	08	Michigan	Ottawa County
+MM11.02	Low Intensity Plot: Cover	41.878	-86.45928333	2012	05	03	Michigan	Berrien County
+MM11.01	Low Intensity Plot: Cover	41.87768333	-86.46333333	2012	05	03	Michigan	Berrien County
+S12042502	Low Intensity Plot: Cover	42.98805	-86.06981667	2012	04	25	Michigan	Ottawa County
+S12042503	Low Intensity Plot: Cover	42.98881667	-86.06905	2012	04	25	Michigan	Ottawa County
+Blandford Ravine	Floristic	42.99501208	-85.74268598	2013	05	31	Michigan	Kent County
+S13070909	Low Intensity Plot: Cover	42.52943333	-86.04826667	2013	07	09	Michigan	Allegan County
+S13070910	Low Intensity Plot: Cover	42.52851667	-86.04901667	2013	07	09	Michigan	Allegan County
+S13070911	Low Intensity Plot: Cover	42.52763333	-86.05031667	2013	07	09	Michigan	Allegan County
+S13070912	Low Intensity Plot: Cover	42.5272	-86.05076667	2013	07	09	Michigan	Allegan County
+S13071001	Low Intensity Plot: Cover	42.65628333	-85.9046	2013	07	10	Michigan	Allegan County
+S13071101	Low Intensity Plot: Cover	43.30553333	-85.92723333	2013	07	11	Michigan	Newaygo County
+S13071102	Low Intensity Plot: Cover	43.30285	-85.931	2013	07	11	Michigan	Newaygo County
+S13071103	Low Intensity Plot: Cover	43.2968	-85.96681667	2013	07	11	Michigan	Newaygo County
+S13071104	Low Intensity Plot: Cover	43.28915	-85.96728333	2013	07	11	Michigan	Muskegon County
+S13071201	Low Intensity Plot: Cover	42.62678333	-85.9488	2013	07	12	Michigan	Allegan County
+S13070901	Low Intensity Plot: Cover	42.53531667	-86.04693333	2013	07	09	Michigan	Allegan County
+S13071202	Low Intensity Plot: Cover	42.62613333	-85.95281667	2013	07	12	Michigan	Allegan County
+S13071203	Low Intensity Plot: Cover	42.62613333	-85.95118333	2013	07	12	Michigan	Allegan County
+W14090809	Wetland Determination	43.12701667	-85.89461667	2014	09	08	Michigan	Ottawa County
+Kalamazoo4	Low Intensity Plot: Cover	42.17458333	-85.4874	2014	04	22	Michigan	Kalamazoo County
+SI: red maple 01	Site Index	42.52853333	-86.05021667	2014	04	08	Michigan	Allegan County
+SI: pin oak 01	Site Index	42.5292	-86.0505	2014	04	10	Michigan	Allegan County
+SI: red oak & red maple 02	Site Index	42.53036667	-86.05093333	2014	04	11	Michigan	Allegan County
+SI: pin oak2 01	Site Index	42.53036667	-86.05093333	2014	04	12	Michigan	Allegan County
+W2015060903	Wetland Determination	43.08493333	-86.01723333	2015	06	09		
+W2015061704	Wetland Determination	42.73455	-84.92628333	2015	06	17		
+S2015062501	Wetland Determination	43.1293	-85.43801667	2015	06	25		
+W2015062501	Wetland Determination	43.13016667	-85.43741667	2015	06	25		
+W2015062502	Wetland Determination	43.1287	-85.43336667	2015	06	25		
+W2015062503	Wetland Determination	43.12646667	-85.43143333	2015	06	25		
+W2015062504	Wetland Determination	43.12973333	-85.43285	2015	06	25		
+W2015062505	Wetland Determination	43.1298	-85.43481667	2015	06	25		
+W2015062506	Wetland Determination	43.12691667	-85.43535	2015	06	25		
+W2015062507	Wetland Determination	43.13905556	-85.43558889	2015	06	25		
+W2015062508	Wetland Determination	43.13965	-85.4359	2015	06	25		
+S2015060901	Wetland Determination	43.08563333	-86.01796667	2015	06	09		
+DSP RF1	High Intensity Plot: Nested	42.63008333	-85.5067	2015	05	19	Michigan	Barry County
+DSP RF3	High Intensity Plot: Nested	42.7937	-84.38381667	2015	05	27	Michigan	Clinton County
+DSP RF2	High Intensity Plot: Nested	43.18406675	-85.34212492	2015	06	04	Michigan	Kent County
+Page Creek Fen	High Intensity Plot: Nested	42.98656667	-85.36145	2015	07	08	Michigan	Kent County
+S13071204	Low Intensity Plot: Cover	42.6253	-85.95085	2013	07	12	Michigan	Allegan County
+S13071205	Low Intensity Plot: Cover	42.62695473	-85.96046238	2013	07	12	Michigan	Allegan County
+S13071601	Low Intensity Plot: Cover	42.527	-86.04806667	2013	07	16	Michigan	Allegan County
+S13071602	Low Intensity Plot: Cover	42.52499205	-86.04905282	2013	07	16	Michigan	Allegan County
+S13071701	Hybrid Line-Point-Intercept Plot	42.52901667	-86.04985	2013	07	17	Michigan	Allegan County
+S13071801	Line-Point-Intercept Plot	42.53091667	-86.04928333	2013	07	18	Michigan	Allegan County
+S13072301	Line-Point-Intercept Plot	43.30453333	-85.92895	2013	07	23	Michigan	Newaygo County
+S13072302	Line-Point-Intercept Plot	43.3048	-85.92868333	2013	07	23	Michigan	Newaygo County
+S13070902	Low Intensity Plot: Cover	42.53473333	-86.04663333	2013	07	09	Michigan	Allegan County
+s13072901	Low Intensity Plot: Cover	41.72633333	-86.8124	2013	07	29	Indiana	LaPorte County
+s13072902	Low Intensity Plot: Cover	41.72675	-86.81236667	2013	07	29	Indiana	LaPorte County
+s13072903	Low Intensity Plot: Cover	41.72668333	-86.81181667	2013	07	29	Indiana	LaPorte County
+s13072904	Low Intensity Plot: Cover	41.72716667	-86.81183333	2013	07	29	Indiana	LaPorte County
+s13072905	Low Intensity Plot: Cover	41.72761667	-86.81126667	2013	07	29	Indiana	LaPorte County
+s13072906	Low Intensity Plot: Cover	41.73166667	-86.80513333	2013	07	29	Indiana	LaPorte County
+s13072907	Low Intensity Plot: Cover	41.73073333	-86.80513333	2013	07	29	Indiana	LaPorte County
+s13072908	Low Intensity Plot: Cover	41.72981667	-86.80521667	2013	07	29	Indiana	LaPorte County
+s13072909	Low Intensity Plot: Cover	41.72805	-86.80751667	2013	07	29	Indiana	LaPorte County
+S13080701	Line-Point-Intercept Plot	41.72781667	-86.81085	2013	08	07	Indiana	LaPorte County
+S13070903	Low Intensity Plot: Cover	42.5339	-86.04653333	2013	07	09	Michigan	Allegan County
+S13081201	Line-Point-Intercept Plot	41.72773333	-86.81001667	2013	08	12	Indiana	LaPorte County
+Blandford West	Floristic	0	0	2013	06	01		
+West Meadow	Floristic	0	0	2013	06	01		
+Blandford West - Justin	Floristic	0	0	2013	06	01		
+Heron Meadow - Justin	Floristic	0	0	2013	06	01		
+S13070904	Low Intensity Plot: Cover	42.53301667	-86.0463	2013	07	09	Michigan	Allegan County
+S13070905	Low Intensity Plot: Cover	42.5321	-86.04651667	2013	07	09	Michigan	Allegan County
+S13070906	Low Intensity Plot: Cover	42.53121667	-86.0466	2013	07	09	Michigan	Allegan County
+S13070907	Low Intensity Plot: Cover	42.53021667	-86.04678333	2013	07	09	Michigan	Allegan County
+S13070908	Low Intensity Plot: Cover	42.53031667	-86.04785	2013	07	09	Michigan	Allegan County
+S14060201	Medium Intensity Plot: Strata	42.392	-86.13621667	2014	06	02	Michigan	Van Buren County
+S14060202	Medium Intensity Plot: Strata	42.12805	-86.3517	2014	06	02	Michigan	Berrien County
+S14061002	Medium Intensity Plot: Strata	43.29986111	-85.98288889	2014	06	10	Michigan	Newaygo County
+S14061001	Medium Intensity Plot: Strata	43.30122222	-85.98163889	2014	06	10	Michigan	Muskegon County
+S14060601	Medium Intensity Plot: Strata	43.30211111	-86.155	2014	06	06	Michigan	Muskegon County
+S14060602	Medium Intensity Plot: Strata	43.30452778	-86.14872222	2014	06	06	Michigan	Muskegon County
+S14061901	High Intensity Plot: Nested	42.60688333	-86.03801667	2014	06	19	Michigan	Allegan County
+S14061902	High Intensity Plot: Nested	42.60766667	-86.03701667	2014	06	19	Michigan	Allegan County
+S14062401	High Intensity Plot: Nested	42.59705	-85.99786667	2014	06	24	Michigan	Allegan County
+S14062501	Medium Intensity Plot: Strata	42.60065	-85.98986667	2014	06	25	Michigan	Allegan County
+Kalamazoo1	Low Intensity Plot: Cover	42.17528333	-85.48663333	2014	04	22	Michigan	Kalamazoo County
+S14062601	High Intensity Plot: Nested	42.60796667	-86.02283333	2014	06	26	Michigan	Allegan County
+S14070202	High Intensity Plot: Nested	42.58598333	-85.9515	2014	07	02	Michigan	Allegan County
+S14070203	Medium Intensity Plot: Strata	42.58608333	-85.96768333	2014	07	02	Michigan	Allegan County
+S14070201	Medium Intensity Plot: Strata	42.58338333	-85.95156667	2014	07	02	Michigan	Allegan County
+S14071501	High Intensity Plot: Nested	43.29833333	-86.01183333	2014	07	15	Michigan	Muskegon County
+S14071502	High Intensity Plot: Nested	43.29926667	-86.00778333	2014	07	15	Michigan	Muskegon County
+S14071701	High Intensity Plot: Nested	43.0362	-86.12076667	2014	07	17	Michigan	Ottawa County
+S14080601	High Intensity Plot: Nested	42.98811667	-86.06998333	2014	08	06	Michigan	Ottawa County
+W14081201	Wetland Determination	43.18787	-85.839401	2014	08	12	Michigan	Ottawa County
+S14081301	Low Intensity Plot: Cover	42.99913333	-86.10361667	2014	08	13	Michigan	Ottawa County
+Kalamazoo2	Low Intensity Plot: Cover	42.17541667	-85.48698333	2014	04	22	Michigan	Kalamazoo County
+S14081302	Low Intensity Plot: Cover	42.99875	-86.10316667	2014	08	13	Michigan	Ottawa County
+S14081303	Low Intensity Plot: Cover	43.00186667	-86.1663	2014	08	13	Michigan	Ottawa County
+S14081304	Low Intensity Plot: Cover	43.1478	-86.08371667	2014	08	13	Michigan	Muskegon County
+S14081305	Low Intensity Plot: Cover	43.17866667	-86.06325	2014	08	13	Michigan	Muskegon County
+S14081306	Low Intensity Plot: Cover	43.17976667	-86.06378333	2014	08	13	Michigan	Muskegon County
+W14081401	Wetland Determination	43.17963333	-85.46136667	2014	08	14	Michigan	Kent County
+W14081402	Wetland Determination	43.18803333	-85.84195	2014	08	14	Michigan	Ottawa County
+W14081403	Wetland Determination	43.1872	-85.8439	2014	08	14	Michigan	Ottawa County
+W14081404	Wetland Determination	43.1875	-85.8438	2014	08	14	Michigan	Ottawa County
+W14090801	Wetland Determination	43.12838333	-85.90568333	2014	09	08	Michigan	Ottawa County
+Kalamazoo3	Low Intensity Plot: Cover	42.17546667	-85.4875	2014	04	22	Michigan	Kalamazoo County
+W14090802	Wetland Determination	43.12815	-85.90443333	2014	09	08	Michigan	Ontonagon County
+W14090803	Wetland Determination	43.1264	-85.9004	2014	09	08	Michigan	Ottawa County
+W14090804	Wetland Determination	43.12634823	-85.89839883	2014	09	08	Michigan	Ottawa County
+W14090805	Wetland Determination	43.12706667	-85.8986	2014	09	08	Michigan	Ottawa County
+W14090806	Wetland Determination	43.12672801	-85.89851685	2014	09	08	Michigan	Ottawa County
+W14090807	Wetland Determination	43.12721667	-85.8954	2014	09	08	Michigan	Ottawa County
+W14090808	Wetland Determination	43.12711667	-85.8954	2014	09	08	Michigan	Ottawa County
+Lamberton Lake Fen	High Intensity Plot: Nested	43.03601667	-85.6278	2015	07	20	Michigan	Kent County
+DSP RR1	High Intensity Plot: Nested	43.25588333	-85.1605	2015	07	29	Michigan	Montcalm County
+DSP ER2	High Intensity Plot: Nested	43.30398333	-85.75971667	2015	07	31	Michigan	Newaygo County
+DSP ER1	High Intensity Plot: Nested	42.74583333	-85.17444444	2015	08	05	Michigan	Barry County
+DSP ER3	High Intensity Plot: Nested	42.52472222	-84.88138889	2015	08	07	Michigan	Eaton County
+DSP RR2	High Intensity Plot: Nested	43.54433333	-85.18218333	2015	08	14	Michigan	Mecosta County
+W2015060904	Wetland Determination	43.08688333	-86.01838333	2015	06	09		
+DSP RR3	High Intensity Plot: Nested	42.68136667	-84.7211	2015	08	12	Michigan	Eaton County
+W2015060905	Wetland Determination	43.08748333	-86.01968333	2015	06	09		
+W2015060906	Wetland Determination	43.08616667	-86.0201	2015	06	09		
+S2015061701	Wetland Determination	42.73573333	-84.92828333	2015	06	17		
+W2015061701	Wetland Determination	42.73613333	-84.92825	2015	06	17		
+W2015061702	Wetland Determination	42.73705	-84.92751667	2015	06	17		
+W2015061703	Wetland Determination	42.73516667	-84.9265	2015	06	17		
+2016MI067001	Low Intensity Plot: Cover	42.79301667	-84.8636	2016	06	02	Michigan	Ionia County
+2016MI067002	Low Intensity Plot: Cover	42.7937	-84.86283333	2016	06	02	Michigan	Ionia County
+2016MI067003	Low Intensity Plot: Cover	42.78951667	-84.86313333	2016	06	02	Michigan	Ionia County
+2016MI067004	Low Intensity Plot: Cover	42.80811667	-84.94056667	2016	06	08	Michigan	Ionia County
+2016MI067005	Low Intensity Plot: Cover	42.80781667	-84.94491667	2016	06	08	Michigan	Ionia County
+2016MI067006	Low Intensity Plot: Cover	42.80793333	-84.94391667	2016	06	08	Michigan	Ionia County
+2016MI067007	Low Intensity Plot: Cover	42.80766667	-84.94371667	2016	06	08	Michigan	Ionia County
+2016MI081006	Low Intensity Plot: Cover	43.02416667	-85.4987	2016	06	10	Michigan	Kent County
+2016MI081007	Low Intensity Plot: Cover	43.02461667	-85.49881667	2016	06	10	Michigan	Kent County
+2016MI149001	Low Intensity Plot: Cover	41.902	-85.65771667	2016	06	14	Michigan	Saint Joseph County
+farm field	Wetland Determination	43.2418	-85.63085	2016	08	24	Michigan	Kent County
+S2016MI149002	EPA	41.7897	-85.69176667	2016	06	27	Michigan	Saint Joseph County
+2016MI037001	Low Intensity Plot: Cover	43.08543333	-84.76531667	2016	07	06	Michigan	Clinton County
+2016MI037002	Low Intensity Plot: Cover	43.08478333	-84.76545	2016	07	06	Michigan	Clinton County
+2016MI065001	Low Intensity Plot: Cover	42.717777	-84.4735	2016	07	14	Michigan	Ingham County
+2016MI065002	Low Intensity Plot: Cover	42.71408333	-84.47358333	2016	07	14	Michigan	Ingham County
+2016MI023001	Low Intensity Plot: Cover	41.97513333	-85.06153333	2016	07	27	Michigan	Branch County
+2016MI023002	Low Intensity Plot: Cover	41.87676667	-85.0609	2016	07	27	Michigan	Branch County
+2016MI059001	Low Intensity Plot: Cover	42.00791667	-84.6943	2016	08	03	Michigan	Hillsdale County
+2016MI059002	Low Intensity Plot: Cover	42.00813333	-84.69406667	2016	08	03	Michigan	Hillsdale County
+2016MI059003	Low Intensity Plot: Cover	42.00746667	-84.69458333	2016	08	03	Michigan	Hillsdale County
+Woodland	Wetland Determination	43.2418	-85.63085	2016	08	24	Michigan	Kent County
+2016MI067008	Low Intensity Plot: Cover	42.7926	-84.99458333	2016	08	08	Michigan	Ionia County
+2016MI067009	Low Intensity Plot: Cover	42.79323333	-84.99375	2016	08	08	Michigan	Ionia County
+2016MI067010	Low Intensity Plot: Cover	43.04698333	-85.21718333	2016	08	08	Michigan	Ionia County
+2016MI067011	Low Intensity Plot: Cover	43.04603333	-85.21798333	2016	08	08	Michigan	Ionia County
+2016MI045001	Low Intensity Plot: Cover	42.46416667	-84.99818333	2016	08	10	Michigan	Eaton County
+2016MI045002	Low Intensity Plot: Cover	42.46488333	-84.998	2016	08	10	Michigan	Eaton County
+2016MI005001	Low Intensity Plot: Cover	42.62631667	-85.71511667	2016	08	17	Michigan	Allegan County
+2016MI005002	Low Intensity Plot: Cover	42.62728333	-85.71508333	2016	08	17	Michigan	Allegan County
+2016MI005003	Low Intensity Plot: Cover	42.62685	-85.71316667	2016	08	17	Michigan	Allegan County
+2016IN087001	Low Intensity Plot: Cover	41.75316667	-85.41283333	2016	08	18	Indiana	LaGrange County
+	Wetland Determination	0	0	2016	10	05		
+2016MI139001	Low Intensity Plot: Cover	42.94438333	-86.11793333	2016	08	23	Michigan	Ottawa County
+2016MI139002	Low Intensity Plot: Cover	42.94366667	-86.11698333	2016	08	23	Michigan	Ottawa County
+2016MI005004	Low Intensity Plot: Cover	42.62908333	-85.68271667	2016	08	25	Michigan	Allegan County
+2016MI005005	Low Intensity Plot: Cover	42.6278	-85.68375	2016	08	25	Michigan	Allegan County
+2016MI005006	Low Intensity Plot: Cover	42.62843333	-85.6846	2016	08	25	Michigan	Allegan County
+2016MI005007	Low Intensity Plot: Cover	42.62736667	-85.68708333	2016	08	25	Michigan	Allegan County
+2016MI005008	Low Intensity Plot: Cover	42.62776667	-85.68558333	2016	08	25	Michigan	Allegan County
+2016MI075001	Low Intensity Plot: Cover	42.26136667	-84.52511667	2016	09	01	Michigan	Jackson County
+2016MI075002	Low Intensity Plot: Cover	42.26	-84.52926667	2016	09	01	Michigan	Jackson County
+2016MI075003	Low Intensity Plot: Cover	42.259724	-84.529167	2016	09	01	Michigan	Jackson County
+	Wetland Determination	0	0	2016	10	05	Michigan	Jackson County
+2016MI081008	Low Intensity Plot: Cover	43.2387	-85.53851667	2016	09	06	Michigan	Kent County
+2016MI081009	Low Intensity Plot: Cover	43.2402	-85.54001667	2016	09	06	Michigan	Kent County
+2016MI081010	Low Intensity Plot: Cover	43.24128333	-85.54071667	2016	09	06	Michigan	Kent County
+2016MI081011	Low Intensity Plot: Cover	43.2411	-85.53925	2016	09	06	Michigan	Kent County
+2016MI081012	Low Intensity Plot: Cover	43.05063333	-85.7354	2016	09	06	Michigan	Kent County
+S2016MI105001	EPA	44.14343333	-86.31741667	2016	09	14	Michigan	Mason County
+2016MI105002	EPA	44.14308333	-86.31778333	2016	09	14	Michigan	Mason County
+2016MI045003	Low Intensity Plot: Cover	42.63331667	-84.9428	2016	09	15	Michigan	Eaton County
+2016MI045004	Low Intensity Plot: Cover	42.63123333	-84.94083333	2016	09	20	Michigan	Eaton County
+2016MI045005	Low Intensity Plot: Cover	42.63088333	-84.9429	2016	09	20	Michigan	Eaton County
+2016MI081002	Low Intensity Plot: Cover	43.24223333	-85.66861667	2016	05	24	Michigan	Kent County
+2016MI045006	Low Intensity Plot: Cover	42.63355	-84.94551667	2016	09	20	Michigan	Eaton County
+2016MI165001	ELTP	44.22023333	-85.70068333	2016	09	21	Michigan	Wexford County
+2016MI165002	ELTP	44.22011667	-85.70305	2016	09	21	Michigan	Wexford County
+2016MI165003	ELTP	44.23088333	-85.68573333	2016	09	21	Michigan	Wexford County
+2016MI139003	Low Intensity Plot: Cover	43.17108333	-85.7971	2016	09	25	Michigan	Ottawa County
+2016MI107001	Low Intensity Plot: Cover	43.70716667	-85.28035	2016	10	05	Michigan	Mecosta County
+2016MI107002	Low Intensity Plot: Cover	43.70621667	-85.28201667	2016	10	05	Michigan	Mecosta County
+2016MI081003	Low Intensity Plot: Cover	43.24215	-85.67776667	2016	05	24	Michigan	Kent County
+2016MI081004	Low Intensity Plot: Cover	43.24805	-85.67208333	2016	05	26	Michigan	Kent County
+2016MI081005	Low Intensity Plot: Cover	43.24815	-85.69026667	2016	05	26	Michigan	Kent County
+es20170731.04	Wetland Determination	43.22673333	-85.82853333	2017	07	31	Michigan	Muskegon County
+es20170519.01	Medium Intensity Plot: Strata	42.72225	-85.18215	2017	05	19	Michigan	Barry County
+es20170519.02	Medium Intensity Plot: Strata	42.72071667	-85.157	2017	05	19	Michigan	Barry County
+es20170519.03	Medium Intensity Plot: Strata	42.73383333	-85.1653	2017	05	19	Michigan	Barry County
+es20170615.01	Medium Intensity Plot: Strata	42.47378333	-84.82618333	2017	06	15	Michigan	Eaton County
+es20170615.02	Medium Intensity Plot: Strata	42.46708333	-84.86096667	2017	06	15	Michigan	Eaton County
+es20170623.01	General	42.35913333	-84.8361	2017	06	23	Michigan	Calhoun County
+es20170623.02	General	42.3566	-84.83406667	2017	06	23	Michigan	Calhoun County
+es20170808.01	General	42.59586667	-85.8138	2017	08	08	Michigan	Allegan County
+es20170717.01	Wetland Determination	43.10096667	-84.42356667	2017	07	17	Michigan	Clinton County
+es20170808.02	General	42.5957	-85.81178333	2017	08	08	Michigan	Allegan County
+es20170823.01	Wetland Determination	42.47405	-85.00288333	2017	08	23	Michigan	Eaton County
+es20170823.02	Wetland Determination	42.47485	-85.00173333	2017	08	23	Michigan	Eaton County
+es20170823.03	Wetland Determination	42.48001667	-84.98778333	2017	08	23	Michigan	Eaton County
+es20170823.04	Wetland Determination	42.48031667	-84.98643333	2017	08	23	Michigan	Eaton County
+es20170915.01	General	43.01045	-84.80825	2017	09	15	Michigan	Clinton County
+es20170525.01	Medium Intensity Plot: Strata	43.14305	-84.90566667	2017	05	25	Michigan	Montcalm County
+es20170717.02	Wetland Determination	43.10128333	-84.42363333	2017	07	17	Michigan	Clinton County
+es20170727.01	Wetland Determination	42.58751667	-84.98263333	2017	07	27	Michigan	Eaton County
+es20170727.02	Wetland Determination	42.58761667	-84.98478333	2017	07	27	Michigan	Eaton County
+es20170727.03	Wetland Determination	42.58918333	-84.98386667	2017	07	27	Michigan	Eaton County
+es20170731.01	Wetland Determination	43.22628333	-85.82843333	2017	07	31	Michigan	Muskegon County
+es20170731.02	Wetland Determination	43.22585	-85.8259	2017	07	31	Michigan	Muskegon County
+es20170731.03	Wetland Determination	43.22703333	-85.82493333	2017	07	31	Michigan	Muskegon County
+es20180601.01	General	42.62008333	-84.1051	2018	06	01	Michigan	Livingston County
+gs20180823.04	Wetland Determination	41.86368333	-86.6257	2018	08	23	Michigan	Berrien County
+gs20180823.05	Wetland Determination	41.86213333	-86.6252	2018	08	23	Michigan	Berrien County
+gs20180813.01	Wetland Determination	42.22551389	-85.46240278	2018	08	13	Michigan	Kalamazoo County
+gs20180813.02	Wetland Determination	42.22554167	-85.46136389	2018	08	13	Michigan	Kalamazoo County
+gs20180813.03	Wetland Determination	42.22621111	-85.45951111	2018	08	13	Michigan	Kalamazoo County
+gs20180830.01	Wetland Determination	42.4287	-84.62686667	2018	08	30	Michigan	Eaton County
+gs20180830.02	Wetland Determination	42.42865	-84.62853333	2018	08	30	Michigan	Eaton County
+gs20180830.03	Wetland Determination	42.67708333	-85.05843333	2018	08	30	Michigan	Eaton County
+gs20180830.04	Wetland Determination	42.67745	-85.06096667	2018	08	30	Michigan	Eaton County
+gs20180912.02	Wetland Determination	41.80523333	-85.0235	2018	09	12	Michigan	Branch County
+es20180608.01	General	42.71981667	-84.08468333	2018	06	08	Michigan	Livingston County
+gs20180912.01	Wetland Determination	41.80605	-85.02531667	2018	09	12	Michigan	Branch County
+gs20180912.03	Wetland Determination	41.80735	-85.02846667	2018	09	12	Michigan	Branch County
+gs20180912.04	Wetland Determination	41.80681667	-85.02731667	2018	09	12	Michigan	Branch County
+gs20180912.05	Wetland Determination	41.80718333	-85.02478333	2018	09	12	Michigan	Branch County
+gs20180912.06	Wetland Determination	41.80081667	-85.02765	2018	09	12	Michigan	Branch County
+gs20180919.01	Wetland Determination	42.14736667	-85.1124	2018	09	19	Michigan	Calhoun County
+gs20180919.02	Wetland Determination	42.14821667	-85.11281667	2018	09	19	Michigan	Calhoun County
+gs20180919.03	Wetland Determination	42.14881667	-85.1134	2018	09	19	Michigan	Calhoun County
+gs20180919.04	Wetland Determination	42.1498	-85.11333333	2018	09	19	Michigan	Calhoun County
+gs20180919.05	Wetland Determination	42.15051667	-85.11405	2018	09	19	Michigan	Calhoun County
+gs20180816.01	Wetland Determination	41.86766667	-86.14531667	2018	08	16	Michigan	Cass County
+gs20180927.01	Wetland Determination	42.74455	-84.79406667	2018	09	27	Michigan	Eaton County
+gs20180927.02	Wetland Determination	42.74221667	-84.78923333	2018	09	27	Michigan	Eaton County
+gs20181003.01	Wetland Determination	42.49666667	-84.72553333	2018	10	03	Michigan	Eaton County
+gs20181003.02	Wetland Determination	42.48851667	-84.72446667	2018	10	03	Michigan	Eaton County
+gs20181003.03	Wetland Determination	42.4877	-84.72413333	2018	10	03	Michigan	Eaton County
+gs20181003.04	Wetland Determination	42.4871	-84.72405	2018	10	03	Michigan	Eaton County
+gs20181003.05	Wetland Determination	42.48788333	-84.72568333	2018	10	03	Michigan	Eaton County
+gs20180816.02	Wetland Determination	41.8689	-86.14553333	2018	08	16	Michigan	Cass County
+gs20180816.03	Wetland Determination	41.8665	-86.15036667	2018	08	16	Michigan	Cass County
+gs20180816.04	Wetland Determination	41.86418333	-86.15003333	2018	08	16	Michigan	Cass County
+gs20180823.01	Wetland Determination	41.81015	-86.64468333	2018	08	23	Michigan	Berrien County
+gs20180823.02	Wetland Determination	41.84548333	-86.51905	2018	08	23	Michigan	Berrien County
+gs20180823.03	Wetland Determination	41.84708333	-86.5187	2018	08	23	Michigan	Berrien County
+GRR1	Temperature	44.3602778	-85.6794444	2019	06	26	Michigan	Wexford County
+s20190820.01	Wetland Determination	42.52086389	-85.03696111	2019	08	20	Michigan	Eaton County
+s20190820.02	Wetland Determination	42.52207778	-85.03587778	2019	08	20	Michigan	Eaton County
+s20190820.03	Wetland Determination	42.52344722	-85.03693889	2019	08	20	Michigan	Eaton County
+s20190820.04	Wetland Determination	42.52143611	-85.03438056	2019	08	20	Michigan	Eaton County
+s20190905.01	Wetland Determination	42.04503889	-84.92260556	2019	09	05	Michigan	Branch County
+s20190905.02	Wetland Determination	41.79265556	-84.92278056	2019	09	05	Michigan	Branch County
+s20190905.03	Wetland Determination	41.78917222	-84.92298056	2019	09	05	Michigan	Branch County
+s20190905.04	Wetland Determination	41.79523889	-84.92624444	2019	09	05	Michigan	Branch County
+s20191010.01	Soil	44.10582222	-84.28794722	2019	10	10	Michigan	Gladwin County
+s20191010.02	Soil	44.040675	-84.27964444	2019	10	10	Michigan	Gladwin County
+GRR2	Temperature	44.3701389	-85.7571111	2019	06	26	Michigan	Wexford County
+s20191017.01	Soil	43.90746944	-84.24554444	2019	10	17	Michigan	Gladwin County
+s20191017.02	Soil	44.14088333	-84.31208056	2019	10	17	Michigan	Gladwin County
+GRR5	Temperature	43.68175	-85.5799722	2019	06	26	Michigan	Newaygo County
+GRR6	Temperature	43.631	-85.7725278	2019	06	26	Michigan	Newaygo County
+s20190722.01	Wetland Determination	42.51628333	-84.83256944	2019	07	22	Michigan	Eaton County
+s20190722.02	Wetland Determination	42.516575	-84.83180556	2019	07	22	Michigan	Eaton County
+s20190722.03	Wetland Determination	43.01968889	-84.75250278	2019	07	22	Michigan	Clinton County
+s20190722.04	Wetland Determination	43.01952222	-84.75435278	2019	07	22	Michigan	Clinton County
+s20190726.01	Soil	43.15525556	-86.05971111	2019	09	12	Michigan	Muskegon County
