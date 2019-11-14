@@ -33,7 +33,7 @@
 "GRR.2011.GJS.1.AllAll.Crataegus..."	"GRR.2011.GJS.1"	"Crataegus"	"Crataegus"				"All"	"All"	"SBD2"	0.20	0	0	0	0.20	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2011071117.00	0.00	0.00										0.20	0.20	0.00	0.00				
 "GRR.2011.GJS.1.AllAll.Fraxinus.pennsylvanica.."	"GRR.2011.GJS.1"	"Fraxinus pennsylvanica"	"Fraxinus"	"pennsylvanica"			"All"	"All"	"TBD2"	0.00	0	0	0	1.00	0	0	0	0.00	0	0	0	0	0	0	0	50.06	0	0	0	0	0	0	0	0		2011071117.00	0.00	0.00										0.00	1.00	0.00	25.00				
 "GRR.2011.GJS.1.AllAll.Sambucus.canadensis.."	"GRR.2011.GJS.1"	"Sambucus nigra"	"Sambucus"	"canadensis"			"All"	"All"	"SBD2"	0.20	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2011070817.00	0.00	0.00										0.20	0.00	0.00	0.00				
-"GRR.2011.GJS.1.AllAll.Smilax..."	"GRR.2011.GJS.1"	"Smilax"	"Smilax"				"All"	"All"	"Vh"	0.20	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2011070815.00	0.00	0.00										0.20	0.00	0.00	0.00				
+"GRR.2011.GJS.1.AllAll.Smilax..."	"GRR.2011.GJS.1"	"Smilax"	"Smilax"				"All"	"All"	"HFV2"	0.20	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2011070815.00	0.00	0.00										0.20	0.00	0.00	0.00				
 "GRR.2011.GJS.1.AllAll.Thalictrum..."	"GRR.2011.GJS.1"	"Thalictrum"	"Thalictrum"				"All"	"All"	"HF"	1.00	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2011071118.00	0.00	0.00										1.00	0.00	0.00	0.00				
 "GRR.2011.GJS.1.AllAll.Ulmus.americana.."	"GRR.2011.GJS.1"	"Ulmus americana"	"Ulmus"	"americana"			"All"	"All"	"TBD2"	0.00	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	41.64	0	0	0	0	0	0	0	0		2011071117.00	0.00	0.00										0.00	0.00	0.00	20.00				
 "GRR.2011.GJS.10.All.All.Acer.rubrum.."	"GRR.2011.GJS.10"	"Acer rubrum"	"Acer"	"rubrum"			"All"	"All"	"TBD2"	0.00	0	0	0	5.00	0	0	0	0.00	0	0	0	0	0	0	0	10.00	0	0	0	0	0	0	0	0		2011072714.00	0.00	0.00																	
@@ -710,7 +710,7 @@
 "GRR.GJS.2011.76.AllAll.Eurybia.macrophylla.."	"GRR.GJS.2011.76"	"Eurybia macrophylla"	"Eurybia"	"macrophylla"			"All"	"All"	"HF2"	0.00	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0	0	2012110517.00	0.00	0.00	0.00																
 "GRR.GJS.2011.76.AllAll.Fagus.grandifolia.."	"GRR.GJS.2011.76"	"Fagus grandifolia"	"Fagus"	"grandifolia"			"All"	"All"	"TBD2"	0.00	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0	0	2012110517.00	0.00	0.00	0.00																
 "GRR.GJS.2011.76.AllAll.Fraxinus.americana.."	"GRR.GJS.2011.76"	"Fraxinus americana"	"Fraxinus"	"americana"			"All"	"All"	"TBD2"	0.00	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0	0	2012110517.00	0.00	0.00	0.00																
-"GRR.GJS.2011.76.AllAll.Galium..."	"GRR.GJS.2011.76"	"Galium"	"Galium"				"All"	"All"	"Vh"	0.00	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0	0	2012110517.00	0.00	0.00	0.00																
+"GRR.GJS.2011.76.AllAll.Galium..."	"GRR.GJS.2011.76"	"Galium"	"Galium"				"All"	"All"	"HFV1"	0.00	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0	0	2012110517.00	0.00	0.00	0.00																
 "GRR.GJS.2011.76.AllAll.Geum.canadense.."	"GRR.GJS.2011.76"	"Geum canadense"	"Geum"	"canadense"			"All"	"All"	"HF2"	0.00	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0	0	2012110517.00	0.00	0.00	0.00																
 "GRR.GJS.2011.76.AllAll.Hamamelis.virginiana.."	"GRR.GJS.2011.76"	"Hamamelis virginiana"	"Hamamelis"	"virginiana"			"All"	"All"	"TBD1"	0.00	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0	0	2012110517.00	0.00	0.00	0.00																
 "GRR.GJS.2011.76.AllAll.Helianthus.divaricatus.."	"GRR.GJS.2011.76"	"Helianthus divaricatus"	"Helianthus"	"divaricatus"			"All"	"All"	"HF2"	0.00	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0	0	2012110517.00	0.00	0.00	0.00																
@@ -1977,7 +1977,7 @@
 "GRR.GJS.2012.60.AllAll.Quercus.alba.."	"GRR.GJS.2012.60"	"Quercus alba"	"Quercus"	"alba"			"All"	"All"	"TBD2"	0.20	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0	0	2012103109.00	0.00	0.00	0.00																
 "GRR.GJS.2012.60.AllAll.Quercus.bicolor.."	"GRR.GJS.2012.60"	"Quercus bicolor"	"Quercus"	"bicolor"			"BA"	"All"	"TBD2"	0.00	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	20.00	0	0	0	0	0	0	0	0	0	2012103109.00	0.00	3.00	0.00																
 "GRR.GJS.2012.60.AllAll.Quercus.rubra.."	"GRR.GJS.2012.60"	"Quercus rubra"	"Quercus"	"rubra"			"BA"	"All"	"TBD2"	0.00	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	20.00	0	0	0	0	0	0	0	0	0	2012103109.00	0.00	2.00	0.00																
-"GRR.GJS.2012.60.AllAll.Smilax..."	"GRR.GJS.2012.60"	"Smilax"	"Smilax"				"All"	"All"	"Vh"	0.20	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0	0	2012103110.00	0.00	0.00	0.00																
+"GRR.GJS.2012.60.AllAll.Smilax..."	"GRR.GJS.2012.60"	"Smilax"	"Smilax"				"All"	"All"	"HFV2"	0.20	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0	0	2012103110.00	0.00	0.00	0.00																
 "GRR.GJS.2012.60.AllAll.Sphagnum..."	"GRR.GJS.2012.60"	"Sphagnum"	"Sphagnum"				"All"	"All"	"NB"	0.10	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0	0	2012103110.00	0.00	0.00	0.00																
 "GRR.GJS.2012.60.AllAll.Spiraea.alba.."	"GRR.GJS.2012.60"	"Spiraea alba"	"Spiraea"	"alba"			"All"	"All"	"SBD2"	0.20	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0	0	2012103110.00	0.00	0.00	0.00																
 "GRR.GJS.2012.60.AllAll.Spiranthes.cernua.."	"GRR.GJS.2012.60"	"Spiranthes cernua"	"Spiranthes"	"cernua"			"All"	"All"	"HF2"	0.10	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0	0	2012103110.00	0.00	0.00	0.00																
@@ -10266,7 +10266,7 @@
 "GRR.GJS.2019.13.AllAll.Parthenocissus.quinquefolia.."	"GRR.GJS.2019.13"	"Parthenocissus quinquefolia"	"Parthenocissus"	"quinquefolia"			"All"	"All"	"LBD"	0.00	0	0	0	0.30	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2019101110.38	0.00	0.00					1.00					0.00	0.20	0.00	0.00				1.00
 "GRR.GJS.2019.13.AllAll.Phalaris.arundinacea.."	"GRR.GJS.2019.13"	"Phalaris arundinacea"	"Phalaris"	"arundinacea"			"All"	"All"	"HGC2"	0.30	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2019101110.38	0.00	0.00			1.00							0.20	0.00	0.00	0.00				1.00
 "GRR.GJS.2019.13.AllAll.Quercus.bicolor.."	"GRR.GJS.2019.13"	"Quercus bicolor"	"Quercus"	"bicolor"			"All"	"All"	"TBD2"	0.00	0	0	0	3.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2019101110.37	0.00	0.00				2.00	3.00					0.00	2.00	0.00	0.00			2.00	3.00
-"GRR.GJS.2019.13.AllAll.Ribes..."	"GRR.GJS.2019.13"	"Ribes"	"Ribes"				"All"	"All"	"SBD"	0.30	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2019101110.37	0.00	0.00			0.50							0.20	0.00	0.00	0.00				0.50
+"GRR.GJS.2019.13.AllAll.Ribes..."	"GRR.GJS.2019.13"	"Ribes"	"Ribes"				"All"	"All"	"SBD2"	0.30	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2019101110.37	0.00	0.00			0.50							0.20	0.00	0.00	0.00				0.50
 "GRR.GJS.2019.13.AllAll.Solidago.rugosa.."	"GRR.GJS.2019.13"	"Solidago rugosa"	"Solidago"	"rugosa"			"All"	"All"	"HF2"	0.30	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2019101110.38	0.00	0.00			1.00							0.20	0.00	0.00	0.00				1.00
 "GRR.GJS.2019.13.AllAll.Symphyotrichum.firmum.."	"GRR.GJS.2019.13"	"Symphyotrichum puniceum"	"Symphyotrichum"	"firmum"			"All"	"All"	"HF2"	7.40	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2019101110.37	0.00	0.00			2.00							5.00	0.00	0.00	0.00				2.00
 "GRR.GJS.2019.13.AllAll.Vitis.riparia.."	"GRR.GJS.2019.13"	"Vitis riparia"	"Vitis"	"riparia"			"All"	"All"	"LBD"	0.00	0	0	0	0.30	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2019101110.37	0.00	0.00					1.00					0.00	0.20	0.00	0.00				1.00
@@ -10279,7 +10279,7 @@
 "GRR.GJS.2019.14.AllAll.Parthenocissus.quinquefolia.."	"GRR.GJS.2019.14"	"Parthenocissus quinquefolia"	"Parthenocissus"	"quinquefolia"			"All"	"All"	"LBD"	1.20	0	0	0	0.00	0	0	0	0.40	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2019101114.22	0.00	0.00										2.00	0.00	0.20	0.00				
 "GRR.GJS.2019.14.AllAll.Persicaria.virginiana.."	"GRR.GJS.2019.14"	"Persicaria virginiana"	"Persicaria"	"virginiana"			"All"	"All"	"HF2"	0.60	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2019101114.22	0.00	0.00										1.00	0.00	0.00	0.00				
 "GRR.GJS.2019.14.AllAll.Prunus.serotina.."	"GRR.GJS.2019.14"	"Prunus serotina"	"Prunus"	"serotina"			"All"	"All"	"TBD2"	0.00	0	0	0	0.00	0	0	0	17.10	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2019101114.22	0.00	2.00						13.00	14.00			0.00	0.00	10.00	0.00	20.00	22.00	13.00	14.00
-"GRR.GJS.2019.14.AllAll.Ribes..."	"GRR.GJS.2019.14"	"Ribes"	"Ribes"				"All"	"All"	"SBD"	0.10	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2019101114.22	0.00	0.00										0.20	0.00	0.00	0.00				
+"GRR.GJS.2019.14.AllAll.Ribes..."	"GRR.GJS.2019.14"	"Ribes"	"Ribes"				"All"	"All"	"SBD2"	0.10	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2019101114.22	0.00	0.00										0.20	0.00	0.00	0.00				
 "GRR.GJS.2019.14.AllAll.Tilia.americana.."	"GRR.GJS.2019.14"	"Tilia americana"	"Tilia"	"americana"			"All"	"All"	"TBD2"	0.00	0	0	0	0.00	0	0	0	3.50	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2019101114.23	0.00	0.00										0.00	0.00	2.00	0.00				
 "GRR.GJS.2019.14.AllAll.Toxicodendron.radicans.."	"GRR.GJS.2019.14"	"Toxicodendron radicans"	"Toxicodendron"	"radicans"			"All"	"All"	"LBD"	1.20	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2019101114.22	0.00	0.00										2.00	0.00	0.00	0.00				
 "GRR.GJS.2019.14.AllAll.Ulmus.americana.."	"GRR.GJS.2019.14"	"Ulmus americana"	"Ulmus"	"americana"			"All"	"All"	"TBD2"	0.10	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2019101114.22	0.00	0.00										0.20	0.00	0.00	0.00				
@@ -10316,7 +10316,7 @@
 "GRR.GJS.2019.16.AllAll.Parthenocissus.quinquefolia.."	"GRR.GJS.2019.16"	"Parthenocissus quinquefolia"	"Parthenocissus"	"quinquefolia"			"All"	"All"	"LBD"	23.70	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2019101114.41	0.00	0.00										30.00	0.00	0.00	0.00				
 "GRR.GJS.2019.16.AllAll.Prunus.serotina.."	"GRR.GJS.2019.16"	"Prunus serotina"	"Prunus"	"serotina"			"All"	"All"	"TBD2"	0.00	0	0	0	0.00	0	0	0	42.30	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2019101114.39	0.00	0.00										0.00	0.00	30.00	0.00				
 "GRR.GJS.2019.16.AllAll.Quercus.rubra.."	"GRR.GJS.2019.16"	"Quercus rubra"	"Quercus"	"rubra"			"All"	"All"	"TBD2"	0.00	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	54.50	0	0	0	0	0	0	0	0		2019101114.39	0.00	3.00								22.00	26.00	0.00	0.00	0.00	40.00	22.00	47.00	22.00	26.00
-"GRR.GJS.2019.16.AllAll.Ribes..."	"GRR.GJS.2019.16"	"Ribes"	"Ribes"				"All"	"All"	"SBD"	0.00	0	0	0	0.20	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2019101114.42	0.00	0.00										0.00	0.20	0.00	0.00				
+"GRR.GJS.2019.16.AllAll.Ribes..."	"GRR.GJS.2019.16"	"Ribes"	"Ribes"				"All"	"All"	"SBD2"	0.00	0	0	0	0.20	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2019101114.42	0.00	0.00										0.00	0.20	0.00	0.00				
 "GRR.GJS.2019.16.AllAll.Rubus.occidentalis.."	"GRR.GJS.2019.16"	"Rubus occidentalis"	"Rubus"	"occidentalis"			"All"	"All"	"SBD1"	0.00	0	0	0	0.80	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2019101114.40	0.00	0.00										0.00	1.00	0.00	0.00				
 "GRR.GJS.2019.16.AllAll.Sambucus.canadensis.."	"GRR.GJS.2019.16"	"Sambucus nigra"	"Sambucus"	"canadensis"			"All"	"All"	"SBD2"	0.00	0	0	0	1.50	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2019101114.39	0.00	0.00										0.00	2.00	0.00	0.00				
 "GRR.GJS.2019.16.AllAll.Smilax.hispida.."	"GRR.GJS.2019.16"	"Smilax hispida"	"Smilax"	"hispida"			"All"	"All"	"LBD"	0.00	0	0	0	3.80	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2019101114.40	0.00	0.00										0.00	5.00	0.00	0.00				
@@ -13545,7 +13545,7 @@
 "INDU.AA621.Quercus palustris"	"INDU.AA621"	"Quercus palustris"	"Quercus"	"palustris"			"All"	"All"	"TBD2"	0.00	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	20.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00								20.00	35.00								
 "INDU.AA621.Quercus rubra"	"INDU.AA621"	"Quercus rubra"	"Quercus"	"rubra"			"All"	"All"	"TBD2"	0.00	0	0	0	5.00	0	0	0	0.00	0	0	0	0	0	0	0	40.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00				2.00	5.00			20.00	35.00								
 "INDU.AA621.Rosa multiflora"	"INDU.AA621"	"Rosa multiflora"	"Rosa"	"multiflora"			"All"	"All"	"SBD2"	0.00	0	0	0	5.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00				0.10	1.00												
-"INDU.AA621.Smilax"	"INDU.AA621"	"Smilax"	"Smilax"				"All"	"All"	"Vh"	10.00	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00		0.00	0.50														
+"INDU.AA621.Smilax"	"INDU.AA621"	"Smilax"	"Smilax"				"All"	"All"	"HFV2"	10.00	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00		0.00	0.50														
 "INDU.AA621.Vaccinium pallidum"	"INDU.AA621"	"Vaccinium pallidum"	"Vaccinium"	"pallidum"			"All"	"All"	"SBD1"	10.00	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00		0.00	0.50														
 "INDU.AA622.Cephalanthus occidentalis"	"INDU.AA622"	"Cephalanthus occidentalis"	"Cephalanthus"	"occidentalis"			"All"	"All"	"SBD2"	0.00	0	0	0	30.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00				1.00	5.00												
 "INDU.AA622.Lemna"	"INDU.AA622"	"Lemna"	"Lemna"				"All"	"All"	"HA"	20.00	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00		0.00	0.50														
@@ -14534,7 +14534,7 @@
 "INDU.VP009.Quercus velutina"	"INDU.VP009"	"Quercus velutina"	"Quercus"	"velutina"			"All"	"All"	"TBD2"	0.00	0	0	0	0.00	0	0	0	0.50	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00						10.00	15.00										
 "INDU.VP009.Rosa multiflora"	"INDU.VP009"	"Rosa multiflora"	"Rosa"	"multiflora"			"All"	"All"	"SBD2"	0.00	0	0	0	30.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00				1.00	2.00												
 "INDU.VP009.Rubus"	"INDU.VP009"	"Rubus"	"Rubus"				"All"	"All"	"SBD1"	0.00	0	0	0	0.50	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00				1.00	2.00												
-"INDU.VP009.Smilax"	"INDU.VP009"	"Smilax"	"Smilax"				"All"	"All"	"Vh"	0.50	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00		0.00	0.50														
+"INDU.VP009.Smilax"	"INDU.VP009"	"Smilax"	"Smilax"				"All"	"All"	"HFV2"	0.50	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00		0.00	0.50														
 "INDU.VP009.Solidago"	"INDU.VP009"	"Solidago"	"Solidago"				"All"	"All"	"HF"	0.50	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00		0.00	0.50														
 "INDU.VP009.Tilia americana"	"INDU.VP009"	"Tilia americana"	"Tilia"	"americana"			"All"	"All"	"TBD2"	0.00	0	0	0	0.00	0	0	0	50.50	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00						7.50	15.00										
 "INDU.VP009.Toxicodendron radicans"	"INDU.VP009"	"Toxicodendron radicans"	"Toxicodendron"	"radicans"			"All"	"All"	"LBD"	10.00	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00		0.00	0.50														
@@ -14583,7 +14583,7 @@
 "INDU.VP011.Ribes"	"INDU.VP011"	"Ribes"	"Ribes"				"All"	"All"	"SBD2"	0.00	0	0	0	0.50	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00				0.10	1.00												
 "INDU.VP011.Rosa multiflora"	"INDU.VP011"	"Rosa multiflora"	"Rosa"	"multiflora"			"All"	"All"	"SBD2"	0.00	0	0	0	30.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00				0.10	5.00												
 "INDU.VP011.Sanicula odorata"	"INDU.VP011"	"Sanicula odorata"	"Sanicula"	"odorata"			"All"	"All"	"HF2"	0.50	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00		0.00	0.50														
-"INDU.VP011.Smilax"	"INDU.VP011"	"Smilax"	"Smilax"				"All"	"All"	"Vh"	0.50	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00		0.00	0.50														
+"INDU.VP011.Smilax"	"INDU.VP011"	"Smilax"	"Smilax"				"All"	"All"	"HFV2"	0.50	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00		0.00	0.50														
 "INDU.VP011.Smilax rotundifolia"	"INDU.VP011"	"Smilax rotundifolia"	"Smilax"	"rotundifolia"			"All"	"All"	"LBD"	0.00	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.50	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00								20.00	35.00								
 "INDU.VP011.Solidago flexicaulis"	"INDU.VP011"	"Solidago flexicaulis"	"Solidago"	"flexicaulis"			"All"	"All"	"HF2"	0.50	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00		0.00	0.50														
 "INDU.VP011.Taraxacum officinale"	"INDU.VP011"	"Taraxacum officinale"	"Taraxacum"	"officinale"			"All"	"All"	"HF2"	0.50	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00		0.00	0.50														
@@ -14613,7 +14613,7 @@
 "INDU.VP012.Ribes"	"INDU.VP012"	"Ribes"	"Ribes"				"All"	"All"	"SBD2"	0.00	0	0	0	3.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00				0.10	1.00												
 "INDU.VP012.Rosa multiflora"	"INDU.VP012"	"Rosa multiflora"	"Rosa"	"multiflora"			"All"	"All"	"SBD2"	0.00	0	0	0	3.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00				0.10	1.00												
 "INDU.VP012.Rubus"	"INDU.VP012"	"Rubus"	"Rubus"				"All"	"All"	"SBD1"	0.00	0	0	0	0.50	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00				0.10	1.00												
-"INDU.VP012.Smilax"	"INDU.VP012"	"Smilax"	"Smilax"				"All"	"All"	"Vh"	0.50	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00		0.00	0.50														
+"INDU.VP012.Smilax"	"INDU.VP012"	"Smilax"	"Smilax"				"All"	"All"	"HFV2"	0.50	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00		0.00	0.50														
 "INDU.VP012.Ulmus rubra"	"INDU.VP012"	"Ulmus rubra"	"Ulmus"	"rubra"			"All"	"All"	"TBD2"	0.00	0	0	0	0.00	0	0	0	0.50	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00						5.00	10.00										
 "INDU.VP012.Vitis riparia"	"INDU.VP012"	"Vitis riparia"	"Vitis"	"riparia"			"All"	"All"	"LBD"	0.00	0	0	0	0.50	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00				2.00	5.00												
 "INDU.VP013.Acer saccharum"	"INDU.VP013"	"Acer saccharum"	"Acer"	"saccharum"			"All"	"All"	"TBD2"	1.00	0	0	0	0.00	0	0	0	3.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00		0.00	0.50			5.00	10.00										
@@ -14906,7 +14906,7 @@
 "INDU.VP025.Prunus virginiana"	"INDU.VP025"	"Prunus virginiana"	"Prunus"	"virginiana"			"All"	"All"	"SBD2"	1.00	0	0	0	1.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00		0.00	0.50	2.00	5.00												
 "INDU.VP025.Ptelea trifoliata ssp. trifoliata var. mollis"	"INDU.VP025"	"Ptelea trifoliata"	"Ptelea"	"trifoliata"	"trifoliata"	"mollis"	"All"	"All"	"TBD1"	1.00	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00		0.00	0.50														
 "INDU.VP025.Quercus velutina"	"INDU.VP025"	"Quercus velutina"	"Quercus"	"velutina"			"All"	"All"	"TBD2"	0.00	0	0	0	10.00	0	0	0	30.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00				2.00	5.00	10.00	15.00										
-"INDU.VP025.Smilax"	"INDU.VP025"	"Smilax"	"Smilax"				"All"	"All"	"Vh"	1.00	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00		0.00	0.50														
+"INDU.VP025.Smilax"	"INDU.VP025"	"Smilax"	"Smilax"				"All"	"All"	"HFV2"	1.00	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00		0.00	0.50														
 "INDU.VP025.Smilax ecirrata"	"INDU.VP025"	"Smilax ecirrata"	"Smilax"	"ecirrata"			"All"	"All"	"HFV2"	1.00	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00		0.00	0.50														
 "INDU.VP025.Solidago simplex ssp. randii var. gillmanii"	"INDU.VP025"	"Solidago simplex"	"Solidago"	"simplex"	"randii"	"gillmanii"	"All"	"All"	"HF2"	1.00	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00		0.00	0.50														
 "INDU.VP025.Symphyotrichum oolentangiense var. oolentangiense"	"INDU.VP025"	"Symphyotrichum oolentangiense"	"Symphyotrichum"	"oolentangiense"	""	"oolentangiense"	"All"	"All"	"HF2"	10.00	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00		0.00	0.50														
@@ -15196,7 +15196,7 @@
 "INDU.VP040.Quercus velutina"	"INDU.VP040"	"Quercus velutina"	"Quercus"	"velutina"			"All"	"All"	"TBD2"	0.00	0	0	0	3.00	0	0	0	0.00	0	0	0	0	0	0	0	80.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00				0.10	1.00			15.00	20.00								
 "INDU.VP040.Rubus"	"INDU.VP040"	"Rubus"	"Rubus"				"All"	"All"	"SBD1"	0.00	0	0	0	3.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00				0.10	1.00												
 "INDU.VP040.Sassafras albidum"	"INDU.VP040"	"Sassafras albidum"	"Sassafras"	"albidum"			"All"	"All"	"TBD2"	0.00	0	0	0	20.00	0	0	0	10.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00				0.10	1.00	5.00	10.00										
-"INDU.VP040.Smilax"	"INDU.VP040"	"Smilax"	"Smilax"				"All"	"All"	"Vh"	0.50	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00		0.10	1.00														
+"INDU.VP040.Smilax"	"INDU.VP040"	"Smilax"	"Smilax"				"All"	"All"	"HFV2"	0.50	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00		0.10	1.00														
 "INDU.VP040.Toxicodendron"	"INDU.VP040"	"Toxicodendron"	"Toxicodendron"				"All"	"All"	"LBD"	0.00	0	0	0	0.50	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00				0.10	1.00												
 "INDU.VP040.Vaccinium"	"INDU.VP040"	"Vaccinium"	"Vaccinium"				"All"	"All"	"SBD2"	0.00	0	0	0	3.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00				0.10	1.00												
 "INDU.VP040.Viola hastata"	"INDU.VP040"	"Viola hastata"	"Viola"	"hastata"			"All"	"All"	"HF2"	0.50	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00		0.10	1.00														
@@ -15403,7 +15403,7 @@
 "INDU.VP053.Rosa multiflora"	"INDU.VP053"	"Rosa multiflora"	"Rosa"	"multiflora"			"All"	"All"	"SBD2"	0.00	0	0	0	1.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00				0.10	1.00												
 "INDU.VP053.Rumex acetosella"	"INDU.VP053"	"Rumex acetosella"	"Rumex"	"acetosella"			"All"	"All"	"HF2"	1.00	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00		0.00	0.50														
 "INDU.VP053.Sassafras albidum"	"INDU.VP053"	"Sassafras albidum"	"Sassafras"	"albidum"			"All"	"All"	"TBD2"	0.00	0	0	0	20.00	0	0	0	3.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00				1.00	2.00	5.00	10.00										
-"INDU.VP053.Smilax"	"INDU.VP053"	"Smilax"	"Smilax"				"All"	"All"	"Vh"	1.00	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00		0.00	0.50														
+"INDU.VP053.Smilax"	"INDU.VP053"	"Smilax"	"Smilax"				"All"	"All"	"HFV2"	1.00	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00		0.00	0.50														
 "INDU.VP054.Quercus"	"INDU.VP054"	"Quercus"	"Quercus"				"All"	"All"	"TBD"	1.00	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00		0.25	0.50														
 "INDU.VP054.Quercus palustris"	"INDU.VP054"	"Quercus palustris"	"Quercus"	"palustris"			"All"	"All"	"TBD2"	0.00	0	0	0	1.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00				1.00	2.00												
 "INDU.VP054.Quercus velutina"	"INDU.VP054"	"Quercus velutina"	"Quercus"	"velutina"			"All"	"All"	"TBD2"	0.00	0	0	0	3.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00				1.00	2.00												
@@ -16603,7 +16603,7 @@
 "INDU.VP129.Robinia pseudoacacia"	"INDU.VP129"	"Robinia pseudoacacia"	"Robinia"	"pseudoacacia"			"All"	"All"	"TBD2"	0.00	0	0	0	3.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00				2.00	5.00												
 "INDU.VP129.Rubus"	"INDU.VP129"	"Rubus"	"Rubus"				"All"	"All"	"SBD1"	0.00	0	0	0	40.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00				1.00	2.00												
 "INDU.VP129.Rubus occidentalis"	"INDU.VP129"	"Rubus occidentalis"	"Rubus"	"occidentalis"			"All"	"All"	"SBD1"	0.00	0	0	0	3.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00				1.00	2.00												
-"INDU.VP129.Smilax lasioneura"	"INDU.VP129"	"Smilax lasioneura"	"Smilax"	"lasioneura"			"All"	"All"	"Vh"	3.00	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00		2.00	5.00														
+"INDU.VP129.Smilax lasioneura"	"INDU.VP129"	"Smilax lasioneura"	"Smilax"	"lasioneura"			"All"	"All"	"HFV2"	3.00	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00		2.00	5.00														
 "INDU.VP129.Solanum dulcamara"	"INDU.VP129"	"Solanum dulcamara"	"Solanum"	"dulcamara"			"All"	"All"	"LBD"	1.00	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00		0.00	0.50														
 "INDU.VP129.Solidago caesia"	"INDU.VP129"	"Solidago caesia"	"Solidago"	"caesia"			"All"	"All"	"HF2"	1.00	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00		0.00	0.50														
 "INDU.VP129.Toxicodendron radicans"	"INDU.VP129"	"Toxicodendron radicans"	"Toxicodendron"	"radicans"			"All"	"All"	"LBD"	3.00	0	0	0	0.00	0	0	0	0.00	0	0	0	0	0	0	0	0.00	0	0	0	0	0	0	0	0		2014072412.00	0.00	0.00		0.00	0.50														

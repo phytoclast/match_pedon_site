@@ -1,0 +1,102 @@
+order1	order2	Habitname	ESIS Group	Old Symbol	Intermediate Revision	Revised Symbol	Simple
+1	1	Tree	Tree	t	T	T	Evergreen
+2	2	Shrub/Subshrub	Shrub/Subshrub		S	S	Evergreen
+3	3	Liana	Vine/Liana	v	L	L	Evergreen
+4	4	Herb	Forb/Herb		H	H	Forb
+5	5	Forb	Forb/Herb		HF	H.F	Forb
+6	6	Graminoid	Grass/grass-like		HG	H.G	Graminoid
+7	7	Epiphyte	Vine/Liana	e	E	E	Evergreen
+8	8	Nonvascular	Nonvascular		N	N.	Nonvascular
+9	9	Bryophyte	Nonvascular	M	NB	N.B	Nonvascular
+10	10	Lichen	Biological Crusts	L	NL	N.L	Nonvascular
+11	11	Algae	Biological Crusts	A	NA	N.A	Nonvascular
+100	12	broadleaf tree	Tree			T.B	Evergreen
+100	13	broadleaf deciduous tree	Tree	Dt	TBD	T.BD	Deciduous
+100	14	short broadleaf deciduous tree	Tree	Dt1	TBD1	T1BD	Deciduous
+100	15	tall broadleaf deciduous tree	Tree	Dt2	TBD2	T2BD	Deciduous
+100	16	broadleaf evergreen tree	Tree	Bt	TBE	T.BE	Evergreen
+100	17	small broadleaf evergreen tree	Tree	Bt1	TBE1	T1BE	Evergreen
+100	18	tall broadleaf evergreen tree	Tree	Bt2	TBE2	T2BE	Evergreen
+100	19	small sclerophyllous tree	Tree			T1BES	Evergreen
+100	20	tall sclerophyllous tree	Tree	Bt2	TBE2	T2BES	Evergreen
+100	21	graminoid tree	Tree	Gt	TG	T.G	Evergreen
+100	22	small graminoid tree	Tree	Gt1	TG1	T1G	Evergreen
+100	23	small microphyllous deciduous tree	Tree			T1MD	Deciduous
+100	24	microphyllous evergreen tree	Tree			T.ME	Evergreen
+100	25	small microphyllous evergreen tree	Tree			T1ME	Evergreen
+100	26	needleleaf deciduous tree	Tree	Nt	TND	T.ND	Deciduous
+100	27	small needleleaf deciduous tree	Tree	Nt1	TND1	T1ND	Deciduous
+100	28	tall needleleaf deciduous tree	Tree	Nt2	TND2	T2ND	Deciduous
+100	29	needleleaf evergreen tree	Tree	Et	TNE	T.NE	Evergreen
+100	30	short needleleaf evergreen tree	Tree	Et1	TNE1	T1NE	Evergreen
+100	31	tall needleleaf evergreen tree	Tree	Et2	TNE2	T2NE	Evergreen
+100	32	rosette tree	Tree	Rt	TP	T.P	Evergreen
+100	33	small rosette tree	Tree	Rt1	TP1	T1P	Evergreen
+100	34	tall rosette tree	Tree	Rt2	TP2	T2P	Evergreen
+100	35	succulent tree	Tree	Ct	TU	T.U	Evergreen
+100	36	short succulent tree	Tree	Ct1	TU1	T1U	Evergreen
+150	37	tree fern	Tree Fern	Ot	TF	T.F	Evergreen
+190	38	small parasitic tree	Tree	Pt1	TBP1	T1Bi	Deciduous
+190	39	parasitic tree	Tree	Pt	TBP	T.Bi	Deciduous
+200	40	broadleaf deciduous shrub/subshrub	Shrub/Subshrub			S.B	Deciduous
+200	41	broadleaf deciduous shrub/subshrub	Shrub/Subshrub			S.BD	Deciduous
+200	42	broadleaf deciduous subshrub	Shrub/Subshrub	Du	SBD1	S1BD	Deciduous
+200	43	broadleaf deciduous shrub	Shrub/Subshrub	Ds	SBD2	S2BD	Deciduous
+200	44	broadleaf evergreen shrub/subshrub	Shrub/Subshrub			S.BE	Evergreen
+200	45	broadleaf evergreen subshrub	Shrub/Subshrub	Bu	SBE1	S1BE	Evergreen
+200	46	broadleaf evergreen shrub	Shrub/Subshrub	Bs	SBE2	S2BE	Evergreen
+200	47	sclerophyllous subshrub	Shrub/Subshrub	Bu	SBE1	S1BES	Evergreen
+200	48	sclerophyllous shrub	Shrub/Subshrub			S2BES	Evergreen
+200	49	fern shrub/subshrub	Shrub/Subshrub			S.F	Evergreen
+200	50	graminoid subshrub	Shrub/Subshrub	Gu	SG1	S1G	Evergreen
+200	51	graminoid shrub	Shrub/Subshrub	Gs	SG2	S2G	Evergreen
+200	52	microphyllous deciduous subshrub	Shrub/Subshrub			S1MD	Deciduous
+200	53	microphyllous deciduous shrub	Shrub/Subshrub			S2MD	Deciduous
+200	54	microphyllous evergreen subshrub	Shrub/Subshrub			S1ME	Evergreen
+200	55	microphyllous evergreen shrub	Shrub/Subshrub			S2ME	Evergreen
+200	56	needleleaf deciduous shrub	Shrub/Subshrub	Ns	SND2	S2ND	Deciduous
+200	57	needleleaf evergreen shrub/subshrub	Shrub/Subshrub			S.NE	Evergreen
+200	58	needleleaf evergreen subshrub	Shrub/Subshrub	Eu	SNE1	S1NE	Evergreen
+200	59	needleleaf evergreen shrub	Shrub/Subshrub	Es	SNE2	S2NE	Evergreen
+200	60	rosette shrub/subshrub	Shrub/Subshrub			S.P	Evergreen
+200	61	rosette subshrub	Shrub/Subshrub	Ru	SP1	S1P	Evergreen
+200	62	rosette shrub	Shrub/Subshrub	Rs	SP2	S2P	Evergreen
+200	63	succulent shrub/subshrub	Shrub/Subshrub			S.U	Evergreen
+200	64	succulent subshrub	Shrub/Subshrub	Cu	SU1	S1U	Evergreen
+200	65	succulent shrub	Shrub/Subshrub	Cs	SU2	S2U	Evergreen
+250	66	subshrub fern	Tree Fern	Ou	SF1	S1F	Evergreen
+250	67	shrub fern	Tree Fern	Os	SF2	S2F	Evergreen
+290	68	parasitic subshrub	Shrub/Subshrub	Pu	SBP1	S1Bi	Deciduous
+290	69	parasitic shrub	Shrub/Subshrub	Ps	SBP2	S2Bi	Deciduous
+290	70	microphyllous parasitic subshrub	Shrub/Subshrub			S1Mi	Deciduous
+300	71	broadleaf vine	Vine/Liana			L.B	Evergreen
+300	72	broadleaf deciduous vine	Vine/Liana	Dv	LBD	L.BD	Deciduous
+300	73	broadleaf evergreen vine	Vine/Liana	Bv	LBE	L.BE	Evergreen
+300	74	graminoid vine	Vine/Liana	Gv	LG	L.G	Evergreen
+300	75	needleleaf evergreen vine	Vine/Liana	Ev	LNE	L.ME	Evergreen
+300	76	succulent vine	Vine/Liana	Cv	LU	L.U	Evergreen
+400	77	aquatic herb	Forb/Herb	Ah	HA	H.A	Forb
+400	78	annual aquatic herb	Forb/Herb	Ah1	HA1	H1A	Forb
+400	79	perennial aquatic herb	Forb/Herb	Ah2	HA2	H2A	Forb
+400	80	annual forb	Forb/Herb	Fh1	HF1	H1F	Forb
+400	81	perennial forb	Forb/Herb	Fh2	HF2	H2F	Forb
+400	82	succulent forb	Forb/Herb			H.FS	Forb
+400	83	annual succulent forb	Forb/Herb	Ch1	HFS1	H1FS	Forb
+400	84	perennial succulent forb	Forb/Herb	Ch2	HFS2	H2FS	Forb
+400	85	herbaceous vine	Forb/Herb			H.FV	Forb
+400	86	annual herbaceous vine	Vine/Liana	Vh1	HFV1	H1FV	Forb
+400	87	perennial herbaceous vine	Vine/Liana	Vh2	HFV2	H2FV	Forb
+420	88	cool season graminoid	Grass/grass-like	Gh	HGC	H.GC	Graminoid
+420	89	annual cool season graminoid	Grass/grass-like	Gh1	HGC1	H1GC	Graminoid
+420	90	perennial cool season graminoid	Grass/grass-like	Gh2	HGC2	H2GC	Graminoid
+420	91	warm season graminoid	Grass/grass-like		HGW	H.GW	Graminoid
+420	92	annual warm season graminoid	Grass/grass-like	Wh1	HGW1	H1GW	Graminoid
+420	93	perennial warm season graminoid	Grass/grass-like	Wh2	HGW2	H2GW	Graminoid
+450	94	seedless forb	Fern/fern ally	Oh	HFE	H.FE	Forb
+490	95	parasitic herb	Forb/Herb	Ph	HFP	H.Fi	Forb
+490	96	annual parasitic forb	Forb/Herb	Ph1	HFP1	H1Fi	Forb
+490	97	perennial parasitic herb	Forb/Herb	Ph2	HFP2	H2Fi	Forb
+490	98	parasitic herb	Forb/Herb			H.i	Forb
+900	99	freeliving epiphyte	Vine/Liana	Fe	EF	E.F	Evergreen
+900	100	parasitic epiphyte	Vine/Liana	Pe	EP	E.i	Evergreen
+1000	101	parasitic plant				i	Forb

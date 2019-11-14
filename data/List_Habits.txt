@@ -1,0 +1,80 @@
+Old	Form	Habitname	ESIS Group	order	Simple
+t	T	Tree	Tree	1	Evergreen
+	S	Shrub/Subshrub	Shrub/Subshrub	2	Evergreen
+v	L	Liana	Vine/Liana	3	Evergreen
+	H	Herb	Forb/Herb	4	Forb
+	HF	Forb	Forb/Herb	5	Forb
+	HG	Graminoid	Forb/Herb	6	Graminoid
+e	E	Epiphyte	Vine/Liana	7	Evergreen
+	N	Nonvascular	Nonvascular	8	Nonvascular
+M	NB	Bryophyte	Nonvascular	9	Nonvascular
+L	NL	Lichen	Biological Crusts	10	Nonvascular
+A	NA	Algae	Biological Crusts	11	Nonvascular
+Dt	TBD	broadleaf deciduous tree	Tree	12	Deciduous
+Dt2	TBD2	tall broadleaf deciduous tree	Tree	13	Deciduous
+Dt1	TBD1	short broadleaf deciduous tree	Tree	14	Deciduous
+Ds	SBD2	broadleaf deciduous shrub	Shrub/Subshrub	15	Deciduous
+Du	SBD1	broadleaf deciduous subshrub	Shrub/Subshrub	16	Deciduous
+Dv	LBD	broadleaf deciduous vine	Vine/Liana	17	Deciduous
+Et	TNE	needleleaf evergreen tree	Tree	18	Evergreen
+Et2	TNE2	tall needleleaf evergreen tree	Tree	19	Evergreen
+Et1	TNE1	short needleleaf evergreen tree	Tree	20	Evergreen
+Es	SNE2	needleleaf evergreen shrub	Shrub/Subshrub	21	Evergreen
+Eu	SNE1	needleleaf evergreen subshrub	Shrub/Subshrub	22	Evergreen
+Ev	LNE	needleleaf evergreen vine	Vine/Liana	23	Evergreen
+Bt	TBE	broadleaf evergreen tree	Tree	24	Evergreen
+Bt1	TBE1	small broadleaf evergreen tree	Tree	25	Evergreen
+Bt2	TBE2	tall broadleaf evergreen tree	Tree	26	Evergreen
+Bs	SBE2	broadleaf evergreen shrub	Shrub/Subshrub	27	Evergreen
+Bu	SBE1	broadleaf evergreen subshrub	Shrub/Subshrub	28	Evergreen
+Bv	LBE	broadleaf evergreen vine	Vine/Liana	29	Evergreen
+Nt	TND	needleleaf deciduous tree	Tree	30	Deciduous
+Nt2	TND2	tall needleleaf deciduous tree	Tree	31	Deciduous
+Nt1	TND1	small needleleaf deciduous tree	Tree	32	Deciduous
+Ns	SND2	needleleaf deciduous shrub	Shrub/Subshrub	33	Deciduous
+Ct	TU	succulent tree	Tree	34	Evergreen
+Ct1	TU1	short succulent tree	Tree	35	Evergreen
+Cs	SU2	succulent shrub	Shrub/Subshrub	36	Evergreen
+Cu	SU1	succulent subshrub	Shrub/Subshrub	37	Evergreen
+Cv	LU	succulent vine	Vine/Liana	38	Evergreen
+Ch2	HFS2	perennial succulent forb	Forb/Herb	39	Forb
+Ch1	HFS1	annual succulent forb	Forb/Herb	40	Forb
+Rt	TP	rosette tree	Tree	41	Evergreen
+Rt2	TP2	tall rosette tree	Tree	42	Evergreen
+Rt1	TP1	small rosette tree	Tree	43	Evergreen
+Rs	SP2	rosette shrub	Shrub/Subshrub	44	Evergreen
+Ru	SP1	rosette subshrub	Shrub/Subshrub	45	Evergreen
+Gt	TG	graminoid tree	Tree	46	Evergreen
+Gt1	TG1	small graminoid tree	Tree	47	Evergreen
+Gs	SG2	graminoid shrub	Shrub/Subshrub	48	Evergreen
+Gu	SG1	graminoid subshrub	Shrub/Subshrub	49	Evergreen
+Gv	LG	graminoid vine	Vine/Liana	50	Evergreen
+Gh	HGC	cool season graminoid	Grass/grass-like	51	Graminoid
+Gh2	HGC2	perennial cool season graminoid	Grass/grass-like	52	Graminoid
+Gh1	HGC1	annual cool season graminoid	Grass/grass-like	53	Graminoid
+	HGW	warm season graminoid	Grass/grass-like	54	Graminoid
+Wh2	HGW2	perennial warm season graminoid	Grass/grass-like	55	Graminoid
+Wh1	HGW1	annual warm season graminoid	Grass/grass-like	56	Graminoid
+Ot	TF	tree fern	Tree Fern	57	Evergreen
+Os	SF2	shrub fern	Tree Fern	58	Evergreen
+Ou	SF1	subshrub fern	Tree Fern	59	Evergreen
+Oh	HFE	seedless forb	Fern/fern ally	60	Forb
+Fh1	HF1	annual forb	Forb/Herb	61	Forb
+Fh2	HF2	perennial forb	Forb/Herb	62	Forb
+Vh2	HFV2	perennial herbaceous vine	Vine/Liana	63	Forb
+Vh1	HFV1	annual herbaceous vine	Vine/Liana	64	Forb
+Ah	HA	aquatic herb	Forb/Herb	65	Forb
+Ah2	HA2	perennial aquatic herb	Forb/Herb	66	Forb
+Ah1	HA1	annual aquatic herb	Forb/Herb	67	Forb
+Fe	EF	freeliving epiphyte	Vine/Liana	68	Evergreen
+Pe	EP	parasitic epiphyte	Vine/Liana	69	Evergreen
+Pt	TBP	parasitic tree	Tree	70	Deciduous
+Pt1	TBP1	small parasitic tree	Tree	71	Deciduous
+Ps	SBP2	parasitic shrub	Shrub/Subshrub	72	Deciduous
+Pu	SBP1	parasitic subshrub	Shrub/Subshrub	73	Deciduous
+Ph	HFP	parasitic herb	Forb/Herb	74	Forb
+Ph2	HFP2	perennial parasitic herb	Forb/Herb	75	Forb
+Ph1	HFP1	annual parasitic forb	Forb/Herb	76	Forb
+Old	Form	Habitname	ESIS Group	order
+Vh	HFV	herbaceous vine	Vine/Liana	64
+Ds	SBD	broadleaf deciduous shrub	Shrub/Subshrub	15
