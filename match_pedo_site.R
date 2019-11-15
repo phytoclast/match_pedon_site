@@ -2,6 +2,9 @@ library(stringr)
 library(BiodiversityR)
 library(cluster)
 library(ape)
+library(dendextend)
+library(dplyr)
+#----
 NASISPEDONS <- read.delim("data/NASISPEDONS.txt")
 List_Habits <- read.delim("data/List_Habits.txt", na.strings = '')
 #Habit_Symbols <- read.delim("data/Habit_Symbols.txt", encoding = 'UTF-8', na.strings = '')
@@ -91,35 +94,90 @@ Com.Sp.Agg$Total <- (10^(Com.Sp.Agg$Total)*-1+1)*100
 #cluster analysis
 
 
-plotinputs <- makecommunitydataset(Com.Sp.mean, row = 'soilplot', column = 'Species', value = 'total', drop = TRUE)
+plotinputs1 <- makecommunitydataset(Com.Sp.mean, row = 'soilplot', column = 'Species', value = 'total', drop = TRUE)
 
-jacdist <- as.data.frame(as.matrix(vegdist(plotinputs,method='jaccard', binary=FALSE, na.rm=T)))
+jacdist1 <- as.data.frame(as.matrix(vegdist(plotinputs1,method='jaccard', binary=FALSE, na.rm=T)))
 
-jactree <- agnes(jacdist, method='average')
+jactree <- agnes(jacdist1, method='average')
 
 w <- 800
 h <- 3000
 u <- 12
-png(filename="output/jactree.png",width = w, height = h, units = "px", pointsize = u)
-plot(as.phylo(as.hclust(jactree)), main='floristic simularity - jaccard metric',label.offset=0.05, direction='right', font=1, cex=0.85)
+
+groups <- cutree(jactree, k = 4)
+
+dend1 <- color_branches(as.hclust(jactree), k = 4)
+dend1 <- color_labels(dend1, k = 4)
+
+png(filename="output/jactree_flora.png",width = w, height = h, units = "px", pointsize = u)
+par(mar = c(2,0,1,13))
+plot(dend1, horiz = TRUE, main='floristic simularity - jaccard metric', font=1, cex=0.85)
+rect.dendrogram(dend1, k =4, horiz = TRUE)
 dev.off()
 
 #----
-plotinputs <- makecommunitydataset(Com.Sp.Agg, row = 'soilplot', column = 'Simple', value = 'Total', drop = TRUE)
+plotinputs2 <- makecommunitydataset(Com.Sp.Agg, row = 'soilplot', column = 'Simple', value = 'Total', drop = TRUE)
 
-jacdist <- as.data.frame(as.matrix(vegdist(plotinputs,method='jaccard', binary=FALSE, na.rm=T)))
+jacdist2 <- as.data.frame(as.matrix(vegdist(plotinputs2,method='jaccard', binary=FALSE, na.rm=T)))
 
-jactree <- agnes(jacdist, method='average')
+jactree <- agnes(jacdist2, method='average')
+
+groups <- cutree(jactree, k = 4)
+
+dend1 <- color_branches(as.hclust(jactree), k = 4)
+dend1 <- color_labels(dend1, k = 4)
 
 w <- 800
 h <- 3000
 u <- 12
 png(filename="output/jactree_simple.png",width = w, height = h, units = "px", pointsize = u)
-plot(as.phylo(as.hclust(jactree)), main='floristic simularity - jaccard metric',label.offset=0.05, direction='right', font=1, cex=0.85)
+
+par(mar = c(2,0,1,13))
+plot(dend1, horiz = TRUE, main='floristic simularity - jaccard metric', font=1, cex=0.85)
+rect.dendrogram(dend1, k =4, horiz = TRUE)
 dev.off()
+#----
+jacdist <- (jacdist1+jacdist2)/2
+maxdist <- max(na.omit(jacdist))
+jactree <- agnes(jacdist, method='average')
+
+groups <- cutree(jactree, k = 4)
+
+dend1 <- color_branches(as.hclust(jactree), k = 4)
+dend1 <- color_labels(dend1, k = 4)
+
+w <- 800
+h <- 3000
+u <- 12
+png(filename="output/jactree_comb.png",width = w, height = h, units = "px", pointsize = u)
+
+par(mar = c(2,0,1,13))
+plot(dend1, horiz = TRUE, main='floristic simularity - jaccard metric', font=1, cex=0.85)
+rect.dendrogram(dend1, k =4, horiz = TRUE)
+dev.off()
+#----
+#group dominant and indicator species
+
+soilplot <- names(groups)
+clust <- unname(groups)
+groupdf <- as.data.frame(cbind(soilplot, clust))
+Com.Sp.Agg$soilplot <- str_replace_all(Com.Sp.Agg$soilplot, ' ', '.')
+Com.Sp.Agg$soilplot <- str_replace_all(Com.Sp.Agg$soilplot, '-', '.')
+Com.Sp.Agg$soilplot <- str_replace_all(Com.Sp.Agg$soilplot, ',', '.')
+Com.Sp.Agg$soilplot <- str_replace_all(Com.Sp.Agg$soilplot, ':', '.')
+Com.Sp.Agg$soilplot <- str_replace_all(Com.Sp.Agg$soilplot, ';', '.')
+Com.Sp.Agg$soilplot <- str_replace_all(Com.Sp.Agg$soilplot, '&', '.')
+
+Com.Sp.groups <- merge(groupdf,  Com.Sp.Agg, by='soilplot', all.x=TRUE, all.y = TRUE)
+#need to add placeholders for all zeros
+
+unique(Com.Sp.mean$Species)
 
 #----
-
+Com.Sp.grouprank <- 
+  Com.Sp.groups %>%
+  group_by(clust) %>%
+  mutate(my_ranks = order(order(Total, decreasing=TRUE)))
 
 write.table(VEGOBS, 'output/VEGOBS-export.txt', row.names = FALSE, sep = "\t")
 write.dbf(VEGOBS[,c(1,3:ncol(VEGOBS))], 'output/VEGOBS.dbf')
