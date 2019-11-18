@@ -64,19 +64,28 @@ Com.Sp.mean$Field<-Com.Sp.mean$Field/Com.Sp.mean$mfreq
 Com.Sp.mean$Shrub<-Com.Sp.mean$Shrub/Com.Sp.mean$mfreq
 Com.Sp.mean$Subcanopy<-Com.Sp.mean$Subcanopy/Com.Sp.mean$mfreq
 Com.Sp.mean$Tree<-Com.Sp.mean$Tree/Com.Sp.mean$mfreq
-Com.Sp.mean$total <- ((Com.Sp.mean$Field + Com.Sp.mean$Shrub + Com.Sp.mean$Subcanopy + Com.Sp.mean$Tree)/2)^0.5 #average overstory and understory and apply sqroot transform
+
+#ensure not to exceed 100%
+Com.Sp.mean$Field <- ifelse(Com.Sp.mean$Field > 100,100,Com.Sp.mean$Field)
+Com.Sp.mean$Shrub <- ifelse(Com.Sp.mean$Shrub > 100,100,Com.Sp.mean$Shrub)
+Com.Sp.mean$Subcanopy <- ifelse(Com.Sp.mean$Subcanopy > 100,100,Com.Sp.mean$Subcanopy)
+Com.Sp.mean$Tree <- ifelse(Com.Sp.mean$Tree > 100,100,Com.Sp.mean$Tree)
+#average overstory and understory
+Com.Sp.mean$Total <- round(100*(1-10^(apply(log10(1-(Com.Sp.mean[,c('Field', 'Shrub', 'Subcanopy', 'Tree')]/100.001)), MARGIN = 1, FUN='sum'))),1)
 Com.Sp.mean <- merge(Com.Sp.mean, VEGOBS[,c('Observation_Label', 'Soil')], by='Observation_Label')
 Com.Sp.mean <-subset(Com.Sp.mean, !substr(Species,1,1) %in% '-'& !Species %in% '')
 Com.Sp.mean$soilplot <- paste(Com.Sp.mean$Soil , Com.Sp.mean$Observation_Label)
+Com.Sp.mean$soilplot <- str_replace_all(Com.Sp.mean$soilplot, ' ', '.')
+Com.Sp.mean$soilplot <- str_replace_all(Com.Sp.mean$soilplot, '-', '.')
+Com.Sp.mean$soilplot <- str_replace_all(Com.Sp.mean$soilplot, ',', '.')
+Com.Sp.mean$soilplot <- str_replace_all(Com.Sp.mean$soilplot, ':', '.')
+Com.Sp.mean$soilplot <- str_replace_all(Com.Sp.mean$soilplot, ';', '.')
+Com.Sp.mean$soilplot <- str_replace_all(Com.Sp.mean$soilplot, '&', '.')
 
 #----
 #need formula for aggregating within strata... 
 Com.Sp.preagg <- Com.Sp.mean
 
-Com.Sp.preagg$Field <- ifelse(Com.Sp.preagg$Field > 100,100,Com.Sp.preagg$Field)
-Com.Sp.preagg$Shrub <- ifelse(Com.Sp.preagg$Shrub > 100,100,Com.Sp.preagg$Shrub)
-Com.Sp.preagg$Subcanopy <- ifelse(Com.Sp.preagg$Subcanopy > 100,100,Com.Sp.preagg$Subcanopy)
-Com.Sp.preagg$Tree <- ifelse(Com.Sp.preagg$Tree > 100,100,Com.Sp.preagg$Tree)
 Com.Sp.preagg[,c('Field', 'Shrub', 'Subcanopy', 'Tree')] <- log10(1-(Com.Sp.preagg[,c('Field', 'Shrub', 'Subcanopy', 'Tree')]/100.001))
 Com.Sp.Agg <- aggregate(Com.Sp.preagg[,c('Field', 'Shrub', 'Subcanopy', 'Tree')], by=list(Com.Sp.preagg$soilplot, Com.Sp.preagg$Simple), FUN = 'sum')
 colnames(Com.Sp.Agg) <- c('soilplot', 'Simple', 'Field', 'Shrub', 'Subcanopy', 'Tree')
@@ -92,9 +101,9 @@ rm(Com.Sp.preagg, Com.Sp.AggCanopy)
 Com.Sp.Agg$Total <- (10^(Com.Sp.Agg$Total)*-1+1)*100
 #----
 #cluster analysis
+Com.Sp.mean$sqrttotal <- sqrt(Com.Sp.mean$Total)
 
-
-plotinputs1 <- makecommunitydataset(Com.Sp.mean, row = 'soilplot', column = 'Species', value = 'total', drop = TRUE)
+plotinputs1 <- makecommunitydataset(Com.Sp.mean, row = 'soilplot', column = 'Species', value = 'sqrttotal', drop = TRUE)
 
 jacdist1 <- as.data.frame(as.matrix(vegdist(plotinputs1,method='jaccard', binary=FALSE, na.rm=T)))
 
@@ -161,24 +170,43 @@ dev.off()
 soilplot <- names(groups)
 clust <- unname(groups)
 groupdf <- as.data.frame(cbind(soilplot, clust))
-Com.Sp.Agg$soilplot <- str_replace_all(Com.Sp.Agg$soilplot, ' ', '.')
-Com.Sp.Agg$soilplot <- str_replace_all(Com.Sp.Agg$soilplot, '-', '.')
-Com.Sp.Agg$soilplot <- str_replace_all(Com.Sp.Agg$soilplot, ',', '.')
-Com.Sp.Agg$soilplot <- str_replace_all(Com.Sp.Agg$soilplot, ':', '.')
-Com.Sp.Agg$soilplot <- str_replace_all(Com.Sp.Agg$soilplot, ';', '.')
-Com.Sp.Agg$soilplot <- str_replace_all(Com.Sp.Agg$soilplot, '&', '.')
 
-Com.Sp.groups <- merge(groupdf,  Com.Sp.Agg, by='soilplot', all.x=TRUE, all.y = TRUE)
-#need to add placeholders for all zeros
 
-unique(Com.Sp.mean$Species)
+Com.Sp.groups <- merge(groupdf,  Com.Sp.mean, by='soilplot', all.x=TRUE, all.y = TRUE)
 
 #----
-Com.Sp.grouprank <- 
-  Com.Sp.groups %>%
-  group_by(clust) %>%
-  mutate(my_ranks = order(order(Total, decreasing=TRUE)))
+#average spp by cluster
 
+Com.Sp.groups.sum <- aggregate(Com.Sp.groups[,c('Field', 'Shrub', 'Subcanopy','Tree', 'Total')],
+                               by=list(Com.Sp.groups$clust, Com.Sp.groups$Species), FUN=c('sum'))
+colnames(Com.Sp.groups.sum) <- c('cluster', 'taxon', 'Field', 'Shrub', 'Subcanopy','Tree', 'Total')
+Com.Sp.groups.count <- aggregate(unique(Com.Sp.groups[c('clust', 'soilplot')])$soilplot, 
+                                 by=list(unique(Com.Sp.groups[c('clust', 'soilplot')])$clust), FUN='length')
+colnames(Com.Sp.groups.count) <- c('cluster', 'count')
+Com.Sp.groups.mean <- merge(Com.Sp.groups.sum, Com.Sp.groups.count, by = 'cluster')
+Com.Sp.groups.mean[,c('Field', 'Shrub', 'Subcanopy','Tree', 'Total')] <- Com.Sp.groups.mean[,c('Field', 'Shrub', 'Subcanopy','Tree', 'Total')]/Com.Sp.groups.mean$count
+Com.Sp.groups.mean$stratum <- round((3^(Com.Sp.groups.mean$Tree)*3+
+  3^(Com.Sp.groups.mean$Subcanopy)*2.5+
+  3^(Com.Sp.groups.mean$Shrub)*2+
+  3^(Com.Sp.groups.mean$Field)*1)/
+(  3^(Com.Sp.groups.mean$Tree)+
+  3^(Com.Sp.groups.mean$Subcanopy)+
+  3^(Com.Sp.groups.mean$Shrub)+
+  3^(Com.Sp.groups.mean$Field)),0)
+
+
+#rank
+Com.Sp.groups.mean <- 
+  Com.Sp.groups.mean %>%
+  group_by(cluster) %>%
+  mutate(ranks = order(order(Total, decreasing=TRUE)))
+
+Com.Sp.groups.mean <- 
+  Com.Sp.groups.mean %>%
+  group_by(cluster, stratum) %>%
+  mutate(subranks = order(order(Total, decreasing=TRUE)))
+
+Com.Sp.groups.rank <- subset(Com.Sp.groups.mean, ranks <= 3)
 write.table(VEGOBS, 'output/VEGOBS-export.txt', row.names = FALSE, sep = "\t")
 write.dbf(VEGOBS[,c(1,3:ncol(VEGOBS))], 'output/VEGOBS.dbf')
 
