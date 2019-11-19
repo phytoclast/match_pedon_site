@@ -64,14 +64,14 @@ Com.Sp.mean$Field<-Com.Sp.mean$Field/Com.Sp.mean$mfreq
 Com.Sp.mean$Shrub<-Com.Sp.mean$Shrub/Com.Sp.mean$mfreq
 Com.Sp.mean$Subcanopy<-Com.Sp.mean$Subcanopy/Com.Sp.mean$mfreq
 Com.Sp.mean$Tree<-Com.Sp.mean$Tree/Com.Sp.mean$mfreq
-
+rm(Com.max.freq)
 #ensure not to exceed 100%
 Com.Sp.mean$Field <- ifelse(Com.Sp.mean$Field > 100,100,Com.Sp.mean$Field)
 Com.Sp.mean$Shrub <- ifelse(Com.Sp.mean$Shrub > 100,100,Com.Sp.mean$Shrub)
 Com.Sp.mean$Subcanopy <- ifelse(Com.Sp.mean$Subcanopy > 100,100,Com.Sp.mean$Subcanopy)
 Com.Sp.mean$Tree <- ifelse(Com.Sp.mean$Tree > 100,100,Com.Sp.mean$Tree)
 #average overstory and understory
-Com.Sp.mean$Total <- round(100*(1-10^(apply(log10(1-(Com.Sp.mean[,c('Field', 'Shrub', 'Subcanopy', 'Tree')]/100.001)), MARGIN = 1, FUN='sum'))),1)
+Com.Sp.mean$Total <- 100*(1-10^(apply(log10(1-(Com.Sp.mean[,c('Field', 'Shrub', 'Subcanopy', 'Tree')]/100.001)), MARGIN = 1, FUN='sum')))
 Com.Sp.mean <- merge(Com.Sp.mean, VEGOBS[,c('Observation_Label', 'Soil')], by='Observation_Label')
 Com.Sp.mean <-subset(Com.Sp.mean, !substr(Species,1,1) %in% '-'& !Species %in% '')
 Com.Sp.mean$soilplot <- paste(Com.Sp.mean$Soil , Com.Sp.mean$Observation_Label)
@@ -91,11 +91,11 @@ Com.Sp.Agg <- aggregate(Com.Sp.preagg[,c('Field', 'Shrub', 'Subcanopy', 'Tree')]
 colnames(Com.Sp.Agg) <- c('soilplot', 'Simple', 'Field', 'Shrub', 'Subcanopy', 'Tree')
 Com.Sp.Agg$Total <- Com.Sp.Agg$Field + Com.Sp.Agg$Shrub
 Com.Sp.AggCanopy <- subset(Com.Sp.Agg,  Simple %in% c('Deciduous','Evergreen'))
-Com.Sp.AggCanopy$Simple <- paste(Com.Sp.AggCanopy$Simple, 'Tree')
+Com.Sp.AggCanopy$Simple <- paste0(Com.Sp.AggCanopy$Simple, 'Tree')
 Com.Sp.AggCanopy$Total <- Com.Sp.AggCanopy$Subcanopy + Com.Sp.AggCanopy$Tree
 Com.Sp.Agg$Simple <-as.character(Com.Sp.Agg$Simple)
 Com.Sp.Agg[Com.Sp.Agg$Simple %in% c('Evergreen', 'Deciduous'),]$Simple <- 
-  paste(Com.Sp.Agg[Com.Sp.Agg$Simple %in% c('Evergreen', 'Deciduous'),]$Simple, 'Shrub')
+  paste0(Com.Sp.Agg[Com.Sp.Agg$Simple %in% c('Evergreen', 'Deciduous'),]$Simple, 'Shrub')
 Com.Sp.Agg <- rbind(Com.Sp.Agg, Com.Sp.AggCanopy)
 rm(Com.Sp.preagg, Com.Sp.AggCanopy)
 Com.Sp.Agg$Total <- (10^(Com.Sp.Agg$Total)*-1+1)*100
@@ -178,23 +178,110 @@ Com.Sp.groups <- merge(groupdf,  Com.Sp.mean, by='soilplot', all.x=TRUE, all.y =
 #average spp by cluster
 
 Com.Sp.groups.sum <- aggregate(Com.Sp.groups[,c('Field', 'Shrub', 'Subcanopy','Tree', 'Total')],
-                               by=list(Com.Sp.groups$clust, Com.Sp.groups$Species), FUN=c('sum'))
+                               by=list(Com.Sp.groups$clust, Com.Sp.groups$Species), FUN='sum')
 colnames(Com.Sp.groups.sum) <- c('cluster', 'taxon', 'Field', 'Shrub', 'Subcanopy','Tree', 'Total')
 Com.Sp.groups.count <- aggregate(unique(Com.Sp.groups[c('clust', 'soilplot')])$soilplot, 
                                  by=list(unique(Com.Sp.groups[c('clust', 'soilplot')])$clust), FUN='length')
 colnames(Com.Sp.groups.count) <- c('cluster', 'count')
 Com.Sp.groups.mean <- merge(Com.Sp.groups.sum, Com.Sp.groups.count, by = 'cluster')
 Com.Sp.groups.mean[,c('Field', 'Shrub', 'Subcanopy','Tree', 'Total')] <- Com.Sp.groups.mean[,c('Field', 'Shrub', 'Subcanopy','Tree', 'Total')]/Com.Sp.groups.mean$count
-Com.Sp.groups.mean$stratum <- round((3^(Com.Sp.groups.mean$Tree)*3+
-  3^(Com.Sp.groups.mean$Subcanopy)*2.5+
-  3^(Com.Sp.groups.mean$Shrub)*2+
-  3^(Com.Sp.groups.mean$Field)*1)/
-(  3^(Com.Sp.groups.mean$Tree)+
-  3^(Com.Sp.groups.mean$Subcanopy)+
-  3^(Com.Sp.groups.mean$Shrub)+
-  3^(Com.Sp.groups.mean$Field)),0)
+rm(Com.Sp.groups.sum, Com.Sp.groups.count)
 
+#frequency spp by cluster
+Com.Sp.prefreq <- Com.Sp.groups
+Com.Sp.prefreq$Total <- ifelse(Com.Sp.prefreq$Total >0, 1,0)
+Com.Sp.freq.sum <- aggregate(Com.Sp.prefreq$Total,
+                               by=list(Com.Sp.prefreq$clust, Com.Sp.prefreq$Species), FUN='sum')
+colnames(Com.Sp.freq.sum) <- c('cluster', 'taxon', 'freq')
+Com.Sp.groups.count <- aggregate(unique(Com.Sp.prefreq[c('clust', 'soilplot')])$soilplot, 
+                                 by=list(unique(Com.Sp.prefreq[c('clust', 'soilplot')])$clust), FUN='length')
+colnames(Com.Sp.groups.count) <- c('cluster', 'count')
+Com.Sp.groups.freq <- merge(Com.Sp.freq.sum, Com.Sp.groups.count, by = 'cluster')
+Com.Sp.groups.freq$freq <- Com.Sp.groups.freq$freq/Com.Sp.groups.freq$count*100
+Com.Sp.groups.mean <- merge(Com.Sp.groups.mean, Com.Sp.groups.freq[,c('cluster', 'taxon', 'freq')], by = c('cluster', 'taxon'))
+Com.Sp.groups.mean$freqcover <- (Com.Sp.groups.mean$Total+Com.Sp.groups.mean$freq*2)/3
+rm(Com.Sp.freq.sum, Com.Sp.groups.count)
 
+#Affinity analysis
+Com.Sp.groups.spptotals <- aggregate(Com.Sp.groups.mean[,c('freqcover')],
+                                     by=list(Com.Sp.groups.mean$taxon), FUN='sum')
+colnames(Com.Sp.groups.spptotals) <- c('taxon', 'Totalfreqcover')
+Com.Sp.groups.mean <- merge(Com.Sp.groups.mean, Com.Sp.groups.spptotals, by = 'taxon')
+Com.Sp.groups.mean$affinity <- (Com.Sp.groups.mean$freq*2 + Com.Sp.groups.mean$freqcover/(Com.Sp.groups.mean$Totalfreqcover+0.0001)*100)/3
+
+#calculate dominant stratum by species in group.
+Com.Sp.groups.mean$stratum <- round(
+  ( (Com.Sp.groups.mean$Tree)^2*3+
+    (Com.Sp.groups.mean$Subcanopy)^2*2.5+
+    (Com.Sp.groups.mean$Shrub)^2*2+
+    (Com.Sp.groups.mean$Field)^2*1
+)/
+( (Com.Sp.groups.mean$Tree)^2+
+  (Com.Sp.groups.mean$Subcanopy)^2+
+  (Com.Sp.groups.mean$Shrub)^2+
+  (Com.Sp.groups.mean$Field)^2
+  +0.000000001),0)
+
+#Classify Structure
+Com.Sp.Agg.groups <- merge(groupdf,  Com.Sp.Agg, by='soilplot', all.x=TRUE, all.y = TRUE)
+Com.Sp.Agg.groups.sum <- aggregate(Com.Sp.Agg.groups$Total, by=list(Com.Sp.Agg.groups$clust, Com.Sp.Agg.groups$Simple), FUN='sum')
+colnames(Com.Sp.Agg.groups.sum) <- c('cluster', 'simple', 'Total')
+Com.Sp.Agg.count <- aggregate(unique(Com.Sp.Agg.groups[c('clust', 'soilplot')])$soilplot, 
+                                 by=list(unique(Com.Sp.Agg.groups[c('clust', 'soilplot')])$clust), FUN='length')
+colnames(Com.Sp.Agg.count) <- c('cluster', 'count')
+Com.Sp.Agg.groups.mean <- merge(Com.Sp.Agg.groups.sum, Com.Sp.Agg.count, by = 'cluster')
+Com.Sp.Agg.groups.mean$Total <- Com.Sp.Agg.groups.mean$Total/(Com.Sp.Agg.groups.mean$count+0.0001)
+rm(Com.Sp.Agg.groups.sum, Com.Sp.Agg.count)
+listofsimple <- c("DeciduousShrub", "DeciduousTree", "EvergreenShrub", "EvergreenTree", "Forb", "Graminoid", "Nonvascular")
+cluster = unique(Com.Sp.Agg.groups.mean$cluster)
+Com.Structure <- as.data.frame(cluster)
+for (i in 1:length(listofsimple)){
+  x <- Com.Sp.Agg.groups.mean[Com.Sp.Agg.groups.mean$simple %in% listofsimple[i],c('cluster','Total')]
+  
+  Com.Structure <- merge(Com.Structure,x, by='cluster', all.x = TRUE)
+  Com.Structure$Total <- ifelse(is.na(Com.Structure$Total),0,Com.Structure$Total)
+  colnames(Com.Structure)[colnames(Com.Structure)=="Total"] <- listofsimple[i]
+}
+
+Com.Structure$Structure <-ifelse(Com.Structure$EvergreenTree + Com.Structure$DeciduousTree >= 60,'Forestland',
+                                 ifelse(Com.Structure$EvergreenTree + Com.Structure$DeciduousTree >= 25,'Woodland',
+                                 ifelse(Com.Structure$EvergreenShrub + Com.Structure$DeciduousShrub >= 25,'Shrubland',
+                                        ifelse(Com.Structure$Forb + Com.Structure$Graminoid >= 25,'Herbland',
+                                               ifelse(Com.Structure$Nonvascular >= 25,'Mossland',
+                                                      ifelse(Com.Structure$EvergreenTree + Com.Structure$DeciduousTree +
+                                                               Com.Structure$EvergreenShrub + Com.Structure$DeciduousShrub +
+                                                               Com.Structure$Forb + Com.Structure$Graminoid + 
+                                                               Com.Structure$Nonvascular >= 1,'Sparse','Barren'))))))
+Com.Structure$Structure <- 
+  ifelse(Com.Structure$Structure %in% 'Forestland' &
+           Com.Structure$EvergreenTree/(Com.Structure$EvergreenTree+Com.Structure$DeciduousTree)*100 >=75, 'Evergreen Forest',
+         ifelse(Com.Structure$Structure %in% 'Forestland' &
+                  Com.Structure$EvergreenTree/(Com.Structure$EvergreenTree+Com.Structure$DeciduousTree)*100 >=25, 'Mixed Forest',
+                ifelse(Com.Structure$Structure %in% 'Forestland', 'Deciduous Forest',Com.Structure$Structure)))
+
+Com.Structure$Structure <- 
+  ifelse(Com.Structure$Structure %in% 'Shrubland' &
+           Com.Structure$EvergreenShrub/(Com.Structure$EvergreenShrub+Com.Structure$DeciduousShrub)*100 >=50, 'Evergreen Shrubland',
+         ifelse(Com.Structure$Structure %in% 'Shrubland', 'Deciduous Shrubland',Com.Structure$Structure))
+
+Com.Structure$Structure <- 
+  ifelse(Com.Structure$Structure %in% 'Herbland' &
+           Com.Structure$Graminoid/(Com.Structure$Graminoid+Com.Structure$Forb)*100 >=50, 'Grassland',
+         ifelse(Com.Structure$Structure %in% 'Herbland', 'Meadow',Com.Structure$Structure))
+
+Com.Structure$Structure <- 
+  ifelse(Com.Structure$Structure %in% 'Grassland' &
+           Com.Structure$EvergreenTree+Com.Structure$DeciduousTree >= 10, 'Treed Grassland',
+         ifelse(Com.Structure$Structure %in% 'Grassland' &
+                  Com.Structure$EvergreenShrub+Com.Structure$DeciduousShrub >= 10, 'Shrubby Grassland',Com.Structure$Structure))
+Com.Structure$Structure <- 
+  ifelse(Com.Structure$Structure %in% 'Meadow' &
+           Com.Structure$EvergreenTree+Com.Structure$DeciduousTree >= 10, 'Treed Meadow',
+         ifelse(Com.Structure$Structure %in% 'Meadow' &
+                  Com.Structure$EvergreenShrub+Com.Structure$DeciduousShrub >= 10, 'Shrubby Meadow',Com.Structure$Structure))
+
+Com.Sp.groups.mean<- merge(Com.Sp.groups.mean, Com.Structure[,c('cluster','Structure')], by='cluster', all.x = TRUE)
+ 
 #rank
 Com.Sp.groups.mean <- 
   Com.Sp.groups.mean %>%
@@ -203,10 +290,45 @@ Com.Sp.groups.mean <-
 
 Com.Sp.groups.mean <- 
   Com.Sp.groups.mean %>%
-  group_by(cluster, stratum) %>%
-  mutate(subranks = order(order(Total, decreasing=TRUE)))
+  group_by(cluster) %>%
+  mutate(freqranks = order(order(freqcover, decreasing=TRUE)))
 
-Com.Sp.groups.rank <- subset(Com.Sp.groups.mean, ranks <= 3)
+Com.Sp.groups.mean <- 
+  Com.Sp.groups.mean %>%
+  group_by(cluster) %>%
+  mutate(affranks = order(order(affinity, decreasing=TRUE)))
+
+Com.Sp.groups.mean <- 
+  Com.Sp.groups.mean %>%
+  group_by(cluster, stratum) %>%
+  mutate(subranks = order(order(freqcover, decreasing=TRUE)))
+
+Com.Sp.groups.rank <- subset(Com.Sp.groups.mean, 
+                             !stratum %in% 0 &  (
+                               ((grepl('Forest',Structure)|grepl('Woodland',Structure))&
+                                  (freqranks <= 2 | affranks <= 1|
+                                     (subranks <= 1 & freqranks <= 5)|(subranks <= 1 & affranks <= 5)))|
+                                 (grepl('Shrubland',Structure) &
+                                    ((affranks <= 1 & stratum %in% c(1,2)) |
+                                       (subranks <= 1 & freqranks <= 5)|(subranks <= 1 & affranks <= 5)|
+                                       (freqranks <= 2 & stratum == 2)))|
+                                 (Structure %in% c('Treed Grassland') &
+                                    (freqranks <= 2 | affranks <= 1|
+                                       (subranks <= 1 & freqranks <= 5)|(subranks <= 1 & affranks <= 5)|
+                                       (freqranks <= 3 & stratum %in% c(1,3) )))|
+                                 (Structure %in% c('Shrubby Grassland') &
+                                    (freqranks <= 2 | affranks <= 1|
+                                       (subranks <= 1 & freqranks <= 5)|(subranks <= 1 & affranks <= 5)|
+                                       (freqranks <= 2 & stratum %in% c(1,2) )))|
+                                 (Structure %in% c('Grassland', 'Meadow') &
+                                    (freqranks <= 2 | affranks <= 1|
+                                       (subranks <= 1 & freqranks <= 5)|(subranks <= 1 & affranks <= 5)|
+                                       (freqranks <= 3 & stratum == 1)))
+                               
+                             )
+)
+
+
 write.table(VEGOBS, 'output/VEGOBS-export.txt', row.names = FALSE, sep = "\t")
 write.dbf(VEGOBS[,c(1,3:ncol(VEGOBS))], 'output/VEGOBS.dbf')
 
