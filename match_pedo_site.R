@@ -16,6 +16,7 @@ obsspp <- subset(obsspp, !substr(AcTaxon,1,1) %in% '-'& !AcTaxon %in% '' & !is.n
 obsspp <- merge(obsspp, List_Habits[,c('Form','Simple')], by.x = 'Habit', by.y = 'Form', all.x = TRUE)
 obs <- read.delim("data/Sites.txt")
 obsspp <- merge(obs[,c('Observation_ID','Observation_Label')],obsspp, by='Observation_ID')
+obsspp <- subset(obsspp, Field+Shrub+Subcanopy+Tree > 0)
 
 VEGOBS <- read.delim("data/VEGOBS.txt")
 VEGOBS$pedon <- ""
@@ -112,29 +113,31 @@ jactree <- agnes(jacdist1, method='average')
 w <- 800
 h <- 3000
 u <- 12
+ngroups <- 16
+groups <- cutree(jactree, k = ngroups)
 
-groups <- cutree(jactree, k = 4)
-
-dend1 <- color_branches(as.hclust(jactree), k = 4)
-dend1 <- color_labels(dend1, k = 4)
+dend1 <- color_branches(as.hclust(jactree), k = ngroups)
+dend1 <- color_labels(dend1, k = ngroups)
 
 png(filename="output/jactree_flora.png",width = w, height = h, units = "px", pointsize = u)
 par(mar = c(2,0,1,13))
 plot(dend1, horiz = TRUE, main='floristic simularity - jaccard metric', font=1, cex=0.85)
-rect.dendrogram(dend1, k =4, horiz = TRUE)
+rect.dendrogram(dend1, k = ngroups, horiz = TRUE)
 dev.off()
 
 #----
+Com.Sp.Agg$sqrttotal <- Com.Sp.Agg$Total^0.5
 plotinputs2 <- makecommunitydataset(Com.Sp.Agg, row = 'soilplot', column = 'Simple', value = 'Total', drop = TRUE)
 
 jacdist2 <- as.data.frame(as.matrix(vegdist(plotinputs2,method='jaccard', binary=FALSE, na.rm=T)))
 
 jactree <- agnes(jacdist2, method='average')
 
-groups <- cutree(jactree, k = 4)
+ngroups <- 8
+groups <- cutree(jactree, k = ngroups)
 
-dend1 <- color_branches(as.hclust(jactree), k = 4)
-dend1 <- color_labels(dend1, k = 4)
+dend1 <- color_branches(as.hclust(jactree), k = ngroups)
+dend1 <- color_labels(dend1, k = ngroups)
 
 w <- 800
 h <- 3000
@@ -143,17 +146,32 @@ png(filename="output/jactree_simple.png",width = w, height = h, units = "px", po
 
 par(mar = c(2,0,1,13))
 plot(dend1, horiz = TRUE, main='floristic simularity - jaccard metric', font=1, cex=0.85)
-rect.dendrogram(dend1, k =4, horiz = TRUE)
+rect.dendrogram(dend1, k = ngroups, horiz = TRUE)
 dev.off()
 #----
-jacdist <- (jacdist1+jacdist2)/2
+#jacdist <- (jacdist1*2+jacdist2*1)/3
+plotinputs <- cbind(plotinputs1, plotinputs2)
+jacdist <- as.data.frame(as.matrix(vegdist(plotinputs1, method='bray', binary=FALSE, na.rm=T)))
 maxdist <- max(na.omit(jacdist))
 jactree <- agnes(jacdist, method='average')
+#jactree <- diana(jacdist)
 
-groups <- cutree(jactree, k = 4)
+ngroups <- 16
+groups <- cutree(jactree, k = ngroups)
+soilplot <- names(groups)
+clust <- unname(groups)
+groupdf <- as.data.frame(cbind(soilplot, clust))
+newlabels <- jactree$order.lab
+newlabels <- as.data.frame(newlabels)
+newlabels$row <- row(newlabels)
+newlabels <- merge(newlabels, groupdf, by.x='newlabels', by.y ='soilplot')
+newlabels$newlabels <- paste(newlabels$clust, newlabels$newlabels)
+newlabels <- newlabels[order(newlabels$row),1]
+newtree <- jactree
+newtree$order.lab <- newlabels
 
-dend1 <- color_branches(as.hclust(jactree), k = 4)
-dend1 <- color_labels(dend1, k = 4)
+dend1 <- color_branches(as.hclust(newtree), k = ngroups)
+dend1 <- color_labels(dend1, k = ngroups)
 
 w <- 800
 h <- 3000
@@ -161,8 +179,8 @@ u <- 12
 png(filename="output/jactree_comb.png",width = w, height = h, units = "px", pointsize = u)
 
 par(mar = c(2,0,1,13))
-plot(dend1, horiz = TRUE, main='floristic simularity - jaccard metric', font=1, cex=0.85)
-rect.dendrogram(dend1, k =4, horiz = TRUE)
+plot(dend1, horiz = TRUE, main='floristic simularity - bray metric', font=1, cex=0.85)
+rect.dendrogram(dend1, k = ngroups, horiz = TRUE)
 dev.off()
 #----
 #group dominant and indicator species
@@ -199,7 +217,7 @@ colnames(Com.Sp.groups.count) <- c('cluster', 'count')
 Com.Sp.groups.freq <- merge(Com.Sp.freq.sum, Com.Sp.groups.count, by = 'cluster')
 Com.Sp.groups.freq$freq <- Com.Sp.groups.freq$freq/Com.Sp.groups.freq$count*100
 Com.Sp.groups.mean <- merge(Com.Sp.groups.mean, Com.Sp.groups.freq[,c('cluster', 'taxon', 'freq')], by = c('cluster', 'taxon'))
-Com.Sp.groups.mean$freqcover <- (Com.Sp.groups.mean$Total+Com.Sp.groups.mean$freq*2)/3
+Com.Sp.groups.mean$freqcover <- (Com.Sp.groups.mean$Total+Com.Sp.groups.mean$freq*3)/4
 rm(Com.Sp.freq.sum, Com.Sp.groups.count)
 
 #Affinity analysis
@@ -207,7 +225,7 @@ Com.Sp.groups.spptotals <- aggregate(Com.Sp.groups.mean[,c('freqcover')],
                                      by=list(Com.Sp.groups.mean$taxon), FUN='sum')
 colnames(Com.Sp.groups.spptotals) <- c('taxon', 'Totalfreqcover')
 Com.Sp.groups.mean <- merge(Com.Sp.groups.mean, Com.Sp.groups.spptotals, by = 'taxon')
-Com.Sp.groups.mean$affinity <- (Com.Sp.groups.mean$freq*2 + Com.Sp.groups.mean$freqcover/(Com.Sp.groups.mean$Totalfreqcover+0.0001)*100)/3
+Com.Sp.groups.mean$affinity <- (Com.Sp.groups.mean$freq*3 + Com.Sp.groups.mean$freqcover/(Com.Sp.groups.mean$Totalfreqcover+0.0001)*100)/4
 
 #calculate dominant stratum by species in group.
 Com.Sp.groups.mean$stratum <- round(
@@ -281,7 +299,7 @@ Com.Structure$Structure <-
                   Com.Structure$EvergreenShrub+Com.Structure$DeciduousShrub >= 10, 'Shrubby Meadow',Com.Structure$Structure))
 
 Com.Sp.groups.mean<- merge(Com.Sp.groups.mean, Com.Structure[,c('cluster','Structure')], by='cluster', all.x = TRUE)
- 
+Com.Sp.groups.mean$overunder <- ifelse(Com.Sp.groups.mean$stratum == 3, 1,0)
 #rank
 Com.Sp.groups.mean <- 
   Com.Sp.groups.mean %>%
@@ -303,32 +321,86 @@ Com.Sp.groups.mean <-
   group_by(cluster, stratum) %>%
   mutate(subranks = order(order(freqcover, decreasing=TRUE)))
 
-Com.Sp.groups.rank <- subset(Com.Sp.groups.mean, 
-                             !stratum %in% 0 &  (
-                               ((grepl('Forest',Structure)|grepl('Woodland',Structure))&
-                                  (freqranks <= 2 | affranks <= 1|
-                                     (subranks <= 1 & freqranks <= 5)|(subranks <= 1 & affranks <= 5)))|
-                                 (grepl('Shrubland',Structure) &
-                                    ((affranks <= 1 & stratum %in% c(1,2)) |
-                                       (subranks <= 1 & freqranks <= 5)|(subranks <= 1 & affranks <= 5)|
-                                       (freqranks <= 2 & stratum == 2)))|
-                                 (Structure %in% c('Treed Grassland') &
-                                    (freqranks <= 2 | affranks <= 1|
-                                       (subranks <= 1 & freqranks <= 5)|(subranks <= 1 & affranks <= 5)|
-                                       (freqranks <= 3 & stratum %in% c(1,3) )))|
-                                 (Structure %in% c('Shrubby Grassland') &
-                                    (freqranks <= 2 | affranks <= 1|
-                                       (subranks <= 1 & freqranks <= 5)|(subranks <= 1 & affranks <= 5)|
-                                       (freqranks <= 2 & stratum %in% c(1,2) )))|
-                                 (Structure %in% c('Grassland', 'Meadow') &
-                                    (freqranks <= 2 | affranks <= 1|
-                                       (subranks <= 1 & freqranks <= 5)|(subranks <= 1 & affranks <= 5)|
-                                       (freqranks <= 3 & stratum == 1)))
-                               
-                             )
-)
+Com.Sp.groups.mean <- 
+  Com.Sp.groups.mean %>%
+  group_by(cluster, overunder) %>%
+  mutate(overunderranks = order(order(freqcover, decreasing=TRUE)))
 
+Com.rank <- subset(Com.Sp.groups.mean, !stratum %in% 0)
+         
+ 
+ 
+ 
+Com.rankA <- subset(Com.rank,
+                    ((grepl('Forest',Structure))&
+                       (((freqranks <= 3 | affranks <= 1) & stratum %in% c(1,2,3))|(subranks <= 1 & stratum == 3))
+                    )|
+                      ((grepl('Woodland',Structure))&
+                         (((freqranks <= 2 | affranks <= 1) & stratum %in% c(1,2,3))|(overunderranks <= 1))
+                      )|
+                               ((grepl('Shrubland',Structure))&
+                                  (((freqranks <= 3 | affranks <= 1) & stratum %in% c(1,2))|(subranks <= 1 & stratum %in% c(2)))
+                               )|
+                               ((Structure %in% c('Treed Grassland', 'Treed Meadow'))&
+                                  (((freqranks <= 2 | affranks <= 1) & stratum %in% c(1,2,3))|(subranks <= 1 & stratum %in% c(1,3)))
+                               )|
+                               ((Structure %in% c('Shrubby Grassland', 'Shrubby Meadow'))&
+                                  (((freqranks <= 2 | affranks <= 1) & stratum %in% c(1,2))|(subranks <= 1 & stratum %in% c(1,2)))
+                               )|
+                               ((Structure %in% c('Grassland', 'Meadow'))&
+                                  (((freqranks <= 3 | affranks <= 1) & stratum %in% c(1))|(subranks <= 1 & stratum %in% c(1)))
+                               ))
 
+Com.rankB <- subset(Com.rank,
+                   affranks <= 2|(subranks <= 1 & freqranks <= 5)|(subranks <= 1 & affranks <= 5))
+
+Com.Ass <- Com.rankA
+Com.Ass <- Com.Ass[,c('cluster', 'taxon', 'stratum', 'freqcover')]
+Com.Ass <- 
+  Com.Ass %>%
+  group_by(cluster, stratum) %>%
+  mutate(ranks = order(order(freqcover, decreasing=FALSE)))
+Com.Ass$ranks <- Com.Ass$stratum*10+Com.Ass$ranks 
+Com.Ass <- 
+  Com.Ass %>%
+  group_by(cluster) %>%
+  mutate(ranks = order(order(ranks, decreasing=TRUE)))
+
+Com.Structure$association <- ""
+
+Com.Ass$taxon <- as.character(Com.Ass$taxon)
+nclust <- unique(Com.Ass$cluster)
+for (i in 1:length(nclust)){
+  Com.B <- subset(Com.Ass, cluster %in% nclust[i])
+nrank <- length(unique(Com.B$ranks))
+assname <- ""
+  for (j in 1:nrank){
+    assname <- ifelse(j == 1,Com.B[Com.B$ranks %in% j,]$taxon,
+                      ifelse(Com.B[Com.B$ranks %in% j,]$stratum == Com.B[Com.B$ranks %in% (j-1),]$stratum,
+                             paste0(assname, '-',Com.B[Com.B$ranks %in% j,]$taxon),paste0(assname, '/',Com.B[Com.B$ranks %in% j,]$taxon)))
+                             
+  }
+Com.Structure[Com.Structure$cluster %in% nclust[i],]$association <- assname
+}
+Com.Structure[order(as.numeric(as.character(Com.Structure$cluster))),c("cluster", "association", "Structure")]
+
+nrow(unique(Com.Sp.groups[,c('Soil','clust')]))/length(unique(Com.Sp.groups$Soil))
+#comparison of 16 clusters different matrix, distance, and tree building
+clusterpersoilbrayflorahabitmatrixcomb <- 1.834862
+clusterpersoileuclidflorahabitmatrixcomb <- 1.853211
+clusterpersoilbraybinaryflorahabitmatrixcomb <- 1.862385
+clusterpersoiljacflorahabitmatrixcomb <- 1.917431
+clusterpersoiljacfloraonly <- 1.990826
+clusterpersoiljacflorahabitdist2to1 <- 2.009174
+clusterpersoiljachabitonly <- 2.036697
+clusterpersoiljacdiana <- 2.110092
+clusterpersoilbraynotsqrtflorahabitmatrixcomb <- 2.119266
+clusterpersoiljacward <-2.275229
+clusterpersoilbraynotsqrtfloraonly <- 2.073394
+clusterpersoiljacnotsqrtfloraonly <- 2.018349
+clusterpersoilbraysqrtbothflorahabitcomb <- 1.954128
+clusterpersoilbrayfloraonly <- 1.963303
+#optimum is with sqrt sp matrix with non-sqrt habits combined matrix then bray distance. But flora only matrix may have more cohesive community composition, but this defailts to mostly forests.
 write.table(VEGOBS, 'output/VEGOBS-export.txt', row.names = FALSE, sep = "\t")
 write.dbf(VEGOBS[,c(1,3:ncol(VEGOBS))], 'output/VEGOBS.dbf')
 
