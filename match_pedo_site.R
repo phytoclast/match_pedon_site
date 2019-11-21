@@ -155,9 +155,12 @@ jacdist <- as.data.frame(as.matrix(vegdist(plotinputs1, method='bray', binary=FA
 maxdist <- max(na.omit(jacdist))
 jactree <- agnes(jacdist, method='average')
 #jactree <- diana(jacdist)
-
-ngroups <- 16
+km <- kmeans(plotinputs1, ngroups)
+ngroups <- 32
 groups <- cutree(jactree, k = ngroups)
+
+#soilplot <- names(km$cluster)
+#clust <- unname(km$cluster)
 soilplot <- names(groups)
 clust <- unname(groups)
 groupdf <- as.data.frame(cbind(soilplot, clust))
@@ -185,9 +188,6 @@ dev.off()
 #----
 #group dominant and indicator species
 
-soilplot <- names(groups)
-clust <- unname(groups)
-groupdf <- as.data.frame(cbind(soilplot, clust))
 
 
 Com.Sp.groups <- merge(groupdf,  Com.Sp.mean, by='soilplot', all.x=TRUE, all.y = TRUE)
@@ -400,7 +400,7 @@ clusterpersoilbraynotsqrtfloraonly <- 2.073394
 clusterpersoiljacnotsqrtfloraonly <- 2.018349
 clusterpersoilbraysqrtbothflorahabitcomb <- 1.954128
 clusterpersoilbrayfloraonly <- 1.963303
+clusterpersoilbraykmeansflora <- 2.082569
 #optimum is with sqrt sp matrix with non-sqrt habits combined matrix then bray distance. But flora only matrix may have more cohesive community composition, but this defailts to mostly forests.
 write.table(VEGOBS, 'output/VEGOBS-export.txt', row.names = FALSE, sep = "\t")
 write.dbf(VEGOBS[,c(1,3:ncol(VEGOBS))], 'output/VEGOBS.dbf')
-
