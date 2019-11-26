@@ -420,20 +420,22 @@ for (i in 2:6){
   resultsdf[,i] <- as.numeric(resultsdf[,i])
   resultsdf[,i] <- NA}
 
-plotinputs3 <- makecommunitydataset(Com.Sp.mean, row = 'soilplot', column = 'Species', value = 'Total', drop = TRUE)
+plotinputs3 <- makecommunitydataset(Com.Sp.mean, row = 'soilplot', column = 'Species', value = 'sqrttotal', drop = TRUE)
 
 
 jacdist <- as.data.frame(as.matrix(vegdist(plotinputs3,method='jaccard', binary=FALSE, na.rm=T)))
 bradist <- as.data.frame(as.matrix(vegdist(plotinputs3,method='bray', binary=FALSE, na.rm=T)))
+krudist <- as.data.frame(as.matrix(vegdist(plotinputs3,method='kulczynski', binary=FALSE, na.rm=T)))
 
 jactree <- agnes(jacdist, method = 'average')
 bratree <- agnes(bradist, method = 'average')
+krutree <- agnes(krudist, method = 'average')
 jwardree <- agnes(jacdist, method = 'ward')
 bwardree <- agnes(bradist, method = 'ward')
 jdiatree <- diana(jacdist)
 bdiatree <- diana(bradist)
 
-treeofinterest <- list(jactree,bratree,jwardree,bwardree,jdiatree,bdiatree)
+treeofinterest <- list(jactree,bratree,krutree,jwardree,bwardree,jdiatree,bdiatree)
 precutlist <- c(2,4,8,16,32)
 
 for (i in 1:6){
@@ -464,3 +466,101 @@ for (i in 1:6){
 sqrtresults <-resultsdf
 relativeresults <- resultsdf
 relativeresults[,2:6] <- sqrtresults[,2:6]/resultsdf[,2:6]
+
+
+
+
+
+#----
+comparedf <- as.data.frame(cbind(
+  methodsx=c('jactree','bratree','krutree', 'jwardree','bwardree','jdiatree','bdiatree'),
+  kcut002=c(0,0,0,0,0,0,0),
+  kcut008=c(0,0,0,0,0,0,0),
+  kcut032=c(0,0,0,0,0,0,0)))
+
+for (i in 2:4){
+  comparedf[,i] <- as.numeric(comparedf[,i])
+  comparedf[,i] <- NA}
+
+precutlist <- c(2,8,32)
+
+jacdist.mean <- apply(jacdist, MARGIN = 1, FUN ='mean')
+jacdist.mean <- mean(jacdist.mean)
+for (i in 1:7){
+  for (j in 1:3){
+    cuts000 <- cutree(treeofinterest[[i]], k=precutlist[j])
+    
+    cuttreelist <- cbind(as.data.frame(cuts000), row.names(treeofinterest[[i]]$data))
+    colnames(cuttreelist) <- c('cuts000','ssec')
+    ssecsppclust <- merge(Com.Sp.mean, cuttreelist, by.x = 'soilplot', by.y = 'ssec')
+    
+    ssecsppclust.mean <- aggregate(ssecsppclust[,"Total"], by=list(ssecsppclust$Species, ssecsppclust$cuts000), FUN='sum')
+    colnames(ssecsppclust.mean) <- c('taxon', 'cluster', 'sum')
+    ssecsppclust.count <- aggregate(unique(ssecsppclust[c('cuts000', 'soilplot')])$soilplot, 
+                                    by=list(unique(ssecsppclust[c('cuts000', 'soilplot')])$cuts000), FUN='length')
+    colnames(ssecsppclust.count) <- c('cluster', 'count')
+    ssecsppclust.mean <- merge(ssecsppclust.mean, ssecsppclust.count, by='cluster')
+    ssecsppclust.mean$mean <- ssecsppclust.mean$sum/ssecsppclust.mean$count
+    
+    listclust <- unique(ssecsppclust.mean$cluster)
+    nclust <- length(listclust)
+    prejac <- 0
+    for (k in 1:nclust){
+      for (m in 1:nclust){
+        A <- ssecsppclust.mean[ssecsppclust.mean$cluster == listclust[k],c('taxon', 'mean')]
+        B <- ssecsppclust.mean[ssecsppclust.mean$cluster == listclust[m],c('taxon', 'mean')]
+        C <- merge(A,B, by='taxon', all.x = TRUE,all.y = TRUE)
+        C$mean.x <- ifelse(is.na(C$mean.x), 0, C$mean.x)
+        C$mean.y <- ifelse(is.na(C$mean.y), 0, C$mean.y)
+        C$abdif <- abs(C$mean.x-C$mean.y)
+        C <- sum(C$abdif)
+        A <- sum(A$mean)
+        B <- sum(B$mean)
+        bray <- C/(A+B)
+        jaccard <- 2*bray/(1+bray)
+        prejac <- jaccard + prejac
+      }}
+    comparedf[i,j+1] <- prejac/nclust^2
+  }}
+
+sqresults <- comparedf
+sqresults2 <- sqresults
+sqresults2[,2:4]<- comparedf[,2:4]-sqresults[,2:4]
+sqresults2 <- merge(sqresults, comparedf, by='methodsx')
+
+kmmmlist <- as.data.frame(rbind(c('kmeans',0,0,0)))
+kmmmlist[,2:4] <- as.numeric(kmmmlist[,2:4])
+for (j in 1:3){
+kmmmm <- kmeans(plotinputs3, precutlist[j])
+cuttreelist <- cbind(as.data.frame(kmmmm$cluster), row.names(treeofinterest[[i]]$data))
+colnames(cuttreelist) <- c('cuts000','ssec')
+ssecsppclust <- merge(Com.Sp.mean, cuttreelist, by.x = 'soilplot', by.y = 'ssec')
+
+ssecsppclust.mean <- aggregate(ssecsppclust[,"Total"], by=list(ssecsppclust$Species, ssecsppclust$cuts000), FUN='sum')
+colnames(ssecsppclust.mean) <- c('taxon', 'cluster', 'sum')
+ssecsppclust.count <- aggregate(unique(ssecsppclust[c('cuts000', 'soilplot')])$soilplot, 
+                                by=list(unique(ssecsppclust[c('cuts000', 'soilplot')])$cuts000), FUN='length')
+colnames(ssecsppclust.count) <- c('cluster', 'count')
+ssecsppclust.mean <- merge(ssecsppclust.mean, ssecsppclust.count, by='cluster')
+ssecsppclust.mean$mean <- ssecsppclust.mean$sum/ssecsppclust.mean$count
+
+listclust <- unique(ssecsppclust.mean$cluster)
+nclust <- length(listclust)
+prejac <- 0
+for (k in 1:nclust){
+  for (m in 1:nclust){
+    A <- ssecsppclust.mean[ssecsppclust.mean$cluster == listclust[k],c('taxon', 'mean')]
+    B <- ssecsppclust.mean[ssecsppclust.mean$cluster == listclust[m],c('taxon', 'mean')]
+    C <- merge(A,B, by='taxon', all.x = TRUE,all.y = TRUE)
+    C$mean.x <- ifelse(is.na(C$mean.x), 0, C$mean.x)
+    C$mean.y <- ifelse(is.na(C$mean.y), 0, C$mean.y)
+    C$abdif <- abs(C$mean.x-C$mean.y)
+    C <- sum(C$abdif)
+    A <- sum(A$mean)
+    B <- sum(B$mean)
+    bray <- C/(A+B)
+    jaccard <- 2*bray/(1+bray)
+    prejac <- jaccard + prejac
+  }}
+kmmmlist[1,j+1] <- prejac/nclust^2
+}
