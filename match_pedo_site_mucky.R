@@ -4,6 +4,7 @@ library(cluster)
 library(ape)
 library(dendextend)
 library(dplyr)
+library(dynamicTreeCut)
 #----
 NASISPEDONS <- read.delim("data/NASISPEDONS.txt")
 List_Habits <- read.delim("data/List_Habits.txt", na.strings = '')
@@ -50,7 +51,11 @@ VEGOBS_soilnames <- merge(VEGOBS_mukeys[,c('Observatio','RASTERVALU')], mu[,c('l
 VEGOBS <- merge(VEGOBS, VEGOBS_soilnames[,c('Observatio', 'muname')], by.x='Observation_Label', by.y= 'Observatio')
 VEGOBS$Soil <- VEGOBS$taxonname
 VEGOBS[VEGOBS$Soil %in% '',]$Soil <- str_split_fixed(VEGOBS[VEGOBS$Soil %in% '',]$muname, " ",2)[,1]
-
+#----
+#narrow to soil series
+VEGOBS <- subset(VEGOBS,Soil %in% c('Houghton', 'Carlisle', 'Adrian', 'Edwards', 'Palms', 'Napoleon', 'Rifle', 'Tawas', 'Lupton', 'Histosols',
+                                    'Dair','Boots','Antung','Aurelius','Bowstring','Ausable','Cathro','Dawson','Deerwood','Dorval','Edselton','Haplosaprists','Kerston','Leafriver','Loxley','Madaus','Martisco', 'Makinen','Medo','Pinnebog','Rondeau','Spalding','Thapto-Histic Fluvaquent
+','Toto','Wallkill'))
 #----
 #observed species
 
@@ -128,68 +133,32 @@ rm(Com.Sp.wet.agg2,Com.Sp.wet.agg)
 Com.Sp.mean$sqrttotal <- sqrt(Com.Sp.mean$Total)
 
 plotinputs1 <- makecommunitydataset(Com.Sp.mean, row = 'soilplot', column = 'Species', value = 'sqrttotal', drop = TRUE)
-if (F){
-jacdist1 <- as.data.frame(as.matrix(vegdist(plotinputs1,method='jaccard', binary=FALSE, na.rm=T)))
-
-jactree <- agnes(jacdist1, method='average')
-
-w <- 800
-h <- 3000
-u <- 12
-ngroups <- 16
-groups <- cutree(jactree, k = ngroups)
-
-dend1 <- color_branches(as.hclust(jactree), k = ngroups)
-dend1 <- color_labels(dend1, k = ngroups)
-
-png(filename="output/jactree_flora.png",width = w, height = h, units = "px", pointsize = u)
-par(mar = c(2,0,1,13))
-plot(dend1, horiz = TRUE, main='floristic simularity - jaccard metric', font=1, cex=0.85)
-rect.dendrogram(dend1, k = ngroups, horiz = TRUE)
-dev.off()
-}
-#----
 Com.Sp.Agg$sqrttotal <- Com.Sp.Agg$Total^0.5
 plotinputs2 <- makecommunitydataset(Com.Sp.Agg.wet, row = 'soilplot', column = 'Simple', value = 'Total', drop = TRUE)
 
-if (F){
-jacdist2 <- as.data.frame(as.matrix(vegdist(plotinputs2,method='jaccard', binary=FALSE, na.rm=T)))
 
-jactree <- agnes(jacdist2, method='average')
-
-ngroups <- 8
-groups <- cutree(jactree, k = ngroups)
-
-dend1 <- color_branches(as.hclust(jactree), k = ngroups)
-dend1 <- color_labels(dend1, k = ngroups)
-
-w <- 800
-h <- 3000
-u <- 12
-png(filename="output/jactree_simple.png",width = w, height = h, units = "px", pointsize = u)
-
-par(mar = c(2,0,1,13))
-plot(dend1, horiz = TRUE, main='floristic simularity - jaccard metric', font=1, cex=0.85)
-rect.dendrogram(dend1, k = ngroups, horiz = TRUE)
-dev.off()
-}
-#----
 #jacdist <- (jacdist1*2+jacdist2*1)/3
 plotinputs <- cbind(plotinputs1, plotinputs2)
-jacdist <- as.data.frame(as.matrix(vegdist(plotinputs, method='bray', binary=FALSE, na.rm=T)))
-maxdist <- max(na.omit(jacdist))
-jactree <- agnes(jacdist, method='average')
-#jactree <- diana(jacdist)
 
-ngroups <- 32
+jacdist <- as.data.frame(as.matrix(vegdist(plotinputs1, method='jaccard', binary=FALSE, na.rm=T)))
+
+jactree <- agnes(jacdist, method='average')
+
+
+ngroups <- 6
 groups <- cutree(jactree, k = ngroups)
+
 soilplot <- names(groups)
 clust <- unname(groups)
 if (F){
 groups <- kmeans(plotinputs1, ngroups)
 soilplot <- names(groups$cluster)
 clust <- unname(groups$cluster)}
-
+if (F){
+  groups <- cutreeDynamic(as.hclust(jactree), distM = jacdist, method = 'tree', minClusterSize = 1)
+  soilplot <- rownames(plotinputs1)
+  clust <- groups
+}
 groupdf <- as.data.frame(cbind(soilplot, clust))
 newlabels <- jactree$order.lab
 newlabels <- as.data.frame(newlabels)
@@ -204,9 +173,9 @@ dend1 <- color_branches(as.hclust(newtree), k = ngroups)
 dend1 <- color_labels(dend1, k = ngroups)
 
 w <- 800
-h <- 3000
+h <- nrow(VEGOBS)*12+80
 u <- 12
-png(filename="output/jactree_comb.png",width = w, height = h, units = "px", pointsize = u)
+png(filename="output/muckytree_comb.png",width = w, height = h, units = "px", pointsize = u)
 
 par(mar = c(2,0,1,13))
 plot(dend1, horiz = TRUE, main='floristic simularity - bray metric', font=1, cex=0.85)
@@ -422,181 +391,5 @@ Com.Structure[Com.Structure$cluster %in% nclust[i],]$association <- assname
 }
 Com.Structure[order(as.numeric(as.character(Com.Structure$cluster))),c("cluster", "association", "WetStructure")]
 
-nrow(unique(Com.Sp.groups[,c('Soil','clust')]))/length(unique(Com.Sp.groups$Soil))
-#comparison of 16 clusters different matrix, distance, and tree building
-clusterpersoilbrayflorahabitmatrixcomb <- 1.834862
-clusterpersoileuclidflorahabitmatrixcomb <- 1.853211
-clusterpersoilbraybinaryflorahabitmatrixcomb <- 1.862385
-clusterpersoiljacflorahabitmatrixcomb <- 1.917431
-clusterpersoiljacfloraonly <- 1.990826
-clusterpersoiljacflorahabitdist2to1 <- 2.009174
-clusterpersoiljachabitonly <- 2.036697
-clusterpersoiljacdiana <- 2.110092
-clusterpersoilbraynotsqrtflorahabitmatrixcomb <- 2.119266
-clusterpersoiljacward <-2.275229
-clusterpersoilbraynotsqrtfloraonly <- 2.073394
-clusterpersoiljacnotsqrtfloraonly <- 2.018349
-clusterpersoilbraysqrtbothflorahabitcomb <- 1.954128
-clusterpersoilbrayfloraonly <- 1.963303
-clusterpersoilbraykmeansflora <- 2.082569
-#optimum is with sqrt sp matrix with non-sqrt habits combined matrix then bray distance. But flora only matrix may have more cohesive community composition, but this defailts to mostly forests.
-write.table(VEGOBS, 'output/VEGOBS-export.txt', row.names = FALSE, sep = "\t")
-write.dbf(VEGOBS[,c(1,3:ncol(VEGOBS))], 'output/VEGOBS.dbf')
-#----
-#validation of method
-resultsdf <- as.data.frame(cbind(
-  methodsx=c('jactree','bratree','jwardree','bwardree','jdiatree','bdiatree'),
-  kcut002=c(0,0,0,0,0,0),
-  kcut004=c(0,0,0,0,0,0),
-  kcut008=c(0,0,0,0,0,0),
-  kcut016=c(0,0,0,0,0,0),
-  kcut032=c(0,0,0,0,0,0)))
 
-for (i in 2:6){
-  resultsdf[,i] <- as.numeric(resultsdf[,i])
-  resultsdf[,i] <- NA}
-
-#plotinputs3 <- makecommunitydataset(Com.Sp.mean, row = 'soilplot', column = 'Species', value = 'sqrttotal', drop = TRUE)
-plotinputs3<- plotinputs
-
-jacdist <- as.data.frame(as.matrix(vegdist(plotinputs3,method='jaccard', binary=FALSE, na.rm=T)))
-bradist <- as.data.frame(as.matrix(vegdist(plotinputs3,method='bray', binary=FALSE, na.rm=T)))
-krudist <- as.data.frame(as.matrix(vegdist(plotinputs3,method='kulczynski', binary=FALSE, na.rm=T)))
-
-jactree <- agnes(jacdist, method = 'average')
-bratree <- agnes(bradist, method = 'average')
-krutree <- agnes(krudist, method = 'average')
-jwardree <- agnes(jacdist, method = 'ward')
-bwardree <- agnes(bradist, method = 'ward')
-jdiatree <- diana(jacdist)
-bdiatree <- diana(bradist)
-
-treeofinterest <- list(jactree,bratree,krutree,jwardree,bwardree,jdiatree,bdiatree)
-precutlist <- c(2,4,8,16,32)
-
-for (i in 1:6){
-  for (j in 1:5){
-    cuts000 <- cutree(treeofinterest[[i]], k=precutlist[j])
-    
-    cuttreelist <- cbind(as.data.frame(cuts000), row.names(treeofinterest[[i]]$data))
-    colnames(cuttreelist) <- c('cuts000','ssec')
-    ssecsppclust <- merge(Com.Sp.mean, cuttreelist, by.x = 'soilplot', by.y = 'ssec')
-    
-    ssecsppclust.mean <- aggregate(ssecsppclust[,"Total"], by=list(ssecsppclust$Species, ssecsppclust$cuts000), FUN='sum')
-    colnames(ssecsppclust.mean) <- c('taxon', 'cluster', 'sum')
-    ssecsppclust.count <- aggregate(unique(ssecsppclust[c('cuts000', 'soilplot')])$soilplot, 
-                                    by=list(unique(ssecsppclust[c('cuts000', 'soilplot')])$cuts000), FUN='length')
-    colnames(ssecsppclust.count) <- c('cluster', 'count')
-    ssecsppclust.mean <- merge(ssecsppclust.mean, ssecsppclust.count, by='cluster')
-    ssecsppclust.mean$mean <- ssecsppclust.mean$sum/ssecsppclust.mean$count
-    
-    ssecsppclust.mean.aff <- aggregate(ssecsppclust.mean[,"mean"], by=list(ssecsppclust.mean$taxon), FUN='sum')
-    colnames(ssecsppclust.mean.aff) <- c('taxon', 'affsum')
-    ssecsppclust.mean <- merge(ssecsppclust.mean, ssecsppclust.mean.aff, by = 'taxon')
-    ssecsppclust.mean$aff <- ssecsppclust.mean$mean/ssecsppclust.mean$affsum*100
-    ssecsppclust.mean.aff.max <- aggregate(ssecsppclust.mean[,"aff"], by=list(ssecsppclust.mean$taxon), FUN='max')
-    colnames(ssecsppclust.mean.aff.max) <- c('taxon', 'max')
-    meanaff <- mean(ssecsppclust.mean.aff.max$max)
-    resultsdf[i,j+1] <- meanaff
-  }}
-sqrtresults <-resultsdf
-relativeresults <- resultsdf
-relativeresults[,2:6] <- sqrtresults[,2:6]/resultsdf[,2:6]
-
-
-
-
-
-#----
-comparedf <- as.data.frame(cbind(
-  methodsx=c('jactree','bratree','krutree', 'jwardree','bwardree','jdiatree','bdiatree'),
-  kcut002=c(0,0,0,0,0,0,0),
-  kcut008=c(0,0,0,0,0,0,0),
-  kcut032=c(0,0,0,0,0,0,0)))
-
-for (i in 2:4){
-  comparedf[,i] <- as.numeric(comparedf[,i])
-  comparedf[,i] <- NA}
-
-precutlist <- c(2,8,32)
-
-jacdist.mean <- apply(jacdist, MARGIN = 1, FUN ='mean')
-jacdist.mean <- mean(jacdist.mean)
-for (i in 1:7){
-  for (j in 1:3){
-    cuts000 <- cutree(treeofinterest[[i]], k=precutlist[j])
-    
-    cuttreelist <- cbind(as.data.frame(cuts000), row.names(treeofinterest[[i]]$data))
-    colnames(cuttreelist) <- c('cuts000','ssec')
-    ssecsppclust <- merge(Com.Sp.mean, cuttreelist, by.x = 'soilplot', by.y = 'ssec')
-    
-    ssecsppclust.mean <- aggregate(ssecsppclust[,"Total"], by=list(ssecsppclust$Species, ssecsppclust$cuts000), FUN='sum')
-    colnames(ssecsppclust.mean) <- c('taxon', 'cluster', 'sum')
-    ssecsppclust.count <- aggregate(unique(ssecsppclust[c('cuts000', 'soilplot')])$soilplot, 
-                                    by=list(unique(ssecsppclust[c('cuts000', 'soilplot')])$cuts000), FUN='length')
-    colnames(ssecsppclust.count) <- c('cluster', 'count')
-    ssecsppclust.mean <- merge(ssecsppclust.mean, ssecsppclust.count, by='cluster')
-    ssecsppclust.mean$mean <- ssecsppclust.mean$sum/ssecsppclust.mean$count
-    
-    listclust <- unique(ssecsppclust.mean$cluster)
-    nclust <- length(listclust)
-    prejac <- 0
-    for (k in 1:nclust){
-      for (m in 1:nclust){
-        A <- ssecsppclust.mean[ssecsppclust.mean$cluster == listclust[k],c('taxon', 'mean')]
-        B <- ssecsppclust.mean[ssecsppclust.mean$cluster == listclust[m],c('taxon', 'mean')]
-        C <- merge(A,B, by='taxon', all.x = TRUE,all.y = TRUE)
-        C$mean.x <- ifelse(is.na(C$mean.x), 0, C$mean.x)
-        C$mean.y <- ifelse(is.na(C$mean.y), 0, C$mean.y)
-        C$abdif <- abs(C$mean.x-C$mean.y)
-        C <- sum(C$abdif)
-        A <- sum(A$mean)
-        B <- sum(B$mean)
-        bray <- C/(A+B)
-        jaccard <- 2*bray/(1+bray)
-        prejac <- jaccard + prejac
-      }}
-    comparedf[i,j+1] <- prejac/nclust^2
-  }}
-
-sqresults <- comparedf
-sqresults2 <- sqresults
-sqresults2[,2:4]<- comparedf[,2:4]-sqresults[,2:4]
-sqresults2 <- merge(sqresults, comparedf, by='methodsx')
-
-kmmmlist <- as.data.frame(rbind(c('kmeans',0,0,0)))
-kmmmlist[,2:4] <- as.numeric(kmmmlist[,2:4])
-for (j in 1:3){
-kmmmm <- kmeans(plotinputs3, precutlist[j])
-cuttreelist <- cbind(as.data.frame(kmmmm$cluster), row.names(treeofinterest[[i]]$data))
-colnames(cuttreelist) <- c('cuts000','ssec')
-ssecsppclust <- merge(Com.Sp.mean, cuttreelist, by.x = 'soilplot', by.y = 'ssec')
-
-ssecsppclust.mean <- aggregate(ssecsppclust[,"Total"], by=list(ssecsppclust$Species, ssecsppclust$cuts000), FUN='sum')
-colnames(ssecsppclust.mean) <- c('taxon', 'cluster', 'sum')
-ssecsppclust.count <- aggregate(unique(ssecsppclust[c('cuts000', 'soilplot')])$soilplot, 
-                                by=list(unique(ssecsppclust[c('cuts000', 'soilplot')])$cuts000), FUN='length')
-colnames(ssecsppclust.count) <- c('cluster', 'count')
-ssecsppclust.mean <- merge(ssecsppclust.mean, ssecsppclust.count, by='cluster')
-ssecsppclust.mean$mean <- ssecsppclust.mean$sum/ssecsppclust.mean$count
-
-listclust <- unique(ssecsppclust.mean$cluster)
-nclust <- length(listclust)
-prejac <- 0
-for (k in 1:nclust){
-  for (m in 1:nclust){
-    A <- ssecsppclust.mean[ssecsppclust.mean$cluster == listclust[k],c('taxon', 'mean')]
-    B <- ssecsppclust.mean[ssecsppclust.mean$cluster == listclust[m],c('taxon', 'mean')]
-    C <- merge(A,B, by='taxon', all.x = TRUE,all.y = TRUE)
-    C$mean.x <- ifelse(is.na(C$mean.x), 0, C$mean.x)
-    C$mean.y <- ifelse(is.na(C$mean.y), 0, C$mean.y)
-    C$abdif <- abs(C$mean.x-C$mean.y)
-    C <- sum(C$abdif)
-    A <- sum(A$mean)
-    B <- sum(B$mean)
-    bray <- C/(A+B)
-    jaccard <- 2*bray/(1+bray)
-    prejac <- jaccard + prejac
-  }}
-kmmmlist[1,j+1] <- prejac/nclust^2
-}
+#filtered <- subset(NASISPEDONS, grepl('ist', Current.Taxonomic.Class) )
