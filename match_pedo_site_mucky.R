@@ -7,6 +7,7 @@ library(dplyr)
 library(dynamicTreeCut)
 #----
 NASISPEDONS <- read.delim("data/NASISPEDONS.txt")
+pedonoverride <- read.delim("data/pedonoverride.txt")
 List_Habits <- read.delim("data/List_Habits.txt", na.strings = '')
 #Habit_Symbols <- read.delim("data/Habit_Symbols.txt", encoding = 'UTF-8', na.strings = '')
 #FloraNorthAmerica <- read.delim("data/FloraNorthAmerica.txt", encoding = 'UTF-8', na.strings = '')
@@ -50,12 +51,18 @@ VEGOBS_mukeys <- read.delim("data/VEGOBS_mukeys.txt")
 VEGOBS_soilnames <- merge(VEGOBS_mukeys[,c('Observatio','RASTERVALU')], mu[,c('lmapunitiid', 'muname')], by.x='RASTERVALU', by.y= 'lmapunitiid')
 VEGOBS <- merge(VEGOBS, VEGOBS_soilnames[,c('Observatio', 'muname')], by.x='Observation_Label', by.y= 'Observatio')
 VEGOBS$Soil <- VEGOBS$taxonname
+for (i in 1:nrow(pedonoverride)){ #replace known soils that disagree with map unit and don't have pedon records
+VEGOBS[VEGOBS$Observation_Label %in% pedonoverride$sitelabel[i],]$Soil <- as.character(pedonoverride$soil[i])}
 VEGOBS[VEGOBS$Soil %in% '',]$Soil <- str_split_fixed(VEGOBS[VEGOBS$Soil %in% '',]$muname, " ",2)[,1]
+
 #----
 #narrow to soil series
-VEGOBS <- subset(VEGOBS,Soil %in% c('Houghton', 'Carlisle', 'Adrian', 'Edwards', 'Palms', 'Napoleon', 'Rifle', 'Tawas', 'Lupton', 'Histosols',
-                                    'Dair','Boots','Antung','Aurelius','Bowstring','Ausable','Cathro','Dawson','Deerwood','Dorval','Edselton','Haplosaprists','Kerston','Leafriver','Loxley','Madaus','Martisco', 'Makinen','Medo','Pinnebog','Rondeau','Spalding','Thapto-Histic Fluvaquent
-','Toto','Wallkill'))
+if (T){
+  VEGOBS <- subset(VEGOBS,Soil %in% c('Houghton', 'Carlisle', 'Adrian', 'Edwards', 'Palms', 'Napoleon', 'Rifle', 'Tawas', 'Lupton', 'Histosols',
+                                      'Dair','Boots','Antung','Aurelius','Bowstring','Ausable','Cathro','Dawson','Deerwood','Dorval','Edselton','Haplosaprists','Kerston','Leafriver','Loxley','Madaus','Martisco', 'Makinen','Medo','Pinnebog','Rondeau','Spalding','Thapto-Histic Fluvaquent
+                                      ','Toto','Wallkill'))}
+if (F){
+  VEGOBS <- subset(VEGOBS,Soil %in% c('Capac','Nester','Marlette','Perrinton','Brookston','Riddles','Ockley','Tekenink','Kalamazoo','Crosier','Filer','Conover'))}
 #----
 #observed species
 
@@ -145,7 +152,7 @@ jacdist <- as.data.frame(as.matrix(vegdist(plotinputs1, method='jaccard', binary
 jactree <- agnes(jacdist, method='average')
 
 
-ngroups <- 6
+ngroups <- 7
 groups <- cutree(jactree, k = ngroups)
 
 soilplot <- names(groups)
@@ -154,12 +161,20 @@ if (F){
 groups <- kmeans(plotinputs1, ngroups)
 soilplot <- names(groups$cluster)
 clust <- unname(groups$cluster)}
-if (F){
-  groups <- cutreeDynamic(as.hclust(jactree), distM = jacdist, method = 'tree', minClusterSize = 1)
-  soilplot <- rownames(plotinputs1)
-  clust <- groups
+if (F){ #cut tree at variable heights. PamStage=FALSE parameter maintains zeros for singlton clusters so that they are not lumped as paraphyletic clusters.
+    groups <- cutreeDynamic(as.hclust(jactree), distM = jacdist, method = 'hybrid',minClusterSize = 0, minGap = 0.85, minSplitHeight = 0.0, maxCoreScatter = 0, pamRespectsDendro = TRUE, pamStage= FALSE, minExternalSplit = 0)
+  soilplot <- rownames(jacdist)[sort(order(rownames(jacdist)), decreasing = F)]
+  clust <- (groups)
 }
 groupdf <- as.data.frame(cbind(soilplot, clust))
+groupdf$clust <- (as.numeric(as.character(groupdf$clust)))
+maxcluster <- max(groupdf$clust)
+numberzeros <- nrow(groupdf[(groupdf$clust == 0),])
+whichrecords <- which(groupdf$clust == 0)
+if (nrow(groupdf[groupdf$clust == 0,]) != 0){
+for (i in 1:numberzeros){ #assign all zero clusters to unique cluster number.
+  groupdf[whichrecords[i],]$clust <- maxcluster+i}}
+
 newlabels <- jactree$order.lab
 newlabels <- as.data.frame(newlabels)
 newlabels$row <- row(newlabels)
@@ -178,8 +193,8 @@ u <- 12
 png(filename="output/muckytree_comb.png",width = w, height = h, units = "px", pointsize = u)
 
 par(mar = c(2,0,1,13))
-plot(dend1, horiz = TRUE, main='floristic simularity - bray metric', font=1, cex=0.85)
-rect.dendrogram(dend1, k = ngroups, horiz = TRUE)
+plot(dend1, horiz = TRUE, main='floristic simularity - bray metric', font=1, cex=0.84)
+#rect.dendrogram(dend1, k = ngroups, horiz = TRUE)
 dev.off()
 #----
 #group dominant and indicator species
@@ -339,8 +354,8 @@ Com.rank <- subset(Com.Sp.groups.mean, !stratum %in% 0)
  
 Com.rankA <- subset(Com.rank,
                     ((grepl('Forest',Structure))&
-                       (((freqranks <= 2 | affranks <= 1) & stratum %in% c(1,2,3))|(overunderranks <= 1))#forced understory
-                     #(((freqranks <= 3 | affranks <= 1) & stratum %in% c(1,2,3))|(subranks <= 1 & stratum %in% c(2)))#can be all overstory
+                       #(((freqranks <= 2 | affranks <= 1) & stratum %in% c(1,2,3))|(overunderranks <= 1))#forced understory
+                     (((freqranks <= 3 | affranks <= 1) & stratum %in% c(1,2,3))|(subranks <= 1 & stratum %in% c(2)))#can be all overstory
                      )|
                       ((grepl('Woodland',Structure))&
                          (((freqranks <= 2 | affranks <= 1) & stratum %in% c(1,2,3))|(overunderranks <= 1))
@@ -393,3 +408,4 @@ Com.Structure[order(as.numeric(as.character(Com.Structure$cluster))),c("cluster"
 
 
 #filtered <- subset(NASISPEDONS, grepl('ist', Current.Taxonomic.Class) )
+#----

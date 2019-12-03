@@ -1,0 +1,5 @@
+sitelabel	soilname
+W2015062505	Palms
+S12060503	Napoleon
+S12060502	Napoleon
+S12060501	Napoleon
