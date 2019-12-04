@@ -4,10 +4,12 @@ library(cluster)
 library(ape)
 library(dendextend)
 library(dplyr)
-library(dynamicTreeCut)
+library(dynamicTreeCut) 
 #----
 NASISPEDONS <- read.delim("data/NASISPEDONS.txt")
 pedonoverride <- read.delim("data/pedonoverride.txt")
+s <- read.delim("data/s.txt")
+
 List_Habits <- read.delim("data/List_Habits.txt", na.strings = '')
 #Habit_Symbols <- read.delim("data/Habit_Symbols.txt", encoding = 'UTF-8', na.strings = '')
 #FloraNorthAmerica <- read.delim("data/FloraNorthAmerica.txt", encoding = 'UTF-8', na.strings = '')
@@ -57,12 +59,29 @@ VEGOBS[VEGOBS$Soil %in% '',]$Soil <- str_split_fixed(VEGOBS[VEGOBS$Soil %in% '',
 
 #----
 #narrow to soil series
-if (T){
-  VEGOBS <- subset(VEGOBS,Soil %in% c('Houghton', 'Carlisle', 'Adrian', 'Edwards', 'Palms', 'Napoleon', 'Rifle', 'Tawas', 'Lupton', 'Histosols',
-                                      'Dair','Boots','Antung','Aurelius','Bowstring','Ausable','Cathro','Dawson','Deerwood','Dorval','Edselton','Haplosaprists','Kerston','Leafriver','Loxley','Madaus','Martisco', 'Makinen','Medo','Pinnebog','Rondeau','Spalding','Thapto-Histic Fluvaquent
-                                      ','Toto','Wallkill'))}
+filename <- 'output/all.png'
+ngroups <- 18
 if (F){
-  VEGOBS <- subset(VEGOBS,Soil %in% c('Capac','Nester','Marlette','Perrinton','Brookston','Riddles','Ockley','Tekenink','Kalamazoo','Crosier','Filer','Conover'))}
+  sortsoils <- unique(subset(s, T150_OM >= 20, select = 'compname'))[,1]
+  VEGOBS <- subset(VEGOBS,Soil %in% sortsoils)
+  ngroups <- 7
+  filename <- 'output/mucks.png'}
+if (F){
+  sortsoils <- unique(subset(s, T50_sand < 70 & T150_OM < 20 & flood == 'none', select = 'compname'))[,1]
+  VEGOBS <- subset(VEGOBS,Soil %in% sortsoils)
+  ngroups <- 12
+  filename <- 'output/loams.png'}
+if (F){
+  sortsoils <- unique(subset(s, T50_sand >= 70 & T150_OM < 20 & flood == 'none', select = 'compname'))[,1]
+  VEGOBS <- subset(VEGOBS,Soil %in% sortsoils)
+  ngroups <- 12
+  filename <- 'output/sands.png'}
+
+if (F){
+  sortsoils <- unique(subset(s, T150_OM < 20 & flood == 'flood', select = 'compname'))[,1]
+    VEGOBS <- subset(VEGOBS,Soil %in% sortsoils)
+    ngroups <- 4
+  filename <- 'output/flood.png'}
 #----
 #observed species
 
@@ -147,12 +166,11 @@ plotinputs2 <- makecommunitydataset(Com.Sp.Agg.wet, row = 'soilplot', column = '
 #jacdist <- (jacdist1*2+jacdist2*1)/3
 plotinputs <- cbind(plotinputs1, plotinputs2)
 
-jacdist <- as.data.frame(as.matrix(vegdist(plotinputs1, method='jaccard', binary=FALSE, na.rm=T)))
+jacdist <- as.data.frame(as.matrix(vegdist(plotinputs1, method='bray', binary=FALSE, na.rm=T)))
 
 jactree <- agnes(jacdist, method='average')
 
 
-ngroups <- 7
 groups <- cutree(jactree, k = ngroups)
 
 soilplot <- names(groups)
@@ -190,7 +208,7 @@ dend1 <- color_labels(dend1, k = ngroups)
 w <- 800
 h <- nrow(VEGOBS)*12+80
 u <- 12
-png(filename="output/muckytree_comb.png",width = w, height = h, units = "px", pointsize = u)
+png(filename=filename,width = w, height = h, units = "px", pointsize = u)
 
 par(mar = c(2,0,1,13))
 plot(dend1, horiz = TRUE, main='floristic simularity - bray metric', font=1, cex=0.84)
@@ -354,8 +372,8 @@ Com.rank <- subset(Com.Sp.groups.mean, !stratum %in% 0)
  
 Com.rankA <- subset(Com.rank,
                     ((grepl('Forest',Structure))&
-                       #(((freqranks <= 2 | affranks <= 1) & stratum %in% c(1,2,3))|(overunderranks <= 1))#forced understory
-                     (((freqranks <= 3 | affranks <= 1) & stratum %in% c(1,2,3))|(subranks <= 1 & stratum %in% c(2)))#can be all overstory
+                       (((freqranks <= 2 | affranks <= 1) & stratum %in% c(1,2,3))|(overunderranks <= 1))#forced understory
+                     #(((freqranks <= 3 | affranks <= 1) & stratum %in% c(1,2,3))|(subranks <= 1 & stratum %in% c(2)))#can be all overstory
                      )|
                       ((grepl('Woodland',Structure))&
                          (((freqranks <= 2 | affranks <= 1) & stratum %in% c(1,2,3))|(overunderranks <= 1))
@@ -409,3 +427,5 @@ Com.Structure[order(as.numeric(as.character(Com.Structure$cluster))),c("cluster"
 
 #filtered <- subset(NASISPEDONS, grepl('ist', Current.Taxonomic.Class) )
 #----
+
+selectedobs <-  subset(VEGOBS,pedon != "")

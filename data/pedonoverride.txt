@@ -1,5 +1,7 @@
 sitelabel	soilname
-W2015062505	Palms
+W2015062505	Parkhill
 S12060503	Napoleon
 S12060502	Napoleon
 S12060501	Napoleon
+Lamberton Lake Fen	Edwards
+S12070202	Covert
