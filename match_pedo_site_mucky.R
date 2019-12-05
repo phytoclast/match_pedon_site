@@ -24,7 +24,10 @@ obsspp <- merge(obsspp, List_Habits[,c('Form','Simple')], by.x = 'Habit', by.y =
 obs <- read.delim("data/Sites.txt")
 obsspp <- merge(obs[,c('Observation_ID','Observation_Label')],obsspp, by='Observation_ID')
 obsspp <- subset(obsspp, Field+Shrub+Subcanopy+Tree > 0)
-
+if (T){ #if true, remove ambiguous taxa
+  obsspp <- subset(obsspp, grepl(' ', AcTaxon) & !grepl('\\?', AcTaxon))}
+if (F){ #if true, remove bad invasives
+  obsspp <- subset(obsspp, !grepl('Phalaris', AcTaxon) | grepl('Rosa multiflora', AcTaxon))}
 VEGOBS <- read.delim("data/VEGOBS.txt")
 VEGOBS$pedon <- ""
 VEGOBS$taxonname <- ""
@@ -61,10 +64,10 @@ VEGOBS[VEGOBS$Soil %in% '',]$Soil <- str_split_fixed(VEGOBS[VEGOBS$Soil %in% '',
 #narrow to soil series
 filename <- 'output/all.png'
 ngroups <- 18
-if (F){
+if (T){
   sortsoils <- unique(subset(s, T150_OM >= 20, select = 'compname'))[,1]
   VEGOBS <- subset(VEGOBS,Soil %in% sortsoils)
-  ngroups <- 7
+  ngroups <- 8
   filename <- 'output/mucks.png'}
 if (F){
   sortsoils <- unique(subset(s, T50_sand < 70 & T150_OM < 20 & flood == 'none', select = 'compname'))[,1]
