@@ -4,7 +4,8 @@ library(cluster)
 library(ape)
 library(dendextend)
 library(dplyr)
-library(dynamicTreeCut) 
+library(dynamicTreeCut)
+
 #----
 NASISPEDONS <- read.delim("data/NASISPEDONS.txt")
 pedonoverride <- read.delim("data/pedonoverride.txt")
@@ -24,11 +25,12 @@ obsspp <- merge(obsspp, List_Habits[,c('Form','Simple')], by.x = 'Habit', by.y =
 obs <- read.delim("data/Sites.txt")
 obsspp <- merge(obs[,c('Observation_ID','Observation_Label')],obsspp, by='Observation_ID')
 obsspp <- subset(obsspp, Field+Shrub+Subcanopy+Tree > 0)
-if (T){ #if true, remove ambiguous taxa
+if (F){ #if true, remove ambiguous taxa
   obsspp <- subset(obsspp, grepl(' ', AcTaxon) & !grepl('\\?', AcTaxon))}
 if (F){ #if true, remove bad invasives
   obsspp <- subset(obsspp, !grepl('Phalaris', AcTaxon) | grepl('Rosa multiflora', AcTaxon))}
-VEGOBS <- read.delim("data/VEGOBS.txt")
+#VEGOBS <- read.delim("data/VEGOBS.txt")
+VEGOBS <- subset(obs, !(Latitude == 0 & Longitude == 0) & Year > 1990 & Mon > 0, select = c("Observation_ID", "Observation_Label", "Observation_Type","Latitude","Longitude","Year","Mon","Day","State","County" ))
 VEGOBS$pedon <- ""
 VEGOBS$taxonname <- ""
 VEGOBS$taxonclass <- ""
@@ -64,7 +66,7 @@ VEGOBS[VEGOBS$Soil %in% '',]$Soil <- str_split_fixed(VEGOBS[VEGOBS$Soil %in% '',
 #narrow to soil series
 filename <- 'output/all.png'
 ngroups <- 18
-if (T){
+if (F){
   sortsoils <- unique(subset(s, T150_OM >= 20, select = 'compname'))[,1]
   VEGOBS <- subset(VEGOBS,Soil %in% sortsoils)
   ngroups <- 8
@@ -169,7 +171,7 @@ plotinputs2 <- makecommunitydataset(Com.Sp.Agg.wet, row = 'soilplot', column = '
 #jacdist <- (jacdist1*2+jacdist2*1)/3
 plotinputs <- cbind(plotinputs1, plotinputs2)
 
-jacdist <- as.data.frame(as.matrix(vegdist(plotinputs1, method='bray', binary=FALSE, na.rm=T)))
+jacdist <- as.data.frame(as.matrix(vegdist(plotinputs1, method='jaccard', binary=FALSE, na.rm=T)))
 
 jactree <- agnes(jacdist, method='average')
 
@@ -432,3 +434,22 @@ Com.Structure[order(as.numeric(as.character(Com.Structure$cluster))),c("cluster"
 #----
 
 selectedobs <-  subset(VEGOBS,pedon != "")
+#----
+#bootstrap
+library(recluster)
+library(pvclust)
+length(jactree2$trees)
+length(rownames(plotinputs1))
+jactree2 <- recluster.cons(plotinputs1, method = 'average', dist = "jaccard", tr = 1000, p = 0.5)
+boottree <- recluster.boot(jactree2$cons, plotinputs1, tr = 100, p = 0.5,
+               dist = "jaccard", method = "average", boot = 100, level = 1)
+
+fit <- pvclust(plotinputs1, method.hclust="average",
+               method.dist="correlation")
+plot(fit) # dendogram with p values
+# add rectangles around groups highly supported by the data
+pvrect(fit, alpha=.95)
+
+
+
+recluster.plot(jactree2$cons,boottree)
