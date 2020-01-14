@@ -5,7 +5,7 @@ library(ape)
 library(dendextend)
 library(dplyr)
 library(dynamicTreeCut)
-
+library(soilDB)
 #----
 NASISPEDONS <- readRDS("data/NASISPEDONS.RDS")
 #NASISPEDONS <- read.delim("data/NASISPEDONS.txt")
@@ -42,7 +42,10 @@ if (F){ #if true, remove ambiguous taxa
 if (F){ #if true, remove bad invasives
   obsspp <- subset(obsspp, !grepl('Phalaris', AcTaxon) | grepl('Rosa multiflora', AcTaxon))}
 #VEGOBS <- read.delim("data/VEGOBS.txt")
-VEGOBS <- subset(obs, !(Latitude == 0 & Longitude == 0) & Year > 1990 & Mon > 0, select = c("Observation_ID", "Observation_Label", "Observation_Type","Latitude","Longitude","Year","Mon","Day","State","County" ))
+VEGOBS <- subset(obs, !(Latitude == 0 & Longitude == 0) & Year > 1990 & Mon > 0, select = c("Observation_ID", "Observation_Label", "Observation_Type","Latitude","Longitude","Year","Mon","Day","State","County", "Soil.Series" ))
+VEGOBS$Soil.Series <- str_replace_all(VEGOBS$Soil.Series, ',', ' ')
+VEGOBS$Soil.Series <- str_replace_all(VEGOBS$Soil.Series, '\\?', ' ')
+VEGOBS$Soil.Series <- str_replace_all(VEGOBS$Soil.Series, '/', ' ')
 VEGOBS$pedon <- ""
 VEGOBS$taxonname <- ""
 VEGOBS$taxonclass <- ""
@@ -50,19 +53,32 @@ VEGOBS$pedondist <- NA
 VEGOBS$pedondate <- 0
 n <- nrow(VEGOBS)
 for (i in 1:n){
+ 
+  
 NASISPEDONS$distance <- (((VEGOBS[i,]$Latitude - NASISPEDONS$Std.Latitude)/360*40041.47*1000)^2 +
   ((VEGOBS[i,]$Longitude - NASISPEDONS$Std.Longitude)/360*40041.47*1000*cos(VEGOBS[i,]$Latitude/2/360*2*3.141592))^2)^0.5
+NASISPEDONS$distance2 <- ifelse(!is.na(VEGOBS[i,]$Soil.Series)&!is.na(NASISPEDONS$Current.Taxon.Name)&
+  (str_split_fixed(VEGOBS[i,]$Soil.Series, " ",2)[,1])==
+                                  (str_split_fixed(NASISPEDONS$Current.Taxon.Name, " ",2)[,1]), 0.1,1)
+#NASISPEDONS$distance <- NASISPEDONS$distance*NASISPEDONS$distance2
+NASISPEDONS$distance <- NASISPEDONS$distance+(NASISPEDONS$distance2-1)*222.2
 mindist <- min(NASISPEDONS$distance, na.rm = TRUE)
-
+if(!is.na(subset(NASISPEDONS, NASISPEDONS$User.Site.ID == VEGOBS[i,]$Observation_Label )[1,]$User.Site.ID)){
+VEGOBS[i,]$pedondist <- -1000
+VEGOBS[i,]$pedon <- as.character(subset(NASISPEDONS, NASISPEDONS$User.Site.ID == VEGOBS[i,]$Observation_Label )[1,]$User.Site.ID)
+VEGOBS[i,]$taxonname <- as.character(subset(NASISPEDONS, NASISPEDONS$User.Site.ID == VEGOBS[i,]$Observation_Label )[1,]$Current.Taxon.Name)
+VEGOBS[i,]$taxonclass <- as.character(subset(NASISPEDONS, NASISPEDONS$User.Site.ID == VEGOBS[i,]$Observation_Label )[1,]$Current.Taxonomic.Class)
+VEGOBS[i,]$pedondate <- as.numeric(substr(as.character(subset(NASISPEDONS, NASISPEDONS$User.Site.ID == VEGOBS[i,]$Observation_Label )[1,]$obs_date), 1,4))
+}else{
 VEGOBS[i,]$pedondist <- round(mindist,1)
 VEGOBS[i,]$pedon <- as.character(subset(NASISPEDONS, NASISPEDONS$distance == mindist)[1,]$User.Site.ID)
 VEGOBS[i,]$taxonname <- as.character(subset(NASISPEDONS, NASISPEDONS$distance == mindist)[1,]$Current.Taxon.Name)
 VEGOBS[i,]$taxonclass <- as.character(subset(NASISPEDONS, NASISPEDONS$distance == mindist)[1,]$Current.Taxonomic.Class)
 VEGOBS[i,]$pedondate <- as.numeric(substr(as.character(subset(NASISPEDONS, NASISPEDONS$distance == mindist)[1,]$obs_date), 1,4))
 #VEGOBS[i,]$pedondate <- as.numeric(substr(as.character(NASISPEDONS[NASISPEDONS$distance == mindist,]$obs_date[1]), 1,4))
-
+ }
 }
-
+#VEGOBS <- merge(VEGOBS, NASISPEDONS[,c('User.Site.ID', 'Current.Taxon.Name', 'Current.Taxonomic.Class')], by.x = 'Observation_Label', by.y = 'User.Site.ID', all.x = TRUE)
 
 
 mu <- readRDS(file='data/mu.RDS')
@@ -75,14 +91,15 @@ VEGOBS$eval <- "dump"
 VEGOBS[VEGOBS$pedondist < 50,]$eval <- "keep1" 
 VEGOBS[(str_split_fixed(VEGOBS$muname, " ",2)[,1])==VEGOBS$taxonname & VEGOBS$pedondist < 1000 & VEGOBS$eval == 'dump', ]$eval <- "keep2"
 VEGOBS[VEGOBS$pedondate==VEGOBS$Year & VEGOBS$pedondist < 200 & VEGOBS$eval == 'dump', ]$eval <- "keep3"
-VEGOBS[VEGOBS$eval == 'dump',]$taxonname <- ""
-VEGOBS[VEGOBS$eval == 'dump',]$taxonclass <- ""
-VEGOBS[VEGOBS$eval == 'dump',]$pedon <- ""
+#VEGOBS[VEGOBS$Observation_Label==VEGOBS$pedon & VEGOBS$eval == 'dump', ]$eval <- "keep4"
+#VEGOBS[VEGOBS$eval == 'dump',]$taxonname <- ""
+#VEGOBS[VEGOBS$eval == 'dump',]$taxonclass <- ""
+#VEGOBS[VEGOBS$eval == 'dump',]$pedon <- ""
 VEGOBS$Soil <- VEGOBS$taxonname
 for (i in 1:nrow(pedonoverride)){ #replace known soils that disagree with map unit and don't have pedon records
 VEGOBS[VEGOBS$Observation_Label %in% pedonoverride$sitelabel[i],]$Soil <- as.character(pedonoverride$soil[i])}
 VEGOBS[VEGOBS$Soil %in% '',]$Soil <- str_split_fixed(VEGOBS[VEGOBS$Soil %in% '',]$muname, " ",2)[,1]
-
+write.csv(VEGOBS, 'output/VEGOBS.csv', row.names = FALSE, na = "")
 #----
 #narrow to soil series
 filename <- 'output/all.png'
