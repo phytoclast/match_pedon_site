@@ -1,15 +1,29 @@
+remotes::install_github('ncss-tech/aqp', dependencies=F, build=F)
+remotes::install_github('ncss-tech/soilDB', dependencies=F, build=F)
+
+#remotes::install_github("ncss-tech/soilReports", dependencies=FALSE, upgrade=FALSE, build=FALSE)
+#remotes::install_github("ncss-tech/sharpshootR", dependencies=FALSE, upgrade=FALSE, build=FALSE)
+library(soilDB)
+library(aqp)#load before dplr
 library(stringr)
 library(BiodiversityR)
 library(cluster)
 library(ape)
 library(dendextend)
+#library(plyr)
 library(dplyr)
 library(dynamicTreeCut)
-library(soilDB)
+
+#write(paste0(unique(as.numeric(soilDB::get_site_data_from_NASIS_db(SS = FALSE)$siteiid)), collapse=','), file="bad_siteids.txt")
 #----
 NASISPEDONS <- readRDS("data/NASISPEDONS.RDS")
 #NASISPEDONS <- read.delim("data/NASISPEDONS.txt")
-#NASISPEDONS <- site(fetchNASIS_pedons(SS=FALSE))
+#NASISPEDONSxx <- site(fetchNASIS_pedons(SS=FALSE, rmHzErrors=FALSE)) #doesn't seem to work anymore
+NASISPEDONSx <- get_site_data_from_NASIS_db(SS=FALSE)
+
+fp <-  fetchNASIS(from = 'pedons', SS=FALSE, rmHzErrors=FALSE)
+#fp <-  fetchNASIS_pedons(SS=TRUE, rmHzErrors=FALSE)
+NASISPEDONS <- apg::site(fp)
 #saveRDS(NASISPEDONS, 'data/NASISPEDONS.RDS')
 names(NASISPEDONS)[names(NASISPEDONS) == "x_std"] <- 'Std.Longitude'
 names(NASISPEDONS)[names(NASISPEDONS) == "y_std"] <- 'Std.Latitude'
@@ -17,7 +31,7 @@ names(NASISPEDONS)[names(NASISPEDONS) == "taxonname"] <- 'Current.Taxon.Name'
 NASISPEDONS$Current.Taxonomic.Class <- paste(NASISPEDONS$taxpartsize, NASISPEDONS$taxtempregime, NASISPEDONS$taxsubgrp, sep = ', ')
 NASISPEDONS$Current.Taxonomic.Class <- str_replace(NASISPEDONS$Current.Taxonomic.Class, 'NA, ','')
 NASISPEDONS$Current.Taxonomic.Class <- str_replace(NASISPEDONS$Current.Taxonomic.Class, 'not used, ','')
-
+#write.csv(NASISPEDONS, 'data/NASISPEDON.csv')
 names(NASISPEDONS)[names(NASISPEDONS) == "pedon_id"] <- 'User.Site.ID'
 
 pedonoverride <- read.delim("data/pedonoverride.txt")
@@ -92,19 +106,21 @@ VEGOBS[VEGOBS$pedondist < 50,]$eval <- "keep1"
 VEGOBS[(str_split_fixed(VEGOBS$muname, " ",2)[,1])==VEGOBS$taxonname & VEGOBS$pedondist < 1000 & VEGOBS$eval == 'dump', ]$eval <- "keep2"
 VEGOBS[VEGOBS$pedondate==VEGOBS$Year & VEGOBS$pedondist < 200 & VEGOBS$eval == 'dump', ]$eval <- "keep3"
 #VEGOBS[VEGOBS$Observation_Label==VEGOBS$pedon & VEGOBS$eval == 'dump', ]$eval <- "keep4"
-#VEGOBS[VEGOBS$eval == 'dump',]$taxonname <- ""
-#VEGOBS[VEGOBS$eval == 'dump',]$taxonclass <- ""
-#VEGOBS[VEGOBS$eval == 'dump',]$pedon <- ""
+VEGOBS[VEGOBS$eval == 'dump',]$taxonname <- ""
+VEGOBS[VEGOBS$eval == 'dump',]$taxonclass <- ""
+VEGOBS[VEGOBS$eval == 'dump',]$pedon <- ""
 VEGOBS$Soil <- VEGOBS$taxonname
 for (i in 1:nrow(pedonoverride)){ #replace known soils that disagree with map unit and don't have pedon records
 VEGOBS[VEGOBS$Observation_Label %in% pedonoverride$sitelabel[i],]$Soil <- as.character(pedonoverride$soil[i])}
 VEGOBS[VEGOBS$Soil %in% '',]$Soil <- str_split_fixed(VEGOBS[VEGOBS$Soil %in% '',]$muname, " ",2)[,1]
 write.csv(VEGOBS, 'output/VEGOBS.csv', row.names = FALSE, na = "")
+
+
 #----
 #narrow to soil series
 filename <- 'output/all.png'
 ngroups <- 18
-if (F){
+if (T){
   sortsoils <- unique(subset(s, T150_OM >= 20, select = 'compname'))[,1]
   VEGOBS <- subset(VEGOBS,Soil %in% sortsoils)
   ngroups <- 8
