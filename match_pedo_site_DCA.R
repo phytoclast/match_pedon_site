@@ -13,6 +13,9 @@ library(dendextend)
 #library(plyr)
 library(dplyr)
 library(dynamicTreeCut)
+library(rpart)
+library(rpart.plot)
+library(goeveg)
 
 #write(paste0(unique(as.numeric(soilDB::get_site_data_from_NASIS_db(SS = FALSE)$siteiid)), collapse=','), file="bad_siteids.txt")
 #----
@@ -122,35 +125,41 @@ write.csv(VEGOBS, 'output/VEGOBS.csv', row.names = FALSE, na = "")
 
 #----
 #narrow to soil series
-filename <- 'output/all.png'
+soilgroup <- 'all'
 ngroups <- 18
 if (T){
-  sortsoils <- unique(subset(s, T150_OM >= 20, select = 'compname'))[,1]
+  sortsoils <- unique(subset(s, T150_OM >= 10, select = 'compname'))[,1]
   VEGOBS <- subset(VEGOBS,Soil %in% sortsoils)
   ngroups <- 8
-  filename <- 'output/mucks.png'}
+  soilgroup <- 'mucks'}
 if (F){
   sortsoils <- unique(subset(s, T50_sand < 70 & T150_OM < 20 & flood == 'none', select = 'compname'))[,1]
   VEGOBS <- subset(VEGOBS,Soil %in% sortsoils)
   ngroups <- 12
-  filename <- 'output/loams.png'}
+  soilgroup <- 'loams'}
+if (F){
+  sortsoils <- unique(subset(s, Water_Table > 100, select = 'compname'))[,1]
+  VEGOBS <- subset(VEGOBS,Soil %in% sortsoils)
+  ngroups <- 5
+  soilgroup <- 'dry'}
 if (F){
   sortsoils <- unique(subset(s, T50_sand >= 70 & T150_OM < 20 & flood == 'none', select = 'compname'))[,1]
   VEGOBS <- subset(VEGOBS,Soil %in% sortsoils)
   ngroups <- 12
-  filename <- 'output/sands.png'}
+  soilgroup <- 'sands'}
 
 if (F){
   sortsoils <- unique(subset(s, T150_OM < 20 & flood == 'flood', select = 'compname'))[,1]
   VEGOBS <- subset(VEGOBS,Soil %in% sortsoils)
   ngroups <- 4
-  filename <- 'output/flood.png'}
+  soilgroup <- 'output/flood.png'}
 
 if (F){
   sortsoils <- unique(subset(s, Water_Table < 50, select = 'compname'))[,1]
   VEGOBS <- subset(VEGOBS,Soil %in% sortsoils)
-  ngroups <- 4
+  ngroups <- 8
   filename <- 'output/wet.png'}
+
 #----
 #observed species
 
@@ -231,15 +240,42 @@ plotinputs1 <- makecommunitydataset(Com.Sp.mean, row = 'soilplot', column = 'Spe
 Com.Sp.Agg$sqrttotal <- Com.Sp.Agg$Total^0.5
 plotinputs2 <- makecommunitydataset(Com.Sp.Agg.wet, row = 'soilplot', column = 'Simple', value = 'Total', drop = TRUE)
 
+#analysis method
+amethod <- 'bray-agnes' 
 
-#jacdist <- (jacdist1*2+jacdist2*1)/3
-plotinputs <- cbind(plotinputs1, plotinputs2)
+if (F){
+  amethod <- 'bray-agnes' 
+  jacdist <- as.data.frame(as.matrix(vegdist(plotinputs1, method='bray', binary=FALSE, na.rm=T)))
+  jactree <- agnes(jacdist, method='average')
+}
+if (F){
+  amethod <- 'bray-single' 
+  jacdist <- as.data.frame(as.matrix(vegdist(plotinputs1, method='bray', binary=FALSE, na.rm=T)))
+  jactree <- agnes(jacdist, method='single')
+}
+if (F){
+  amethod <- 'bray-complete' 
+  jacdist <- as.data.frame(as.matrix(vegdist(plotinputs1, method='bray', binary=FALSE, na.rm=T)))
+  jactree <- agnes(jacdist, method='complete')
+}
+if (F){
+  amethod <- 'bray-diana' 
+  jacdist <- as.data.frame(as.matrix(vegdist(plotinputs1, method='bray', binary=FALSE, na.rm=T)))
+  jactree <- diana(jacdist)
+}
+if (T){
+  amethod <- 'bray-ward' 
+  jacdist <- as.data.frame(as.matrix(vegdist(plotinputs1, method='bray', binary=FALSE, na.rm=T)))
+  jactree <- agnes(jacdist, method='ward')
+}
+if (F){
+  amethod <- 'jaccard-agnes' 
+  jacdist <- as.data.frame(as.matrix(vegdist(plotinputs1, method='jaccard', binary=FALSE, na.rm=T)))
+  jactree <- agnes(jacdist, method='average')
+}
+filename <- paste0('output/',amethod,'-',soilgroup,'.png')
 
-jacdist <- as.data.frame(as.matrix(vegdist(plotinputs1, method='jaccard', binary=FALSE, na.rm=T)))
-
-jactree <- agnes(jacdist, method='average')
-
-
+#----
 groups <- cutree(jactree, k = ngroups)
 
 soilplot <- names(groups)
@@ -280,7 +316,7 @@ u <- 12
 png(filename=filename,width = w, height = h, units = "px", pointsize = u)
 
 par(mar = c(2,0,1,13))
-plot(dend1, horiz = TRUE, main='floristic simularity - bray metric', font=1, cex=0.84)
+plot(dend1, horiz = TRUE, main=paste('floristic simularity', amethod,'method of', soilgroup, 'soils'), font=1, cex=0.84)
 #rect.dendrogram(dend1, k = ngroups, horiz = TRUE)
 dev.off()
 #----
@@ -499,10 +535,54 @@ Com.Structure[order(as.numeric(as.character(Com.Structure$cluster))),c("cluster"
 
 selectedobs <-  subset(VEGOBS,pedon != "")
 #----
-library(rpart)
-library(rpart.plot)
-indicatorspp <- syntable(plotinputs1, groups)
-indicatorspp <- indicatorspp$syntable
+
+spp.freq <- syntable(plotinputs1, groups)
+spp.freq <- spp.freq$syntable
+spp.mean <- syntable(plotinputs1, groups,  type = "mean")
+spp.mean <- spp.mean$syntable
+spp.med <- syntable(plotinputs1, groups,  type = "median")
+spp.med <- spp.med$syntable
+spp.diff <- syntable(plotinputs1, groups,  type = "diffspec")
+spp.diffonly <- rownames(spp.diff$onlydiff)
+spp.diff <- spp.diff$syntable
+spp.freqdif <- subset(spp.freq, rownames(spp.freq) %in% spp.diffonly)
+spp.diffonly <- subset(spp.diff, rownames(spp.diff) %in% spp.diffonly)
+#----
+#evaluating methods 
+data(dune)
+distbray <- vegdist(dune, method='bray', binary=FALSE, na.rm=T)
+distjac <- vegdist(dune, method='jaccard', binary=FALSE, na.rm=T)
+coph.agnes <- cor(as.dist(distbray), cophenetic(as.hclust(agnes(distbray, method='average'))))
+coph.jagnes1 <- cor(as.dist(distjac), cophenetic(as.hclust(agnes(distjac, method='average'))))
+coph.jagnes2 <- cor(as.dist(distbray), cophenetic(as.hclust(agnes(distjac, method='average'))))
+coph.hclust <- cor(as.dist(distbray), cophenetic(hclust(as.dist(distbray), "average")))
+coph.single <- cor(as.dist(distbray), cophenetic(as.hclust(agnes(distbray, method='single'))))
+coph.complete <- cor(as.dist(distbray), cophenetic(as.hclust(agnes(distbray, method='complete'))))
+coph.ward <- cor(as.dist(distbray), cophenetic(as.hclust(agnes(distbray, method='ward'))))
+coph.diana <- cor(as.dist(distbray), cophenetic(as.hclust(diana(distbray))))
+coph.agnes
+coph.jagnes1
+coph.jagnes2
+coph.hclust
+coph.ward
+coph.diana
+coph.single
+coph.complete
+#---- 
+#export
+VEGOBS_groups <- cbind(groups, soilplot = rownames(plotinputs1))
+VEGOBS_groups <- merge(VEGOBS_groups, Com.Structure[,c('cluster','WetStructure','association')], by.x = 'groups', by.y = 'cluster')
+VEGOBS$soilplot <- paste(VEGOBS$Soil , VEGOBS$Observation_Label)
+VEGOBS$soilplot <- str_replace_all(VEGOBS$soilplot, ' ', '.')
+VEGOBS$soilplot <- str_replace_all(VEGOBS$soilplot, '-', '.')
+VEGOBS$soilplot <- str_replace_all(VEGOBS$soilplot, ',', '.')
+VEGOBS$soilplot <- str_replace_all(VEGOBS$soilplot, ':', '.')
+VEGOBS$soilplot <- str_replace_all(VEGOBS$soilplot, ';', '.')
+VEGOBS$soilplot <- str_replace_all(VEGOBS$soilplot, '&', '.')
+VEGOBS_groups <- merge(VEGOBS_groups, VEGOBS, by = 'soilplot')
+write.csv(VEGOBS_groups, 'output/VEGOBS_groups.csv')
+write.csv(NASISPEDONS[grepl('ist',NASISPEDONS$taxsubgrp),], 'output/mucks.csv')
+#----
 transind <- as.data.frame(t(indicatorspp))
 transind$group <- rownames(transind)
 
@@ -510,8 +590,7 @@ p <- rpart(as.factor(group) ~ ., data=transind, method="class", maxdepth = 7, cp
 rpart.plot(p, extra=108,  box.palette="white") 
 #----
 #DCA
-library(vegan)
-library(goeveg)
+
 dca <- decorana(plotinputs)
 dcaselect <- ordiselect(plotinputs, dca, ablim = 0.2)
 plot(dca, type = "n", choices = 1:2)
