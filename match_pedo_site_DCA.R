@@ -16,6 +16,7 @@ library(dynamicTreeCut)
 library(rpart)
 library(rpart.plot)
 library(goeveg)
+library(proxy)
 
 #write(paste0(unique(as.numeric(soilDB::get_site_data_from_NASIS_db(SS = FALSE)$siteiid)), collapse=','), file="bad_siteids.txt")
 #----
@@ -240,87 +241,170 @@ plotinputs1 <- makecommunitydataset(Com.Sp.mean, row = 'soilplot', column = 'Spe
 Com.Sp.Agg$sqrttotal <- Com.Sp.Agg$Total^0.5
 plotinputs2 <- makecommunitydataset(Com.Sp.Agg.wet, row = 'soilplot', column = 'Simple', value = 'Total', drop = TRUE)
 
-#analysis method
-amethod <- 'bray-agnes' 
+#evaluating methods 
 
-if (F){
+distbray <- vegdist(plotinputs1, method='bray', binary=FALSE, na.rm=T)
+distjac <- vegdist(plotinputs1, method='jaccard', binary=FALSE, na.rm=T)
+coph.agnes <- cor(as.dist(distbray), cophenetic(as.hclust(agnes(distbray, method='average'))))
+coph.jagnes <- cor(as.dist(distbray), cophenetic(as.hclust(agnes(distjac, method='average'))))
+coph.hclust <- cor(as.dist(distbray), cophenetic(hclust(as.dist(distbray), "average")))
+coph.single <- cor(as.dist(distbray), cophenetic(as.hclust(agnes(distbray, method='single'))))
+coph.complete <- cor(as.dist(distbray), cophenetic(as.hclust(agnes(distbray, method='complete'))))
+coph.ward <- cor(as.dist(distbray), cophenetic(as.hclust(agnes(distbray, method='ward'))))
+coph.diana <- cor(as.dist(distbray), cophenetic(as.hclust(diana(distbray))))
+coph.agnes
+coph.jagnes
+coph.hclust
+coph.ward
+coph.diana
+coph.single
+coph.complete
+#validity using silhouette index
+#----
+silanalysis <- function(input){
+distbray <- vegdist(input, method='bray', binary=FALSE, na.rm=T)
+distjac <- vegdist(input, method='jaccard', binary=FALSE, na.rm=T)
+distsim <- as.data.frame(as.matrix(simil(input,method='Simpson')))
+#tree <- agnes(distbray, method='average')
+#cuttree <- cutree(tree, k = 8)
+#siltree <- silhouette(cuttree, distbray)
+#summary(siltree)
+#mean(siltree[,3])
+maxcluster <- min(20, nrow(input)-1)
+k <- 2
+klevel <- 0
+sil.bray <- 0
+sil.jac <- 0
+sil.sim <- 0
+sil.ward <- 0
+sil.diana <- 0
+sil.kmeans <- 0
+sil.single <- 0
+sil.complete <- 0
+for (k in 2:maxcluster){
+  sil.bray1 <- (distbray %>% agnes(method = 'average') %>% cutree(k=k) %>% silhouette(distbray))[,3]%>% mean
+  sil.jac1 <- (distjac %>% agnes(method = 'average') %>% cutree(k=k) %>% silhouette(distbray))[,3]%>% mean
+  sil.sim1 <- (distsim %>% agnes(method = 'average') %>% cutree(k=k) %>% silhouette(distbray))[,3]%>% mean
+  sil.ward1 <- (distbray %>% agnes(method = 'ward') %>% cutree(k=k) %>% silhouette(distbray))[,3]%>% mean
+  sil.diana1 <- (distbray %>% diana %>% cutree(k=k) %>% silhouette(distbray))[,3]%>% mean
+  sil.kmeans1 <- (kmeans(distbray, centers = k)$cluster %>% silhouette(distbray))[,3] %>% mean
+  sil.single1 <- (distbray %>% agnes(method = 'single') %>% cutree(k=k) %>% silhouette(distbray))[,3]%>% mean
+  sil.complete1 <- (distbray %>% agnes(method = 'complete') %>% cutree(k=k) %>% silhouette(distbray))[,3]%>% mean
+  
+  klevel <- c(klevel, k)
+  sil.bray <- c(sil.bray, sil.bray1)
+  sil.jac <- c(sil.jac, sil.jac1)
+  sil.sim <- c(sil.sim, sil.sim1)
+  sil.ward <- c(sil.ward, sil.ward1)
+  sil.diana <- c(sil.diana, sil.diana1)
+  sil.kmeans <- c(sil.kmeans, sil.kmeans1)
+  sil.single <- c(sil.single, sil.single1)
+  sil.complete <- c(sil.complete, sil.complete1)}
+sil.table <- as.data.frame(cbind(klevel,sil.bray,sil.jac,sil.sim,sil.ward,sil.diana,sil.kmeans,sil.single,sil.complete))
+sil.table <- sil.table[-1,]}
+#----
+silanalysis(plotinputs1)
+#analysis method
+makeplot <- function(amethod,jacdist,jactree, soilgroup,k){
+  filename <- paste0('output/Soils_',soilgroup,"_",amethod,'.png')
+  
+  #make cuts and reformat dendrogram
+  ngroups=k
+  groups <- cutree(jactree, k = ngroups)
+  
+  soilplot <- names(groups)
+  clust <- unname(groups)
+  groupdf <- as.data.frame(cbind(soilplot, clust))
+  groupdf$clust <- (as.numeric(as.character(groupdf$clust)))
+  maxcluster <- max(groupdf$clust)
+  numberzeros <- nrow(groupdf[(groupdf$clust == 0),])
+  whichrecords <- which(groupdf$clust == 0)
+  if (nrow(groupdf[groupdf$clust == 0,]) != 0){
+    for (i in 1:numberzeros){ #assign all zero clusters to unique cluster number.
+      groupdf[whichrecords[i],]$clust <- maxcluster+i}}
+  
+  newlabels <- jactree$order.lab
+  newlabels <- as.data.frame(newlabels)
+  newlabels$row <- row(newlabels)
+  newlabels <- merge(newlabels, groupdf, by.x='newlabels', by.y ='soilplot')
+  newlabels$newlabels <- paste(newlabels$clust, newlabels$newlabels)
+  newlabels <- newlabels[order(newlabels$row),1]
+  newtree <- jactree
+  newtree$order.lab <- newlabels
+  
+  dend1 <- color_branches(as.hclust(newtree), k = ngroups)
+  dend1 <- color_labels(dend1, k = ngroups)
+  
+  #output file
+  
+  w <- 800
+  h <- nrow(jacdist)*12+80
+  u <- 12
+  png(filename=filename,width = w, height = h, units = "px", pointsize = u)
+  
+  par(mar = c(2,0,1,13))
+  plot(dend1, horiz = TRUE, main=paste('floristic simularity', amethod,' method of', soilgroup, 'soils'), font=1, cex=0.84)
+  dev.off()
+  
+}
+
+amethod <- 'bray-agnes' 
+k=16
+if (T){
   amethod <- 'bray-agnes' 
   jacdist <- as.data.frame(as.matrix(vegdist(plotinputs1, method='bray', binary=FALSE, na.rm=T)))
   jactree <- agnes(jacdist, method='average')
+  makeplot(amethod,jacdist,jactree,soilgroup,k)
 }
-if (F){
+if (T){
   amethod <- 'bray-single' 
   jacdist <- as.data.frame(as.matrix(vegdist(plotinputs1, method='bray', binary=FALSE, na.rm=T)))
   jactree <- agnes(jacdist, method='single')
+  makeplot(amethod,jacdist,jactree,soilgroup,k)
 }
-if (F){
+if (T){
   amethod <- 'bray-complete' 
   jacdist <- as.data.frame(as.matrix(vegdist(plotinputs1, method='bray', binary=FALSE, na.rm=T)))
   jactree <- agnes(jacdist, method='complete')
+  makeplot(amethod,jacdist,jactree,soilgroup,k)
 }
-if (F){
+if (T){
   amethod <- 'bray-diana' 
   jacdist <- as.data.frame(as.matrix(vegdist(plotinputs1, method='bray', binary=FALSE, na.rm=T)))
   jactree <- diana(jacdist)
+  makeplot(amethod,jacdist,jactree,soilgroup,k)
 }
 if (T){
   amethod <- 'bray-ward' 
   jacdist <- as.data.frame(as.matrix(vegdist(plotinputs1, method='bray', binary=FALSE, na.rm=T)))
   jactree <- agnes(jacdist, method='ward')
+  makeplot(amethod,jacdist,jactree,soilgroup,k)
 }
-if (F){
+if (T){
   amethod <- 'jaccard-agnes' 
   jacdist <- as.data.frame(as.matrix(vegdist(plotinputs1, method='jaccard', binary=FALSE, na.rm=T)))
   jactree <- agnes(jacdist, method='average')
+  makeplot(amethod,jacdist,jactree,soilgroup,k)
 }
-filename <- paste0('output/',amethod,'-',soilgroup,'.png')
+
 
 #----
+#group dominant and indicator species
+ngroups=16
+jacdist <- as.data.frame(as.matrix(vegdist(plotinputs1, method='bray', binary=FALSE, na.rm=T)))
+jactree <- agnes(jacdist, method='average')
 groups <- cutree(jactree, k = ngroups)
 
 soilplot <- names(groups)
 clust <- unname(groups)
-if (F){
-groups <- kmeans(plotinputs1, ngroups)
-soilplot <- names(groups$cluster)
-clust <- unname(groups$cluster)}
-if (F){ #cut tree at variable heights. PamStage=FALSE parameter maintains zeros for singlton clusters so that they are not lumped as paraphyletic clusters.
-    groups <- cutreeDynamic(as.hclust(jactree), distM = jacdist, method = 'hybrid',minClusterSize = 0, minGap = 0.85, minSplitHeight = 0.0, maxCoreScatter = 0, pamRespectsDendro = TRUE, pamStage= FALSE, minExternalSplit = 0)
-  soilplot <- rownames(jacdist)[sort(order(rownames(jacdist)), decreasing = F)]
-  clust <- (groups)
-}
 groupdf <- as.data.frame(cbind(soilplot, clust))
 groupdf$clust <- (as.numeric(as.character(groupdf$clust)))
 maxcluster <- max(groupdf$clust)
 numberzeros <- nrow(groupdf[(groupdf$clust == 0),])
 whichrecords <- which(groupdf$clust == 0)
 if (nrow(groupdf[groupdf$clust == 0,]) != 0){
-for (i in 1:numberzeros){ #assign all zero clusters to unique cluster number.
-  groupdf[whichrecords[i],]$clust <- maxcluster+i}}
-
-newlabels <- jactree$order.lab
-newlabels <- as.data.frame(newlabels)
-newlabels$row <- row(newlabels)
-newlabels <- merge(newlabels, groupdf, by.x='newlabels', by.y ='soilplot')
-newlabels$newlabels <- paste(newlabels$clust, newlabels$newlabels)
-newlabels <- newlabels[order(newlabels$row),1]
-newtree <- jactree
-newtree$order.lab <- newlabels
-
-dend1 <- color_branches(as.hclust(newtree), k = ngroups)
-dend1 <- color_labels(dend1, k = ngroups)
-
-w <- 800
-h <- nrow(VEGOBS)*12+80
-u <- 12
-png(filename=filename,width = w, height = h, units = "px", pointsize = u)
-
-par(mar = c(2,0,1,13))
-plot(dend1, horiz = TRUE, main=paste('floristic simularity', amethod,'method of', soilgroup, 'soils'), font=1, cex=0.84)
-#rect.dendrogram(dend1, k = ngroups, horiz = TRUE)
-dev.off()
-#----
-#group dominant and indicator species
+  for (i in 1:numberzeros){ #assign all zero clusters to unique cluster number.
+    groupdf[whichrecords[i],]$clust <- maxcluster+i}}
 
 
 
@@ -548,26 +632,17 @@ spp.diff <- spp.diff$syntable
 spp.freqdif <- subset(spp.freq, rownames(spp.freq) %in% spp.diffonly)
 spp.diffonly <- subset(spp.diff, rownames(spp.diff) %in% spp.diffonly)
 #----
-#evaluating methods 
-data(dune)
-distbray <- vegdist(dune, method='bray', binary=FALSE, na.rm=T)
-distjac <- vegdist(dune, method='jaccard', binary=FALSE, na.rm=T)
-coph.agnes <- cor(as.dist(distbray), cophenetic(as.hclust(agnes(distbray, method='average'))))
-coph.jagnes1 <- cor(as.dist(distjac), cophenetic(as.hclust(agnes(distjac, method='average'))))
-coph.jagnes2 <- cor(as.dist(distbray), cophenetic(as.hclust(agnes(distjac, method='average'))))
-coph.hclust <- cor(as.dist(distbray), cophenetic(hclust(as.dist(distbray), "average")))
-coph.single <- cor(as.dist(distbray), cophenetic(as.hclust(agnes(distbray, method='single'))))
-coph.complete <- cor(as.dist(distbray), cophenetic(as.hclust(agnes(distbray, method='complete'))))
-coph.ward <- cor(as.dist(distbray), cophenetic(as.hclust(agnes(distbray, method='ward'))))
-coph.diana <- cor(as.dist(distbray), cophenetic(as.hclust(diana(distbray))))
-coph.agnes
-coph.jagnes1
-coph.jagnes2
-coph.hclust
-coph.ward
-coph.diana
-coph.single
-coph.complete
+k = 5
+tspp.freq <- t(spp.freq)
+silanalysis(tspp.freq)
+input <- tspp.freq
+if (T){
+  amethod <- 'spp-freq-groups' 
+  jacdist <- as.data.frame(as.matrix(vegdist(tspp.freq, method='bray', binary=FALSE, na.rm=T)))
+  jactree <- agnes(jacdist, method='average')
+  makeplot(amethod,jacdist,jactree,soilgroup,k)
+}
+
 #---- 
 #export
 VEGOBS_groups <- cbind(groups, soilplot = rownames(plotinputs1))
