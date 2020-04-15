@@ -260,16 +260,13 @@ coph.diana
 coph.single
 coph.complete
 #validity using silhouette index
+sil.table <-'x'
 #----
 silanalysis <- function(input){
 distbray <- vegdist(input, method='bray', binary=FALSE, na.rm=T)
 distjac <- vegdist(input, method='jaccard', binary=FALSE, na.rm=T)
-distsim <- as.data.frame(as.matrix(simil(input,method='Simpson')))
-#tree <- agnes(distbray, method='average')
-#cuttree <- cutree(tree, k = 8)
-#siltree <- silhouette(cuttree, distbray)
-#summary(siltree)
-#mean(siltree[,3])
+distsim <- as.dist(simil(input,method='Simpson'))
+
 maxcluster <- min(20, nrow(input)-1)
 k <- 2
 klevel <- 0
@@ -301,8 +298,11 @@ for (k in 2:maxcluster){
   sil.single <- c(sil.single, sil.single1)
   sil.complete <- c(sil.complete, sil.complete1)}
 sil.table <- as.data.frame(cbind(klevel,sil.bray,sil.jac,sil.sim,sil.ward,sil.diana,sil.kmeans,sil.single,sil.complete))
-sil.table <- sil.table[-1,]}
+sil.table <- sil.table[-1,]
+sil.table <<- sil.table
+return(sil.table)}
 #----
+#data('dune')
 silanalysis(plotinputs1)
 #analysis method
 makeplot <- function(amethod,jacdist,jactree, soilgroup,k){
@@ -352,37 +352,39 @@ amethod <- 'bray-agnes'
 k=16
 if (T){
   amethod <- 'bray-agnes' 
-  jacdist <- as.data.frame(as.matrix(vegdist(plotinputs1, method='bray', binary=FALSE, na.rm=T)))
+  k=16
+  jacdist <- vegdist(plotinputs1, method='bray', binary=FALSE, na.rm=T)
   jactree <- agnes(jacdist, method='average')
   makeplot(amethod,jacdist,jactree,soilgroup,k)
 }
 if (T){
   amethod <- 'bray-single' 
-  jacdist <- as.data.frame(as.matrix(vegdist(plotinputs1, method='bray', binary=FALSE, na.rm=T)))
+  jacdist <- vegdist(plotinputs1, method='bray', binary=FALSE, na.rm=T)
   jactree <- agnes(jacdist, method='single')
   makeplot(amethod,jacdist,jactree,soilgroup,k)
 }
 if (T){
   amethod <- 'bray-complete' 
-  jacdist <- as.data.frame(as.matrix(vegdist(plotinputs1, method='bray', binary=FALSE, na.rm=T)))
+  jacdist <- vegdist(plotinputs1, method='bray', binary=FALSE, na.rm=T)
   jactree <- agnes(jacdist, method='complete')
   makeplot(amethod,jacdist,jactree,soilgroup,k)
 }
 if (T){
   amethod <- 'bray-diana' 
-  jacdist <- as.data.frame(as.matrix(vegdist(plotinputs1, method='bray', binary=FALSE, na.rm=T)))
+  jacdist <- vegdist(plotinputs1, method='bray', binary=FALSE, na.rm=T)
   jactree <- diana(jacdist)
   makeplot(amethod,jacdist,jactree,soilgroup,k)
 }
 if (T){
-  amethod <- 'bray-ward' 
-  jacdist <- as.data.frame(as.matrix(vegdist(plotinputs1, method='bray', binary=FALSE, na.rm=T)))
+  amethod <- 'bray-ward'
+  k=8
+  jacdist <- vegdist(plotinputs1, method='bray', binary=FALSE, na.rm=T)
   jactree <- agnes(jacdist, method='ward')
   makeplot(amethod,jacdist,jactree,soilgroup,k)
 }
 if (T){
   amethod <- 'jaccard-agnes' 
-  jacdist <- as.data.frame(as.matrix(vegdist(plotinputs1, method='jaccard', binary=FALSE, na.rm=T)))
+  jacdist <- vegdist(plotinputs1, method='jaccard', binary=FALSE, na.rm=T)
   jactree <- agnes(jacdist, method='average')
   makeplot(amethod,jacdist,jactree,soilgroup,k)
 }
@@ -391,7 +393,7 @@ if (T){
 #----
 #group dominant and indicator species
 ngroups=16
-jacdist <- as.data.frame(as.matrix(vegdist(plotinputs1, method='bray', binary=FALSE, na.rm=T)))
+jacdist <- ((vegdist(plotinputs1, method='jaccard', binary=FALSE, na.rm=T)))
 jactree <- agnes(jacdist, method='average')
 groups <- cutree(jactree, k = ngroups)
 
@@ -612,7 +614,7 @@ assname <- ""
 Com.Structure[Com.Structure$cluster %in% nclust[i],]$association <- assname
 }
 Com.Structure[order(as.numeric(as.character(Com.Structure$cluster))),c("cluster", "association", "WetStructure")]
-
+###end associated spp ###
 
 #filtered <- subset(NASISPEDONS, grepl('ist', Current.Taxonomic.Class) )
 #----
@@ -632,16 +634,30 @@ spp.diff <- spp.diff$syntable
 spp.freqdif <- subset(spp.freq, rownames(spp.freq) %in% spp.diffonly)
 spp.diffonly <- subset(spp.diff, rownames(spp.diff) %in% spp.diffonly)
 #----
-k = 5
+k = 4
 tspp.freq <- t(spp.freq)
 silanalysis(tspp.freq)
 input <- tspp.freq
-if (T){
+
   amethod <- 'spp-freq-groups' 
   jacdist <- as.data.frame(as.matrix(vegdist(tspp.freq, method='bray', binary=FALSE, na.rm=T)))
   jactree <- agnes(jacdist, method='average')
   makeplot(amethod,jacdist,jactree,soilgroup,k)
-}
+
+  groups2 <- cutree(jactree, k=k)
+spp.freq2 <- syntable(tspp.freq, groups2)
+spp.freq2 <- spp.freq2$syntable
+
+
+compound2 <- as.data.frame(groups2)
+compound2$groups <- row.names(compound2)
+compound <- as.data.frame(groups)
+compound$name <- row.names(compound)
+compound <- merge(compound, compound2, by='groups' )
+compound$groups <- compound$groups2
+row.names(compound) <- compound$name
+compound<- compound[,c('groups')]
+sil.compound <- (compound %>% silhouette(distbray))[,3]%>% mean
 
 #---- 
 #export
