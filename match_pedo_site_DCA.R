@@ -352,7 +352,7 @@ amethod <- 'bray-agnes'
 k=16
 if (T){
   amethod <- 'bray-agnes' 
-  k=16
+  k=8
   jacdist <- vegdist(plotinputs1, method='bray', binary=FALSE, na.rm=T)
   jactree <- agnes(jacdist, method='average')
   makeplot(amethod,jacdist,jactree,soilgroup,k)
@@ -392,9 +392,9 @@ if (T){
 
 #----
 #group dominant and indicator species
-ngroups=16
-jacdist <- ((vegdist(plotinputs1, method='jaccard', binary=FALSE, na.rm=T)))
-jactree <- agnes(jacdist, method='average')
+ngroups=8
+jacdist <- ((vegdist(plotinputs1, method='bray', binary=FALSE, na.rm=T)))
+jactree <- agnes(jacdist, method='ward')
 groups <- cutree(jactree, k = ngroups)
 
 soilplot <- names(groups)
@@ -615,8 +615,9 @@ Com.Structure[Com.Structure$cluster %in% nclust[i],]$association <- assname
 }
 Com.Structure[order(as.numeric(as.character(Com.Structure$cluster))),c("cluster", "association", "WetStructure")]
 ###end associated spp ###
+sil <- (distbray %>% agnes(method = 'ward') %>% cutree(k=10) %>% silhouette(distbray))[,] %>% as.data.frame() 
+sil.summary <- aggregate(sil[,c('sil_width')], by=list(cluster = sil$cluster ), FUN='mean') %>%  `colnames<-`(c('cluster', 'sil_width'))
 
-#filtered <- subset(NASISPEDONS, grepl('ist', Current.Taxonomic.Class) )
 #----
 
 selectedobs <-  subset(VEGOBS,pedon != "")
