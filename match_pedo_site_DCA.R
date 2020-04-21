@@ -17,6 +17,16 @@ library(rpart)
 library(rpart.plot)
 library(goeveg)
 library(proxy)
+betasim2 <- function(p){
+  d <- matrix(1, nrow = nrow(p), ncol = nrow(p))
+  rownames(d) <- rownames(p)
+  colnames(d) <- rownames(p)
+  for(j in 1:nrow(p)){
+    for(k in 1:nrow(p)){
+      d[j,k] <- 1-sum((p[j,]*p[k,])^0.5)/sqrt(sum(p[j,])*sum(p[k,]))
+    }}
+  d<-as.dist(d)
+}
 
 #write(paste0(unique(as.numeric(soilDB::get_site_data_from_NASIS_db(SS = FALSE)$siteiid)), collapse=','), file="bad_siteids.txt")
 #----
@@ -237,14 +247,15 @@ rm(Com.Sp.wet.agg2,Com.Sp.wet.agg)
 #cluster analysis
 Com.Sp.mean$sqrttotal <- sqrt(Com.Sp.mean$Total)
 
-plotinputs1 <- makecommunitydataset(Com.Sp.mean, row = 'soilplot', column = 'Species', value = 'sqrttotal', drop = TRUE)
+plotdata <- makecommunitydataset(Com.Sp.mean, row = 'soilplot', column = 'Species', value = 'sqrttotal', drop = TRUE)
 Com.Sp.Agg$sqrttotal <- Com.Sp.Agg$Total^0.5
 plotinputs2 <- makecommunitydataset(Com.Sp.Agg.wet, row = 'soilplot', column = 'Simple', value = 'Total', drop = TRUE)
 
 #evaluating methods 
 
-distbray <- vegdist(plotinputs1, method='bray', binary=FALSE, na.rm=T)
-distjac <- vegdist(plotinputs1, method='jaccard', binary=FALSE, na.rm=T)
+distbray <- vegdist(plotdata, method='bray', binary=FALSE, na.rm=T)
+distjac <- vegdist(plotdata, method='jaccard', binary=FALSE, na.rm=T)
+distbet <- betasim2(plotdata)
 coph.agnes <- cor(as.dist(distbray), cophenetic(as.hclust(agnes(distbray, method='average'))))
 coph.jagnes <- cor(as.dist(distbray), cophenetic(as.hclust(agnes(distjac, method='average'))))
 coph.hclust <- cor(as.dist(distbray), cophenetic(hclust(as.dist(distbray), "average")))
@@ -266,7 +277,7 @@ silanalysis <- function(input){
 distbray <- vegdist(input, method='bray', binary=FALSE, na.rm=T)
 distjac <- vegdist(input, method='jaccard', binary=FALSE, na.rm=T)
 distsim <- as.dist(simil(input,method='Simpson'))
-
+distbet <- betasim2(input)
 maxcluster <- min(20, nrow(input)-1)
 k <- 2
 klevel <- 0
@@ -278,7 +289,12 @@ sil.diana <- 0
 sil.kmeans <- 0
 sil.single <- 0
 sil.complete <- 0
-for (k in 2:maxcluster){
+sil.wardeuc <- 0
+sil.kmeanseuc <- 0
+sil.bet <- 0
+sil.betward <- 0
+sil.betdiana <- 0
+for (k in 2:20){
   sil.bray1 <- (distbray %>% agnes(method = 'average') %>% cutree(k=k) %>% silhouette(distbray))[,3]%>% mean
   sil.jac1 <- (distjac %>% agnes(method = 'average') %>% cutree(k=k) %>% silhouette(distbray))[,3]%>% mean
   sil.sim1 <- (distsim %>% agnes(method = 'average') %>% cutree(k=k) %>% silhouette(distbray))[,3]%>% mean
@@ -287,6 +303,11 @@ for (k in 2:maxcluster){
   sil.kmeans1 <- (kmeans(distbray, centers = k)$cluster %>% silhouette(distbray))[,3] %>% mean
   sil.single1 <- (distbray %>% agnes(method = 'single') %>% cutree(k=k) %>% silhouette(distbray))[,3]%>% mean
   sil.complete1 <- (distbray %>% agnes(method = 'complete') %>% cutree(k=k) %>% silhouette(distbray))[,3]%>% mean
+  sil.wardeuc1 <- (plotdata %>% agnes(method = 'ward') %>% cutree(k=k) %>% silhouette(distbray))[,3]%>% mean
+  sil.kmeanseuc1 <- (kmeans(plotdata, centers = k)$cluster %>% silhouette(distbray))[,3] %>% mean
+  sil.bet1 <- (distbet %>% agnes(method = 'average') %>% cutree(k=k) %>% silhouette(distbray))[,3]%>% mean
+  sil.betward1 <- (distbet %>% agnes(method = 'ward') %>% cutree(k=k) %>% silhouette(distbray))[,3]%>% mean
+  sil.betdiana1 <- (distbet %>% diana %>% cutree(k=k) %>% silhouette(distbray))[,3]%>% mean
   
   klevel <- c(klevel, k)
   sil.bray <- c(sil.bray, sil.bray1)
@@ -296,14 +317,20 @@ for (k in 2:maxcluster){
   sil.diana <- c(sil.diana, sil.diana1)
   sil.kmeans <- c(sil.kmeans, sil.kmeans1)
   sil.single <- c(sil.single, sil.single1)
-  sil.complete <- c(sil.complete, sil.complete1)}
-sil.table <- as.data.frame(cbind(klevel,sil.bray,sil.jac,sil.sim,sil.ward,sil.diana,sil.kmeans,sil.single,sil.complete))
+  sil.complete <- c(sil.complete, sil.complete1)
+  sil.wardeuc <- c(sil.wardeuc, sil.wardeuc1)
+  sil.kmeanseuc <- c(sil.kmeanseuc, sil.kmeanseuc1)
+  sil.bet <- c(sil.bet, sil.bet1)
+  sil.betward <- c(sil.betward, sil.betward1)
+  sil.betdiana <- c(sil.betdiana, sil.betdiana1)
+}
+sil.table <- as.data.frame(cbind(klevel,sil.bray,sil.jac,sil.sim,sil.ward,sil.diana,sil.kmeans,sil.single,sil.complete,sil.bet,sil.betward,sil.betdiana))
 sil.table <- sil.table[-1,]
 sil.table <<- sil.table
 return(sil.table)}
 #----
 #data('dune')
-silanalysis(plotinputs1)
+silanalysis(plotdata)
 #analysis method
 makeplot <- function(amethod,jacdist,jactree, soilgroup,k){
   filename <- paste0('output/Soils_',soilgroup,"_",amethod,'.png')
@@ -353,48 +380,68 @@ k=16
 if (T){
   amethod <- 'bray-agnes' 
   k=8
-  jacdist <- vegdist(plotinputs1, method='bray', binary=FALSE, na.rm=T)
+  jacdist <- vegdist(plotdata, method='bray', binary=FALSE, na.rm=T)
   jactree <- agnes(jacdist, method='average')
   makeplot(amethod,jacdist,jactree,soilgroup,k)
 }
 if (T){
   amethod <- 'bray-single' 
-  jacdist <- vegdist(plotinputs1, method='bray', binary=FALSE, na.rm=T)
+  jacdist <- vegdist(plotdata, method='bray', binary=FALSE, na.rm=T)
   jactree <- agnes(jacdist, method='single')
   makeplot(amethod,jacdist,jactree,soilgroup,k)
 }
 if (T){
   amethod <- 'bray-complete' 
-  jacdist <- vegdist(plotinputs1, method='bray', binary=FALSE, na.rm=T)
+  jacdist <- vegdist(plotdata, method='bray', binary=FALSE, na.rm=T)
   jactree <- agnes(jacdist, method='complete')
   makeplot(amethod,jacdist,jactree,soilgroup,k)
 }
 if (T){
   amethod <- 'bray-diana' 
-  jacdist <- vegdist(plotinputs1, method='bray', binary=FALSE, na.rm=T)
+  jacdist <- vegdist(plotdata, method='bray', binary=FALSE, na.rm=T)
   jactree <- diana(jacdist)
   makeplot(amethod,jacdist,jactree,soilgroup,k)
 }
 if (T){
   amethod <- 'bray-ward'
   k=8
-  jacdist <- vegdist(plotinputs1, method='bray', binary=FALSE, na.rm=T)
+  jacdist <- vegdist(plotdata, method='bray', binary=FALSE, na.rm=T)
   jactree <- agnes(jacdist, method='ward')
   makeplot(amethod,jacdist,jactree,soilgroup,k)
 }
 if (T){
   amethod <- 'jaccard-agnes' 
-  jacdist <- vegdist(plotinputs1, method='jaccard', binary=FALSE, na.rm=T)
+  jacdist <- vegdist(plotdata, method='jaccard', binary=FALSE, na.rm=T)
   jactree <- agnes(jacdist, method='average')
   makeplot(amethod,jacdist,jactree,soilgroup,k)
 }
-
+if (T){
+  amethod <- 'agnes-betasim'
+  k=8
+  
+  tree <- agnes(distbet, method='average')
+  makeplot(amethod,distbet,tree,soilgroup,k)
+}
+if (T){
+  amethod <- 'ward-betasim'
+  k=8
+  
+  tree <- agnes(distbet, method='ward')
+  makeplot(amethod,distbet,tree,soilgroup,k)
+}
+if (T){
+  amethod <- 'diana-betasim'
+  k=8
+  
+  tree <- diana(distbet)
+  makeplot(amethod,distbet,tree,soilgroup,k)
+}
 
 #----
 #group dominant and indicator species
 ngroups=8
-jacdist <- ((vegdist(plotinputs1, method='bray', binary=FALSE, na.rm=T)))
-jactree <- agnes(jacdist, method='ward')
+jacdist <- ((vegdist(plotdata, method='bray', binary=FALSE, na.rm=T)))
+jactree <- agnes(distbet, method='ward')
 groups <- cutree(jactree, k = ngroups)
 
 soilplot <- names(groups)
@@ -623,79 +670,28 @@ sil.summary <- aggregate(sil[,c('sil_width')], by=list(cluster = sil$cluster ), 
 selectedobs <-  subset(VEGOBS,pedon != "")
 #----
 
-spp.freq <- syntable(plotinputs1, groups)
+spp.freq <- syntable(plotdata, groups)
 spp.freq <- spp.freq$syntable
-spp.mean <- syntable(plotinputs1, groups,  type = "mean")
+spp.mean <- syntable(plotdata, groups,  type = "mean")
 spp.mean <- spp.mean$syntable
-spp.med <- syntable(plotinputs1, groups,  type = "median")
+spp.med <- syntable(plotdata, groups,  type = "median")
 spp.med <- spp.med$syntable
-spp.diff <- syntable(plotinputs1, groups,  type = "diffspec")
+spp.diff <- syntable(plotdata, groups,  type = "diffspec")
 spp.diffonly <- rownames(spp.diff$onlydiff)
 spp.diff <- spp.diff$syntable
 spp.freqdif <- subset(spp.freq, rownames(spp.freq) %in% spp.diffonly)
 spp.diffonly <- subset(spp.diff, rownames(spp.diff) %in% spp.diffonly)
+write.csv(spp.freqdif, 'output/indicators.csv')
+
 #----
-k = 4
-tspp.freq <- t(spp.freq)
-silanalysis(tspp.freq)
-input <- tspp.freq
-
-  amethod <- 'spp-freq-groups' 
-  jacdist <- as.data.frame(as.matrix(vegdist(tspp.freq, method='bray', binary=FALSE, na.rm=T)))
-  jactree <- agnes(jacdist, method='average')
-  makeplot(amethod,jacdist,jactree,soilgroup,k)
-
-  groups2 <- cutree(jactree, k=k)
-spp.freq2 <- syntable(tspp.freq, groups2)
-spp.freq2 <- spp.freq2$syntable
-
-
-compound2 <- as.data.frame(groups2)
-compound2$groups <- row.names(compound2)
-compound <- as.data.frame(groups)
-compound$name <- row.names(compound)
-compound <- merge(compound, compound2, by='groups' )
-compound$groups <- compound$groups2
-row.names(compound) <- compound$name
-compound<- compound[,c('groups')]
-sil.compound <- (compound %>% silhouette(distbray))[,3]%>% mean
-
-#---- 
-#export
-VEGOBS_groups <- cbind(groups, soilplot = rownames(plotinputs1))
-VEGOBS_groups <- merge(VEGOBS_groups, Com.Structure[,c('cluster','WetStructure','association')], by.x = 'groups', by.y = 'cluster')
-VEGOBS$soilplot <- paste(VEGOBS$Soil , VEGOBS$Observation_Label)
-VEGOBS$soilplot <- str_replace_all(VEGOBS$soilplot, ' ', '.')
-VEGOBS$soilplot <- str_replace_all(VEGOBS$soilplot, '-', '.')
-VEGOBS$soilplot <- str_replace_all(VEGOBS$soilplot, ',', '.')
-VEGOBS$soilplot <- str_replace_all(VEGOBS$soilplot, ':', '.')
-VEGOBS$soilplot <- str_replace_all(VEGOBS$soilplot, ';', '.')
-VEGOBS$soilplot <- str_replace_all(VEGOBS$soilplot, '&', '.')
-VEGOBS_groups <- merge(VEGOBS_groups, VEGOBS, by = 'soilplot')
-write.csv(VEGOBS_groups, 'output/VEGOBS_groups.csv')
-write.csv(NASISPEDONS[grepl('ist',NASISPEDONS$taxsubgrp),], 'output/mucks.csv')
-#----
-transind <- as.data.frame(t(indicatorspp))
-transind$group <- rownames(transind)
-
-p <- rpart(as.factor(group) ~ ., data=transind, method="class", maxdepth = 7, cp=0.00000005, minsplit=1)
-rpart.plot(p, extra=108,  box.palette="white") 
-#----
-#DCA
-
-dca <- decorana(plotinputs)
-dcaselect <- ordiselect(plotinputs, dca, ablim = 0.2)
-plot(dca, type = "n", choices = 1:2)
-points(dca, display = "sites", cex = 0.8, pch = 21, col = "red", bg = "yellow", choices = 1:2)
-points(dca, display = "spec", cex = 0.8, pch = 3, col = "red", bg = "yellow", select = dcaselect, choices = 1:2)
-text(dca, display = "spec", cex = 0.5, col = "blue", select = dcaselect, choices = 1:2)
-
-plot(dca, type = "n", choices = c(1,3))
-points(dca, display = "sites", cex = 0.8, pch = 21, col = "red", bg = "yellow", choices = c(1,3))
-points(dca, display = "spec", cex = 0.8, pch = 3, col = "red", bg = "yellow", select = dcaselect, choices = c(1,3))
-text(dca, display = "spec", cex = 0.5, col = "blue", select = dcaselect, choices = c(1,3))
-
-
-
-orditkplot(dca, cex = 0.7, choices = 2:3, select = dcaselect)
-
+frq <- as.data.frame(t(spp.freq))
+sdfrq <- apply(frq, MARGIN = 2, FUN='sd') 
+msdfrq <- quantile(sdfrq,.9)
+sppnames <- sort(names(sdfrq[sdfrq > msdfrq]), decreasing = F)
+sppnames <- c("Acer.rubrum", "Acer.saccharinum", "Asclepias.incarnata", "Boehmeria.cylindrica", "Carex.lasiocarpa", "Carex.stricta", "Cephalanthus.occidentalis", "Cornus.alba", "Cornus.racemosa", "Eutrochium.maculatum", "Fraxinus.pennsylvanica", "Ilex.verticillata", "Impatiens.capensis", "Juniperus.virginiana", "Lysimachia.terrestris", "Onoclea.sensibilis", "Persicaria.virginiana", "Phalaris.arundinacea", "Pilea.pumila", "Salix.discolor", "Salix.nigra", "Sambucus.nigra", "Schoenoplectus.pungens", "Scutellaria.lateriflora", "Symphyotrichum.puniceum", "Thelypteris.palustris", "Toxicodendron.radicans", "Toxicodendron.vernix", "Typha.angustifolia", "Ulmus.americana")
+frq[frq>50] <- 50
+frq[frq>1&frq<50] <- 1
+frq$site <- rownames(frq)
+formula <- paste0('site ~', paste(sppnames, collapse="+"))
+rp <- rpart(formula , data = frq, maxdepth = 6, cp=0.005, minsplit=1)
+rpart.plot(rp, extra=108)
