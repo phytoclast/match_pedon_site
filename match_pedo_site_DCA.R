@@ -439,10 +439,10 @@ if (T){
 
 #----
 #group dominant and indicator species
-ngroups=8
-jacdist <- ((vegdist(plotdata, method='bray', binary=FALSE, na.rm=T)))
-jactree <- agnes(distbet, method='ward')
-groups <- cutree(jactree, k = ngroups)
+k=8
+d <- ((vegdist(plotdata, method='bray', binary=FALSE, na.rm=T)))
+t <- agnes(d, method='ward')
+groups <- cutree(t, k = k)
 
 soilplot <- names(groups)
 clust <- unname(groups)
