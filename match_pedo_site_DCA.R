@@ -33,11 +33,13 @@ betasim2 <- function(p){
 NASISPEDONS <- readRDS("data/NASISPEDONS.RDS")
 #NASISPEDONS <- read.delim("data/NASISPEDONS.txt")
 #NASISPEDONSxx <- site(fetchNASIS_pedons(SS=FALSE, rmHzErrors=FALSE)) #doesn't seem to work anymore
-NASISPEDONSx <- get_site_data_from_NASIS_db(SS=FALSE)
+#NASISPEDONSx <- get_site_data_from_NASIS_db(SS=FALSE)
 
-fp <-  fetchNASIS(from = 'pedons', SS=FALSE, rmHzErrors=FALSE)
+#fp <-  fetchNASIS(from = 'pedons', SS=FALSE, rmHzErrors=FALSE)
+#saveRDS(fp, 'data/fp.RDS')
+fp <- readRDS('data/fp.RDS')
 #fp <-  fetchNASIS_pedons(SS=TRUE, rmHzErrors=FALSE)
-NASISPEDONS <- apg::site(fp)
+#NASISPEDONS <- aqp::site(fp)
 #saveRDS(NASISPEDONS, 'data/NASISPEDONS.RDS')
 names(NASISPEDONS)[names(NASISPEDONS) == "x_std"] <- 'Std.Longitude'
 names(NASISPEDONS)[names(NASISPEDONS) == "y_std"] <- 'Std.Latitude'
@@ -163,13 +165,13 @@ if (F){
   sortsoils <- unique(subset(s, T150_OM < 20 & flood == 'flood', select = 'compname'))[,1]
   VEGOBS <- subset(VEGOBS,Soil %in% sortsoils)
   ngroups <- 4
-  soilgroup <- 'output/flood.png'}
+  soilgroup <- 'flood'}
 
 if (F){
   sortsoils <- unique(subset(s, Water_Table < 50, select = 'compname'))[,1]
   VEGOBS <- subset(VEGOBS,Soil %in% sortsoils)
   ngroups <- 8
-  filename <- 'output/wet.png'}
+  filename <- 'wet'}
 
 #----
 #observed species
@@ -205,7 +207,6 @@ Com.Sp.mean$soilplot <- str_replace_all(Com.Sp.mean$soilplot, ',', '.')
 Com.Sp.mean$soilplot <- str_replace_all(Com.Sp.mean$soilplot, ':', '.')
 Com.Sp.mean$soilplot <- str_replace_all(Com.Sp.mean$soilplot, ';', '.')
 Com.Sp.mean$soilplot <- str_replace_all(Com.Sp.mean$soilplot, '&', '.')
-
 #----
 #need formula for aggregating within strata... 
 Com.Sp.preagg <- Com.Sp.mean
@@ -246,6 +247,7 @@ rm(Com.Sp.wet.agg2,Com.Sp.wet.agg)
 #----
 #cluster analysis
 Com.Sp.mean$sqrttotal <- sqrt(Com.Sp.mean$Total)
+#saveRDS(Com.Sp.mean, 'C:/workspace2/USNVC/data/plotdata.RDS')
 
 plotdata <- makecommunitydataset(Com.Sp.mean, row = 'soilplot', column = 'Species', value = 'sqrttotal', drop = TRUE)
 Com.Sp.Agg$sqrttotal <- Com.Sp.Agg$Total^0.5
@@ -664,6 +666,7 @@ Com.Structure[order(as.numeric(as.character(Com.Structure$cluster))),c("cluster"
 ###end associated spp ###
 sil <- (distbray %>% agnes(method = 'ward') %>% cutree(k=10) %>% silhouette(distbray))[,] %>% as.data.frame() 
 sil.summary <- aggregate(sil[,c('sil_width')], by=list(cluster = sil$cluster ), FUN='mean') %>%  `colnames<-`(c('cluster', 'sil_width'))
+saveRDS(Com.Sp.Agg, 'C:/workspace2/USNVC/data/Com.Sp.Agg.RDS')
 
 #----
 
