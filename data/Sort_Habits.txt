@@ -1,0 +1,10 @@
+order	Plant.Type
+1	Tree
+2	Tree Fern
+3	Shrub/Subshrub
+4	Vine/Liana
+5	Grass/grass-like (Graminoids)
+6	Forb/Herb
+7	Fern/fern ally
+8	Nonvascular
+9	Biological Crusts

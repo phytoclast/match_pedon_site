@@ -4,7 +4,7 @@ t	T	Tree	Tree	1	Evergreen
 v	L	Liana	Vine/Liana	3	Evergreen
 	H	Herb	Forb/Herb	4	Forb
 	HF	Forb	Forb/Herb	5	Forb
-	HG	Graminoid	Forb/Herb	6	Graminoid
+	HG	Graminoid	Grass/grass-like	6	Graminoid
 e	E	Epiphyte	Vine/Liana	7	Evergreen
 	N	Nonvascular	Nonvascular	8	Nonvascular
 M	NB	Bryophyte	Nonvascular	9	Nonvascular
