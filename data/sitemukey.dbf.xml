@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xml:lang="en"><Esri><CreaDate>20200706</CreaDate><CreaTime>13451400</CreaTime><ArcGISFormat>1.0</ArcGISFormat><SyncOnce>TRUE</SyncOnce><DataProperties><lineage><Process ToolSource="c:\program files (x86)\arcgis\desktop10.5\ArcToolbox\Toolboxes\Spatial Analyst Tools.tbx\ExtractValuesToPoints" Date="20200706" Time="133949">ExtractValuesToPoints sites MapunitRaster_30m.tif C:\ArcGIS\Default.gdb\Extract_shp1 NONE VALUE_ONLY</Process></lineage></DataProperties></Esri></metadata>

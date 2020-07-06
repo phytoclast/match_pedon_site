@@ -11,6 +11,7 @@ library(rpart)
 library(rpart.plot)
 library(goeveg)
 library(proxy)
+library(foreign)
 
 
 #----
@@ -40,6 +41,9 @@ listspp <- readRDS("data/listspp.RDS")
 obsspp <- subset(obsspp, !substr(AcTaxon,1,1) %in% '-'& !AcTaxon %in% '' & !is.na(Habit))
 obsspp <- merge(obsspp, List_Habits[,c('Form','Simple')], by.x = 'Habit', by.y = 'Form', all.x = TRUE)
 obs <- read.delim("data/Sites.txt")
+obs <- subset(obs,Observer_Code %in% 'GRR.GJS' & Year >=2011 & !Observation_Type %in% c('Bogus', 'Floristics')) #filter out bogus points
+unique(obs$Observation_Type)
+
 obsspp <- merge(obs[,c('Observation_ID','Observation_Label')],obsspp, by='Observation_ID')
 obsspp <- subset(obsspp, Field+Shrub+Subcanopy+Tree > 0)
 if (F){ #if true, remove ambiguous taxa
@@ -88,9 +92,9 @@ for (i in 1:n){
 
 mu <- readRDS(file='data/mu.RDS')
 
-VEGOBS_mukeys <- read.delim("data/VEGOBS_mukeys.txt")
-VEGOBS_soilnames <- merge(VEGOBS_mukeys[,c('Observatio','RASTERVALU')], mu[,c('lmapunitiid', 'muname')], by.x='RASTERVALU', by.y= 'lmapunitiid')
-VEGOBS <- merge(VEGOBS, VEGOBS_soilnames[,c('Observatio', 'muname')], by.x='Observation_Label', by.y= 'Observatio')
+VEGOBS_mukeys <- foreign::read.dbf("data/sitemukey.dbf") 
+VEGOBS_soilnames <- merge(VEGOBS_mukeys[,c('Observat_3','RASTERVALU')], mu[,c('lmapunitiid', 'muname')], by.x='RASTERVALU', by.y= 'lmapunitiid')
+VEGOBS <- merge(VEGOBS, VEGOBS_soilnames[,c('Observat_3', 'muname')], by.x='Observation_Label', by.y= 'Observat_3')
 
 VEGOBS$eval <- "dump"
 VEGOBS[VEGOBS$pedondist < 50,]$eval <- "keep1" 
@@ -349,10 +353,22 @@ if (T){
   jactree <- agnes(jacdist, method='average')
   makeplot(amethod,jacdist,jactree,soilgroup,k)
 }
+if (T){
+  amethod <- 'kulczynski-agnes' 
+  jacdist <- vegdist(plotdata, method='kulczynski', binary=FALSE, na.rm=T)
+  jactree <- agnes(jacdist, method='average')
+  makeplot(amethod,jacdist,jactree,soilgroup,k)
+}
+if (T){
+  amethod <- 'kulczynski-ward' 
+  jacdist <- vegdist(plotdata, method='kulczynski', binary=FALSE, na.rm=T)
+  jactree <- agnes(jacdist, method='ward')
+  makeplot(amethod,jacdist,jactree,soilgroup,k)
+}
 #----
 #group dominant and indicator species
 k=8
-d <- ((vegdist(plotdata, method='bray', binary=FALSE, na.rm=T)))
+d <- ((vegdist(plotdata, method='kulczynski', binary=FALSE, na.rm=T)))
 t <- agnes(d, method='ward')
 groups <- cutree(t, k = k)
 

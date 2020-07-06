@@ -6,12 +6,13 @@ library(cluster)
 library(ape)
 library(dendextend)
 library(dplyr)
-library(plyr)
 library(dynamicTreeCut)
 library(rpart)
 library(rpart.plot)
 library(goeveg)
 library(proxy)
+library(foreign)
+library(isopam)
 
 
 #----
@@ -41,6 +42,9 @@ listspp <- readRDS("data/listspp.RDS")
 obsspp <- subset(obsspp, !substr(AcTaxon,1,1) %in% '-'& !AcTaxon %in% '' & !is.na(Habit))
 obsspp <- merge(obsspp, List_Habits[,c('Form','Simple')], by.x = 'Habit', by.y = 'Form', all.x = TRUE)
 obs <- read.delim("data/Sites.txt")
+obs <- subset(obs,Observer_Code %in% 'GRR.GJS' & Year >=2011 & !Observation_Type %in% c('Bogus', 'Floristics')) #filter out bogus points
+unique(obs$Observation_Type)
+
 obsspp <- merge(obs[,c('Observation_ID','Observation_Label')],obsspp, by='Observation_ID')
 obsspp <- subset(obsspp, Field+Shrub+Subcanopy+Tree > 0)
 if (F){ #if true, remove ambiguous taxa
@@ -59,7 +63,9 @@ VEGOBS$pedondist <- NA
 VEGOBS$pedondate <- 0
 n <- nrow(VEGOBS)
 for (i in 1:n){
-    NASISPEDONS$distance <- (((VEGOBS[i,]$Latitude - NASISPEDONS$Std.Latitude)/360*40041.47*1000)^2 +
+  
+  
+  NASISPEDONS$distance <- (((VEGOBS[i,]$Latitude - NASISPEDONS$Std.Latitude)/360*40041.47*1000)^2 +
                              ((VEGOBS[i,]$Longitude - NASISPEDONS$Std.Longitude)/360*40041.47*1000*cos(VEGOBS[i,]$Latitude/2/360*2*3.141592))^2)^0.5
   NASISPEDONS$distance2 <- ifelse(!is.na(VEGOBS[i,]$Soil.Series)&!is.na(NASISPEDONS$Current.Taxon.Name)&
                                     (str_split_fixed(VEGOBS[i,]$Soil.Series, " ",2)[,1])==
@@ -87,9 +93,9 @@ for (i in 1:n){
 
 mu <- readRDS(file='data/mu.RDS')
 
-VEGOBS_mukeys <- read.delim("data/VEGOBS_mukeys.txt")
-VEGOBS_soilnames <- merge(VEGOBS_mukeys[,c('Observatio','RASTERVALU')], mu[,c('lmapunitiid', 'muname')], by.x='RASTERVALU', by.y= 'lmapunitiid')
-VEGOBS <- merge(VEGOBS, VEGOBS_soilnames[,c('Observatio', 'muname')], by.x='Observation_Label', by.y= 'Observatio')
+VEGOBS_mukeys <- foreign::read.dbf("data/sitemukey.dbf") 
+VEGOBS_soilnames <- merge(VEGOBS_mukeys[,c('Observat_3','RASTERVALU')], mu[,c('lmapunitiid', 'muname')], by.x='RASTERVALU', by.y= 'lmapunitiid')
+VEGOBS <- merge(VEGOBS, VEGOBS_soilnames[,c('Observat_3', 'muname')], by.x='Observation_Label', by.y= 'Observat_3')
 
 VEGOBS$eval <- "dump"
 VEGOBS[VEGOBS$pedondist < 50,]$eval <- "keep1" 
@@ -243,13 +249,13 @@ silanalysis <- function(input){
   sil.kulcward <- 0
   sil.kulchybrid <- 0
 
-  for (k in 2:20){
+  for (k in 2:24){
     sil.bray1 <- (distbray %>% agnes(method = 'average') %>% cutree(k=k) %>% silhouette(distkulc))[,3]%>% mean
     sil.jac1 <- (distjac %>% agnes(method = 'average') %>% cutree(k=k) %>% silhouette(distkulc))[,3]%>% mean
     sil.sim1 <- (distsim %>% agnes(method = 'average') %>% cutree(k=k) %>% silhouette(distkulc))[,3]%>% mean
     sil.ward1 <- (distbray %>% agnes(method = 'ward') %>% cutree(k=k) %>% silhouette(distkulc))[,3]%>% mean
     sil.diana1 <- (distkulc %>% diana %>% cutree(k=k) %>% silhouette(distkulc))[,3]%>% mean
-    sil.kmeans1 <- (kmeans(distbray, centers = k)$cluster %>% silhouette(distbray))[,3] %>% mean
+    sil.kmeans1 <- (kmeans(distbray, centers = k)$cluster %>% silhouette(distkulc))[,3] %>% mean
     sil.kulc1 <- (distkulc %>% agnes(method = 'average') %>% cutree(k=k) %>% silhouette(distkulc))[,3]%>% mean
     sil.kulcward1 <- (distkulc %>% agnes(method = 'ward') %>% cutree(k=k) %>% silhouette(distkulc))[,3]%>% mean
     sil.kulchybrid1 <- (dbyrid %>% agnes(method = 'average') %>% cutree(k=k) %>% silhouette(distkulc))[,3]%>% mean
@@ -384,6 +390,16 @@ if (T){
   jactree <- agnes(jacdist, method='average')
   makeplot(amethod,jacdist,jactree,soilgroup,k)
 }
+
+if (T){
+  amethod <- 'isopam'
+   pamtree <- isopam(plotdata, distance = 'kulczynski')
+  
+
+#tree <- as.hclust.isopam(pamtree)
+plot(pamtree)
+}
+
 #----
 #group dominant and indicator species
 k=8
@@ -440,7 +456,9 @@ Com.Sp.groups.freq$freq <- Com.Sp.groups.freq$freq/Com.Sp.groups.freq$count*100
 Com.Sp.groups.mean <- merge(Com.Sp.groups.mean, Com.Sp.groups.freq[,c('cluster', 'taxon', 'freq')], by = c('cluster', 'taxon'))
 Com.Sp.groups.mean$freqcover <- (Com.Sp.groups.mean$Total+Com.Sp.groups.mean$freq*3)/4
 rm(Com.Sp.freq.sum, Com.Sp.groups.count)
+
 #percentile spp by cluster
+Com.Sp.groups <- subset(Com.Sp.groups, !is.na(Field) & !is.na(Shrub) & !is.na(Subcanopy) & !is.na(Tree))#remove nulls
 Com.Sp.groups.pctl <- ddply(Com.Sp.groups, c('clust', 'Species'), summarise,
                             f05 = quantile(Field, 0.05),
                             f75 = quantile(Field, 0.75),
@@ -450,7 +468,7 @@ Com.Sp.groups.pctl <- ddply(Com.Sp.groups, c('clust', 'Species'), summarise,
                             sc75 = quantile(Subcanopy, 0.75),
                             t05 = quantile(Tree, 0.05),
                             t75 = quantile(Tree, 0.75)
-)
+                            )
 Com.Sp.groups.pctl <- merge(Com.Sp.groups.pctl, Com.Sp.groups.freq, by.x=c('clust', 'Species'), by.y=c('cluster', 'taxon'), all.x = T)
 Com.Sp.groups.pctl$f05 <- ifelse(Com.Sp.groups.pctl$freq < 75, 0,
                                  Com.Sp.groups.pctl$f05)
@@ -639,4 +657,5 @@ Com.Structure[order(as.numeric(as.character(Com.Structure$cluster))),c("cluster"
 sil <- (distbray %>% agnes(method = 'ward') %>% cutree(k=10) %>% silhouette(distbray))[,] %>% as.data.frame() 
 sil.summary <- aggregate(sil[,c('sil_width')], by=list(cluster = sil$cluster ), FUN='mean') %>%  `colnames<-`(c('cluster', 'sil_width'))
 
-saveRDS(Com.Sp.mean, 'C:/workspace2/USNVC/data/Com.Sp.mean.RDS')
+#saveRDS(Com.Sp.mean, 'C:/workspace2/USNVC/data/Com.Sp.mean.RDS')
+#saveRDS(Com.Sp.mean, 'C:/workspace2/USNVC/data/allplotdata.RDS')

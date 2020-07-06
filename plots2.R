@@ -117,7 +117,9 @@ plots <- c(
   'GRR.GJS.2019.13',
   'GRR.GJS.2019.17',
   'GRR.GJS.2014.39',
-  'GRR.GJS.2014.40'
+  'GRR.GJS.2014.40',
+  'GRR.GJS.2020.13',
+  'GRR.GJS.2020.14'
 )
 #----
 List_Habits <- read.delim("data/List_Habits.txt", na.strings = '', stringsAsFactors = FALSE)
@@ -191,8 +193,8 @@ Com.Sp.mean$plot <- str_replace_all(Com.Sp.mean$plot, '&', '.')
 plotdata <- makecommunitydataset(Com.Sp.mean[grepl(' ',Com.Sp.mean$Species)&!grepl('\\[', Com.Sp.mean$Species) | Com.Sp.mean$Species %in% c('Sphagnum', 'Chara', 'Cladonia'),], row = 'plot', column = 'Species', value = 'sqrttotal', drop = TRUE)
 #----
 a <- 'test'
-k <- 2
-d <- ((vegdist(plotdata, method='bray', binary=FALSE, na.rm=T)))
+k <- 8
+d <- ((vegdist(plotdata, method='kulczynski', binary=FALSE, na.rm=T)))
 t <- agnes(d, method='ward')
 groups <- cutree(t, k = k)
 
