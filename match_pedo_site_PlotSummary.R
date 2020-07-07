@@ -229,6 +229,7 @@ silanalysis <- function(input){
   distjac <- vegdist(input, method='jaccard', binary=FALSE, na.rm=T)
   distsim <- as.dist(simil(input,method='Simpson'))
   distkulc <- vegdist(plotdata, method='kulczynski', binary=FALSE, na.rm=T)
+  distbraykulc <- (distbray+distkulc)/2
   dward <- agnes(distkulc, method='ward') %>% cophenetic()
   dward <- dward/mean(dward)
   dbyrid <- (dward^(1/2)+distkulc^2*0.5)/1.5
@@ -250,15 +251,15 @@ silanalysis <- function(input){
   sil.kulchybrid <- 0
 
   for (k in 2:24){
-    sil.bray1 <- (distbray %>% agnes(method = 'average') %>% cutree(k=k) %>% silhouette(distkulc))[,3]%>% mean
-    sil.jac1 <- (distjac %>% agnes(method = 'average') %>% cutree(k=k) %>% silhouette(distkulc))[,3]%>% mean
-    sil.sim1 <- (distsim %>% agnes(method = 'average') %>% cutree(k=k) %>% silhouette(distkulc))[,3]%>% mean
-    sil.ward1 <- (distbray %>% agnes(method = 'ward') %>% cutree(k=k) %>% silhouette(distkulc))[,3]%>% mean
-    sil.diana1 <- (distkulc %>% diana %>% cutree(k=k) %>% silhouette(distkulc))[,3]%>% mean
-    sil.kmeans1 <- (kmeans(distbray, centers = k)$cluster %>% silhouette(distkulc))[,3] %>% mean
-    sil.kulc1 <- (distkulc %>% agnes(method = 'average') %>% cutree(k=k) %>% silhouette(distkulc))[,3]%>% mean
-    sil.kulcward1 <- (distkulc %>% agnes(method = 'ward') %>% cutree(k=k) %>% silhouette(distkulc))[,3]%>% mean
-    sil.kulchybrid1 <- (dbyrid %>% agnes(method = 'average') %>% cutree(k=k) %>% silhouette(distkulc))[,3]%>% mean
+    sil.bray1 <- (distbray %>% agnes(method = 'average') %>% cutree(k=k) %>% silhouette(distbraykulc))[,3]%>% mean
+    sil.jac1 <- (distjac %>% agnes(method = 'average') %>% cutree(k=k) %>% silhouette(distbraykulc))[,3]%>% mean
+    sil.sim1 <- (distsim %>% agnes(method = 'average') %>% cutree(k=k) %>% silhouette(distbraykulc))[,3]%>% mean
+    sil.ward1 <- (distbray %>% agnes(method = 'ward') %>% cutree(k=k) %>% silhouette(distbraykulc))[,3]%>% mean
+    sil.diana1 <- (distkulc %>% diana %>% cutree(k=k) %>% silhouette(distbraykulc))[,3]%>% mean
+    sil.kmeans1 <- (kmeans(distbray, centers = k)$cluster %>% silhouette(distbraykulc))[,3] %>% mean
+    sil.kulc1 <- (distkulc %>% agnes(method = 'average') %>% cutree(k=k) %>% silhouette(distbraykulc))[,3]%>% mean
+    sil.kulcward1 <- (distkulc %>% agnes(method = 'ward') %>% cutree(k=k) %>% silhouette(distbraykulc))[,3]%>% mean
+    sil.kulchybrid1 <- (dbyrid %>% agnes(method = 'average') %>% cutree(k=k) %>% silhouette(distbraykulc))[,3]%>% mean
     
     
     klevel <- c(klevel, k)
@@ -278,15 +279,14 @@ silanalysis <- function(input){
   sil.table <<- sil.table
   return(sil.table)}
 #----
-
 silanalysis(plotdata)
-#analysis method
-makeplot <- function(amethod,jacdist,jactree, soilgroup,k){
-  filename <- paste0('output/Soils_',soilgroup,"_",amethod,'.png')
-  
+
+#plotting function
+makeplot <- function(a,d,t, soilgroup,k){
+  filename <- paste0('output/Soils_',soilgroup,"_",a,'.png')
+  t <- as.hclust(t)
   #make cuts and reformat dendrogram
-  ngroups=k
-  groups <- cutree(jactree, k = ngroups)
+  groups <- cutree(t, k = k)
   
   soilplot <- names(groups)
   clust <- unname(groups)
@@ -299,27 +299,27 @@ makeplot <- function(amethod,jacdist,jactree, soilgroup,k){
     for (i in 1:numberzeros){ #assign all zero clusters to unique cluster number.
       groupdf[whichrecords[i],]$clust <- maxcluster+i}}
   
-  newlabels <- jactree$order.lab
+  newlabels <- t$labels
   newlabels <- as.data.frame(newlabels)
   newlabels$row <- row(newlabels)
   newlabels <- merge(newlabels, groupdf, by.x='newlabels', by.y ='soilplot')
   newlabels$newlabels <- paste(newlabels$clust, newlabels$newlabels)
   newlabels <- newlabels[order(newlabels$row),1]
-  newtree <- jactree
-  newtree$order.lab <- newlabels
+  newtree <- t
+  newtree$labels <- newlabels
   
-  dend1 <- color_branches(as.hclust(newtree), k = ngroups)
-  dend1 <- color_labels(dend1, k = ngroups)
+  dend1 <- color_branches(as.hclust(newtree), k = k)
+  dend1 <- color_labels(dend1, k = k)
   
   #output file
   
   w <- 800
-  h <- nrow(jacdist)*12+80
+  h <- nrow(d)*12+80
   u <- 12
   png(filename=filename,width = w, height = h, units = "px", pointsize = u)
   
   par(mar = c(2,0,1,13))
-  plot(dend1, horiz = TRUE, main=paste('floristic simularity', amethod,' method of', soilgroup, 'soils'), font=1, cex=0.84)
+  plot(dend1, horiz = TRUE, main=paste('floristic simularity', a,' method of', soilgroup, 'soils'), font=1, cex=0.84)
   dev.off()
   
 }
@@ -327,18 +327,18 @@ makeplot <- function(amethod,jacdist,jactree, soilgroup,k){
 amethod <- 'bray-agnes' 
 k=16
 if (T){
-  amethod <- 'kulczynski-agnes' 
+  a <- 'kulczynski-agnes' 
   k=8
-  jacdist <- vegdist(plotdata, method='kulczynski', binary=FALSE, na.rm=T)
-  jactree <- agnes(jacdist, method='average')
-  makeplot(amethod,jacdist,jactree,soilgroup,k)
+  d <- vegdist(plotdata, method='kulczynski', binary=FALSE, na.rm=T)
+  t <- agnes(jacdist, method='average')
+  makeplot(a,d,t,soilgroup,k)
 }
 if (T){
   amethod <- 'kulczynski-ward' 
   k=8
-  jacdist <- vegdist(plotdata, method='kulczynski', binary=FALSE, na.rm=T)
-  jactree <- agnes(jacdist, method='ward')
-  makeplot(amethod,jacdist,jactree,soilgroup,k)
+  d <- vegdist(plotdata, method='kulczynski', binary=FALSE, na.rm=T)
+  t <- agnes(jacdist, method='ward')
+  makeplot(amethod,d,t,soilgroup,k)
 }
 
 if (T){
@@ -355,51 +355,101 @@ if (T){
 if (T){
   amethod <- 'bray-agnes' 
   k=8
-  jacdist <- vegdist(plotdata, method='bray', binary=FALSE, na.rm=T)
-  jactree <- agnes(jacdist, method='average')
-  makeplot(amethod,jacdist,jactree,soilgroup,k)
+  d <- vegdist(plotdata, method='bray', binary=FALSE, na.rm=T)
+  t <- agnes(jacdist, method='average')
+  makeplot(amethod,d,t,soilgroup,k)
 }
 if (T){
   amethod <- 'bray-single' 
-  jacdist <- vegdist(plotdata, method='bray', binary=FALSE, na.rm=T)
-  jactree <- agnes(jacdist, method='single')
-  makeplot(amethod,jacdist,jactree,soilgroup,k)
+  d <- vegdist(plotdata, method='bray', binary=FALSE, na.rm=T)
+  t <- agnes(jacdist, method='single')
+  makeplot(amethod,d,t,soilgroup,k)
 }
 if (T){
   amethod <- 'bray-complete' 
-  jacdist <- vegdist(plotdata, method='bray', binary=FALSE, na.rm=T)
-  jactree <- agnes(jacdist, method='complete')
-  makeplot(amethod,jacdist,jactree,soilgroup,k)
+  d <- vegdist(plotdata, method='bray', binary=FALSE, na.rm=T)
+  t <- agnes(jacdist, method='complete')
+  makeplot(amethod,d,t,soilgroup,k)
 }
 if (T){
   amethod <- 'bray-diana' 
-  jacdist <- vegdist(plotdata, method='bray', binary=FALSE, na.rm=T)
-  jactree <- diana(jacdist)
-  makeplot(amethod,jacdist,jactree,soilgroup,k)
+  d <- vegdist(plotdata, method='bray', binary=FALSE, na.rm=T)
+  t <- diana(jacdist)
+  makeplot(amethod,d,t,soilgroup,k)
 }
 if (T){
   amethod <- 'bray-ward'
-  k=8
-  jacdist <- vegdist(plotdata, method='bray', binary=FALSE, na.rm=T)
-  jactree <- agnes(jacdist, method='ward')
-  makeplot(amethod,jacdist,jactree,soilgroup,k)
+  k=4
+  d <- vegdist(plotdata, method='bray', binary=FALSE, na.rm=T)
+  t <- agnes(jacdist, method='ward')
+  makeplot(amethod,d,t,soilgroup,k)
 }
 if (T){
   amethod <- 'jaccard-agnes' 
-  jacdist <- vegdist(plotdata, method='jaccard', binary=FALSE, na.rm=T)
-  jactree <- agnes(jacdist, method='average')
-  makeplot(amethod,jacdist,jactree,soilgroup,k)
+  d <- vegdist(plotdata, method='jaccard', binary=FALSE, na.rm=T)
+  t <- agnes(jacdist, method='average')
+  makeplot(amethod,d,t,soilgroup,k)
 }
 
 if (T){
   amethod <- 'isopam'
-   pamtree <- isopam(plotdata, distance = 'kulczynski')
+  d <- vegdist(plotdata, method='kulczynski', binary=FALSE, na.rm=T)
+  k=7
+  tpam <- isopam(plotdata, distance = 'kulczynski', stopat = c(1,7))
+  t <- tpam$dendro
+  makeplot(amethod,d,t,soilgroup,k)
+  pamtab <- isotab(tpam, level = 3)
+  pamtab <- pamtab$tab
+  pamtab$x1 <- as.numeric(gsub("[^0-9.-]", "", (pamtab$`1`)))
+  pamtab$x2 <- as.numeric(gsub("[^0-9.-]", "", (pamtab$`2`)))
+  pamtab$dif1_2 <- pamtab$x1-pamtab$x2
+  pamtab$x3.1 <- as.numeric(gsub("[^0-9.-]", "", (pamtab$`3.1`)))
+  pamtab$x3.2 <- as.numeric(gsub("[^0-9.-]", "", (pamtab$`3.2`)))
+  pamtab$dif3.1_3.2 <- pamtab$x3.1-pamtab$x3.2
+  pamtab$dif2_3.1 <- pamtab$x2-pamtab$x3.1
+  coph <- cophenetic(t)
+  tward <- vegdist(plotdata, method='bray', binary=FALSE, na.rm=T) %>% agnes(method = 'ward') 
+  dward <- tward %>% cophenetic()
+  d2 <- (coph/mean(coph)*2 + dward/mean(dward))/3
+  t2 <- agnes(d2, method = 'average')
+  makeplot('kulczynski-isopam-ward-hybrid',d2,t2,soilgroup,k)
   
-
-#tree <- as.hclust.isopam(pamtree)
-plot(pamtree)
+  w <- 900
+  h <- nrow(d)*15+80
+  u <- 18
+  png(filename='output/duelingdendro.png',width = w, height = h, units = "px", pointsize = u)
+  
+  par(mar = c(2,0,1,13))
+  sharpshootR::dueling.dendrograms(as.phylo(as.hclust(tward)), as.phylo(as.hclust(t2)))
+  dev.off()
+  
 }
 
+
+
+distbray <- vegdist(plotdata, method='bray', binary=FALSE, na.rm=T)
+distjac <- vegdist(plotdata, method='jaccard', binary=FALSE, na.rm=T)
+distsim <- as.dist(simil(plotdata,method='Simpson'))
+distkulc <- vegdist(plotdata, method='kulczynski', binary=FALSE, na.rm=T)
+distbraykulc <- (distbray+distkulc)/2
+tbrayagnes <- distbray %>% agnes(method = 'average')
+tjacagnes <- distjac %>% agnes(method = 'average')
+tjacward <- distjac %>% agnes(method = 'ward')
+tbrayward <- distbray %>% agnes(method = 'ward')
+tbraydiana <- distbray %>% diana 
+tsimpagnes <- distsim %>% agnes(method = 'average') 
+tkulcagnes <- distkulc %>% agnes(method = 'average')
+tkulcward <- distkulc %>% agnes(method = 'ward')
+tkulcbrayward <- distbraykulc %>% agnes(method = 'ward')
+cor(cophenetic(tbrayagnes), cophenetic(tpam$dendro))
+cor(cophenetic(tjacagnes), cophenetic(tpam$dendro))
+cor(cophenetic(tjacward), cophenetic(tpam$dendro))
+cor(cophenetic(tbraydiana), cophenetic(tpam$dendro))
+cor(cophenetic(tbrayward), cophenetic(tpam$dendro))
+cor(cophenetic(tsimpagnes), cophenetic(tpam$dendro))
+cor(cophenetic(tkulcagnes), cophenetic(tpam$dendro))
+cor(cophenetic(tkulcward), cophenetic(tpam$dendro))
+cor(cophenetic(tkulcbrayward), cophenetic(tpam$dendro))
 #----
 #group dominant and indicator species
 k=8
