@@ -181,79 +181,89 @@ Com.Sp.mean$Total <- 100*(1-10^(apply(log10(1-(Com.Sp.mean[,c('Field', 'Shrub', 
 Com.Sp.mean <-subset(Com.Sp.mean, !substr(Species,1,1) %in% '-'& !Species %in% '')
 
 #----
-#hand picked clusters
+#hand picked phases
 Com.Sp.groups <- merge(unique(handpicked[,c('Observation_ID', 'phase')]), Com.Sp.mean, by='Observation_ID')
-#----
-Com.Sp.groups <- merge(groupdf,  Com.Sp.mean, by='plot', all.x=TRUE, all.y = TRUE)
+
 
 #----
-#average spp by cluster
+#average spp by phase
 
 Com.Sp.groups.sum <- aggregate(Com.Sp.groups[,c('Field', 'Shrub', 'Subcanopy','Tree', 'Total')],
                                by=list(Com.Sp.groups$phase, Com.Sp.groups$Species), FUN='sum')
 colnames(Com.Sp.groups.sum) <- c('phase', 'Species', 'Field', 'Shrub', 'Subcanopy','Tree', 'Total')
-Com.Sp.groups.count <- aggregate(unique(Com.Sp.groups[c('phase', 'plot')])$plot, 
-                                 by=list(unique(Com.Sp.groups[c('phase', 'plot')])$cluster), FUN='length')
+Com.Sp.groups.count <- aggregate(unique(Com.Sp.groups[c('phase', 'Observation_ID')])$Observation_ID, 
+                                 by=list(unique(Com.Sp.groups[c('phase', 'Observation_ID')])$phase), FUN='length')
 colnames(Com.Sp.groups.count) <- c('phase', 'count')
 Com.Sp.groups.mean <- merge(Com.Sp.groups.sum, Com.Sp.groups.count, by = 'phase')
 Com.Sp.groups.mean[,c('Field', 'Shrub', 'Subcanopy','Tree', 'Total')] <- Com.Sp.groups.mean[,c('Field', 'Shrub', 'Subcanopy','Tree', 'Total')]/Com.Sp.groups.mean$count
 rm(Com.Sp.groups.sum, Com.Sp.groups.count)
 
 #----
-#average heights by cluster
+#average heights by phase
 
 Com.Sp.groups.hts <- aggregate(Com.Sp.groups[,c('Fmin', 'Fmax', 'Smin', 'Smax', 'SCmin', 'SCmax', 'Tmin', 'Tmax', 'Dmin', 'Dmax')],
-                               by=list(Com.Sp.groups$cluster, Com.Sp.groups$Species), FUN='mean')
-colnames(Com.Sp.groups.hts) <- c('cluster', 'Species', 'Fmin', 'Fmax', 'Smin', 'Smax', 'SCmin', 'SCmax','Tmin', 'Tmax', 'Dmin', 'Dmax')
+                               by=list(Com.Sp.groups$phase, Com.Sp.groups$Species), FUN='mean')
+colnames(Com.Sp.groups.hts) <- c('phase', 'Species', 'Fmin', 'Fmax', 'Smin', 'Smax', 'SCmin', 'SCmax','Tmin', 'Tmax', 'Dmin', 'Dmax')
 
 #----
-#frequency spp by cluster
+#frequency spp by phase
 Com.Sp.prefreq <- Com.Sp.groups
 Com.Sp.prefreq$Total <- ifelse(Com.Sp.prefreq$Total >0, 1,0)
 Com.Sp.freq.sum <- aggregate(Com.Sp.prefreq$Total,
-                             by=list(Com.Sp.prefreq$cluster, Com.Sp.prefreq$Species), FUN='sum')
-colnames(Com.Sp.freq.sum) <- c('cluster', 'Species', 'freq')
-Com.Sp.groups.count <- aggregate(unique(Com.Sp.prefreq[c('cluster', 'plot')])$plot, 
-                                 by=list(unique(Com.Sp.prefreq[c('cluster', 'plot')])$cluster), FUN='length')
-colnames(Com.Sp.groups.count) <- c('cluster', 'count')
-Com.Sp.groups.freq <- merge(Com.Sp.freq.sum, Com.Sp.groups.count, by = 'cluster')
+                             by=list(Com.Sp.prefreq$phase, Com.Sp.prefreq$Species), FUN='sum')
+colnames(Com.Sp.freq.sum) <- c('phase', 'Species', 'freq')
+Com.Sp.groups.count <- aggregate(unique(Com.Sp.prefreq[c('phase', 'Observation_ID')])$Observation_ID, 
+                                 by=list(unique(Com.Sp.prefreq[c('phase', 'Observation_ID')])$phase), FUN='length')
+colnames(Com.Sp.groups.count) <- c('phase', 'count')
+Com.Sp.groups.freq <- merge(Com.Sp.freq.sum, Com.Sp.groups.count, by = 'phase')
 Com.Sp.groups.freq$freq <- Com.Sp.groups.freq$freq/Com.Sp.groups.freq$count*100
-Com.Sp.groups.mean <- merge(Com.Sp.groups.mean, Com.Sp.groups.freq[,c('cluster', 'Species', 'freq')], by = c('cluster', 'Species'))
+Com.Sp.groups.mean <- merge(Com.Sp.groups.mean, Com.Sp.groups.freq[,c('phase', 'Species', 'freq')], by = c('phase', 'Species'))
 Com.Sp.groups.mean$freqcover <- (Com.Sp.groups.mean$Total+Com.Sp.groups.mean$freq*3)/4
 rm(Com.Sp.freq.sum, Com.Sp.groups.count)
-#percentile spp by cluster
-Com.Sp.groups.pctl <- ddply(Com.Sp.groups, c('cluster', 'Species'), summarise,
-                            f05 = quantile(Field, 0.05),
+#percentile spp by phase
+Com.Sp.groups.pctl <- ddply(Com.Sp.groups, c('phase', 'Species'), summarise,
+                            f25 = quantile(Field, 0.25),
                             f75 = quantile(Field, 0.75),
-                            s05 = quantile(Shrub, 0.05),
+                            s25 = quantile(Shrub, 0.25),
                             s75 = quantile(Shrub, 0.75),
-                            sc05 = quantile(Subcanopy, 0.05),
+                            sc25 = quantile(Subcanopy, 0.25),
                             sc75 = quantile(Subcanopy, 0.75),
-                            t05 = quantile(Tree, 0.05),
+                            t25 = quantile(Tree, 0.25),
                             t75 = quantile(Tree, 0.75),
                             b05 = quantile(BA, 0.05, na.rm = TRUE),
                             b95 = quantile(BA, 0.95, na.rm = TRUE)
                             )
 
-Com.Sp.groups.pctl <- merge(Com.Sp.groups.pctl, Com.Sp.groups.freq, by.x=c('cluster', 'Species'), by.y=c('cluster', 'Species'), all.x = T)
-Com.Sp.groups.pctl$f05 <- ifelse(Com.Sp.groups.pctl$freq < 75, 0,
-                                 Com.Sp.groups.pctl$f05)
-Com.Sp.groups.pctl$s05 <- ifelse(Com.Sp.groups.pctl$freq < 75, 0,
-                                 Com.Sp.groups.pctl$s05)
-Com.Sp.groups.pctl$sc05 <- ifelse(Com.Sp.groups.pctl$freq < 75, 0,
-                                  Com.Sp.groups.pctl$sc05)
-Com.Sp.groups.pctl$t05 <- ifelse(Com.Sp.groups.pctl$freq < 75, 0,
-                                 Com.Sp.groups.pctl$t05)
-Com.Sp.groups.pctl[!is.na(Com.Sp.groups.pctl$b05),]$b05 <- 
-  ifelse(Com.Sp.groups.pctl[!is.na(Com.Sp.groups.pctl$b05),]$freq
-         < 75,0,Com.Sp.groups.pctl[!is.na(Com.Sp.groups.pctl$b05),]$b05)
+Com.Sp.groups.pctl <- merge(Com.Sp.groups.pctl, Com.Sp.groups.freq, by.x=c('phase', 'Species'), by.y=c('phase', 'Species'), all.x = T)
+#Com.Sp.groups.pctl$f75 <- pmin((Com.Sp.groups.pctl$freq/100)^0.5*100, Com.Sp.groups.pctl$f75)
+#Com.Sp.groups.pctl$s75 <- pmin((Com.Sp.groups.pctl$freq/100)^0.5*100, Com.Sp.groups.pctl$s75)
+#Com.Sp.groups.pctl$sc75 <- pmin((Com.Sp.groups.pctl$freq/100)^0.5*100, Com.Sp.groups.pctl$sc75)
+#Com.Sp.groups.pctl$t75 <- pmin((Com.Sp.groups.pctl$freq/100)^0.5*100, Com.Sp.groups.pctl$t75)
+#Com.Sp.groups.pctl$f25 <- pmax(0,pmin(Com.Sp.groups.pctl$freq*4/3-1/3, Com.Sp.groups.pctl$f25))
+#Com.Sp.groups.pctl$s25 <- pmax(0,pmin(Com.Sp.groups.pctl$freq*4/3-1/3, Com.Sp.groups.pctl$s25))
+#Com.Sp.groups.pctl$sc25 <- pmax(0,pmin(Com.Sp.groups.pctl$freq*4/3-1/3, Com.Sp.groups.pctl$sc25))
+#Com.Sp.groups.pctl$t25 <- pmax(0,pmin(Com.Sp.groups.pctl$freq*4/3-1/3, Com.Sp.groups.pctl$t25))
+
+Com.Sp.groups.pctl$f75 <- pmin(1,Com.Sp.groups.pctl$freq*3/200)*Com.Sp.groups.pctl$f75
+Com.Sp.groups.pctl$s75 <- pmin(1,Com.Sp.groups.pctl$freq*3/200)*Com.Sp.groups.pctl$s75
+Com.Sp.groups.pctl$sc75 <- pmin(1,Com.Sp.groups.pctl$freq*3/200)*Com.Sp.groups.pctl$sc75
+Com.Sp.groups.pctl$t75 <- pmin(1,Com.Sp.groups.pctl$freq*3/200)*Com.Sp.groups.pctl$t75
+Com.Sp.groups.pctl$b95 <- pmin(1,Com.Sp.groups.pctl$freq*3/200)*Com.Sp.groups.pctl$b95
+
+Com.Sp.groups.pctl$f25 <- pmax(0,Com.Sp.groups.pctl$freq*3/200-1/2)*Com.Sp.groups.pctl$f25
+Com.Sp.groups.pctl$s25 <- pmax(0,Com.Sp.groups.pctl$freq*3/200-1/2)*Com.Sp.groups.pctl$s25
+Com.Sp.groups.pctl$sc25 <- pmax(0,Com.Sp.groups.pctl$freq*3/200-1/2)*Com.Sp.groups.pctl$sc25
+Com.Sp.groups.pctl$t25 <- pmax(0,Com.Sp.groups.pctl$freq*3/200-1/2)*Com.Sp.groups.pctl$t25
+Com.Sp.groups.pctl$b05 <- pmax(0,Com.Sp.groups.pctl$freq*3/200-1/2)*Com.Sp.groups.pctl$b05
+
+
 
 
 #Com.Sp.groups.pctl[,c('f05','s05','sc05','t05','f75','s75','sc75','t75','b05','b95')] <- lapply(Com.Sp.groups.pctl[,c('f05','s05','sc05','t05','f75','s75','sc75','t75','b05','b95')], FUN=roundF)
 
 #----
 #combine results
-Group.Summary <- merge(Com.Sp.groups.pctl, Com.Sp.groups.hts, by=c('cluster','Species'), all.x = T)
+Group.Summary <- merge(Com.Sp.groups.pctl, Com.Sp.groups.hts, by=c('phase','Species'), all.x = T)
 Group.Summary <- merge(listspp[,c('Taxon', 'Symbol','Form','Nativity')], Group.Summary, by.x = 'Taxon', by.y = 'Species', all.y = TRUE)
 Group.Summary <- merge(Group.Summary, substitutesymbols, by.x = 'Taxon', by.y='taxon', all.x = TRUE)
 Group.Summary <- merge(List_Habits[,c('Form', 'ESIS.Group')], Group.Summary, by = 'Form', all.y = TRUE)
@@ -271,9 +281,9 @@ Group.Summary[is.na(Group.Summary$Nativity) & !is.na(Group.Summary$type2),]$Nati
 
 
 #----
-Group.Summary <- Group.Summary[order(Group.Summary$cluster, Group.Summary$Taxon),c( 'cluster','Taxon', 'Symbol', 'ESIS.Group','Nativity', 'f05', 'f75', 's05', 's75', 'sc05', 'sc75', 't05', 't75', 'Fmin', 'Fmax', 'Smin', 'Smax', 'SCmin', 'SCmax', 'Tmin', 'Tmax','Dmin','Dmax','b05','b95')]
+Group.Summary <- Group.Summary[order(Group.Summary$phase, Group.Summary$Taxon),c( 'phase','Taxon', 'Symbol', 'ESIS.Group','Nativity', 'f25', 'f75', 's25', 's75', 'sc25', 'sc75', 't25', 't75', 'Fmin', 'Fmax', 'Smin', 'Smax', 'SCmin', 'SCmax', 'Tmin', 'Tmax','Dmin','Dmax','b05','b95')]
 
-colnames(Group.Summary) <- c( 'cluster','Taxon', 'Plant.Symbol', 'Plant.Type','Nativity', 'f05', 'f75', 's05', 's75', 'sc05', 'sc75', 't05', 't75', 'Fmin', 'Fmax', 'Smin', 'Smax', 'SCmin', 'SCmax', 'Tmin', 'Tmax','Dmin','Dmax','b05','b95')
+colnames(Group.Summary) <- c( 'phase','Taxon', 'Plant.Symbol', 'Plant.Type','Nativity', 'f25', 'f75', 's25', 's75', 'sc25', 'sc75', 't25', 't75', 'Fmin', 'Fmax', 'Smin', 'Smax', 'SCmin', 'SCmax', 'Tmin', 'Tmax','Dmin','Dmax','b05','b95')
 
 Group.Summary$maxHt <- pmax(Group.Summary$Fmax,Group.Summary$Smax,Group.Summary$SCmax,Group.Summary$Tmax, na.rm = TRUE)
 Group.Summary <- merge(Group.Summary, Plant_Heights[,c('Scientific.Name', 'Ht_m')], by.x = 'Taxon', by.y='Scientific.Name', all.x=TRUE)
@@ -281,8 +291,8 @@ Group.Summary[is.na(Group.Summary$maxHt),]$maxHt <- Group.Summary[is.na(Group.Su
 Group.Summary[Group.Summary$Plant.Type %in% 'Vine/Liana',]$maxHt <- NA
 
 
-Forest.Overstory <- Group.Summary[Group.Summary$t75 >0,c( 'cluster','Taxon',  'Plant.Symbol', 'Plant.Type','Nativity', 't05', 't75','Tmin', 'Tmax','Dmin','Dmax','b05','b95', 'maxHt')]
-colnames(Forest.Overstory) <- c('cluster','Taxon',  'Plant.Symbol', 'Plant.Type','Nativity', 'Cover.Low', 'Cover.High','Canopy.Bottom', 'Canopy.Top','Diam.Low','Diam.High','BA.Low','BA.High', 'maxHt')
+Forest.Overstory <- Group.Summary[Group.Summary$t75 >0,c( 'phase','Taxon',  'Plant.Symbol', 'Plant.Type','Nativity', 't25', 't75','Tmin', 'Tmax','Dmin','Dmax','b05','b95', 'maxHt')]
+colnames(Forest.Overstory) <- c('phase','Taxon',  'Plant.Symbol', 'Plant.Type','Nativity', 'Cover.Low', 'Cover.High','Canopy.Bottom', 'Canopy.Top','Diam.Low','Diam.High','BA.Low','BA.High', 'maxHt')
 Forest.Overstory[is.na(Forest.Overstory$Canopy.Bottom & Forest.Overstory$Plant.Type %in% c('Shrub/Subshrub','Vine/Liana')),]$
   Canopy.Bottom <- 5
 Forest.Overstory[is.na(Forest.Overstory$Canopy.Bottom) & Forest.Overstory$Plant.Type %in% c('Tree'),]$
@@ -294,9 +304,9 @@ Forest.Overstory[is.na(Forest.Overstory$Canopy.Top) & Forest.Overstory$Plant.Typ
 Forest.Overstory[is.na(Forest.Overstory$Canopy.Bottom),]$
   Canopy.Bottom <- 15
 
-Forest.Overstory.sub<- Group.Summary[Group.Summary$sc75 >0,c( 'cluster','Taxon', 'Plant.Symbol', 'Plant.Type','Nativity','sc05', 'sc75','SCmin', 'SCmax', 'Dmin','Dmax','b05','b95', 'maxHt')]
+Forest.Overstory.sub<- Group.Summary[Group.Summary$sc75 >0,c( 'phase','Taxon', 'Plant.Symbol', 'Plant.Type','Nativity','sc25', 'sc75','SCmin', 'SCmax', 'Dmin','Dmax','b05','b95', 'maxHt')]
 Forest.Overstory.sub[,c('Dmin','Dmax','b05','b95')]<- NA
-colnames(Forest.Overstory.sub) <- c('cluster','Taxon', 'Plant.Symbol', 'Plant.Type','Nativity', 'Cover.Low', 'Cover.High','Canopy.Bottom', 'Canopy.Top','Diam.Low','Diam.High','BA.Low','BA.High','maxHt')
+colnames(Forest.Overstory.sub) <- c('phase','Taxon', 'Plant.Symbol', 'Plant.Type','Nativity', 'Cover.Low', 'Cover.High','Canopy.Bottom', 'Canopy.Top','Diam.Low','Diam.High','BA.Low','BA.High','maxHt')
 Forest.Overstory.sub[is.na(Forest.Overstory.sub$Canopy.Bottom & Forest.Overstory.sub$Plant.Type %in% c('Shrub/Subshrub','Vine/Liana')),]$
   Canopy.Bottom <- 2
 Forest.Overstory.sub[is.na(Forest.Overstory.sub$Canopy.Bottom & Forest.Overstory.sub$Plant.Type %in% c('Tree')),]$
@@ -320,8 +330,8 @@ Forest.Overstory$Canopy.Bottom <- ifelse(!is.na(Forest.Overstory$maxHt),
                                       Forest.Overstory$Canopy.Bottom)
 
 
-Forest.Understory <- Group.Summary[Group.Summary$s75 >0,c( 'cluster','Taxon', 'Plant.Symbol', 'Plant.Type','Nativity', 's05', 's75','Smin', 'Smax', 'maxHt')]
-colnames(Forest.Understory) <- c('cluster','Taxon','Plant.Symbol', 'Plant.Type','Nativity', 'Cover.Low', 'Cover.High','Canopy.Bottom', 'Canopy.Top', 'maxHt')
+Forest.Understory <- Group.Summary[Group.Summary$s75 >0,c( 'phase','Taxon', 'Plant.Symbol', 'Plant.Type','Nativity', 's25', 's75','Smin', 'Smax', 'maxHt')]
+colnames(Forest.Understory) <- c('phase','Taxon','Plant.Symbol', 'Plant.Type','Nativity', 'Cover.Low', 'Cover.High','Canopy.Bottom', 'Canopy.Top', 'maxHt')
 Forest.Understory[is.na(Forest.Understory$Canopy.Bottom) & Forest.Understory$Plant.Type %in% c('Shrub/Subshrub'),]$
   Canopy.Bottom <- 0.5
 Forest.Understory[is.na(Forest.Understory$Canopy.Bottom) & Forest.Understory$Plant.Type %in% c('Tree','Vine/Liana'),]$
@@ -334,8 +344,8 @@ Forest.Understory[is.na(Forest.Understory$Canopy.Bottom),]$
   Canopy.Bottom <- 0.5
 
 
-Forest.Understory.sub <- Group.Summary[Group.Summary$f75 >0,c( 'cluster','Taxon','Plant.Symbol', 'Plant.Type','Nativity', 'f05', 'f75','Fmin', 'Fmax', 'maxHt')]
-colnames(Forest.Understory.sub) <- c('cluster','Taxon','Plant.Symbol', 'Plant.Type','Nativity', 'Cover.Low', 'Cover.High','Canopy.Bottom', 'Canopy.Top', 'maxHt')
+Forest.Understory.sub <- Group.Summary[Group.Summary$f75 >0,c( 'phase','Taxon','Plant.Symbol', 'Plant.Type','Nativity', 'f25', 'f75','Fmin', 'Fmax', 'maxHt')]
+colnames(Forest.Understory.sub) <- c('phase','Taxon','Plant.Symbol', 'Plant.Type','Nativity', 'Cover.Low', 'Cover.High','Canopy.Bottom', 'Canopy.Top', 'maxHt')
 Forest.Understory.sub[is.na(Forest.Understory.sub$Canopy.Bottom) & Forest.Understory.sub$Plant.Type %in% c('Nonvascular'),]$Canopy.Bottom <- 0.0
 Forest.Understory.sub[is.na(Forest.Understory.sub$Canopy.Bottom) & Forest.Understory.sub$Plant.Type %in% c('Tree','Vine/Liana','Grass/grass-like (Graminoids)','Fern/fern ally','Forb/Herb', 'Nonvascular'),]$Canopy.Bottom <- 0.1
 Forest.Understory.sub[is.na(Forest.Understory.sub$Canopy.Top) & Forest.Understory.sub$Plant.Type %in% c('Nonvascular'),]$Canopy.Top <- 0.05
@@ -365,22 +375,22 @@ Sort_Habits <- read.delim("data/Sort_Habits.txt", na.strings = '', stringsAsFact
 Forest.Overstory1 <- merge(Forest.Overstory, Sort_Habits, by='Plant.Type', all.x = TRUE)
 Forest.Understory1 <- merge(Forest.Understory, Sort_Habits, by='Plant.Type', all.x = TRUE)
 Forest.Overstory1 <- Forest.Overstory1[order(
-  Forest.Overstory1$cluster,
+  Forest.Overstory1$phase,
   Forest.Overstory1$order,
   -Forest.Overstory1$Cover.Low,
   -Forest.Overstory1$Cover.High,
   -Forest.Overstory1$Cover.High,
   Forest.Overstory1$Taxon
-),c('cluster',	'Taxon', 'order', 'Plant.Symbol',	'Plant.Type',	'Nativity',	'Cover.Low',	'Cover.High',	'Canopy.Bottom',	'Canopy.Top',	'Diam.Low',	'Diam.High',	'BA.Low',	'BA.High')]
+),c('phase',	'Taxon', 'order', 'Plant.Symbol',	'Plant.Type',	'Nativity',	'Cover.Low',	'Cover.High',	'Canopy.Bottom',	'Canopy.Top',	'Diam.Low',	'Diam.High',	'BA.Low',	'BA.High')]
 
 Forest.Understory1 <- Forest.Understory1[order(
-  Forest.Understory1$cluster,
+  Forest.Understory1$phase,
   Forest.Understory1$order,
   -Forest.Understory1$Cover.Low,
   -Forest.Understory1$Cover.High,
   -Forest.Understory1$Cover.High,
   Forest.Understory1$Taxon
-),c('cluster',	'Taxon', 'order', 'Plant.Symbol',	'Plant.Type',	'Nativity',	'Cover.Low',	'Cover.High',	'Canopy.Bottom',	'Canopy.Top')]
+),c('phase',	'Taxon', 'order', 'Plant.Symbol',	'Plant.Type',	'Nativity',	'Cover.Low',	'Cover.High',	'Canopy.Bottom',	'Canopy.Top')]
 
 
 write.csv(Forest.Overstory1, 'output/Forest.Overstory.csv', row.names = FALSE, na = "")

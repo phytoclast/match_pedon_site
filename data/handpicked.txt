@@ -1,17 +1,17 @@
 soilplot	Observation_ID	order	clust	phase
-Palms.gs20180919.05	GRR.GJS.2018.29	1	4	hardwood swamp
-Adrian.gs20180816.01	GRR.GJS.2018.3	1	4	hardwood swamp
-Aurelius.s20190820.02	GRR.GJS.2019.11	1	4	hardwood swamp
-Aurelius.s20190820.03	GRR.GJS.2019.12	1	4	hardwood swamp
-Boots.gs20180830.03	GRR.GJS.2018.17	1	4	hardwood swamp
-Henrietta.gs20180912.03	GRR.GJS.2018.21	1	4	hardwood swamp
-Henrietta.gs20180912.04	GRR.GJS.2018.22	1	4	hardwood swamp
-Adrian.gs20180816.02	GRR.GJS.2018.4	1	4	hardwood swamp
-Palms.gs20180816.03	GRR.GJS.2018.5	1	4	hardwood swamp
-Adrian.gs20180813.02	GRR.GJS.2018.13	2	3	hardwood swamp
-Edwards.gs20180813.03	GRR.GJS.2018.14	2	3	hardwood swamp
-Palms.2016MI067010	GRR.GJS.2016.32	2	3	hardwood swamp
-Palms.es20170731.03	GRR.GJS.2017.9	2	3	hardwood swamp
+Palms.gs20180919.05	GRR.GJS.2018.29	1	4	hardwood swamp1
+Adrian.gs20180816.01	GRR.GJS.2018.3	1	4	hardwood swamp1
+Aurelius.s20190820.02	GRR.GJS.2019.11	1	4	hardwood swamp1
+Aurelius.s20190820.03	GRR.GJS.2019.12	1	4	hardwood swamp1
+Boots.gs20180830.03	GRR.GJS.2018.17	1	4	hardwood swamp1
+Henrietta.gs20180912.03	GRR.GJS.2018.21	1	4	hardwood swamp1
+Henrietta.gs20180912.04	GRR.GJS.2018.22	1	4	hardwood swamp1
+Adrian.gs20180816.02	GRR.GJS.2018.4	1	4	hardwood swamp1
+Palms.gs20180816.03	GRR.GJS.2018.5	1	4	hardwood swamp1
+Adrian.gs20180813.02	GRR.GJS.2018.13	2	3	hardwood swamp2
+Edwards.gs20180813.03	GRR.GJS.2018.14	2	3	hardwood swamp2
+Palms.2016MI067010	GRR.GJS.2016.32	2	3	hardwood swamp2
+Palms.es20170731.03	GRR.GJS.2017.9	2	3	hardwood swamp2
 Aurelius.es20170731.02	GRR.GJS.2017.8	2	3	inundated shrub swamp
 Palms.es20170823.03	GRR.GJS.2017.23	2	3	inundated shrub swamp
 Wallkill.2016MI067008	GRR.GJS.2016.30	2	3	inundated shrub swamp
@@ -42,8 +42,8 @@ Toto.s20190820.04	GRR.GJS.2019.13	7	2	other swamp
 Palms.gs20180919.04	GRR.GJS.2018.28	7	2	other meadow
 Carlisle.W14090801	GRR.GJS.2014.39	7	2	other shrub swamp
 Houghton.S12062901	GRR.GJS.2012.40	7	2	other swamp
-Thomas.s20190701.01	GRR.GJS.2019.22	8	1	disturbed swamp forest
-Carlisle.W14090802	GRR.GJS.2014.40	8	1	disturbed undundated shrub swamp
+Thomas.s20190701.01	GRR.GJS.2019.22	8	1	reed canary grass
+Carlisle.W14090802	GRR.GJS.2014.40	8	1	reed canary grass
 Adrian.DSP.ER2	GRR.GJS.2015.26	8	1	reed canary grass
 Houghton.DSP.RR2	GRR.GJS.2015.29	8	1	reed canary grass
 Houghton.S12062502	GRR.GJS.2012.35	8	1	reed canary grass
