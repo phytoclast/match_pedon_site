@@ -855,8 +855,8 @@ Danthonia compressa	0.7
 Danthonia intermedia	0.5
 Danthonia unispicata	0.2
 Daphnopsis philippiana	10
-Dasiphora floribunda	0.8
-Dasiphora fruticosa	0.8
+Dasiphora floribunda	0.6
+Dasiphora fruticosa	0.6
 Dasylirion wheeleri	5
 Decodon verticillatus	2.5
 Delonix regia	20
@@ -1420,7 +1420,7 @@ Laguncularia racemosa	20
 Laplacea portoricensis	15
 Larix decidua	30
 Larix kaempferi	30
-Larix laricina	25
+Larix laricina	20
 Larix lyallii	25
 Larix occidentalis	60
 Larrea tridentata var. arenaria	3
@@ -1497,7 +1497,7 @@ Linum lewisii	0.8
 Linum striatum	0.8
 Lippia micromera	0.8
 Liquidambar styraciflua	40
-Liriodendron tulipifera	60
+Liriodendron tulipifera	50
 Liriope muscari	0.2
 Listera convallarioides	0.3
 Lithocarpus densiflorus	40

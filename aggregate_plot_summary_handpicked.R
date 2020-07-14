@@ -119,7 +119,9 @@ plots <- c(
   'GRR.GJS.2014.39',
   'GRR.GJS.2014.40',
   'GRR.GJS.2020.13',
-  'GRR.GJS.2020.14'
+  'GRR.GJS.2020.14',
+  'GRR.GJS.2020.15',
+  'GRR.GJS.2020.16'
 )
 #----
 List_Habits <- read.delim("data/List_Habits.txt", na.strings = '', stringsAsFactors = FALSE)
