@@ -114,8 +114,8 @@ write.csv(VEGOBS, 'output/VEGOBS.csv', row.names = FALSE, na = "")
 #----
 #observed species
 
-Com.Sp.sum<-aggregate(obsspp[,c('Field', 'Shrub', 'Subcanopy', 'Tree')], by=list(obsspp$Observation_ID,obsspp$Observation_Label, obsspp$AcTaxon, obsspp$Simple), FUN=sum) #sum within plot
-colnames(Com.Sp.sum)<-c('Observation_ID', 'Observation_Label', 'Species', 'Simple', 'Field', 'Shrub', 'Subcanopy', 'Tree') #restore column names
+Com.Sp.sum<-aggregate(obsspp[,c('Field', 'Shrub', 'Subcanopy', 'Tree')], by=list(obsspp$Observation_ID,obsspp$Observation_Label, obsspp$AcTaxon, obsspp$Habit, obsspp$Simple), FUN=sum) #sum within plot
+colnames(Com.Sp.sum)<-c('Observation_ID', 'Observation_Label', 'Species', 'Habit', 'Simple', 'Field', 'Shrub', 'Subcanopy', 'Tree') #restore column names
 
 Com.Sp.freq<-aggregate(obsspp[,c('AcTaxon')], by=list(obsspp$Observation_Label, obsspp$AcTaxon), FUN=length) #frequency within plot
 colnames(Com.Sp.freq)<- c('Observation_Label', 'Species', 'freq')

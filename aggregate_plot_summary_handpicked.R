@@ -224,14 +224,14 @@ Com.Sp.groups.mean$freqcover <- (Com.Sp.groups.mean$Total+Com.Sp.groups.mean$fre
 rm(Com.Sp.freq.sum, Com.Sp.groups.count)
 #percentile spp by phase
 Com.Sp.groups.pctl <- ddply(Com.Sp.groups, c('phase', 'Species'), summarise,
-                            f25 = quantile(Field, 0.25),
-                            f75 = quantile(Field, 0.75),
-                            s25 = quantile(Shrub, 0.25),
-                            s75 = quantile(Shrub, 0.75),
-                            sc25 = quantile(Subcanopy, 0.25),
-                            sc75 = quantile(Subcanopy, 0.75),
-                            t25 = quantile(Tree, 0.25),
-                            t75 = quantile(Tree, 0.75),
+                            f25 = quantile(Field, 0.15),
+                            f75 = quantile(Field, 0.85),
+                            s25 = quantile(Shrub, 0.15),
+                            s75 = quantile(Shrub, 0.85),
+                            sc25 = quantile(Subcanopy, 0.15),
+                            sc75 = quantile(Subcanopy, 0.85),
+                            t25 = quantile(Tree, 0.15),
+                            t75 = quantile(Tree, 0.85),
                             b05 = quantile(BA, 0.05, na.rm = TRUE),
                             b95 = quantile(BA, 0.95, na.rm = TRUE)
                             )
