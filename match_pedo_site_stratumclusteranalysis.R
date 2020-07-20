@@ -259,6 +259,18 @@ makeplot <- function(a,d,t, soilgroup,k){
 
 if (T){
   k=9
+  d.ward <- vegdist(plotdata, method='bray', binary=FALSE, na.rm=T)
+  t.ward <-  agnes(d, method = 'ward')
+  t.iso <- isopam(plotdata)
+  t.iso.tab  <- isotab(t.iso, level = 3)
+  t.iso.tab <-   t.iso.tab$tab
+  t.iso <- t.iso$dendro
+  d.iso <- cophenetic(t.iso)
+
+  d2 <- d.iso/mean(d.iso) + d.ward/mean(d.ward)
+  t2 <- agnes(d2, method = 'average')
+  makeplot('isopam',d2,t2,soilgroup,k)
+  
   d.under <- vegdist(plotdata.under, method='bray', binary=FALSE, na.rm=T)
   t.under <- agnes(d.under, method = 'ward')
   makeplot('bray-ward-understory',d.under,t.under,soilgroup,k)
