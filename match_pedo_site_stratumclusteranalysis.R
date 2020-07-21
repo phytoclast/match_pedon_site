@@ -49,12 +49,12 @@ obsspp <- merge(obs[,c('Observation_ID','Observation_Label')],obsspp, by='Observ
 
 obsover <- obsspp
 obsover$AcTaxon <- paste('over.',obsover$AcTaxon)
-obsover$Field <- obsover$Field/1000
-obsover$Shrub <- obsover$Shrub/1000
+obsover$Field <- obsover$Field/10000
+obsover$Shrub <- obsover$Shrub/10000
 obsunder <- obsspp
 obsunder$AcTaxon <- paste('under.',obsunder$AcTaxon)
-obsunder$Subcanopy <- obsunder$Subcanopy/1000
-obsunder$Tree <- obsunder$Tree/1000
+obsunder$Subcanopy <- obsunder$Subcanopy/10000
+obsunder$Tree <- obsunder$Tree/10000
 obsspp <- rbind(obsspp, obsover,obsunder)
 obsspp <- subset(obsspp, Field+Shrub+Subcanopy+Tree > 0)
 
@@ -207,6 +207,7 @@ Com.Sp.agg <- aggregate(log10(1-(Com.Sp.mean[,c('Field', 'Shrub', 'Subcanopy', '
 Com.Sp.agg[,c('Field', 'Shrub', 'Subcanopy', 'Tree')] <- 100*(1-10^(Com.Sp.agg[,c('Field', 'Shrub', 'Subcanopy', 'Tree')]))                 
 Com.Sp.agg$over <- 100*(1-10^(apply(log10(1-(Com.Sp.agg[,c('Subcanopy', 'Tree')]/100.001)), MARGIN = 1, FUN='sum')))
 Com.Sp.agg$under <- 100*(1-10^(apply(log10(1-(Com.Sp.agg[,c('Field', 'Shrub')]/100.001)), MARGIN = 1, FUN='sum')))
+Com.Sp.agg$noover <- 100 - Com.Sp.agg$over
 rownames(Com.Sp.agg) <- Com.Sp.agg$soilplot
 Com.Sp.agg <- Com.Sp.agg[,-1]
 
@@ -287,11 +288,11 @@ if (T){
   t <- agnes(d, method = 'ward')
   makeplot('bray-ward-nostructure',d,t,soilgroup,k)
   
-  d.genstr <- vegdist(Com.Sp.agg, method = 'euclidean', binary=FALSE, na.rm=T)
+  d.genstr <- vegdist(Com.Sp.agg[,c('over', 'noover')], method = 'euclidean', binary=FALSE, na.rm=T)
   t.genstr <- agnes(d.genstr, method = 'ward')
   makeplot('bray-ward-genericstructure',d.genstr,t.genstr,soilgroup,k)
-  
-  d.compound <- (d.structure/mean(d.structure)*2 + d.genstr/mean(d.genstr))/3
+  wt <- 9
+  d.compound <- (d/mean(d)*wt + d.genstr/mean(d.genstr))/(wt+1)
   t.compound <- agnes(d.compound, method = 'ward')
   makeplot('bray-ward-compound',d.compound,t.compound,soilgroup,k)
 
@@ -302,7 +303,12 @@ if (T){
   png(filename='output/dueling.structure.png',width = w, height = h, units = "px", pointsize = u)
   
   par(mar = c(2,0,1,13))
-  sharpshootR::dueling.dendrograms(as.phylo(as.hclust(t)), as.phylo(as.hclust(t.compound)))
+  sharpshootR::dueling.dendrograms(as.phylo(as.hclust(t)), as.phylo(as.hclust(t.structure)), lab.1 = "Aggregated strata", lab.2 = "Overstory/Understory as separate taxa")
+  dev.off()
+  
+  png(filename='output/dueling.compound.png',width = w, height = h, units = "px", pointsize = u)
+  par(mar = c(2,0,1,13))
+  sharpshootR::dueling.dendrograms(as.phylo(as.hclust(t)), as.phylo(as.hclust(t.compound)), lab.1 = "Aggregated strata", lab.2 = "Total Overstory as variable")
   dev.off()
   
 }

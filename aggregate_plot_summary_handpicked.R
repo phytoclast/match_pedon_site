@@ -187,6 +187,7 @@ Com.Sp.mean <-subset(Com.Sp.mean, !substr(Species,1,1) %in% '-'& !Species %in% '
 Com.Sp.groups <- merge(unique(handpicked[,c('Observation_ID', 'phase')]), Com.Sp.mean, by='Observation_ID')
 
 
+
 #----
 #average spp by phase
 
@@ -398,4 +399,49 @@ Forest.Understory1 <- Forest.Understory1[order(
 write.csv(Forest.Overstory1, 'output/Forest.Overstory.csv', row.names = FALSE, na = "")
 write.csv(Forest.Understory1, 'output/Forest.Understory.csv', row.names = FALSE, na = "")
 
+#wet
+Com.Sp.mean.wet <- merge(Com.Sp.mean, listspp[,c('AcTaxon', 'Wetness')], by.x = 'Species', by.y = 'AcTaxon')
+Com.Sp.mean.wet$totalwet <- Com.Sp.mean.wet$Wetness * Com.Sp.mean.wet$Total
+Com.Sp.mean.wet <- subset(Com.Sp.mean.wet, !is.na(totalwet))
+Com.mean.wet <- aggregate(Com.Sp.mean.wet[,c('totalwet','Total')], by=list(Observation_ID = Com.Sp.mean.wet$Observation_ID), FUN = 'sum')
+Com.mean.wet$plotwetness <- Com.mean.wet$totalwet / Com.mean.wet$Total
+
+Com.Sp.groups.wet <- merge(Com.Sp.groups.mean, listspp[,c('AcTaxon', 'Wetness')], by.x = 'Species', by.y = 'AcTaxon')
+Com.Sp.groups.wet$totalwet <- Com.Sp.groups.wet$Wetness * Com.Sp.groups.wet$Total
+Com.Sp.groups.wet <- subset(Com.Sp.groups.wet, !is.na(totalwet))
+Com.groups.wet <- aggregate(Com.Sp.groups.wet[,c('totalwet','Total')], by=list(phase = Com.Sp.groups.wet$phase), FUN = 'sum')
+Com.groups.wet$groupwetness <- Com.groups.wet$totalwet / Com.groups.wet$Total
+
+handpicked.wet <- merge(handpicked, Com.groups.wet[,c('phase','groupwetness')], by.x = 'phase', by.y = 'phase')
+handpicked.wet <- merge(handpicked.wet, Com.mean.wet[,c('Observation_ID','plotwetness')], by.x = 'Observation_ID', by.y = 'Observation_ID')
+
+#generic structure
+Com.Sp.agg <- aggregate(log10(1-(Com.Sp.mean[,c('Field', 'Shrub', 'Subcanopy', 'Tree')]/100.001)), by=list(Observation_ID = Com.Sp.mean$Observation_ID),  FUN='sum')
+Com.Sp.agg[,c('Field', 'Shrub', 'Subcanopy', 'Tree')] <- 100*(1-10^(Com.Sp.agg[,c('Field', 'Shrub', 'Subcanopy', 'Tree')]))                 
+Com.Sp.agg$over <- 100*(1-10^(apply(log10(1-(Com.Sp.agg[,c('Subcanopy', 'Tree')]/100.001)), MARGIN = 1, FUN='sum')))
+Com.Sp.agg$under <- 100*(1-10^(apply(log10(1-(Com.Sp.agg[,c('Field', 'Shrub')]/100.001)), MARGIN = 1, FUN='sum')))
+
+handpicked.wet <- merge(handpicked.wet, Com.Sp.agg[,c('Observation_ID', 'over','under')], by.x = 'Observation_ID', by.y = 'Observation_ID')
+#ESIS profile
+
+ESIS <- rbind(Forest.Understory[,c('phase','Taxon','Plant.Symbol','Plant.Type','Nativity','Cover.Low','Cover.High','Canopy.Bottom','Canopy.Top')], Forest.Overstory[,c('phase','Taxon','Plant.Symbol','Plant.Type','Nativity','Cover.Low','Cover.High','Canopy.Bottom','Canopy.Top')])
+ESIS$Plant.Type2 <- 'Forb'
+ESIS[ESIS$Plant.Type %in% c('Grass/grass-like (Graminoids)'),]$Plant.Type2 <- 'Grass/Grasslike'
+ESIS[ESIS$Plant.Type %in% c('Vine/Liana', 	'Shrub/Subshrub'),]$Plant.Type2 <- 'Shrub/Vine'
+ESIS[ESIS$Plant.Type %in% c('Tree', 	'Tree Fern'),]$Plant.Type2 <- 'Tree'
+
+ESIS.01 <- subset(ESIS, Canopy.Top <= 0.5| Plant.Type %in% c('Grass/grass-like (Graminoids)', 'Fern/fern ally', 'Forb/Herb'))
+ESIS.01 <- merge(ESIS.01, Com.Sp.groups[,c('Observation_ID','phase','Observation_Label','Species','Simple','Field')], by.x = c('phase','Taxon'),  by.y = c('phase','Species') )
+names(ESIS.01)[names(ESIS.01) == 'Field'] <- 'Cover'
+ESIS.02 <- subset(ESIS, Canopy.Top > 0.5 & Canopy.Top <= 5 & !Plant.Type %in% c('Grass/grass-like (Graminoids)', 'Fern/fern ally', 'Forb/Herb'))
+ESIS.02 <- merge(ESIS.02, Com.Sp.groups[,c('Observation_ID','phase','Observation_Label','Species','Simple','Shrub')], by.x = c('phase','Taxon'),  by.y = c('phase','Species') )
+names(ESIS.02)[names(ESIS.02) == 'Shrub'] <- 'Cover'
+ESIS.03 <- subset(ESIS, Canopy.Top > 5 & Canopy.Top <= 15 & !Plant.Type %in% c('Grass/grass-like (Graminoids)', 'Fern/fern ally', 'Forb/Herb'))
+ESIS.03 <- merge(ESIS.03, Com.Sp.groups[,c('Observation_ID','phase','Observation_Label','Species','Simple','Subcanopy')], by.x = c('phase','Taxon'),by.y = c('phase','Species'))
+names(ESIS.03)[names(ESIS.03) == 'Subcanopy'] <- 'Cover'
+ESIS.04 <- subset(ESIS, Canopy.Top > 15 & !Plant.Type %in% c('Grass/grass-like (Graminoids)', 'Fern/fern ally', 'Forb/Herb'))
+ESIS.04 <- merge(ESIS.04, Com.Sp.groups[,c('Observation_ID','phase','Observation_Label','Species','Simple','Tree')], by.x = c('phase','Taxon'),  by.y = c('phase','Species') )
+names(ESIS.04)[names(ESIS.04) == 'Tree'] <- 'Cover'
+ESIS <- rbind(ESIS.01, ESIS.02, ESIS.03, ESIS.04)
+ESIS[ESIS$Simple %in% 'Forb',]$Plant.Type2 <- 'Forb'
 

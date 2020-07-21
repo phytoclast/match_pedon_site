@@ -75,6 +75,5 @@ Pu	SBP1	parasitic subshrub	Shrub/Subshrub	73	Deciduous
 Ph	HFP	parasitic herb	Forb/Herb	74	Forb
 Ph2	HFP2	perennial parasitic herb	Forb/Herb	75	Forb
 Ph1	HFP1	annual parasitic forb	Forb/Herb	76	Forb
-Old	Form	Habitname	ESIS Group	order
-Vh	HFV	herbaceous vine	Vine/Liana	64
+Vh	HFV	herbaceous vine	Vine/Liana	64	Forb
 Ds	SBD	broadleaf deciduous shrub	Shrub/Subshrub	15
