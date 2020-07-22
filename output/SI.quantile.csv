@@ -1,0 +1,24 @@
+"","plantsym","plantsciname","legacysoilcompname","si.min","si.15","si.mean","si.85","si.max","si.count"
+"1","ACRU","Acer rubrum","ADRIAN",53,53,53,53,53,1
+"2","ACRU","Acer rubrum","BOOTS",28,28,28,28,28,1
+"3","ACRU","Acer rubrum","CARLISLE",93,93,93,93,93,1
+"4","ACRU","Acer rubrum","HOUGHTON",71,75.5,82.3333333333333,88.8,90,3
+"5","ACSA2","Acer saccharinum","ADRIAN",67,70.75,79.5,88.25,92,2
+"6","ACSA2","Acer saccharinum","HOUGHTON",67,71.5,80.8571428571429,92,92,7
+"7","BEPO","Betula populifolia","ADRIAN",46,46,46,46,46,1
+"8","BEPO","Betula populifolia","EDWARDS",53,53,53,53,53,1
+"9","FRAM2","Fraxinus americana","ADRIAN",69,69,69,69,69,1
+"10","FRAM2","Fraxinus americana","HOUGHTON",100,100,100,100,100,1
+"11","FRNI","Fraxinus nigra","HOUGHTON",56,56,56,56,56,1
+"12","FRPE","Fraxinus pennsylvanica","ADRIAN",75,75,75,75,75,1
+"13","LALA","Larix laricina","HOUGHTON",37,37.45,38.5,39.55,40,2
+"14","LALA","Larix laricina","PALMS",61,61,61,61,61,1
+"15","PIST","Pinus strobus","HOUGHTON",41,41,41,41,41,1
+"16","POTR5","Populus tremuloides","BOOTS",30,30,30,30,30,1
+"17","PRSE2","Prunus serotina","HOUGHTON",72,72.3,78.3333333333333,84.9,90,3
+"18","QUBI","Quercus bicolor","ADRIAN",60,60,60,60,60,1
+"19","QUBI","Quercus bicolor","EDWARDS",55,55,55,55,55,1
+"20","QUBI","Quercus bicolor","HOUGHTON",70,71.05,73.5,75.95,77,2
+"21","QUPA2","Quercus palustris","HOUGHTON",60,60.45,68.25,76.7,83,4
+"22","THOC2","Thuja occidentalis","BOOTS",37,37,37,37,37,1
+"23","THOC2","Thuja occidentalis","HOUGHTON",37,37,37,37,37,1
