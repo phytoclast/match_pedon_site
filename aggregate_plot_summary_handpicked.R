@@ -445,3 +445,60 @@ names(ESIS.04)[names(ESIS.04) == 'Tree'] <- 'Cover'
 ESIS <- rbind(ESIS.01, ESIS.02, ESIS.03, ESIS.04)
 ESIS[ESIS$Simple %in% 'Forb',]$Plant.Type2 <- 'Forb'
 
+#set the stratum breaks
+ESIS.Stratum <- c('s1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9')
+ESIS.min <- c(0,.5,1,2,4.5,13,40,80,120)*.3048
+ESIS.max <- c(.5,1,2,4.5,13,40,80,120,379)*.3048
+
+
+ESIS.strata <- data.frame(cbind(as.data.frame(ESIS.Stratum, stringsAsFactors = FALSE), as.data.frame(cbind(ESIS.min, ESIS.max))))
+#create blank first rpw
+phase = 'x'
+Observation_ID = 'x'
+Plant.Type2 = 'x'
+Cover = 0 
+Stratum = 'x'
+ESIS.z <- cbind(as.data.frame(cbind(phase, Observation_ID, Plant.Type2, Stratum),stringsAsFactors = FALSE),as.data.frame(Cover))
+#loop to sum the cover by stratum and plant type
+i <- 1                        
+for (i in 1:9){
+ESIS.x <- subset(ESIS, Canopy.Top > ESIS.strata[i,]$ESIS.min & Canopy.Bottom <= ESIS.strata[i,]$ESIS.max )
+if (nrow(ESIS.x) > 0){
+ESIS.y <- aggregate(log10(1-(ESIS.x$Cover/100.001)), by=list(phase = ESIS.x$phase, Observation_ID = ESIS.x$Observation_ID, Plant.Type2 = ESIS.x$Plant.Type2),  FUN='sum')
+colnames(ESIS.y) <- c('phase', 'Observation_ID', 'Plant.Type2', 'Cover')
+ESIS.y$Cover <- 100*(1-10^(ESIS.y$Cover))
+ESIS.y$Stratum <- ESIS.strata[i,]$ESIS.Stratum
+ESIS.y <- subset(ESIS.y, select=c('phase', 'Observation_ID', 'Plant.Type2', 'Stratum',  'Cover'))
+ESIS.z <- rbind(ESIS.z, ESIS.y)
+}}
+#insert zeroes for missing values
+ESIS.z <- ESIS.z[-1,]
+ESIS.zero1 <- unique(ESIS.z[,c('phase', 'Observation_ID')])
+ESIS.zero2 <- unique(ESIS.z[,c('Plant.Type2', 'Stratum')])
+ESIS.zero <- merge(ESIS.zero1, ESIS.zero2)
+ESIS.zero$Cover <- 0
+ESIS.z <- rbind(ESIS.z, ESIS.zero)
+ESIS.z <- ddply(ESIS.z, c('phase', 'Observation_ID', 'Plant.Type2','Stratum'), summarise,
+                    Cover = max(Cover)
+)
+#get percentiles
+ESIS.quantile <- ddply(ESIS.z, c('phase', 'Plant.Type2','Stratum'), summarise,
+                       c15 = quantile(Cover, 0.15),
+                       c85 = quantile(Cover, 0.85)
+)
+ESIS.quantile[,c('c15','c85')] <- lapply(ESIS.quantile[,c('c15','c85')], FUN = roundF) #rounding
+#rearrange
+ESIS.table <- unique(ESIS.quantile[,c('phase', 'Stratum')])
+ESIS.table.Forb <- subset(ESIS.quantile, Plant.Type2 %in% 'Forb', select = c(phase, Stratum, c15, c85))
+colnames(ESIS.table.Forb)[3:4] <- c('Forb.min', 'Forb.max')
+ESIS.table.Grass <- subset(ESIS.quantile, Plant.Type2 %in% 'Grass/Grasslike', select = c(phase, Stratum, c15, c85))
+colnames(ESIS.table.Grass)[3:4] <- c('Grass.min', 'Grass.max')
+ESIS.table.Shrub <- subset(ESIS.quantile, Plant.Type2 %in% 'Shrub/Vine', select = c(phase, Stratum, c15, c85))
+colnames(ESIS.table.Shrub)[3:4] <- c('Shrub.min', 'Shrub.max')
+ESIS.table.Tree <- subset(ESIS.quantile, Plant.Type2 %in% 'Tree', select = c(phase, Stratum, c15, c85))
+colnames(ESIS.table.Tree)[3:4] <- c('Tree.min', 'Tree.max')
+ESIS.table <- merge(ESIS.table,ESIS.table.Forb, by=c('phase', 'Stratum'), all.x = TRUE)
+ESIS.table <- merge(ESIS.table,ESIS.table.Grass, by=c('phase', 'Stratum'), all.x = TRUE)
+ESIS.table <- merge(ESIS.table,ESIS.table.Shrub, by=c('phase', 'Stratum'), all.x = TRUE)
+ESIS.table <- merge(ESIS.table,ESIS.table.Tree, by=c('phase', 'Stratum'), all.x = TRUE)
+write.csv(ESIS.table, 'output/ESIS.table.csv', na = "", row.names = F)
