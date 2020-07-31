@@ -19,10 +19,8 @@
 "01drained swamp","Rubus allegheniensis",3,0.0428567160042692,"RUAL","Shrub/Subshrub","Native",0,0.1,0.5,2
 "01drained swamp","Viburnum opulus",3,0.0428567160042692,"VIOP","Shrub/Subshrub","Native",0,0.1,0,0.3
 "01drained swamp","Parthenocissus quinquefolia",4,11.5570269597304,"PAQU2","Vine/Liana","Native",3,25,0.1,0.5
-"01drained swamp","Amphicarpaea bracteata",4,1.41427151714197,"AMBR2","Vine/Liana","Native",0,2,0.1,0.5
 "01drained swamp","Toxicodendron radicans",4,1.08310142623853,"TORA2","Vine/Liana","Native",0,1,1,5
 "01drained swamp","Toxicodendron radicans",4,1.08310142623853,"TORA2","Vine/Liana","Native",0.2,1.5,0.1,0.5
-"01drained swamp","Galium aparine",4,0.642850714349996,"GAAP2","Vine/Liana","Native",0,1,0.1,0.5
 "01drained swamp","Smilax hispida",4,0.228489547492028,"SMHI","Vine/Liana","Native",0,0.5,1,5
 "01drained swamp","Smilax hispida",4,0.228489547492028,"SMHI","Vine/Liana","Native",0,0.1,0.1,0.5
 "01drained swamp","Elymus hystrix",5,3.78567628666571,"ELHY","Grass/grass-like (Graminoids)","Native",0.2,10,0.1,0.5
@@ -44,6 +42,8 @@
 "01drained swamp","Bidens frondosa",6,1.77141080289197,"BIFR","Forb/Herb","Native",0,4,0.1,0.5
 "01drained swamp","Sanicula odorata",6,1.77141080289197,"SAOD","Forb/Herb","Native",0,4,0.1,0.5
 "01drained swamp","Laportea canadensis",6,1.7428396618891,"LACA3","Forb/Herb","Native",0,4,0.1,0.5
+"01drained swamp","Amphicarpaea bracteata",6,1.41427151714197,"AMBR2","Forb/Herb","Native",0,2,0.1,0.5
+"01drained swamp","Galium aparine",6,0.642850714349996,"GAAP2","Forb/Herb","Native",0,1,0.1,0.3
 "01drained swamp","Campanulastrum americanum",6,0.47142385033293,"CAAM18","Forb/Herb","Native",0,1,0.1,0.5
 "01drained swamp","Hackelia virginiana",6,0.357139285749997,"HAVI2","Forb/Herb","Native",0,0.5,0.1,0.5
 "01drained swamp","Ranunculus hispidus",6,0.314282561174384,"RAHI","Forb/Herb","Native",0,0.5,0.1,0.5
@@ -93,7 +93,6 @@
 "02silver maple buttonbush swamp","Toxicodendron radicans",4,0.322218998143353,"TORA2","Vine/Liana","Native",0.1,1,0.1,0.5
 "02silver maple buttonbush swamp","Vitis riparia",4,0.15549844623739,"VIRI","Vine/Liana","Native",0,0.2,1,5
 "02silver maple buttonbush swamp","Vitis riparia",4,0.15549844623739,"VIRI","Vine/Liana","Native",0,0.2,0.1,0.5
-"02silver maple buttonbush swamp","Amphicarpaea bracteata",4,0.0555550000055582,"AMBR2","Vine/Liana","Native",0,0.1,0.1,0.5
 "02silver maple buttonbush swamp","Solanum dulcamara",4,0.0222220003355478,"SODU","Vine/Liana","Introduced",0,0,0.1,0.5
 "02silver maple buttonbush swamp","Cinna arundinacea",5,2.67775104248957,"CIAR2","Grass/grass-like (Graminoids)","Native",0,4,0.1,1
 "02silver maple buttonbush swamp","Glyceria striata",5,1.24443195245826,"GLST","Grass/grass-like (Graminoids)","Native",0,3,0.1,0.5
@@ -123,6 +122,7 @@
 "02silver maple buttonbush swamp","Potentilla simplex",6,0.0999989973433646,"POSI2","Forb/Herb","Native",0,0.1,0.1,0.5
 "02silver maple buttonbush swamp","Rumex verticillatus",6,0.0999989973433646,"RUVE3","Forb/Herb","Native",0,0.1,0.1,0.5
 "02silver maple buttonbush swamp","Sium suave",6,0.0999989973433646,"SISU2","Forb/Herb","Native",0,0.1,0.1,0.5
+"02silver maple buttonbush swamp","Amphicarpaea bracteata",6,0.0555550000055582,"AMBR2","Forb/Herb","Native",0,0.1,0.1,0.5
 "02silver maple buttonbush swamp","Bidens",6,0.0555550000055582,"BIDEN","Forb/Herb","Unknown",0,0.1,0.1,0.5
 "02silver maple buttonbush swamp","Agrimonia gryposepala",6,0.0222220003355478,"AGGR2","Forb/Herb","Native",0,0,0.1,0.5
 "02silver maple buttonbush swamp","Cicuta maculata",6,0.0222220003355478,"CIMA2","Forb/Herb","Native",0,0,0.1,0.5
@@ -159,11 +159,8 @@
 "03silver maple green ash","Lindera benzoin",3,0.199998000019996,"LIBE3","Shrub/Subshrub","Native",0,0.3,0.5,2
 "03silver maple green ash","Rosa palustris",3,0.199998000019996,"ROPA","Shrub/Subshrub","Native",0,0.3,0.5,2
 "03silver maple green ash","Parthenocissus quinquefolia",4,0.199998000019996,"PAQU2","Vine/Liana","Native",0,0.3,1,5
-"03silver maple green ash","Persicaria sagittata",4,0.199998000019996,"PESA20","Vine/Liana","Native",0,0.3,0.1,0.5
 "03silver maple green ash","Toxicodendron radicans",4,0.199998000019996,"TORA2","Vine/Liana","Native",0,0.3,1,5
 "03silver maple green ash","Vitis riparia",4,0.199998000019996,"VIRI","Vine/Liana","Native",0,0.3,0.1,0.5
-"03silver maple green ash","Echinocystis lobata",4,0.0599994024059747,"ECLO","Vine/Liana","Native",0,0.1,0.1,0.5
-"03silver maple green ash","Smilax lasioneuron",4,0.0399996006039904,"SMLA3","Vine/Liana","Native",0,0.1,0.1,2
 "03silver maple green ash","Phalaris arundinacea",5,53.9994600053999,"PHAR3","Grass/grass-like (Graminoids)","Native",25,95,0.1,0.5
 "03silver maple green ash","Cinna arundinacea",5,1.17998821911781,"CIAR2","Grass/grass-like (Graminoids)","Native",0,2,0.1,0.5
 "03silver maple green ash","Carex lacustris",5,0.499995000050002,"CALA16","Grass/grass-like (Graminoids)","Native",0.1,1,0.1,0.5
@@ -184,9 +181,12 @@
 "03silver maple green ash","Epilobium coloratum",6,0.199998000019996,"EPCO","Forb/Herb","Native",0,0.3,0.1,0.5
 "03silver maple green ash","Eupatorium perfoliatum",6,0.199998000019996,"EUPE3","Forb/Herb","Native",0,0.3,0.1,0.5
 "03silver maple green ash","Iris virginica",6,0.199998000019996,"IRVI","Forb/Herb","Native",0,0.3,0.1,0.5
+"03silver maple green ash","Persicaria sagittata",6,0.199998000019996,"PESA20","Forb/Herb","Native",0,0.3,0.1,0.5
 "03silver maple green ash","Platanthera psycodes",6,0.199998000019996,"PLPS2","Forb/Herb","Native",0,0.3,0.1,0.5
 "03silver maple green ash","Scutellaria lateriflora",6,0.199998000019996,"SCLA2","Forb/Herb","Native",0,0.3,0.1,0.5
+"03silver maple green ash","Echinocystis lobata",6,0.0599994024059747,"ECLO","Forb/Herb","Native",0,0.1,0.1,0.5
 "03silver maple green ash","Mentha arvensis",6,0.0599994024059747,"MEAR4","Forb/Herb","Native",0,0.1,0.1,0.5
+"03silver maple green ash","Smilax lasioneuron",6,0.0399996006039904,"SMLA3","Forb/Herb","Native",0,0.1,0.1,2
 "03silver maple green ash","Onoclea sensibilis",7,0.399996000040004,"ONSE","Fern/fern ally","Native",0.1,0.5,0.1,0.5
 "03silver maple green ash","Equisetum fluviatile",7,0.199998000019996,"EQFL","Fern/fern ally","Native",0,0.3,0.1,0.5
 "03silver maple green ash","Osmunda spectabilis",7,0.199998000019996,"OSSP3","Fern/fern ally","Native",0,0.3,0.1,0.5
@@ -266,13 +266,10 @@
 "04tamarack","Vaccinium angustifolium",3,0.00833325012583597,"VAAN","Shrub/Subshrub","Native",0,0,0.1,0.3
 "04tamarack","Toxicodendron radicans",4,0.790112935834208,"TORA2","Vine/Liana","Native",0,1,1,5
 "04tamarack","Toxicodendron radicans",4,0.790112935834208,"TORA2","Vine/Liana","Native",0.1,1,0.1,0.5
-"04tamarack","Apios americana",4,0.580898647513528,"APAM","Vine/Liana","Native",0,1.5,0.1,0.5
 "04tamarack","Parthenocissus quinquefolia",4,0.36448523050624,"PAQU2","Vine/Liana","Native",0,0.1,1,5
 "04tamarack","Parthenocissus quinquefolia",4,0.36448523050624,"PAQU2","Vine/Liana","Native",0.1,0.5,0.1,0.5
 "04tamarack","Vitis riparia",4,0.144480222775512,"VIRI","Vine/Liana","Native",0,0.2,1,5
 "04tamarack","Vitis riparia",4,0.144480222775512,"VIRI","Vine/Liana","Native",0,0.1,0.1,0.5
-"04tamarack","Amphicarpaea bracteata",4,0.126432191386416,"AMBR2","Vine/Liana","Native",0,0.3,0.1,1
-"04tamarack","Galium aparine",4,0.115365756009111,"GAAP2","Vine/Liana","Native",0.1,0.2,0.1,0.5
 "04tamarack","Celastrus scandens",4,0.0666660010066544,"CESC","Vine/Liana","Native",0,0.1,1,1
 "04tamarack","Solanum dulcamara",4,0.055591915751918,"SODU","Vine/Liana","Introduced",0,0.1,1,5
 "04tamarack","Solanum dulcamara",4,0.055591915751918,"SODU","Vine/Liana","Introduced",0,0.1,0.1,0.5
@@ -281,7 +278,6 @@
 "04tamarack","Clematis virginiana",4,0.0499960279771727,"CLVI5","Vine/Liana","Native",0,0.1,0.1,0.5
 "04tamarack","Smilax hispida",4,0.0361975579302176,"SMHI","Vine/Liana","Native",0,0,1,5
 "04tamarack","Smilax hispida",4,0.0361975579302176,"SMHI","Vine/Liana","Native",0,0,0.1,0.5
-"04tamarack","Persicaria sagittata",4,0.00833325012583597,"PESA20","Vine/Liana","Native",0,0,0.1,0.3
 "04tamarack","Leersia oryzoides",5,8.12861179817368,"LEOR","Grass/grass-like (Graminoids)","Native",1,25,0.1,0.5
 "04tamarack","Typha latifolia",5,4.83328501048322,"TYLA","Grass/grass-like (Graminoids)","Native",0.3,15,0.1,0.5
 "04tamarack","Phalaris arundinacea",5,2.49997500025,"PHAR3","Grass/grass-like (Graminoids)","Native",0,4,0.1,0.5
@@ -315,6 +311,7 @@
 "04tamarack","Caltha palustris",6,0.886191387961122,"CAPA5","Forb/Herb","Native",0.1,2,0.1,0.5
 "04tamarack","Boehmeria cylindrica",6,0.796600897324362,"BOCY","Forb/Herb","Native",0.4,1.5,0.1,0.5
 "04tamarack","Solidago patula",6,0.722467019454809,"SOPA2","Forb/Herb","Native",0.2,1.5,0.1,1
+"04tamarack","Apios americana",6,0.580898647513528,"APAM","Forb/Herb","Native",0,1.5,0.1,0.3
 "04tamarack","Cicuta maculata",6,0.483328492298407,"CIMA2","Forb/Herb","Native",0.1,1,0.1,0.5
 "04tamarack","Arisaema triphyllum",6,0.445828877044563,"ARTR","Forb/Herb","Native",0.1,1,0.1,0.5
 "04tamarack","Maianthemum canadense",6,0.384970393421069,"MACA4","Forb/Herb","Native",0.1,1,0.1,0.5
@@ -336,8 +333,10 @@
 "04tamarack","Thalictrum dasycarpum",6,0.16249837651624,"THDA","Forb/Herb","Native",0.1,0.3,0.1,1
 "04tamarack","Persicaria virginiana",6,0.145831875639579,"PEVI13","Forb/Herb","Native",0,0.3,0.3,0.5
 "04tamarack","Mitella diphylla",6,0.13067257364926,"MIDI3","Forb/Herb","Native",0,0.3,0.1,0.3
+"04tamarack","Amphicarpaea bracteata",6,0.126432191386416,"AMBR2","Forb/Herb","Native",0,0.3,0.1,1
 "04tamarack","Lysimachia thyrsiflora",6,0.124998753137473,"LYTH2","Forb/Herb","Native",0,0.3,0.1,0.5
 "04tamarack","Lobelia siphilitica",6,0.116665500511659,"LOSI","Forb/Herb","Native",0,0.3,0.5,1
+"04tamarack","Galium aparine",6,0.115365756009111,"GAAP2","Forb/Herb","Native",0.1,0.2,0.1,0.3
 "04tamarack","Uvularia grandiflora",6,0.108332250385834,"UVGR","Forb/Herb","Native",0,0.2,0.2,0.4
 "04tamarack","Eutrochium maculatum",6,0.0916657501341622,"EUMA9","Forb/Herb","Native",0,0.1,0.5,1
 "04tamarack","Chelone glabra",6,0.0874991272587278,"CHGL2","Forb/Herb","Native",0,0.2,0.1,1
@@ -386,6 +385,7 @@
 "04tamarack","Maianthemum stellatum",6,0.00833325012583597,"MAST4","Forb/Herb","Native",0,0,0.1,0.3
 "04tamarack","Mentha arvensis",6,0.00833325012583597,"MEAR4","Forb/Herb","Native",0,0,0.3,0.5
 "04tamarack","Osmorhiza claytonii",6,0.00833325012583597,"OSCL","Forb/Herb","Native",0,0,0.1,0.3
+"04tamarack","Persicaria sagittata",6,0.00833325012583597,"PESA20","Forb/Herb","Native",0,0,0.1,0.3
 "04tamarack","Solidago gigantea",6,0.00833325012583597,"SOGI","Forb/Herb","Native",0,0,0.3,0.5
 "04tamarack","Lycopus americanus",6,0.00560006487435594,"LYAM","Forb/Herb","Native",0,0,0.1,0.3
 "04tamarack","Symphyotrichum lanceolatum",6,0.00560006487435594,"SYLA6","Forb/Herb","Native",0,0,0.5,1
@@ -418,8 +418,6 @@
 "05red maple dogwood lake sedge swamp","Sambucus nigra",3,1.6249837501625,"SANI4","Shrub/Subshrub","Native",0,2,0.5,2
 "05red maple dogwood lake sedge swamp","Sambucus racemosa",3,0.649993476315236,"SARA2","Shrub/Subshrub","Native",0,1,0.5,2
 "05red maple dogwood lake sedge swamp","Ribes",3,0.0749992530074683,"RIBES","Shrub/Subshrub","Unknown",0,0.1,0,0.5
-"05red maple dogwood lake sedge swamp","Amphicarpaea bracteata",4,2.37497625023749,"AMBR2","Vine/Liana","Native",1,5,0.1,0.5
-"05red maple dogwood lake sedge swamp","Persicaria sagittata",4,0.824991738082614,"PESA20","Vine/Liana","Native",0,1,0.1,0.5
 "05red maple dogwood lake sedge swamp","Menispermum canadense",4,0.649993476315236,"MECA3","Vine/Liana","Native",0,1,1,5
 "05red maple dogwood lake sedge swamp","Parthenocissus quinquefolia",4,0.599600251925936,"PAQU2","Vine/Liana","Native",0,0.2,1,5
 "05red maple dogwood lake sedge swamp","Parthenocissus quinquefolia",4,0.599600251925936,"PAQU2","Vine/Liana","Native",0.1,1,0.1,0.5
@@ -438,11 +436,13 @@
 "05red maple dogwood lake sedge swamp","Symplocarpus foetidus",6,3.97496033339667,"SYFO","Forb/Herb","Native",1,10,0.1,0.5
 "05red maple dogwood lake sedge swamp","Rudbeckia laciniata",6,3.92496070289297,"RULA3","Forb/Herb","Native",0,5,0.1,0.5
 "05red maple dogwood lake sedge swamp","Chrysosplenium americanum",6,3.14996859531405,"CHAM2","Forb/Herb","Native",0,5,0.1,0.5
+"05red maple dogwood lake sedge swamp","Amphicarpaea bracteata",6,2.37497625023749,"AMBR2","Forb/Herb","Native",1,5,0.1,0.5
 "05red maple dogwood lake sedge swamp","Epilobium coloratum",6,1.89998102093979,"EPCO","Forb/Herb","Native",0.4,4,0.1,0.5
 "05red maple dogwood lake sedge swamp","Galium asprellum",6,1.72498277392226,"GAAS2","Forb/Herb","Native",0,3,0.1,0.5
 "05red maple dogwood lake sedge swamp","Solidago altissima",6,1.72498277392226,"SOAL6","Forb/Herb","Native",0,3,0.1,0.5
 "05red maple dogwood lake sedge swamp","Torilis japonica",6,1.72498277392226,"TOJA","Forb/Herb","Introduced",0,3,0.1,0.5
 "05red maple dogwood lake sedge swamp","Pilea pumila",6,1.29998695238047,"PIPU2","Forb/Herb","Native",0,2,0.1,0.5
+"05red maple dogwood lake sedge swamp","Persicaria sagittata",6,0.824991738082614,"PESA20","Forb/Herb","Native",0,1,0.1,0.5
 "05red maple dogwood lake sedge swamp","Pilea fontana",6,0.824991738082614,"PIFO","Forb/Herb","Native",0,1,0.1,0.5
 "05red maple dogwood lake sedge swamp","Solidago patula",6,0.824991738082614,"SOPA2","Forb/Herb","Native",0,1,0.1,0.5
 "05red maple dogwood lake sedge swamp","Lobelia siphilitica",6,0.649993476315236,"LOSI","Forb/Herb","Native",0,1,0.1,0.5
@@ -536,7 +536,6 @@
 "07marsh","Lindera benzoin",3,0.249997500025001,"LIBE3","Shrub/Subshrub","Native",0,0.4,0.5,2
 "07marsh","Rosa palustris",3,0.249997500025001,"ROPA","Shrub/Subshrub","Native",0,0.4,0.5,2
 "07marsh","Salix",3,0.0499995007549936,"SALIX","Shrub/Subshrub","Unknown",0,0.1,0,0.3
-"07marsh","Echinocystis lobata",4,0.0749992530074683,"ECLO","Vine/Liana","Native",0,0.1,0.1,0.5
 "07marsh","Typha angustifolia",5,47.4745256372436,"TYAN","Grass/grass-like (Graminoids)","Introduced",25,75,0.1,0.5
 "07marsh","Eleocharis",5,12.49987500125,"ELEOC","Grass/grass-like (Graminoids)","Unknown",0,20,0.1,0.5
 "07marsh","Eleocharis",5,12.49987500125,"ELOB5","Grass/grass-like (Graminoids)","Unknown",0,20,0.1,0.5
@@ -558,6 +557,7 @@
 "07marsh","Peltandra virginica",6,0.249997500025001,"PEVI","Forb/Herb","Native",0,0.4,0.1,0.5
 "07marsh","Xanthium strumarium",6,0.174998247017533,"XAST","Forb/Herb","Native",0,0.3,0.1,0.5
 "07marsh","Asclepias incarnata",6,0.0999990015099872,"ASIN","Forb/Herb","Native",0.1,0.2,0.1,0.5
+"07marsh","Echinocystis lobata",6,0.0749992530074683,"ECLO","Forb/Herb","Native",0,0.1,0.1,0.5
 "07marsh","Lysimachia terrestris",6,0.0749992530074683,"LYTE2","Forb/Herb","Native",0,0.1,0.1,0.5
 "07marsh","Saururus cernuus",6,0.0749992530074683,"SACE","Forb/Herb","Native",0,0.1,0.1,0.5
 "07marsh","Boehmeria cylindrica",6,0.0499995007549936,"BOCY","Forb/Herb","Native",0,0.1,0.1,0.5
@@ -594,12 +594,8 @@
 "08wet meadow","Salix",3,0.249997500025001,"SALIX","Shrub/Subshrub","Unknown",0,0.5,0.5,2
 "08wet meadow","Cornus",3,0.0499995007549936,"CORNU","Shrub/Subshrub","Unknown",0,0.1,0.5,2
 "08wet meadow","Dasiphora fruticosa",3,0.0499995007549936,"DAFR6","Shrub/Subshrub","Native",0,0.1,0,0.3
-"08wet meadow","Galium aparine",4,1.51520262897371,"GAAP2","Vine/Liana","Native",0,2,0.3,0.5
-"08wet meadow","Apios americana",4,0.428800157998421,"APAM","Vine/Liana","Native",0.1,1,0.1,0.5
 "08wet meadow","Solanum dulcamara",4,0.249997500025001,"SODU","Vine/Liana","Introduced",0,0.4,0.1,0.5
-"08wet meadow","Lathyrus palustris",4,0.191884744590054,"LAPA4","Vine/Liana","Native",0,0.3,0.5,1
 "08wet meadow","Parthenocissus quinquefolia",4,0.0773569209307934,"PAQU2","Vine/Liana","Native",0,0.1,0,0.1
-"08wet meadow","Lathyrus",4,0.0499995007549936,"LATHY","Vine/Liana","Unknown",0,0.1,0.1,0.5
 "08wet meadow","Carex stricta",5,71.6185674905751,"CAST8","Grass/grass-like (Graminoids)","Native",55,90,0.1,0.5
 "08wet meadow","Calamagrostis canadensis",5,7.51247570574294,"CACA4","Grass/grass-like (Graminoids)","Native",4,15,0.1,0.5
 "08wet meadow","Carex trichocarpa",5,7.49992500075,"CATR8","Grass/grass-like (Graminoids)","Native",0,10,0.1,0.5
@@ -617,6 +613,7 @@
 "08wet meadow","Eutrochium maculatum",6,6.79715771617284,"EUMA9","Forb/Herb","Native",0.3,20,0.1,0.5
 "08wet meadow","Symphyotrichum puniceum",6,5.86048035519645,"SYPU","Forb/Herb","Native",0,10,0.5,1
 "08wet meadow","Solidago patula",6,1.53499932413176,"SOPA2","Forb/Herb","Native",0,2,0.2,0.4
+"08wet meadow","Galium aparine",6,1.51520262897371,"GAAP2","Forb/Herb","Native",0,2,0.3,0.5
 "08wet meadow","Solidago",6,1.24998750012499,"SOLID","Forb/Herb","Unknown",0,2,0.1,0.5
 "08wet meadow","Pycnanthemum virginianum",6,1.21694215857842,"PYVI","Forb/Herb","Native",0.1,3,0.1,0.5
 "08wet meadow","Eupatorium perfoliatum",6,1.13495523619764,"EUPE3","Forb/Herb","Native",0.3,3,0.1,0.5
@@ -628,10 +625,12 @@
 "08wet meadow","Iris virginica",6,0.506157078929215,"IRVI","Forb/Herb","Native",0.1,1,0.1,0.5
 "08wet meadow","Thalictrum dasycarpum",6,0.461126410110901,"THDA","Forb/Herb","Native",0,0.5,0.4,1
 "08wet meadow","Hydrocotyle americana",6,0.456157578174221,"HYAM","Forb/Herb","Native",0,0.5,0,0.1
+"08wet meadow","Apios americana",6,0.428800157998421,"APAM","Forb/Herb","Native",0.1,1,0.1,0.3
 "08wet meadow","Impatiens capensis",6,0.378800657243428,"IMCA","Forb/Herb","Native",0,0.5,0.3,0.5
 "08wet meadow","Solidago canadensis",6,0.309427683723162,"SOCA6","Forb/Herb","Native",0,0.5,0.5,1
 "08wet meadow","Lycopus",6,0.299997000779995,"LYCOP4","Forb/Herb","Unknown",0.1,0.5,0.1,0.5
 "08wet meadow","Lemna",6,0.249997500025001,"LEMNA","Forb/Herb","Native",0,0.4,0.1,0.5
+"08wet meadow","Lathyrus palustris",6,0.191884744590054,"LAPA4","Forb/Herb","Native",0,0.3,0.5,1
 "08wet meadow","Caltha palustris",6,0.154713841861587,"CAPA5","Forb/Herb","Native",0,0.2,0.1,0.2
 "08wet meadow","Symplocarpus foetidus",6,0.154713841861587,"SYFO","Forb/Herb","Native",0,0.2,0.1,0.5
 "08wet meadow","Asclepias incarnata",6,0.0773569209307934,"ASIN","Forb/Herb","Native",0,0.1,0.5,1
@@ -648,6 +647,7 @@
 "08wet meadow","Anemone canadensis",6,0.0499995007549936,"ANCA8","Forb/Herb","Native",0,0.1,0.1,0.5
 "08wet meadow","Cicuta maculata",6,0.0499995007549936,"CIMA2","Forb/Herb","Native",0,0.1,0.1,0.5
 "08wet meadow","Cirsium",6,0.0499995007549936,"CIRSI","Forb/Herb","Unknown",0,0.1,0.1,0.5
+"08wet meadow","Lathyrus",6,0.0499995007549936,"LATHY","Forb/Herb","Unknown",0,0.1,0.1,0.5
 "08wet meadow","Lythrum salicaria",6,0.0499995007549936,"LYSA2","Forb/Herb","Introduced",0,0.1,0.1,0.5
 "08wet meadow","Micranthes pensylvanica",6,0.0499995007549936,"MIPE4","Forb/Herb","Native",0,0.1,0.1,0.5
 "08wet meadow","Packera",6,0.0499995007549936,"PACKE","Forb/Herb","Native",0,0.1,0.1,0.5
@@ -675,14 +675,11 @@
 "09reed canary grass","Rubus pubescens",3,0.00838778255967121,"RUPU","Shrub/Subshrub","Native",0,0,0,0.1
 "09reed canary grass","Cornus alba",3,0.00624993759437142,"COAL80","Shrub/Subshrub","Native",0,0,0.5,2
 "09reed canary grass","Salix",3,0.00624993759437142,"SALIX","Shrub/Subshrub","Unknown",0,0,0.5,1
-"09reed canary grass","Persicaria sagittata",4,1.55807687273127,"PESA20","Vine/Liana","Native",0,5,0.1,0.5
 "09reed canary grass","Clematis virginiana",4,0.362474110137445,"CLVI5","Vine/Liana","Native",0,0.5,1,3
 "09reed canary grass","Clematis virginiana",4,0.362474110137445,"CLVI5","Vine/Liana","Native",0,0,0.1,0.5
 "09reed canary grass","Solanum dulcamara",4,0.062499375006253,"SODU","Vine/Liana","Introduced",0,0.1,0.1,0.5
 "09reed canary grass","Vitis riparia",4,0.0594932187240604,"VIRI","Vine/Liana","Native",0,0.1,1,1.5
-"09reed canary grass","Fallopia convolvulus",4,0.0124998751887428,"FACO","Vine/Liana","Introduced",0,0,1,1.5
 "09reed canary grass","Parthenocissus quinquefolia",4,0.0124998751887428,"PAQU2","Vine/Liana","Native",0,0,0,0.1
-"09reed canary grass","Galium aparine",4,0.00624993759437142,"GAAP2","Vine/Liana","Native",0,0,0.5,1
 "09reed canary grass","Toxicodendron radicans",4,0.00624993759437142,"TORA2","Vine/Liana","Native",0,0,0.1,0.5
 "09reed canary grass","Phalaris arundinacea",5,56.4999829493268,"PHAR3","Grass/grass-like (Graminoids)","Native",5,100,0.1,0.5
 "09reed canary grass","Leersia oryzoides",5,16.4345678868211,"LEOR","Grass/grass-like (Graminoids)","Native",2,45,0.1,0.5
@@ -711,6 +708,7 @@
 "09reed canary grass","Phleum pratense",5,0.00624993759437142,"PHPR3","Grass/grass-like (Graminoids)","Introduced",0,0,1,1.5
 "09reed canary grass","Symphyotrichum puniceum",6,14.6994788676801,"SYPU","Forb/Herb","Native",0.5,45,0.1,0.5
 "09reed canary grass","Euthamia graminifolia",6,1.68317302689474,"EUGR5","Forb/Herb","Native",0,5,0.1,0.5
+"09reed canary grass","Persicaria sagittata",6,1.55807687273127,"PESA20","Forb/Herb","Native",0,5,0.1,0.5
 "09reed canary grass","Symphyotrichum lanceolatum",6,1.47498525024125,"SYLA6","Forb/Herb","Native",0,4,0.1,0.5
 "09reed canary grass","Ludwigia palustris",6,1.38123618773187,"LUPA","Forb/Herb","Native",0,4,0.1,0.1
 "09reed canary grass","Eutrochium maculatum",6,1.25081910140273,"EUMA9","Forb/Herb","Native",0.1,3,0.1,0.5
@@ -749,11 +747,13 @@
 "09reed canary grass","Torilis japonica",6,0.0187498127831254,"TOJA","Forb/Herb","Introduced",0,0,0.5,1
 "09reed canary grass","Cirsium vulgare",6,0.0167755651193535,"CIVU","Forb/Herb","Introduced",0,0,0.5,1
 "09reed canary grass","Erigeron strigosus",6,0.0124998751887428,"ERST3","Forb/Herb","Native",0,0,0.4,1
+"09reed canary grass","Fallopia convolvulus",6,0.0124998751887428,"FACO","Forb/Herb","Introduced",0,0,1,1.5
 "09reed canary grass","Senecio hieraciifolius",6,0.00838778255967121,"SEHI3","Forb/Herb","Native",0,0,0.5,1
 "09reed canary grass","Verbascum thapsus",6,0.00838778255967121,"VETH","Forb/Herb","Introduced",0,0,0,0.1
 "09reed canary grass","Amaranthus",6,0.00624993759437142,"AMARA","Forb/Herb","Unknown",0,0,0.1,0.5
 "09reed canary grass","Bidens tripartita",6,0.00624993759437142,"BITR","Forb/Herb","Native",0,0,0.1,0.5
 "09reed canary grass","Circaea canadensis",6,0.00624993759437142,"CICA13","Forb/Herb","Native",0,0,0.3,0.5
+"09reed canary grass","Galium aparine",6,0.00624993759437142,"GAAP2","Forb/Herb","Native",0,0,0.5,1
 "09reed canary grass","Geum canadense",6,0.00624993759437142,"GECA7","Forb/Herb","Native",0,0,0.5,1
 "09reed canary grass","Lactuca",6,0.00624993759437142,"LACTU","Forb/Herb","Unknown",0,0,0.3,0.5
 "09reed canary grass","Lysimachia thyrsiflora",6,0.00624993759437142,"LYTH2","Forb/Herb","Native",0,0,0.5,1

@@ -61,8 +61,8 @@ Ou	SF1	subshrub fern	Tree Fern	59	Evergreen
 Oh	HFE	seedless forb	Fern/fern ally	60	Forb
 Fh1	HF1	annual forb	Forb/Herb	61	Forb
 Fh2	HF2	perennial forb	Forb/Herb	62	Forb
-Vh2	HFV2	perennial herbaceous vine	Vine/Liana	63	Forb
-Vh1	HFV1	annual herbaceous vine	Vine/Liana	64	Forb
+Vh2	HFV2	perennial herbaceous vine	Forb/Herb	63	Forb
+Vh1	HFV1	annual herbaceous vine	Forb/Herb	64	Forb
 Ah	HA	aquatic herb	Forb/Herb	65	Forb
 Ah2	HA2	perennial aquatic herb	Forb/Herb	66	Forb
 Ah1	HA1	annual aquatic herb	Forb/Herb	67	Forb
@@ -75,5 +75,5 @@ Pu	SBP1	parasitic subshrub	Shrub/Subshrub	73	Deciduous
 Ph	HFP	parasitic herb	Forb/Herb	74	Forb
 Ph2	HFP2	perennial parasitic herb	Forb/Herb	75	Forb
 Ph1	HFP1	annual parasitic forb	Forb/Herb	76	Forb
-Vh	HFV	herbaceous vine	Vine/Liana	64	Forb
+Vh	HFV	herbaceous vine	Forb/Herb	64	Forb
 Ds	SBD	broadleaf deciduous shrub	Shrub/Subshrub	15
