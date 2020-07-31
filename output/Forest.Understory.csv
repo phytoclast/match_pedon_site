@@ -58,140 +58,118 @@
 "01drained swamp","Viola canadensis",6,0.0428567160042692,"VICA4","Forb/Herb","Native",0,0.1,0.1,0.5
 "01drained swamp","Dryopteris carthusiana",7,0.185712421732931,"DRCA11","Fern/fern ally","Native",0,0.3,0.1,0.5
 "01drained swamp","Pteridium aquilinum",7,0.0428567160042692,"PTAQ","Fern/fern ally","Native",0,0.1,0.1,0.5
-"02silver maple buttonbush swamp","Frangula alnus",1,9.49347627170394,"FRAL4","Tree","Introduced",0,10,1,5
-"02silver maple buttonbush swamp","Frangula alnus",1,9.49347627170394,"FRAL4","Tree","Introduced",0,0.5,0.1,0.5
-"02silver maple buttonbush swamp","Acer saccharinum",1,4.43025227848136,"ACSA2","Tree","Native",0,1,1,5
-"02silver maple buttonbush swamp","Acer saccharinum",1,4.43025227848136,"ACSA2","Tree","Native",0,5,0.1,0.5
-"02silver maple buttonbush swamp","Fraxinus pennsylvanica",1,3.24245675069439,"FRPE","Tree","Native",0,5,1,5
-"02silver maple buttonbush swamp","Fraxinus pennsylvanica",1,3.24245675069439,"FRPE","Tree","Native",0,1,0.1,0.5
-"02silver maple buttonbush swamp","Quercus palustris",1,0.77702926094424,"QUPA2","Tree","Native",0,0.3,1,5
-"02silver maple buttonbush swamp","Quercus palustris",1,0.77702926094424,"QUPA2","Tree","Native",0,1.5,0.1,0.5
-"02silver maple buttonbush swamp","Ulmus americana",1,0.288756362442233,"ULAM","Tree","Native",0,0.1,1,5
-"02silver maple buttonbush swamp","Ulmus americana",1,0.288756362442233,"ULAM","Tree","Native",0,0.5,0.1,0.5
-"02silver maple buttonbush swamp","Viburnum lentago",1,0.111110000011116,"VILE","Tree","Native",0,0.2,2,5
-"02silver maple buttonbush swamp","Ilex verticillata",1,0.111098886566874,"ILVE","Tree","Native",0,0.3,1,5
-"02silver maple buttonbush swamp","Ilex verticillata",1,0.111098886566874,"ILVE","Tree","Native",0,0,0.1,0.5
-"02silver maple buttonbush swamp","Nyssa sylvatica",1,0.0999989973433646,"NYSY","Tree","Native",0,0.1,0.1,0.5
-"02silver maple buttonbush swamp","Carpinus caroliniana",1,0.0888880013422133,"CACA18","Tree","Native",0,0.1,1,5
-"02silver maple buttonbush swamp","Catalpa speciosa",1,0.0222220003355478,"CASP8","Tree","Native",0,0,0.1,0.5
-"02silver maple buttonbush swamp","Carya cordiformis",1,0.0111110001122183,"CACO15","Tree","Native",0,0,0.1,0.5
-"02silver maple buttonbush swamp","Cephalanthus occidentalis",3,14.9888951786621,"CEOC2","Shrub/Subshrub","Native",2,35,0.5,2
-"02silver maple buttonbush swamp","Cephalanthus occidentalis",3,14.9888951786621,"CEOC2","Shrub/Subshrub","Native",0,1.5,0,0.3
-"02silver maple buttonbush swamp","Zanthoxylum americanum",3,1.66047728411544,"ZAAM","Shrub/Subshrub","Native",0,1,0.5,2
-"02silver maple buttonbush swamp","Zanthoxylum americanum",3,1.66047728411544,"ZAAM","Shrub/Subshrub","Native",0,1.5,0,0.3
-"02silver maple buttonbush swamp","Lindera benzoin",3,0.466563236921691,"LIBE3","Shrub/Subshrub","Native",0,0.1,0.5,2
-"02silver maple buttonbush swamp","Lindera benzoin",3,0.466563236921691,"LIBE3","Shrub/Subshrub","Native",0,1,0,0.3
-"02silver maple buttonbush swamp","Rubus pubescens",3,0.255553001358877,"RUPU","Shrub/Subshrub","Native",0,0.5,0,0.3
-"02silver maple buttonbush swamp","Rubus allegheniensis",3,0.0999989973433646,"RUAL","Shrub/Subshrub","Native",0,0.1,0.5,2
-"02silver maple buttonbush swamp","Rosa multiflora",3,0.0444440006711067,"ROMU","Shrub/Subshrub","Introduced",0,0.1,0.5,2
-"02silver maple buttonbush swamp","Rosa palustris",3,0.0444390624981028,"ROPA","Shrub/Subshrub","Native",0,0.1,0.5,2
-"02silver maple buttonbush swamp","Rosa palustris",3,0.0444390624981028,"ROPA","Shrub/Subshrub","Native",0,0.1,0,0.3
-"02silver maple buttonbush swamp","Cornus racemosa",3,0.0222220003355478,"CORA6","Shrub/Subshrub","Native",0,0,0,0.5
-"02silver maple buttonbush swamp","Rubus occidentalis",3,0.0222220003355478,"RUOC","Shrub/Subshrub","Native",0,0,0,0.5
-"02silver maple buttonbush swamp","Parthenocissus quinquefolia",4,0.622082670393354,"PAQU2","Vine/Liana","Native",0,0.1,1,5
-"02silver maple buttonbush swamp","Parthenocissus quinquefolia",4,0.622082670393354,"PAQU2","Vine/Liana","Native",0,2,0.1,0.5
-"02silver maple buttonbush swamp","Toxicodendron radicans",4,0.322218998143353,"TORA2","Vine/Liana","Native",0.1,1,0.1,0.5
-"02silver maple buttonbush swamp","Vitis riparia",4,0.15549844623739,"VIRI","Vine/Liana","Native",0,0.2,1,5
-"02silver maple buttonbush swamp","Vitis riparia",4,0.15549844623739,"VIRI","Vine/Liana","Native",0,0.2,0.1,0.5
-"02silver maple buttonbush swamp","Solanum dulcamara",4,0.0222220003355478,"SODU","Vine/Liana","Introduced",0,0,0.1,0.5
-"02silver maple buttonbush swamp","Cinna arundinacea",5,2.67775104248957,"CIAR2","Grass/grass-like (Graminoids)","Native",0,4,0.1,1
-"02silver maple buttonbush swamp","Glyceria striata",5,1.24443195245826,"GLST","Grass/grass-like (Graminoids)","Native",0,3,0.1,0.5
-"02silver maple buttonbush swamp","Carex grayi",5,0.611105000061107,"CAGR5","Grass/grass-like (Graminoids)","Native",0,1.5,0.1,0.5
-"02silver maple buttonbush swamp","Carex lacustris",5,0.511105989495664,"CALA16","Grass/grass-like (Graminoids)","Native",0,1,0.1,0.5
-"02silver maple buttonbush swamp","Carex bromoides",5,0.444440000044444,"CABR14","Grass/grass-like (Graminoids)","Native",0,0.5,0.1,0.5
-"02silver maple buttonbush swamp","Carex lupulina",5,0.222219995022277,"CALU4","Grass/grass-like (Graminoids)","Native",0,0.5,0.1,0.5
-"02silver maple buttonbush swamp","Carex bebbii",5,0.177775997684471,"CABE2","Grass/grass-like (Graminoids)","Native",0,0.4,0.1,0.5
-"02silver maple buttonbush swamp","Leersia oryzoides",5,0.111110000011116,"LEOR","Grass/grass-like (Graminoids)","Native",0,0.2,0.1,0.5
-"02silver maple buttonbush swamp","Carex",5,0.0999989973433646,"CAREX","Grass/grass-like (Graminoids)","Unknown",0,0.1,0.1,0.5
-"02silver maple buttonbush swamp","Carex [ovales]",5,0.0222220003355478,"CAREX","Grass/grass-like (Graminoids)","Native",0,0,0.1,0.5
-"02silver maple buttonbush swamp","Boehmeria cylindrica",6,11.0776670723293,"BOCY","Forb/Herb","Native",0.5,20,0.1,0.5
-"02silver maple buttonbush swamp","Pilea pumila",6,3.24441204265735,"PIPU2","Forb/Herb","Native",0,10,0.1,0.5
-"02silver maple buttonbush swamp","Scutellaria lateriflora",6,2.04442404031515,"SCLA2","Forb/Herb","Native",0.1,5,0.1,0.5
-"02silver maple buttonbush swamp","Persicaria virginiana",6,1.95553604241735,"PEVI13","Forb/Herb","Native",0,4,0.1,0.5
-"02silver maple buttonbush swamp","Lysimachia nummularia",6,1.37776395791598,"LYNU","Forb/Herb","Introduced",0,2,0.1,0.5
-"02silver maple buttonbush swamp","Impatiens capensis",6,0.577771978835773,"IMCA","Forb/Herb","Native",0,1,0.1,0.5
-"02silver maple buttonbush swamp","Lycopus americanus",6,0.577771978835773,"LYAM","Forb/Herb","Native",0,1,0.1,0.5
-"02silver maple buttonbush swamp","Sparganium americanum",6,0.511105989495664,"SPAM","Forb/Herb","Native",0,1,0.1,0.5
-"02silver maple buttonbush swamp","Bidens frondosa",6,0.444439995044499,"BIFR","Forb/Herb","Native",0,1,0.1,0.5
-"02silver maple buttonbush swamp","Symphyotrichum",6,0.222220000022222,"SYMPH4","Forb/Herb","Unknown",0,0.3,0.1,0.5
-"02silver maple buttonbush swamp","Lemna turionifera",6,0.177776002684416,"LETU2","Forb/Herb","Native",0,0.3,0.1,0.5
-"02silver maple buttonbush swamp","Lycopus uniflorus",6,0.133331997791131,"LYUN","Forb/Herb","Native",0,0.3,0.1,0.5
-"02silver maple buttonbush swamp","Geum canadense",6,0.111110000011116,"GECA7","Forb/Herb","Native",0,0.2,0.1,0.5
-"02silver maple buttonbush swamp","Ambrosia artemisiifolia",6,0.0999989973433646,"AMAR2","Forb/Herb","Native",0,0.1,0.1,0.5
-"02silver maple buttonbush swamp","Bidens tripartita",6,0.0999989973433646,"BITR","Forb/Herb","Native",0,0.1,0.1,0.5
-"02silver maple buttonbush swamp","Potentilla simplex",6,0.0999989973433646,"POSI2","Forb/Herb","Native",0,0.1,0.1,0.5
-"02silver maple buttonbush swamp","Rumex verticillatus",6,0.0999989973433646,"RUVE3","Forb/Herb","Native",0,0.1,0.1,0.5
-"02silver maple buttonbush swamp","Sium suave",6,0.0999989973433646,"SISU2","Forb/Herb","Native",0,0.1,0.1,0.5
-"02silver maple buttonbush swamp","Amphicarpaea bracteata",6,0.0555550000055582,"AMBR2","Forb/Herb","Native",0,0.1,0.1,0.5
-"02silver maple buttonbush swamp","Bidens",6,0.0555550000055582,"BIDEN","Forb/Herb","Unknown",0,0.1,0.1,0.5
-"02silver maple buttonbush swamp","Agrimonia gryposepala",6,0.0222220003355478,"AGGR2","Forb/Herb","Native",0,0,0.1,0.5
-"02silver maple buttonbush swamp","Cicuta maculata",6,0.0222220003355478,"CIMA2","Forb/Herb","Native",0,0,0.1,0.5
-"02silver maple buttonbush swamp","Circaea canadensis",6,0.0222220003355478,"CICA13","Forb/Herb","Native",0,0,0.1,0.5
-"02silver maple buttonbush swamp","Epilobium coloratum",6,0.0222220003355478,"EPCO","Forb/Herb","Native",0,0,0.1,0.5
-"02silver maple buttonbush swamp","Iris virginica",6,0.0222220003355478,"IRVI","Forb/Herb","Native",0,0,0.1,0.5
-"02silver maple buttonbush swamp","Persicaria hydropiperoides",6,0.0222220003355478,"PEHY7","Forb/Herb","Native",0,0,0.1,0.5
-"02silver maple buttonbush swamp","Prunella vulgaris",6,0.0222220003355478,"PRVU","Forb/Herb","Native",0,0,0.1,0.5
-"02silver maple buttonbush swamp","Symphyotrichum lateriflorum",6,0.0222220003355478,"SYLA4","Forb/Herb","Native",0,0,0.1,0.5
-"02silver maple buttonbush swamp","Symphyotrichum ontarionis",6,0.0222220002244367,"SYON2","Forb/Herb","Native",0,0,0.1,0.5
-"02silver maple buttonbush swamp","Bartonia virginica",6,0.0111110001122183,"BAVI3","Forb/Herb","Native",0,0,0.1,0.5
-"02silver maple buttonbush swamp","Lobelia cardinalis",6,0.0111110001122183,"LOCA2","Forb/Herb","Native",0,0,0.1,0.5
-"02silver maple buttonbush swamp","Solidago",6,0.0111110001122183,"SOLID","Forb/Herb","Unknown",0,0,0.1,0.5
-"02silver maple buttonbush swamp","Osmunda spectabilis",7,2.34442104245625,"OSSP3","Fern/fern ally","Native",0,4,0.1,0.5
-"02silver maple buttonbush swamp","Onoclea sensibilis",7,0.822214001526655,"ONSE","Fern/fern ally","Native",0.3,1.5,0.1,0.5
-"02silver maple buttonbush swamp","Dryopteris carthusiana",7,0.533328000497768,"DRCA11","Fern/fern ally","Native",0,1.5,0.1,0.5
-"02silver maple buttonbush swamp","Osmundastrum cinnamomeum",7,0.411107005374389,"OSCI2","Fern/fern ally","Native",0,0.5,0.1,0.5
-"02silver maple buttonbush swamp","Thelypteris palustris",7,0.14444300134776,"THPA","Fern/fern ally","Native",0,0.3,0.1,0.5
-"02silver maple buttonbush swamp","Dryopteris marginalis",7,0.0222220003355478,"DRMA4","Fern/fern ally","Native",0,0,0.1,0.5
-"02silver maple buttonbush swamp","Riccia fluitans",8,0.511105989495664,"RIFL4","Nonvascular","Native",0,1,0,0.1
-"02silver maple buttonbush swamp","Thuidium",8,0.0999989973433646,"THUID","Nonvascular","Native",0,0.1,0,0.1
-"02silver maple buttonbush swamp","Climacium",8,0.0888880013422133,"CLIMA2","Nonvascular","Native",0,0.1,0,0.1
-"03silver maple green ash","Carpinus caroliniana",1,0.999990000100004,"CACA18","Tree","Native",0,1.5,1,5
-"03silver maple green ash","Fraxinus pennsylvanica",1,0.999990000100004,"FRPE","Tree","Native",0,3,0.1,0.5
-"03silver maple green ash","Acer negundo",1,0.479995219047813,"ACNE2","Tree","Native",0,0.5,1,5
-"03silver maple green ash","Betula alleghaniensis",1,0.399996000040004,"BEAL2","Tree","Native",0,0.5,1,5
-"03silver maple green ash","Salix petiolaris",1,0.199998000019996,"SAPE5","Tree","Native",0,0.3,1,5
-"03silver maple green ash","Ilex verticillata",1,0.0399996006039904,"ILVE","Tree","Native",0,0.1,1,5
-"03silver maple green ash","Prunus serotina",1,0.0399996006039904,"PRSE2","Tree","Native",0,0.1,1,5
-"03silver maple green ash","Cephalanthus occidentalis",3,10.19989800102,"CEOC2","Shrub/Subshrub","Native",1,25,0.5,2
-"03silver maple green ash","Cornus obliqua",3,2.93997056229438,"COOB9","Shrub/Subshrub","Native",0.4,5,0.5,2
-"03silver maple green ash","Sambucus nigra",3,1.59998400015999,"SANI4","Shrub/Subshrub","Native",0.3,3,0.5,2
-"03silver maple green ash","Spiraea alba",3,0.999990000100004,"SPAL2","Shrub/Subshrub","Native",0,1.5,0.5,1
-"03silver maple green ash","Lindera benzoin",3,0.199998000019996,"LIBE3","Shrub/Subshrub","Native",0,0.3,0.5,2
-"03silver maple green ash","Rosa palustris",3,0.199998000019996,"ROPA","Shrub/Subshrub","Native",0,0.3,0.5,2
-"03silver maple green ash","Parthenocissus quinquefolia",4,0.199998000019996,"PAQU2","Vine/Liana","Native",0,0.3,1,5
-"03silver maple green ash","Toxicodendron radicans",4,0.199998000019996,"TORA2","Vine/Liana","Native",0,0.3,1,5
-"03silver maple green ash","Vitis riparia",4,0.199998000019996,"VIRI","Vine/Liana","Native",0,0.3,0.1,0.5
-"03silver maple green ash","Phalaris arundinacea",5,53.9994600053999,"PHAR3","Grass/grass-like (Graminoids)","Native",25,95,0.1,0.5
-"03silver maple green ash","Cinna arundinacea",5,1.17998821911781,"CIAR2","Grass/grass-like (Graminoids)","Native",0,2,0.1,0.5
-"03silver maple green ash","Carex lacustris",5,0.499995000050002,"CALA16","Grass/grass-like (Graminoids)","Native",0.1,1,0.1,0.5
-"03silver maple green ash","Carex",5,0.199998000019996,"CAREX","Grass/grass-like (Graminoids)","Unknown",0,0.3,0.1,0.5
-"03silver maple green ash","Glyceria",5,0.199998000019996,"GLYCE","Grass/grass-like (Graminoids)","Unknown",0,0.3,0.1,0.5
-"03silver maple green ash","Glyceria striata",5,0.199998000019996,"GLST","Grass/grass-like (Graminoids)","Native",0,0.3,0.1,0.5
-"03silver maple green ash","Carex vulpinoidea",5,0.0599994024059747,"CAVU2","Grass/grass-like (Graminoids)","Native",0,0.1,0.1,0.5
-"03silver maple green ash","Poa palustris",5,0.0599994024059747,"POPA2","Grass/grass-like (Graminoids)","Native",0,0.1,0.1,0.5
-"03silver maple green ash","Saururus cernuus",6,13.9998600014,"SACE","Forb/Herb","Native",0,20,0.1,0.5
-"03silver maple green ash","Impatiens capensis",6,5.9799402195978,"IMCA","Forb/Herb","Native",2,10,0.1,0.5
-"03silver maple green ash","Boehmeria cylindrica",6,3.99996000039999,"BOCY","Forb/Herb","Native",0.5,10,0.1,0.5
-"03silver maple green ash","Symplocarpus foetidus",6,0.999990000100004,"SYFO","Forb/Herb","Native",0,1.5,0.1,0.5
-"03silver maple green ash","Lemna turionifera",6,0.479995219047813,"LETU2","Forb/Herb","Native",0,0.5,0.1,0.5
-"03silver maple green ash","Bidens tripartita",6,0.399996000040004,"BITR","Forb/Herb","Native",0.1,0.5,0.1,0.5
-"03silver maple green ash","Eutrochium maculatum",6,0.299997000029995,"EUMA9","Forb/Herb","Native",0,0.4,0.1,0.5
-"03silver maple green ash","Solidago altissima",6,0.299997000029995,"SOAL6","Forb/Herb","Native",0,0.4,0.1,0.5
-"03silver maple green ash","Scutellaria galericulata",6,0.239997609623899,"SCGA","Forb/Herb","Native",0,0.4,0.1,0.5
-"03silver maple green ash","Epilobium coloratum",6,0.199998000019996,"EPCO","Forb/Herb","Native",0,0.3,0.1,0.5
-"03silver maple green ash","Eupatorium perfoliatum",6,0.199998000019996,"EUPE3","Forb/Herb","Native",0,0.3,0.1,0.5
-"03silver maple green ash","Iris virginica",6,0.199998000019996,"IRVI","Forb/Herb","Native",0,0.3,0.1,0.5
-"03silver maple green ash","Persicaria sagittata",6,0.199998000019996,"PESA20","Forb/Herb","Native",0,0.3,0.1,0.5
-"03silver maple green ash","Platanthera psycodes",6,0.199998000019996,"PLPS2","Forb/Herb","Native",0,0.3,0.1,0.5
-"03silver maple green ash","Scutellaria lateriflora",6,0.199998000019996,"SCLA2","Forb/Herb","Native",0,0.3,0.1,0.5
-"03silver maple green ash","Echinocystis lobata",6,0.0599994024059747,"ECLO","Forb/Herb","Native",0,0.1,0.1,0.5
-"03silver maple green ash","Mentha arvensis",6,0.0599994024059747,"MEAR4","Forb/Herb","Native",0,0.1,0.1,0.5
-"03silver maple green ash","Smilax lasioneuron",6,0.0399996006039904,"SMLA3","Forb/Herb","Native",0,0.1,0.1,2
-"03silver maple green ash","Onoclea sensibilis",7,0.399996000040004,"ONSE","Fern/fern ally","Native",0.1,0.5,0.1,0.5
-"03silver maple green ash","Equisetum fluviatile",7,0.199998000019996,"EQFL","Fern/fern ally","Native",0,0.3,0.1,0.5
-"03silver maple green ash","Osmunda spectabilis",7,0.199998000019996,"OSSP3","Fern/fern ally","Native",0,0.3,0.1,0.5
-"03silver maple green ash","Osmundastrum cinnamomeum",7,0.199998000019996,"OSCI2","Fern/fern ally","Native",0,0.3,0.1,0.5
-"03silver maple green ash","Ricciocarpos natans",8,0.479995219047813,"RINA2","Nonvascular","Native",0,0.5,0,0.1
+"02silver maple green ash swamp","Frangula alnus",1,6.1146290705399,"FRAL4","Tree","Introduced",0,5,1,5
+"02silver maple green ash swamp","Frangula alnus",1,6.1146290705399,"FRAL4","Tree","Introduced",0,0.5,0.1,0.5
+"02silver maple green ash swamp","Acer saccharinum",1,2.8538185256736,"ACSA2","Tree","Native",0,0.5,1,5
+"02silver maple green ash swamp","Acer saccharinum",1,2.8538185256736,"ACSA2","Tree","Native",0,5,0.1,0.5
+"02silver maple green ash swamp","Fraxinus pennsylvanica",1,2.44222881651754,"FRPE","Tree","Native",0,4,1,5
+"02silver maple green ash swamp","Fraxinus pennsylvanica",1,2.44222881651754,"FRPE","Tree","Native",0,3,0.1,0.5
+"02silver maple green ash swamp","Quercus palustris",1,0.499688875229531,"QUPA2","Tree","Native",0,0.2,1,5
+"02silver maple green ash swamp","Quercus palustris",1,0.499688875229531,"QUPA2","Tree","Native",0,1,0.1,0.5
+"02silver maple green ash swamp","Carpinus caroliniana",1,0.414281572327135,"CACA18","Tree","Native",0,1,1,5
+"02silver maple green ash swamp","Ulmus americana",1,0.185658851449622,"ULAM","Tree","Native",0,0.1,1,5
+"02silver maple green ash swamp","Ulmus americana",1,0.185658851449622,"ULAM","Tree","Native",0,0.3,0.1,0.5
+"02silver maple green ash swamp","Acer negundo",1,0.171426863945645,"ACNE2","Tree","Native",0,0.3,1,5
+"02silver maple green ash swamp","Betula alleghaniensis",1,0.142855714300005,"BEAL2","Tree","Native",0,0.2,1,5
+"02silver maple green ash swamp","Ilex verticillata",1,0.0857078150188428,"ILVE","Tree","Native",0,0.2,1,5
+"02silver maple green ash swamp","Ilex verticillata",1,0.0857078150188428,"ILVE","Tree","Native",0,0,0.1,0.5
+"02silver maple green ash swamp","Salix petiolaris",1,0.0714278571499971,"SAPE5","Tree","Native",0,0.1,1,5
+"02silver maple green ash swamp","Viburnum lentago",1,0.0714278571499971,"VILE","Tree","Native",0,0.1,2,5
+"02silver maple green ash swamp","Nyssa sylvatica",1,0.0642850697207265,"NYSY","Tree","Native",0,0.1,0.1,0.5
+"02silver maple green ash swamp","Catalpa speciosa",1,0.0142855716442791,"CASP8","Tree","Native",0,0,0.1,0.5
+"02silver maple green ash swamp","Prunus serotina",1,0.0142855716442791,"PRSE2","Tree","Native",0,0,1,5
+"02silver maple green ash swamp","Carya cordiformis",1,0.00714278578642924,"CACO15","Tree","Native",0,0,0.1,0.5
+"02silver maple green ash swamp","Cephalanthus occidentalis",3,13.2831409925238,"CEOC2","Shrub/Subshrub","Native",0.1,35,0.5,2
+"02silver maple green ash swamp","Cephalanthus occidentalis",3,13.2831409925238,"CEOC2","Shrub/Subshrub","Native",0,0.5,0,0.3
+"02silver maple green ash swamp","Zanthoxylum americanum",3,1.06886688786149,"ZAAM","Shrub/Subshrub","Native",0,0.5,0.5,2
+"02silver maple green ash swamp","Zanthoxylum americanum",3,1.06886688786149,"ZAAM","Shrub/Subshrub","Native",0,1,0,0.3
+"02silver maple green ash swamp","Cornus obliqua",3,1.04998948653371,"COOB9","Shrub/Subshrub","Native",0,2,0.5,2
+"02silver maple green ash swamp","Sambucus nigra",3,0.571422857199999,"SANI4","Shrub/Subshrub","Native",0,1,0.5,2
+"02silver maple green ash swamp","Lindera benzoin",3,0.37117996433238,"LIBE3","Shrub/Subshrub","Native",0,0.2,0.5,2
+"02silver maple green ash swamp","Lindera benzoin",3,0.37117996433238,"LIBE3","Shrub/Subshrub","Native",0,1,0,0.3
+"02silver maple green ash swamp","Spiraea alba",3,0.357139285749997,"SPAL2","Shrub/Subshrub","Native",0,0.5,0.5,1
+"02silver maple green ash swamp","Rubus pubescens",3,0.164284072302134,"RUPU","Shrub/Subshrub","Native",0,0.3,0,0.3
+"02silver maple green ash swamp","Rosa palustris",3,0.0999867557852863,"ROPA","Shrub/Subshrub","Native",0,0.2,0.5,2
+"02silver maple green ash swamp","Rosa palustris",3,0.0999867557852863,"ROPA","Shrub/Subshrub","Native",0,0,0,0.3
+"02silver maple green ash swamp","Rubus allegheniensis",3,0.0642850697207265,"RUAL","Shrub/Subshrub","Native",0,0.1,0.5,2
+"02silver maple green ash swamp","Rosa multiflora",3,0.0285711432885694,"ROMU","Shrub/Subshrub","Introduced",0,0,0.5,2
+"02silver maple green ash swamp","Cornus racemosa",3,0.0142855716442791,"CORA6","Shrub/Subshrub","Native",0,0,0,0.5
+"02silver maple green ash swamp","Rubus occidentalis",3,0.0142855716442791,"RUOC","Shrub/Subshrub","Native",0,0,0,0.5
+"02silver maple green ash swamp","Parthenocissus quinquefolia",4,0.471093252198906,"PAQU2","Vine/Liana","Native",0,0.3,1,5
+"02silver maple green ash swamp","Parthenocissus quinquefolia",4,0.471093252198906,"PAQU2","Vine/Liana","Native",0,1,0.1,0.5
+"02silver maple green ash swamp","Toxicodendron radicans",4,0.278420685447056,"TORA2","Vine/Liana","Native",0,0.1,1,5
+"02silver maple green ash swamp","Toxicodendron radicans",4,0.278420685447056,"TORA2","Vine/Liana","Native",0,0.5,0.1,0.5
+"02silver maple green ash swamp","Vitis riparia",4,0.171378389170029,"VIRI","Vine/Liana","Native",0,0.1,1,5
+"02silver maple green ash swamp","Vitis riparia",4,0.171378389170029,"VIRI","Vine/Liana","Native",0,0.3,0.1,0.5
+"02silver maple green ash swamp","Solanum dulcamara",4,0.0142855716442791,"SODU","Vine/Liana","Introduced",0,0,0.1,0.5
+"02silver maple green ash swamp","Phalaris arundinacea",5,19.2855214305,"PHAR3","Grass/grass-like (Graminoids)","Native",0,40,0.1,0.5
+"02silver maple green ash swamp","Cinna arundinacea",5,2.14283574842823,"CIAR2","Grass/grass-like (Graminoids)","Native",0,5,0.1,0.5
+"02silver maple green ash swamp","Glyceria striata",5,0.87141982658745,"GLST","Grass/grass-like (Graminoids)","Native",0,2,0.1,0.5
+"02silver maple green ash swamp","Carex lacustris",5,0.50713777897935,"CALA16","Grass/grass-like (Graminoids)","Native",0,1,0.1,0.5
+"02silver maple green ash swamp","Carex grayi",5,0.392853214324995,"CAGR5","Grass/grass-like (Graminoids)","Native",0,1,0.1,0.5
+"02silver maple green ash swamp","Carex bromoides",5,0.2857114286,"CABR14","Grass/grass-like (Graminoids)","Native",0,0.4,0.1,0.5
+"02silver maple green ash swamp","Carex lupulina",5,0.142855711085743,"CALU4","Grass/grass-like (Graminoids)","Native",0,0.3,0.1,0.5
+"02silver maple green ash swamp","Carex",5,0.135712926870735,"CAREX","Grass/grass-like (Graminoids)","Unknown",0,0.2,0.1,0.5
+"02silver maple green ash swamp","Carex bebbii",5,0.114284569940015,"CABE2","Grass/grass-like (Graminoids)","Native",0,0.3,0.1,0.5
+"02silver maple green ash swamp","Glyceria",5,0.0714278571499971,"GLYCE","Grass/grass-like (Graminoids)","Unknown",0,0.1,0.1,0.5
+"02silver maple green ash swamp","Leersia oryzoides",5,0.0714278571499971,"LEOR","Grass/grass-like (Graminoids)","Native",0,0.1,0.1,0.5
+"02silver maple green ash swamp","Carex vulpinoidea",5,0.0214283580021291,"CAVU2","Grass/grass-like (Graminoids)","Native",0,0,0.1,0.5
+"02silver maple green ash swamp","Poa palustris",5,0.0214283580021291,"POPA2","Grass/grass-like (Graminoids)","Native",0,0,0.1,0.5
+"02silver maple green ash swamp","Carex [ovales]",5,0.0142855716442791,"CAREX","Grass/grass-like (Graminoids)","Native",0,0,0.1,0.5
+"02silver maple green ash swamp","Boehmeria cylindrica",6,8.54991454664025,"BOCY","Forb/Herb","Native",0.5,20,0.1,0.5
+"02silver maple green ash swamp","Saururus cernuus",6,4.9999500005,"SACE","Forb/Herb","Native",0,10,0.1,0.5
+"02silver maple green ash swamp","Impatiens capensis",6,2.50711777910793,"IMCA","Forb/Herb","Native",0.4,5,0.1,0.5
+"02silver maple green ash swamp","Pilea pumila",6,2.08569345599401,"PIPU2","Forb/Herb","Native",0,5,0.1,0.5
+"02silver maple green ash swamp","Scutellaria lateriflora",6,1.38570045449545,"SCLA2","Forb/Herb","Native",0,4,0.1,0.5
+"02silver maple green ash swamp","Persicaria virginiana",6,1.25713031298258,"PEVI13","Forb/Herb","Native",0,2,0.1,0.5
+"02silver maple green ash swamp","Lysimachia nummularia",6,0.885705401517412,"LYNU","Forb/Herb","Introduced",0,1.5,0.1,0.5
+"02silver maple green ash swamp","Lycopus americanus",6,0.371424843537282,"LYAM","Forb/Herb","Native",0,0.5,0.1,0.5
+"02silver maple green ash swamp","Symplocarpus foetidus",6,0.357139285749997,"SYFO","Forb/Herb","Native",0,0.5,0.1,0.5
+"02silver maple green ash swamp","Sparganium americanum",6,0.328568136104357,"SPAM","Forb/Herb","Native",0,0.5,0.1,0.5
+"02silver maple green ash swamp","Lemna turionifera",6,0.285711437099911,"LETU2","Forb/Herb","Native",0,0.5,0.1,0.5
+"02silver maple green ash swamp","Bidens frondosa",6,0.285711425385748,"BIFR","Forb/Herb","Native",0,0.5,0.1,0.5
+"02silver maple green ash swamp","Bidens tripartita",6,0.207140784020732,"BITR","Forb/Herb","Native",0,0.3,0.1,0.5
+"02silver maple green ash swamp","Symphyotrichum",6,0.142855714300005,"SYMPH4","Forb/Herb","Unknown",0,0.2,0.1,0.5
+"02silver maple green ash swamp","Eutrochium maculatum",6,0.107141785724996,"EUMA9","Forb/Herb","Native",0,0.2,0.1,0.5
+"02silver maple green ash swamp","Solidago altissima",6,0.107141785724996,"SOAL6","Forb/Herb","Native",0,0.2,0.1,0.5
+"02silver maple green ash swamp","Scutellaria galericulata",6,0.0857134320085384,"SCGA","Forb/Herb","Native",0,0.1,0.1,0.5
+"02silver maple green ash swamp","Epilobium coloratum",6,0.0857134287942873,"EPCO","Forb/Herb","Native",0,0.2,0.1,0.5
+"02silver maple green ash swamp","Iris virginica",6,0.0857134287942873,"IRVI","Forb/Herb","Native",0,0.2,0.1,0.5
+"02silver maple green ash swamp","Lycopus uniflorus",6,0.0857134271514459,"LYUN","Forb/Herb","Native",0,0.2,0.1,0.5
+"02silver maple green ash swamp","Eupatorium perfoliatum",6,0.0714278571499971,"EUPE3","Forb/Herb","Native",0,0.1,0.1,0.5
+"02silver maple green ash swamp","Geum canadense",6,0.0714278571499971,"GECA7","Forb/Herb","Native",0,0.1,0.1,0.5
+"02silver maple green ash swamp","Persicaria sagittata",6,0.0714278571499971,"PESA20","Forb/Herb","Native",0,0.1,0.1,0.5
+"02silver maple green ash swamp","Platanthera psycodes",6,0.0714278571499971,"PLPS2","Forb/Herb","Native",0,0.1,0.1,0.5
+"02silver maple green ash swamp","Ambrosia artemisiifolia",6,0.0642850697207265,"AMAR2","Forb/Herb","Native",0,0.1,0.1,0.5
+"02silver maple green ash swamp","Potentilla simplex",6,0.0642850697207265,"POSI2","Forb/Herb","Native",0,0.1,0.1,0.5
+"02silver maple green ash swamp","Rumex verticillatus",6,0.0642850697207265,"RUVE3","Forb/Herb","Native",0,0.1,0.1,0.5
+"02silver maple green ash swamp","Sium suave",6,0.0642850697207265,"SISU2","Forb/Herb","Native",0,0.1,0.1,0.5
+"02silver maple green ash swamp","Amphicarpaea bracteata",6,0.0357139285749986,"AMBR2","Forb/Herb","Native",0,0.1,0.1,0.5
+"02silver maple green ash swamp","Bidens",6,0.0357139285749986,"BIDEN","Forb/Herb","Unknown",0,0.1,0.1,0.5
+"02silver maple green ash swamp","Echinocystis lobata",6,0.0214283580021291,"ECLO","Forb/Herb","Native",0,0,0.1,0.5
+"02silver maple green ash swamp","Mentha arvensis",6,0.0214283580021291,"MEAR4","Forb/Herb","Native",0,0,0.1,0.5
+"02silver maple green ash swamp","Agrimonia gryposepala",6,0.0142855716442791,"AGGR2","Forb/Herb","Native",0,0,0.1,0.5
+"02silver maple green ash swamp","Cicuta maculata",6,0.0142855716442791,"CIMA2","Forb/Herb","Native",0,0,0.1,0.5
+"02silver maple green ash swamp","Circaea canadensis",6,0.0142855716442791,"CICA13","Forb/Herb","Native",0,0,0.1,0.5
+"02silver maple green ash swamp","Persicaria hydropiperoides",6,0.0142855716442791,"PEHY7","Forb/Herb","Native",0,0,0.1,0.5
+"02silver maple green ash swamp","Prunella vulgaris",6,0.0142855716442791,"PRVU","Forb/Herb","Native",0,0,0.1,0.5
+"02silver maple green ash swamp","Smilax lasioneuron",6,0.0142855716442791,"SMLA3","Forb/Herb","Native",0,0,0.1,2
+"02silver maple green ash swamp","Symphyotrichum lateriflorum",6,0.0142855716442791,"SYLA4","Forb/Herb","Native",0,0,0.1,0.5
+"02silver maple green ash swamp","Symphyotrichum ontarionis",6,0.0142855715728585,"SYON2","Forb/Herb","Native",0,0,0.1,0.5
+"02silver maple green ash swamp","Bartonia virginica",6,0.00714278578642924,"BAVI3","Forb/Herb","Native",0,0,0.1,0.5
+"02silver maple green ash swamp","Lobelia cardinalis",6,0.00714278578642924,"LOCA2","Forb/Herb","Native",0,0,0.1,0.5
+"02silver maple green ash swamp","Solidago",6,0.00714278578642924,"SOLID","Forb/Herb","Unknown",0,0,0.1,0.5
+"02silver maple green ash swamp","Osmunda spectabilis",7,1.57855567015759,"OSSP3","Fern/fern ally","Native",0,4,0.1,0.5
+"02silver maple green ash swamp","Onoclea sensibilis",7,0.671421858138566,"ONSE","Fern/fern ally","Native",0.3,1,0.1,0.5
+"02silver maple green ash swamp","Dryopteris carthusiana",7,0.342853714605706,"DRCA11","Fern/fern ally","Native",0,1,0.1,0.5
+"02silver maple green ash swamp","Osmundastrum cinnamomeum",7,0.335710932033539,"OSCI2","Fern/fern ally","Native",0,0.5,0.1,0.5
+"02silver maple green ash swamp","Thelypteris palustris",7,0.0928562151521373,"THPA","Fern/fern ally","Native",0,0.2,0.1,0.5
+"02silver maple green ash swamp","Equisetum fluviatile",7,0.0714278571499971,"EQFL","Fern/fern ally","Native",0,0.1,0.1,0.5
+"02silver maple green ash swamp","Dryopteris marginalis",7,0.0142855716442791,"DRMA4","Fern/fern ally","Native",0,0,0.1,0.5
+"02silver maple green ash swamp","Riccia fluitans",8,0.328568136104357,"RIFL4","Nonvascular","Native",0,0.5,0,0.1
+"02silver maple green ash swamp","Ricciocarpos natans",8,0.171426863945645,"RINA2","Nonvascular","Native",0,0.3,0,0.1
+"02silver maple green ash swamp","Thuidium",8,0.0642850697207265,"THUID","Nonvascular","Native",0,0.1,0,0.1
+"02silver maple green ash swamp","Climacium",8,0.0571422865771387,"CLIMA2","Nonvascular","Native",0,0.1,0,0.1
 "04tamarack","Ilex verticillata",1,9.40670317344132,"ILVE","Tree","Native",4,15,1,5
 "04tamarack","Ilex verticillata",1,9.40670317344132,"ILVE","Tree","Native",0,0.5,0.1,0.5
 "04tamarack","Toxicodendron vernix",1,5.29216368908483,"TOVE","Tree","Native",0.3,10,1,5
@@ -224,8 +202,8 @@
 "04tamarack","Betula alleghaniensis",1,0.0416662500041687,"BEAL2","Tree","Native",0,0.1,1,5
 "04tamarack","Prunus serotina",1,0.0416662500041687,"PRSE2","Tree","Native",0,0.1,2,5
 "04tamarack","Nyssa sylvatica",1,0.0252072028863015,"NYSY","Tree","Native",0,0,0.1,0.3
-"04tamarack","Sassafras albidum",1,0.0167995674085208,"SAAL5","Tree","Native",0,0,0.3,0.5
 "04tamarack","Sassafras albidum",1,0.0167995674085208,"SAAL5","Tree","Native",0,0,0.5,0.5
+"04tamarack","Sassafras albidum",1,0.0167995674085208,"SAAL5","Tree","Native",0,0,0.3,0.5
 "04tamarack","Thuja occidentalis",1,0.0166665002516608,"THOC2","Tree","Native",0,0,0,0.1
 "04tamarack","Fagus grandifolia",1,0.00560006487435594,"FAGR","Tree","Native",0,0,0.1,0.5
 "04tamarack","Quercus alba",1,0.00560006487435594,"QUAL","Tree","Native",0,0,2,5
@@ -537,8 +515,8 @@
 "07marsh","Rosa palustris",3,0.249997500025001,"ROPA","Shrub/Subshrub","Native",0,0.4,0.5,2
 "07marsh","Salix",3,0.0499995007549936,"SALIX","Shrub/Subshrub","Unknown",0,0.1,0,0.3
 "07marsh","Typha angustifolia",5,47.4745256372436,"TYAN","Grass/grass-like (Graminoids)","Introduced",25,75,0.1,0.5
-"07marsh","Eleocharis",5,12.49987500125,"ELEOC","Grass/grass-like (Graminoids)","Unknown",0,20,0.1,0.5
 "07marsh","Eleocharis",5,12.49987500125,"ELOB5","Grass/grass-like (Graminoids)","Unknown",0,20,0.1,0.5
+"07marsh","Eleocharis",5,12.49987500125,"ELEOC","Grass/grass-like (Graminoids)","Unknown",0,20,0.1,0.5
 "07marsh","Typha",5,4.9999500005,"TYPHA","Grass/grass-like (Graminoids)","Unknown",0,10,0.1,0.5
 "07marsh","Typha latifolia",5,1.24998750012499,"TYLA","Grass/grass-like (Graminoids)","Native",0,2,0.1,0.5
 "07marsh","Phalaris arundinacea",5,0.499995000050002,"PHAR3","Grass/grass-like (Graminoids)","Native",0,1,0.1,0.5

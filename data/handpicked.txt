@@ -6,20 +6,20 @@ Henrietta.gs20180912.03	GRR.GJS.2018.21	01drained swamp	1	4	686814	Acer sacchari
 Henrietta.gs20180912.04	GRR.GJS.2018.22	01drained swamp	1	4	686814	Acer saccharinum - Fraxinus pennsylvanica - Ulmus americana Floodplain Forest
 Adrian.gs20180816.02	GRR.GJS.2018.4	01drained swamp	1	4	685467	Quercus palustris - Quercus bicolor - Acer rubrum Flatwoods Forest
 Palms.gs20180816.03	GRR.GJS.2018.5	01drained swamp	1	4	685467	Quercus palustris - Quercus bicolor - Acer rubrum Flatwoods Forest
-Adrian.gs20180813.02	GRR.GJS.2018.13	02silver maple buttonbush swamp	2	3	688421	Acer (rubrum, saccharinum) - Fraxinus spp. - Ulmus americana Swamp Forest
-Aurelius.s20190820.02	GRR.GJS.2019.11	02silver maple buttonbush swamp	2	3	686814	Acer saccharinum - Fraxinus pennsylvanica - Ulmus americana Floodplain Forest
-Aurelius.s20190820.03	GRR.GJS.2019.12	02silver maple buttonbush swamp	2	3	686814	Acer saccharinum - Fraxinus pennsylvanica - Ulmus americana Floodplain Forest
-Wallkill.2016MI067008	GRR.GJS.2016.30	02silver maple buttonbush swamp	2	3	686814	Acer saccharinum - Fraxinus pennsylvanica - Ulmus americana Floodplain Forest
-Aurelius.es20170731.02	GRR.GJS.2017.8	02silver maple buttonbush swamp	2	3	683201	Acer saccharinum - Ulmus americana / Onoclea sensibilis Floodplain Forest
-Edwards.gs20180813.03	GRR.GJS.2018.14	02silver maple buttonbush swamp	2	3	683201	Acer saccharinum - Ulmus americana / Onoclea sensibilis Floodplain Forest
-Palms.2016MI067010	GRR.GJS.2016.32	02silver maple buttonbush swamp	2	3	683201	Acer saccharinum - Ulmus americana / Onoclea sensibilis Floodplain Forest
-Palms.es20170731.03	GRR.GJS.2017.9	02silver maple buttonbush swamp	2	3	683201	Acer saccharinum - Ulmus americana / Onoclea sensibilis Floodplain Forest
-Palms.es20170823.03	GRR.GJS.2017.23	02silver maple buttonbush swamp	2	3	683201	Acer saccharinum - Ulmus americana / Onoclea sensibilis Floodplain Forest
-Carlisle.W14090801	GRR.GJS.2014.39	03silver maple green ash	3	7	686814	Acer saccharinum - Fraxinus pennsylvanica - Ulmus americana Floodplain Forest
-Thomas.s20190701.01	GRR.GJS.2019.22	03silver maple green ash	3	7	686814	Acer saccharinum - Fraxinus pennsylvanica - Ulmus americana Floodplain Forest
-Houghton.S12062901	GRR.GJS.2012.40	03silver maple green ash	3	7	892928	Fraxinus nigra - Acer saccharinum Upper Great Lakes Floodplain Forest
-Thomas.s20190905.04	GRR.GJS.2019.17	03silver maple green ash	3	7	685467	Quercus palustris - Quercus bicolor - Acer rubrum Flatwoods Forest
-Carlisle.W14090802	GRR.GJS.2014.40	03silver maple green ash	3	7	683869	Salix nigra / (Cephalanthus occidentalis) Swamp Forest
+Adrian.gs20180813.02	GRR.GJS.2018.13	02silver maple green ash swamp	2	3	688421	Acer (rubrum, saccharinum) - Fraxinus spp. - Ulmus americana Swamp Forest
+Aurelius.s20190820.02	GRR.GJS.2019.11	02silver maple green ash swamp	2	3	686814	Acer saccharinum - Fraxinus pennsylvanica - Ulmus americana Floodplain Forest
+Aurelius.s20190820.03	GRR.GJS.2019.12	02silver maple green ash swamp	2	3	686814	Acer saccharinum - Fraxinus pennsylvanica - Ulmus americana Floodplain Forest
+Wallkill.2016MI067008	GRR.GJS.2016.30	02silver maple green ash swamp	2	3	686814	Acer saccharinum - Fraxinus pennsylvanica - Ulmus americana Floodplain Forest
+Aurelius.es20170731.02	GRR.GJS.2017.8	02silver maple green ash swamp	2	3	683201	Acer saccharinum - Ulmus americana / Onoclea sensibilis Floodplain Forest
+Edwards.gs20180813.03	GRR.GJS.2018.14	02silver maple green ash swamp	2	3	683201	Acer saccharinum - Ulmus americana / Onoclea sensibilis Floodplain Forest
+Palms.2016MI067010	GRR.GJS.2016.32	02silver maple green ash swamp	2	3	683201	Acer saccharinum - Ulmus americana / Onoclea sensibilis Floodplain Forest
+Palms.es20170731.03	GRR.GJS.2017.9	02silver maple green ash swamp	2	3	683201	Acer saccharinum - Ulmus americana / Onoclea sensibilis Floodplain Forest
+Palms.es20170823.03	GRR.GJS.2017.23	02silver maple green ash swamp	2	3	683201	Acer saccharinum - Ulmus americana / Onoclea sensibilis Floodplain Forest
+Carlisle.W14090801	GRR.GJS.2014.39	02silver maple green ash swamp	3	7	686814	Acer saccharinum - Fraxinus pennsylvanica - Ulmus americana Floodplain Forest
+Thomas.s20190701.01	GRR.GJS.2019.22	02silver maple green ash swamp	3	7	686814	Acer saccharinum - Fraxinus pennsylvanica - Ulmus americana Floodplain Forest
+Houghton.S12062901	GRR.GJS.2012.40	02silver maple green ash swamp	3	7	892928	Fraxinus nigra - Acer saccharinum Upper Great Lakes Floodplain Forest
+Thomas.s20190905.04	GRR.GJS.2019.17	02silver maple green ash swamp	3	7	685467	Quercus palustris - Quercus bicolor - Acer rubrum Flatwoods Forest
+Carlisle.W14090802	GRR.GJS.2014.40	02silver maple green ash swamp	3	7	683869	Salix nigra / (Cephalanthus occidentalis) Swamp Forest
 Houghton.DSP.RF3	GRR.GJS.2015.21	04tamarack	4	9	688421	Acer (rubrum, saccharinum) - Fraxinus spp. - Ulmus americana Swamp Forest
 Palms.Barry.County...Houghton.swamp	GRR.2011.GJS.12	04tamarack	4	9	688675	Acer rubrum - Fraxinus (pennsylvanica, americana) / Lindera benzoin / Symplocarpus foetidus Swamp Forest
 Houghton.DSP.RF2	GRR.GJS.2015.22	04tamarack	4	9	689089	Larix laricina - Acer rubrum / (Rhamnus alnifolia, Vaccinium corymbosum) Swamp Forest

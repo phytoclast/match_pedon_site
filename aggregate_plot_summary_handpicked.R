@@ -490,4 +490,5 @@ ESIS.table <- merge(ESIS.table,ESIS.table.Forb, by=c('phase', 'Stratum'), all.x 
 ESIS.table <- merge(ESIS.table,ESIS.table.Grass, by=c('phase', 'Stratum'), all.x = TRUE)
 ESIS.table <- merge(ESIS.table,ESIS.table.Shrub, by=c('phase', 'Stratum'), all.x = TRUE)
 ESIS.table <- merge(ESIS.table,ESIS.table.Tree, by=c('phase', 'Stratum'), all.x = TRUE)
+ESIS.table <- ESIS.table[,c('phase', 'Stratum', 'Tree.min', 'Tree.max', 'Shrub.min', 'Shrub.max', 'Grass.min', 'Grass.max', 'Forb.min', 'Forb.max')]
 write.csv(ESIS.table, 'output/ESIS.table.csv', na = "", row.names = F)
