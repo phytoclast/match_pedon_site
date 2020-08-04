@@ -274,7 +274,7 @@ Group.Summary[is.na(Group.Summary$Nativity) & !is.na(Group.Summary$type2),]$Nati
 
 
 
-# group summary export ----
+# group summary export and fix missing heights ----
 Group.Summary <- Group.Summary[order(Group.Summary$phase, Group.Summary$Taxon),c( 'phase','Taxon', 'Symbol', 'ESIS.Group','Nativity', 'f25', 'f75', 's25', 's75', 'sc25', 'sc75', 't25', 't75', 'Fmin', 'Fmax', 'Smin', 'Smax', 'SCmin', 'SCmax', 'Tmin', 'Tmax','Dmin','Dmax','b05','b95', 'over', 'under')]
 
 colnames(Group.Summary) <- c( 'phase','Taxon', 'Plant.Symbol', 'Plant.Type','Nativity', 'f25', 'f75', 's25', 's75', 'sc25', 'sc75', 't25', 't75', 'Fmin', 'Fmax', 'Smin', 'Smax', 'SCmin', 'SCmax', 'Tmin', 'Tmax','Dmin','Dmax','b05','b95', 'over', 'under')
@@ -341,7 +341,13 @@ Forest.Understory[is.na(Forest.Understory$Canopy.Bottom),]$
 Forest.Understory.sub <- Group.Summary[Group.Summary$f75 >0,c( 'phase','Taxon','Plant.Symbol', 'Plant.Type','Nativity', 'f25', 'f75','Fmin', 'Fmax', 'maxHt', 'under')]
 colnames(Forest.Understory.sub) <- c('phase','Taxon','Plant.Symbol', 'Plant.Type','Nativity', 'Cover.Low', 'Cover.High','Canopy.Bottom', 'Canopy.Top', 'maxHt', 'under')
 Forest.Understory.sub[is.na(Forest.Understory.sub$Canopy.Bottom) & Forest.Understory.sub$Plant.Type %in% c('Nonvascular'),]$Canopy.Bottom <- 0.0
+
+Forest.Understory.sub[is.na(Forest.Understory.sub$Canopy.Top) & !is.na(Forest.Understory.sub$maxHt) & Forest.Understory.sub$Plant.Type %in% c('Grass/grass-like (Graminoids)','Fern/fern ally','Forb/Herb'),]$Canopy.Top <- Forest.Understory.sub[is.na(Forest.Understory.sub$Canopy.Top) & !is.na(Forest.Understory.sub$maxHt) & Forest.Understory.sub$Plant.Type %in% c('Grass/grass-like (Graminoids)','Fern/fern ally','Forb/Herb'),]$maxHt
+
+Forest.Understory.sub[is.na(Forest.Understory.sub$Canopy.Bottom) & !is.na(Forest.Understory.sub$Canopy.Top) & Forest.Understory.sub$Plant.Type %in% c('Grass/grass-like (Graminoids)','Fern/fern ally','Forb/Herb'),]$Canopy.Bottom <- Forest.Understory.sub[is.na(Forest.Understory.sub$Canopy.Bottom) & !is.na(Forest.Understory.sub$Canopy.Top) & Forest.Understory.sub$Plant.Type %in% c('Grass/grass-like (Graminoids)','Fern/fern ally','Forb/Herb'),]$Canopy.Top/2#4+.05
+
 Forest.Understory.sub[is.na(Forest.Understory.sub$Canopy.Bottom) & Forest.Understory.sub$Plant.Type %in% c('Tree','Vine/Liana','Grass/grass-like (Graminoids)','Fern/fern ally','Forb/Herb', 'Nonvascular'),]$Canopy.Bottom <- 0.1
+
 Forest.Understory.sub[is.na(Forest.Understory.sub$Canopy.Top) & Forest.Understory.sub$Plant.Type %in% c('Nonvascular'),]$Canopy.Top <- 0.05
 Forest.Understory.sub[is.na(Forest.Understory.sub$Canopy.Top) & Forest.Understory.sub$Plant.Type %in% c('Grass/grass-like (Graminoids)','Fern/fern ally','Forb/Herb'),]$Canopy.Top <- 0.6
 Forest.Understory.sub[is.na(Forest.Understory.sub$Canopy.Top) & Forest.Understory.sub$Plant.Type %in% c('Shrub/Subshrub'),]$Canopy.Top <- 0.3
@@ -404,14 +410,14 @@ Com.groups.wet$groupwetness <- Com.groups.wet$totalwet / Com.groups.wet$Total
 handpicked.wet <- merge(handpicked, Com.groups.wet[,c('phase','groupwetness')], by.x = 'phase', by.y = 'phase')
 handpicked.wet <- merge(handpicked.wet, Com.mean.wet[,c('Observation_ID','plotwetness')], by.x = 'Observation_ID', by.y = 'Observation_ID')
 
-#generic structure ----
+#Generic structure ----
 Com.Sp.agg <- aggregate(log10(1-(Com.Sp.mean[,c('Field', 'Shrub', 'Subcanopy', 'Tree')]/100.001)), by=list(Observation_ID = Com.Sp.mean$Observation_ID),  FUN='sum')
 Com.Sp.agg[,c('Field', 'Shrub', 'Subcanopy', 'Tree')] <- 100*(1-10^(Com.Sp.agg[,c('Field', 'Shrub', 'Subcanopy', 'Tree')]))                 
 Com.Sp.agg$over <- 100*(1-10^(apply(log10(1-(Com.Sp.agg[,c('Subcanopy', 'Tree')]/100.001)), MARGIN = 1, FUN='sum')))
 Com.Sp.agg$under <- 100*(1-10^(apply(log10(1-(Com.Sp.agg[,c('Field', 'Shrub')]/100.001)), MARGIN = 1, FUN='sum')))
 
 handpicked.wet <- merge(handpicked.wet, Com.Sp.agg[,c('Observation_ID', 'over','under')], by.x = 'Observation_ID', by.y = 'Observation_ID')
-#ESIS profile
+#ESIS profile ----
 
 ESIS <- rbind(Forest.Understory[,c('phase','Taxon','Plant.Symbol','Plant.Type','Nativity','Cover.Low','Cover.High','Canopy.Bottom','Canopy.Top')], Forest.Overstory[,c('phase','Taxon','Plant.Symbol','Plant.Type','Nativity','Cover.Low','Cover.High','Canopy.Bottom','Canopy.Top')])
 ESIS$Plant.Type2 <- 'Forb'
@@ -435,48 +441,53 @@ ESIS <- rbind(ESIS.01, ESIS.02, ESIS.03, ESIS.04)
 ESIS[ESIS$Simple %in% 'Forb',]$Plant.Type2 <- 'Forb'
 
 #set the stratum breaks
-ESIS.Stratum <- c('s1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9')
-ESIS.min <- c(0,.5,1,2,4.5,13,40,80,120)*.3048
-ESIS.max <- c(.5,1,2,4.5,13,40,80,120,379)*.3048
+ESIS.Stratum <- c('f1', 'f2', 'f3', 's1', 's2', 't1', 't2', 't3', 't4')
+Macrostratum <- c('under', 'under', 'under', 'under', 'under', 'over', 'over', 'over', 'over')
+#ESIS.min <- c(0,.5,1,2,4.5,13,40,80,120)*.3048
+#ESIS.max <- c(.5,1,2,4.5,13,40,80,120,379)*.3048
+ESIS.min <- c(0,0.1,0.25, 0.5, 1.5, 5, 15, 25, 35)
+ESIS.max <- c(0.1,0.25, 0.5, 1.5, 5, 15, 25, 35, 115)
 
 
-ESIS.strata <- data.frame(cbind(as.data.frame(ESIS.Stratum, stringsAsFactors = FALSE), as.data.frame(cbind(ESIS.min, ESIS.max))))
-#create blank first rpw
+ESIS.strata <- data.frame(cbind(as.data.frame(Macrostratum, stringsAsFactors = FALSE), as.data.frame(ESIS.Stratum, stringsAsFactors = FALSE), as.data.frame(cbind(ESIS.min, ESIS.max))))
+#create blank first row
 phase = 'x'
 Observation_ID = 'x'
 Plant.Type2 = 'x'
 Cover = 0 
+Macrostratum = 'x'
 Stratum = 'x'
-ESIS.z <- cbind(as.data.frame(cbind(phase, Observation_ID, Plant.Type2, Stratum),stringsAsFactors = FALSE),as.data.frame(Cover))
+ESIS.z <- cbind(as.data.frame(cbind(phase, Observation_ID, Plant.Type2, Macrostratum, Stratum),stringsAsFactors = FALSE),as.data.frame(Cover))
 #loop to sum the cover by stratum and plant type
 i <- 1                        
 for (i in 1:9){
 ESIS.x <- subset(ESIS, Canopy.Top > ESIS.strata[i,]$ESIS.min & Canopy.Bottom <= ESIS.strata[i,]$ESIS.max )
 if (nrow(ESIS.x) > 0){
-ESIS.y <- aggregate(log10(1-(ESIS.x$Cover/100.001)), by=list(phase = ESIS.x$phase, Observation_ID = ESIS.x$Observation_ID, Plant.Type2 = ESIS.x$Plant.Type2),  FUN='sum')
-colnames(ESIS.y) <- c('phase', 'Observation_ID', 'Plant.Type2', 'Cover')
+ESIS.y <- aggregate(list(Cover = log10(1-(ESIS.x$Cover/100.001))), by=list(phase = ESIS.x$phase, Observation_ID = ESIS.x$Observation_ID, Plant.Type2 = ESIS.x$Plant.Type2),  FUN='sum')
 ESIS.y$Cover <- 100*(1-10^(ESIS.y$Cover))
+ESIS.y$Macrostratum <- ESIS.strata[i,]$Macrostratum
 ESIS.y$Stratum <- ESIS.strata[i,]$ESIS.Stratum
-ESIS.y <- subset(ESIS.y, select=c('phase', 'Observation_ID', 'Plant.Type2', 'Stratum',  'Cover'))
+ESIS.y <- subset(ESIS.y, select=c('phase', 'Observation_ID', 'Plant.Type2', 'Macrostratum', 'Stratum',  'Cover'))
 ESIS.z <- rbind(ESIS.z, ESIS.y)
 }}
 #insert zeroes for missing values
 ESIS.z <- ESIS.z[-1,]
 ESIS.zero1 <- unique(ESIS.z[,c('phase', 'Observation_ID')])
-ESIS.zero2 <- unique(ESIS.z[,c('Plant.Type2', 'Stratum')])
+ESIS.zero2 <- unique(ESIS.z[,c('Plant.Type2', 'Macrostratum', 'Stratum')])
 ESIS.zero <- merge(ESIS.zero1, ESIS.zero2)
 ESIS.zero$Cover <- 0
 ESIS.z <- rbind(ESIS.z, ESIS.zero)
-ESIS.z <- ddply(ESIS.z, c('phase', 'Observation_ID', 'Plant.Type2','Stratum'), summarise,
+ESIS.z <- ddply(ESIS.z, c('phase', 'Observation_ID', 'Plant.Type2', 'Macrostratum', 'Stratum'), summarise,
                     Cover = max(Cover)
 )
 #get percentiles
-ESIS.quantile <- ddply(ESIS.z, c('phase', 'Plant.Type2','Stratum'), summarise,
+ESIS.quantile <- ddply(ESIS.z, c('phase', 'Plant.Type2', 'Macrostratum', 'Stratum'), summarise,
                        c15 = quantile(Cover, 0.15),
                        c85 = quantile(Cover, 0.85)
 )
 ESIS.quantile[,c('c15','c85')] <- lapply(ESIS.quantile[,c('c15','c85')], FUN = roundF) #rounding
-#rearrange
+
+#rearrange quantiles
 ESIS.table <- unique(ESIS.quantile[,c('phase', 'Stratum')])
 ESIS.table.Forb <- subset(ESIS.quantile, Plant.Type2 %in% 'Forb', select = c(phase, Stratum, c15, c85))
 colnames(ESIS.table.Forb)[3:4] <- c('Forb.min', 'Forb.max')
@@ -492,3 +503,37 @@ ESIS.table <- merge(ESIS.table,ESIS.table.Shrub, by=c('phase', 'Stratum'), all.x
 ESIS.table <- merge(ESIS.table,ESIS.table.Tree, by=c('phase', 'Stratum'), all.x = TRUE)
 ESIS.table <- ESIS.table[,c('phase', 'Stratum', 'Tree.min', 'Tree.max', 'Shrub.min', 'Shrub.max', 'Grass.min', 'Grass.max', 'Forb.min', 'Forb.max')]
 write.csv(ESIS.table, 'output/ESIS.table.csv', na = "", row.names = F)
+
+#Stratiles ----
+ESIS.stratiles.sum <- aggregate(list(cover.sum = ESIS.z$Cover), by=list(phase = ESIS.z$phase, Plant.Type2 = ESIS.z$Plant.Type2, Macrostratum = ESIS.z$Macrostratum, Stratum = ESIS.z$Stratum), FUN='sum') 
+ESIS.stratiles.max <- aggregate(list(cover.max = ESIS.stratiles.sum$cover.sum), by=list(phase = ESIS.stratiles.sum$phase, Plant.Type2 = ESIS.stratiles.sum$Plant.Type2, Macrostratum = ESIS.stratiles.sum$Macrostratum), FUN='max')
+ESIS.stratiles <- merge(ESIS.stratiles.sum, ESIS.stratiles.max, by=c('phase', 'Plant.Type2', 'Macrostratum'))
+ESIS.stratiles$RCover <- ESIS.stratiles$cover.sum/(ESIS.stratiles$cover.max+0.000001)
+ESIS.Macrostratum <- ESIS
+ESIS.Macrostratum$Macrostratum <- ifelse(ESIS.Macrostratum$Canopy.Top >5, 'over','under')
+ESIS.Macrostratum <- aggregate(list(Cover = log10(1-(ESIS.Macrostratum$Cover/100.001))), by=list(phase = ESIS.Macrostratum$phase, Observation_ID = ESIS.Macrostratum$Observation_ID, Plant.Type2 = ESIS.Macrostratum$Plant.Type2, Macrostratum = ESIS.Macrostratum$Macrostratum),  FUN='sum')
+ESIS.Macrostratum$Cover <- 100*(1-10^(ESIS.Macrostratum$Cover))
+ESIS.Macrostratum.quantile <- ddply(ESIS.Macrostratum, c('phase', 'Plant.Type2', 'Macrostratum'), summarise,
+                       c15 = quantile(Cover, 0.15),
+                       c85 = quantile(Cover, 0.85)
+)
+ESIS.stratiles <- merge(ESIS.Macrostratum.quantile, ESIS.stratiles, by=c('phase', 'Plant.Type2', 'Macrostratum'))
+ESIS.stratiles[,c('c15','c85')] <- ESIS.stratiles[,c('c15','c85')]*ESIS.stratiles$RCover
+ESIS.stratiles[,c('c15','c85')] <- lapply(ESIS.stratiles[,c('c15','c85')], FUN = roundF) #rounding
+
+#rearrange stratiles
+ESIS.table2 <- unique(ESIS.stratiles[,c('phase', 'Stratum')])
+ESIS.table.Forb2 <- subset(ESIS.stratiles, Plant.Type2 %in% 'Forb', select = c(phase, Stratum, c15, c85))
+colnames(ESIS.table.Forb2)[3:4] <- c('Forb.min', 'Forb.max')
+ESIS.table.Grass2 <- subset(ESIS.stratiles, Plant.Type2 %in% 'Grass/Grasslike', select = c(phase, Stratum, c15, c85))
+colnames(ESIS.table.Grass2)[3:4] <- c('Grass.min', 'Grass.max')
+ESIS.table.Shrub2 <- subset(ESIS.stratiles, Plant.Type2 %in% 'Shrub/Vine', select = c(phase, Stratum, c15, c85))
+colnames(ESIS.table.Shrub2)[3:4] <- c('Shrub.min', 'Shrub.max')
+ESIS.table.Tree2 <- subset(ESIS.stratiles, Plant.Type2 %in% 'Tree', select = c(phase, Stratum, c15, c85))
+colnames(ESIS.table.Tree2)[3:4] <- c('Tree.min', 'Tree.max')
+ESIS.table2 <- merge(ESIS.table2,ESIS.table.Forb2, by=c('phase', 'Stratum'), all.x = TRUE)
+ESIS.table2 <- merge(ESIS.table2,ESIS.table.Grass2, by=c('phase', 'Stratum'), all.x = TRUE)
+ESIS.table2 <- merge(ESIS.table2,ESIS.table.Shrub2, by=c('phase', 'Stratum'), all.x = TRUE)
+ESIS.table2 <- merge(ESIS.table2,ESIS.table.Tree2, by=c('phase', 'Stratum'), all.x = TRUE)
+ESIS.table2 <- ESIS.table2[,c('phase', 'Stratum', 'Tree.min', 'Tree.max', 'Shrub.min', 'Shrub.max', 'Grass.min', 'Grass.max', 'Forb.min', 'Forb.max')]
+write.csv(ESIS.table2, 'output/ESIS.table2.csv', na = "", row.names = F)
