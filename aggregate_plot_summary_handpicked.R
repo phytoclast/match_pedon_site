@@ -131,9 +131,21 @@ List_Habits[List_Habits$ESIS.Group %in% 'Grass/grass-like',]$ESIS.Group <- 'Gras
 handpicked  <- read.delim("data/handpicked.txt", na.strings = '', stringsAsFactors = FALSE)
 listspp <- read.delim("data/List_Species2011.txt", encoding = 'UTF-8', na.strings = '', stringsAsFactors = FALSE)
 #listspp <- readRDS("data/listspp.RDS")
+#fix for trees and shrub mismatch
+SBD2 <- c('Ilex verticillata', 'Salix discolor', 'Salix interior', 'Staphylea trifolia', 
+          'Salix bebbiana', 'Salix eriocephala', 'Salix petiolaris', 'Rhamnus cathartica', 'Frangula alnus',
+          'Salix exigua', 'Elaeagnus angustifolia','Ptelea trifoliata')
+listspp[listspp$AcTaxon %in% SBD2,]$Form <- 'SBD2'
+
 listspp$Nativity <- ifelse(listspp$Eastern.North.America %in% 'N','Native',ifelse(listspp$Eastern.North.America %in% 'X','Introduced','Unknown'))
 obs <- read.delim("data/Sites.txt")
 obsspp <- read.delim("data/Observed_Species.txt", encoding = 'UTF-8', na.strings = '')
+
+#obspp.shrub <- unique(subset(obsspp, (Subcanopy > 0 | Tree > 0) & Habit %in% c('SBD2', 'SBE2'), select=c(AcTaxon, Habit)))
+#obspp.tree.a <- unique(subset(obsspp, (Subcanopy == 0 & Tree == 0) & Habit %in% c('TBD1', 'TBE1'), select=c(AcTaxon, Habit)))
+#obspp.tree.b <- unique(subset(obsspp, (Subcanopy > 0 | Tree > 0) & Habit %in% c('TBD1', 'TBE1'), select=c(AcTaxon, Habit)))
+#obspp.tree <- subset(obspp.tree.a, !AcTaxon %in% obspp.tree.b$AcTaxon)
+
 obsspp <- merge(obs[,c('Observation_ID','Observation_Label')],obsspp, by='Observation_ID')
 obsspp[obsspp$AcSpecies == 'Phalaris' & !is.na(obsspp$AcTaxon) ,]$AcTaxon <- 'Phalaris arundinacea'
 obsspp <- obsspp[!grepl("\\?", obsspp$AcTaxon) | is.na(obsspp$AcTaxon) ,]
@@ -143,6 +155,7 @@ obsspp <- subset(obsspp, Observation_ID %in% plots)
 
 obsspp[obsspp$BA==0,]$BA <- NA
 obsspp$BA <- BA.fact10usc.metric(obsspp$BA)
+
 
 # observed species means by plot ----
 Com.Sp.sum<-aggregate(obsspp[,c('Field', 'Shrub', 'Subcanopy', 'Tree', 'BA')], by=list(obsspp$Observation_ID, obsspp$Observation_Label, obsspp$AcTaxon, obsspp$Simple), FUN=sum) #sum within plot

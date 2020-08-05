@@ -6,52 +6,52 @@
 "01drained swamp","s2",20,75,5,35,0,0,0,20
 "01drained swamp","t1",55,95,0,5,,,,
 "01drained swamp","t2",20,80,0,1,,,,
-"02silver maple green ash swamp","f1",0,10,0,1.5,0,1,1,30
-"02silver maple green ash swamp","f2",0,10,0,1.5,0,1,1,30
-"02silver maple green ash swamp","f3",0,10,1,50,0,2,4,45
-"02silver maple green ash swamp","s1",0,10,0.2,45,0,70,1,20
-"02silver maple green ash swamp","s2",2,20,0.2,45,0,65,0,0.1
+"02silver maple green ash swamp","f1",0,15,0,5,0,1,1,30
+"02silver maple green ash swamp","f2",0,15,0,5,0,1,1,30
+"02silver maple green ash swamp","f3",0,15,1,60,0,2,4,45
+"02silver maple green ash swamp","s1",0,5,0.5,55,0,70,1,20
+"02silver maple green ash swamp","s2",2,15,0.5,55,0,65,0,0.1
 "02silver maple green ash swamp","t1",40,95,0,0,,,,
 "02silver maple green ash swamp","t2",30,95,0,0,,,,
-"04tamarack","f1",0.2,4,1,3,0.2,2,15,45
-"04tamarack","f2",0.2,4,1,2,0,1.5,15,45
-"04tamarack","f3",0.2,4,5,25,2,5,25,50
-"04tamarack","s1",10,30,4,25,1,30,4,10
-"04tamarack","s2",35,55,3,20,0,4,0,0
+"04tamarack","f1",0.2,1.5,1.5,4,0.2,2,15,45
+"04tamarack","f2",0.2,1.5,1,4,0,1.5,15,45
+"04tamarack","f3",0.2,1.5,10,35,2,5,25,50
+"04tamarack","s1",5,20,10,35,1,30,4,10
+"04tamarack","s2",25,45,10,30,0,4,0,0
 "04tamarack","t1",15,60,0,0.2,,,,
 "04tamarack","t2",0.5,20,0,0,,,,
 "05red maple dogwood lake sedge swamp","f1",0,0,0.1,1,0,0,15,75
 "05red maple dogwood lake sedge swamp","f2",0,0,0.1,1,0,0,15,75
 "05red maple dogwood lake sedge swamp","f3",0,0,20,45,0,0.4,15,75
-"05red maple dogwood lake sedge swamp","s1",10,15,20,45,65,95,45,70
-"05red maple dogwood lake sedge swamp","s2",20,30,20,45,0,0,25,35
+"05red maple dogwood lake sedge swamp","s1",10,15,20,50,65,95,45,70
+"05red maple dogwood lake sedge swamp","s2",20,25,20,50,0,0,25,35
 "05red maple dogwood lake sedge swamp","t1",5,20,0,0,,,,
 "05red maple dogwood lake sedge swamp","t2",0.1,5,0,0,,,,
-"06fen","f1",0.4,4,1,35,4,10,0,35
-"06fen","f2",0.4,4,1,35,5,10,0.5,3
-"06fen","f3",0.4,4,4,55,25,80,2,10
-"06fen","s1",0.5,3,0,2,5,80,3,45
-"06fen","s2",0.5,3,0,1.5,0,3,0.1,2
+"06fen","f1",0,1,2,40,4,10,0,35
+"06fen","f2",0,1,2,40,5,10,0.5,3
+"06fen","f3",0,1,5,55,25,80,2,10
+"06fen","s1",0.1,2,0.5,3,5,80,3,45
+"06fen","s2",0.1,2,0.5,3,0,3,0.1,2
 "06fen","t1",0,0,0,0,,,,
 "06fen","t2",0,0,0,0,,,,
 "07marsh","f1",0,0.1,0,5,0.5,45,1.5,15
 "07marsh","f2",0,0.1,0,5,0.5,45,1.5,15
-"07marsh","f3",0,0.1,0,10,1,45,1.5,15
-"07marsh","s1",0,15,0,4,4,95,0,0.4
-"07marsh","s2",0,15,0,4,0,1.5,0,0
+"07marsh","f3",0,0.1,0,20,1,45,1.5,15
+"07marsh","s1",0,3,0,15,4,95,0,0.4
+"07marsh","s2",0,3,0,15,0,1.5,0,0
 "07marsh","t1",0,5,0,0,,,,
 "07marsh","t2",0,5,0,0,,,,
-"08wet meadow","f1",0,1,0.1,5,0.1,3,4,25
-"08wet meadow","f2",0,1,0.1,5,0.1,3,4,30
-"08wet meadow","f3",0,1,4,45,3,20,4,45
-"08wet meadow","s1",0,10,4,55,70,90,0.5,30
-"08wet meadow","s2",0,30,3,55,0,1,0.2,15
+"08wet meadow","f1",0,0.5,0.2,5,0.1,3,4,25
+"08wet meadow","f2",0,0.5,0.2,5,0.1,3,4,30
+"08wet meadow","f3",0,0.5,5,45,3,20,4,45
+"08wet meadow","s1",0,0,5,55,70,90,0.5,30
+"08wet meadow","s2",0,0,5,60,0,1,0.2,15
 "08wet meadow","t1",0.4,5,0,1,,,,
 "08wet meadow","t2",0.4,5,0,1,,,,
 "09reed canary grass","f1",0,0.4,0,0.1,0,0,0.2,40
 "09reed canary grass","f2",0,0.4,0,0.1,0,1,0.2,35
-"09reed canary grass","f3",0,0.4,0,1,0,4,1,40
-"09reed canary grass","s1",0,0.1,0,0.2,40,100,0.1,10
-"09reed canary grass","s2",0,2,0,0,5,100,0,4
+"09reed canary grass","f3",0,0.4,0,5,0,4,1,40
+"09reed canary grass","s1",0,0.1,0,5,40,100,0.1,10
+"09reed canary grass","s2",0,1,0,5,5,100,0,4
 "09reed canary grass","t1",0,0,0,0,,,,
 "09reed canary grass","t2",0,0,0,0,,,,
