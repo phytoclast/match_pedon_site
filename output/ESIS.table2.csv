@@ -13,11 +13,11 @@
 "02silver maple green ash swamp","s2",0,15,1.5,55,1,60,0,0.3
 "02silver maple green ash swamp","t1",40,95,0,0.2,,,,
 "02silver maple green ash swamp","t2",35,85,0,0,,,,
-"04tamarack","f1",0.2,0.5,1,4,0.1,1.5,25,45
-"04tamarack","f2",0.2,0.4,1,4,0.1,1,20,45
-"04tamarack","f3",0.2,0.5,10,35,0.5,10,25,55
-"04tamarack","s1",2,5,10,35,3,30,5,10
-"04tamarack","s2",5,20,10,30,0.4,4,0,0
+"04tamarack","f1",0.1,0.2,1,5,0.1,1.5,25,45
+"04tamarack","f2",0.1,0.2,1,4,0.1,1,20,45
+"04tamarack","f3",0.1,0.2,10,45,0.5,10,25,55
+"04tamarack","s1",0.5,1.5,10,45,3,30,5,10
+"04tamarack","s2",3,10,10,40,0.4,4,0,0
 "04tamarack","t1",15,60,0,0.2,,,,
 "04tamarack","t2",4,15,0,0,,,,
 "05red maple dogwood lake sedge swamp","f1",0,0,0.4,1,0,0,40,70
@@ -25,18 +25,18 @@
 "05red maple dogwood lake sedge swamp","f3",0,0,20,45,0.2,0.2,45,75
 "05red maple dogwood lake sedge swamp","s1",4,10,20,50,65,95,55,95
 "05red maple dogwood lake sedge swamp","s2",10,15,20,50,0,0,30,45
-"05red maple dogwood lake sedge swamp","t1",5,20,,,,,,
-"05red maple dogwood lake sedge swamp","t2",1.5,4,,,,,,
+"05red maple dogwood lake sedge swamp","t1",5,20,0.5,0.5,,,,
+"05red maple dogwood lake sedge swamp","t2",1.5,4,0,0,,,,
 "06fen","f1",0.2,1,4,35,4,10,5,45
 "06fen","f2",0.2,1,4,35,5,15,0.5,5
 "06fen","f3",0.2,1,5,55,30,80,3,20
 "06fen","s1",0.5,2,0.4,4,25,65,10,70
 "06fen","s2",0.5,2,0.3,3,0.5,2,0.4,3
-"07marsh","f1",0,0.1,3,10,20,40,1.5,15
-"07marsh","f2",0,0.1,3,10,20,40,1.5,15
-"07marsh","f3",0,0.1,10,25,20,40,1.5,15
-"07marsh","s1",0.2,4,5,20,45,95,0,0.4
-"07marsh","s2",0.2,4,5,20,0.5,1.5,0,0
+"07marsh","f1",0,0,0.5,5,20,40,1.5,15
+"07marsh","f2",0,0,0.5,5,20,40,1.5,15
+"07marsh","f3",0,0,1.5,25,20,40,1.5,15
+"07marsh","s1",0.2,1,1.5,20,45,95,0,0.4
+"07marsh","s2",0.2,1,1.5,20,0.5,1.5,0,0
 "07marsh","t1",1.5,10,,,,,,
 "07marsh","t2",1.5,10,,,,,,
 "08wet meadow","f1",1,1,0.5,5,1.5,1.5,3,35
@@ -46,10 +46,10 @@
 "08wet meadow","s2",0,0,5,60,0.4,0.5,1.5,15
 "08wet meadow","t1",2,5,0.3,1.5,,,,
 "08wet meadow","t2",2,5,0.3,1.5,,,,
-"09reed canary grass","f1",0.2,3,0,0.5,0,0.1,1,50
-"09reed canary grass","f2",0.2,3,0,0.5,0.4,1,1,45
-"09reed canary grass","f3",0.2,3,0.1,5,1,2,1,50
-"09reed canary grass","s1",0,0.4,0.1,10,40,100,0.2,10
+"09reed canary grass","f1",0.2,4,0,0.5,0,0.1,1,50
+"09reed canary grass","f2",0.2,4,0,0.4,0.4,1,1,45
+"09reed canary grass","f3",0.2,4,0.1,5,1,2,1,50
+"09reed canary grass","s1",0,0.5,0.1,10,40,100,0.2,10
 "09reed canary grass","s2",0.1,1.5,0.1,10,30,75,0.1,4
 "09reed canary grass","t1",3,3,,,,,,
 "09reed canary grass","t2",0,0,,,,,,

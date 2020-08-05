@@ -134,7 +134,7 @@ listspp <- read.delim("data/List_Species2011.txt", encoding = 'UTF-8', na.string
 #fix for trees and shrub mismatch
 SBD2 <- c('Ilex verticillata', 'Salix discolor', 'Salix interior', 'Staphylea trifolia', 
           'Salix bebbiana', 'Salix eriocephala', 'Salix petiolaris', 'Rhamnus cathartica', 'Frangula alnus',
-          'Salix exigua', 'Elaeagnus angustifolia','Ptelea trifoliata')
+          'Salix exigua', 'Elaeagnus angustifolia','Ptelea trifoliata', 'Toxicodendron vernix')
 listspp[listspp$AcTaxon %in% SBD2,]$Form <- 'SBD2'
 
 listspp$Nativity <- ifelse(listspp$Eastern.North.America %in% 'N','Native',ifelse(listspp$Eastern.North.America %in% 'X','Introduced','Unknown'))

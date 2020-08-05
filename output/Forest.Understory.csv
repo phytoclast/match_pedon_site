@@ -170,8 +170,6 @@
 "02silver maple green ash swamp","Ricciocarpos natans",8,0.171426857159995,"RINA2","Nonvascular","Native",0,0.3,0,0.1
 "02silver maple green ash swamp","Thuidium",8,0.0642850714349996,"THUID","Nonvascular","Native",0,0.1,0,0.1
 "02silver maple green ash swamp","Climacium",8,0.0571422857200021,"CLIMA2","Nonvascular","Native",0,0.1,0,0.1
-"04tamarack","Toxicodendron vernix",1,5.2904769454876,"TOVE","Tree","Native",0.3,10,1,5
-"04tamarack","Toxicodendron vernix",1,5.2904769454876,"TOVE","Tree","Native",0,0.3,0.1,0.5
 "04tamarack","Fraxinus nigra",1,2.22449128252135,"FRNI","Tree","Native",0.3,5,1,5
 "04tamarack","Fraxinus nigra",1,2.22449128252135,"FRNI","Tree","Native",0,0.1,0.1,0.5
 "04tamarack","Carpinus caroliniana",1,1.39975544919549,"CACA18","Tree","Native",0.3,4,1,5
@@ -205,6 +203,8 @@
 "04tamarack","Ilex verticillata",3,9.40529750317884,"ILVE","Shrub/Subshrub","Native",0,0.5,0,0.3
 "04tamarack","Vaccinium corymbosum",3,6.94139584013905,"VACO","Shrub/Subshrub","Native",0.5,15,0.5,2
 "04tamarack","Vaccinium corymbosum",3,6.94139584013905,"VACO","Shrub/Subshrub","Native",0,1,0,0.3
+"04tamarack","Toxicodendron vernix",3,5.2904769454876,"TOVE","Shrub/Subshrub","Native",0.3,10,0.5,2
+"04tamarack","Toxicodendron vernix",3,5.2904769454876,"TOVE","Shrub/Subshrub","Native",0,0.3,0,0.3
 "04tamarack","Lindera benzoin",3,2.98075595888829,"LIBE3","Shrub/Subshrub","Native",1.5,5,0.5,2
 "04tamarack","Lindera benzoin",3,2.98075595888829,"LIBE3","Shrub/Subshrub","Native",0,0.1,0,0.3
 "04tamarack","Rosa palustris",3,1.56915097515692,"ROPA","Shrub/Subshrub","Native",0.2,4,0.5,1.5
@@ -438,7 +438,6 @@
 "05red maple dogwood lake sedge swamp","Athyrium angustum",7,0.649993500065005,"ATAN2","Fern/fern ally","Native",0,1,0.1,0.5
 "06fen","Juniperus virginiana",1,1.27812943728345,"JUVI","Tree","Native",0.1,2,1,5
 "06fen","Juniperus virginiana",1,1.27812943728345,"JUVI","Tree","Native",0,0.5,0.1,0.5
-"06fen","Toxicodendron vernix",1,0.124998750012495,"TOVE","Tree","Native",0,0.2,1,1
 "06fen","Larix laricina",1,0.0749992500075014,"LALA","Tree","Native",0,0.1,0.1,0.3
 "06fen","Dasiphora fruticosa",3,36.7602594786344,"DAFR6","Shrub/Subshrub","Native",0,50,0.5,0.5
 "06fen","Dasiphora fruticosa",3,36.7602594786344,"DAFR6","Shrub/Subshrub","Native",1,35,0,0.3
@@ -449,6 +448,7 @@
 "06fen","Rhamnus alnifolia",3,0.249997500025001,"RHAL","Shrub/Subshrub","Native",0,0.4,0.5,1
 "06fen","Salix eriocephala",3,0.249997500025001,"SAER","Shrub/Subshrub","Native",0,0.4,0.5,2
 "06fen","Salix petiolaris",3,0.249997500025001,"SAPE5","Shrub/Subshrub","Native",0,0.4,0.5,2
+"06fen","Toxicodendron vernix",3,0.124998750012495,"TOVE","Shrub/Subshrub","Native",0,0.2,0.5,1
 "06fen","Hypericum kalmianum",3,0.0749992500075014,"HYKA","Shrub/Subshrub","Native",0,0.1,0,0.3
 "06fen","Cornus racemosa",3,0.0124998750012484,"CORA6","Shrub/Subshrub","Native",0,0,0.1,0.3
 "06fen","Carex lasiocarpa",5,31.9746802531975,"CALA11","Grass/grass-like (Graminoids)","Native",15,55,0.4,1
@@ -501,12 +501,12 @@
 "06fen","Thelypteris palustris",7,0.68749312506875,"THPA","Fern/fern ally","Native",0.1,1.5,0.3,0.5
 "06fen","Selaginella eclipes",7,0.0124998750012484,"SEEC","Fern/fern ally","Native",0,0,0,0.1
 "06fen","Scorpidium",8,15.19984800152,"SCORP2","Nonvascular","Native",0,25,0,0.1
-"07marsh","Toxicodendron vernix",1,1.34933651313481,"TOVE","Tree","Native",0,4,1,5
-"07marsh","Toxicodendron vernix",1,1.34933651313481,"TOVE","Tree","Native",0,0.1,0.1,0.5
 "07marsh","Larix laricina",1,0.249997500025001,"LALA","Tree","Native",0,0.5,1,5
 "07marsh","Platanus occidentalis",1,0.0249997500024968,"PLOC","Tree","Native",0,0,1,5
 "07marsh","Salix bebbiana",3,2.49997500025,"SABE2","Shrub/Subshrub","Native",0,4,0.5,2
 "07marsh","Salix discolor",3,2.49997500025,"SADI","Shrub/Subshrub","Native",0,4,0.5,2
+"07marsh","Toxicodendron vernix",3,1.34933651313481,"TOVE","Shrub/Subshrub","Native",0,4,0.5,2
+"07marsh","Toxicodendron vernix",3,1.34933651313481,"TOVE","Shrub/Subshrub","Native",0,0.1,0,0.3
 "07marsh","Cornus alba",3,1.24998750012499,"COAL80","Shrub/Subshrub","Native",0,2,0.5,2
 "07marsh","Rhamnus alnifolia",3,1.24998750012499,"RHAL","Shrub/Subshrub","Native",0,2,0,0.3
 "07marsh","Chamaedaphne calyculata",3,0.749992500075003,"CHCA2","Shrub/Subshrub","Native",0,1,0,0.3
@@ -639,7 +639,6 @@
 "09reed canary grass","Salix amygdaloides",1,0.178077321248271,"SAAM2","Tree","Native",0,0.2,1,5
 "09reed canary grass","Salix amygdaloides",1,0.178077321248271,"SAAM2","Tree","Native",0,0,0.1,0.5
 "09reed canary grass","Populus deltoides",1,0.0299997000030028,"PODE3","Tree","Native",0,0.1,0.1,0.5
-"09reed canary grass","Toxicodendron vernix",1,0.0249997500024968,"TOVE","Tree","Native",0,0,0.1,0.5
 "09reed canary grass","Acer negundo",1,0.0187498125018726,"ACNE2","Tree","Native",0,0,0.1,0.5
 "09reed canary grass","Ulmus americana",1,0.0103123968760332,"ULAM","Tree","Native",0,0,0,0.1
 "09reed canary grass","Fraxinus pennsylvanica",1,0.00624993750062419,"FRPE","Tree","Native",0,0,0.1,0.5
@@ -648,6 +647,7 @@
 "09reed canary grass","Sambucus nigra",3,1.41772802029783,"SANI4","Shrub/Subshrub","Native",0,4,0.5,2
 "09reed canary grass","Sambucus nigra",3,1.41772802029783,"SANI4","Shrub/Subshrub","Native",0,0.2,0,0.3
 "09reed canary grass","Salix interior",3,0.906240937590619,"SAIN3","Shrub/Subshrub","Native",0,1.5,0.5,2
+"09reed canary grass","Toxicodendron vernix",3,0.0249997500024968,"TOVE","Shrub/Subshrub","Native",0,0,0,0.3
 "09reed canary grass","Cornus racemosa",3,0.0124998750012484,"CORA6","Shrub/Subshrub","Native",0,0,0.2,0.5
 "09reed canary grass","Cornus obliqua",3,0.00812491875080701,"COOB9","Shrub/Subshrub","Native",0,0,0.3,0.5
 "09reed canary grass","Rubus pubescens",3,0.00812491875080701,"RUPU","Shrub/Subshrub","Native",0,0,0,0.1
