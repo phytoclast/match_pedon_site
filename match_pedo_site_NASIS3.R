@@ -13,6 +13,7 @@ library(goeveg)
 library(proxy)
 library(foreign)
 
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 
 #----
 NASISPEDONS <- readRDS("data/NASISPEDONS.RDS")
@@ -92,9 +93,9 @@ for (i in 1:n){
 
 mu <- readRDS(file='data/mu.RDS')
 
-VEGOBS_mukeys <- foreign::read.dbf("data/sitemukey.dbf") 
-VEGOBS_soilnames <- merge(VEGOBS_mukeys[,c('Observat_3','RASTERVALU')], mu[,c('lmapunitiid', 'muname')], by.x='RASTERVALU', by.y= 'lmapunitiid')
-VEGOBS <- merge(VEGOBS, VEGOBS_soilnames[,c('Observat_3', 'muname')], by.x='Observation_Label', by.y= 'Observat_3')
+VEGOBS_mukeys <- readRDS('output/ssurgo.RDS')
+# VEGOBS_soilnames <- merge(VEGOBS_mukeys[,c('obs.id','mukey')], mu[,c('lmapunitiid', 'muname')], by.x='mukey', by.y= 'lmapunitiid')
+VEGOBS <- merge(VEGOBS, VEGOBS_soilnames[,c('obs.id', 'muname')], by.x='Observation_ID', by.y= 'obs.id')
 
 VEGOBS$eval <- "dump"
 VEGOBS[VEGOBS$pedondist < 50,]$eval <- "keep1" 
@@ -593,4 +594,4 @@ Com.Structure[order(as.numeric(as.character(Com.Structure$cluster))),c("cluster"
 sil <- (distbray %>% agnes(method = 'ward') %>% cutree(k=10) %>% silhouette(distbray))[,] %>% as.data.frame() 
 sil.summary <- aggregate(sil[,c('sil_width')], by=list(cluster = sil$cluster ), FUN='mean') %>%  `colnames<-`(c('cluster', 'sil_width'))
 
-saveRDS(Com.Sp.mean, 'C:/workspace2/USNVC/data/Com.Sp.mean.RDS')
+saveRDS(Com.Sp.mean, 'D:/scripts/USNVC/data/Com.Sp.mean.RDS')
