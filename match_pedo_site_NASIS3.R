@@ -1,5 +1,5 @@
 library(soilDB)
-library(aqp)#load before dplr
+library(aqp)#load before dplyr
 library(stringr)
 library(BiodiversityR)
 library(cluster)
@@ -94,13 +94,13 @@ for (i in 1:n){
 mu <- readRDS(file='data/mu.RDS')
 
 VEGOBS_mukeys <- readRDS('output/ssurgo.RDS')
-# VEGOBS_soilnames <- merge(VEGOBS_mukeys[,c('obs.id','mukey')], mu[,c('lmapunitiid', 'muname')], by.x='mukey', by.y= 'lmapunitiid')
+VEGOBS_soilnames <- merge(VEGOBS_mukeys[,c('obs.id','mukey')], mu[,c('lmapunitiid', 'muname')], by.x='mukey', by.y= 'lmapunitiid')
 VEGOBS <- merge(VEGOBS, VEGOBS_soilnames[,c('obs.id', 'muname')], by.x='Observation_ID', by.y= 'obs.id')
 
 VEGOBS$eval <- "dump"
 VEGOBS[VEGOBS$pedondist < 50,]$eval <- "keep1" 
 VEGOBS[(str_split_fixed(VEGOBS$muname, " ",2)[,1])==VEGOBS$taxonname & VEGOBS$pedondist < 1000 & VEGOBS$eval == 'dump', ]$eval <- "keep2"
-VEGOBS[VEGOBS$pedondate==VEGOBS$Year & VEGOBS$pedondist < 200 & VEGOBS$eval == 'dump', ]$eval <- "keep3"
+VEGOBS[VEGOBS$pedondate==VEGOBS$Year & VEGOBS$pedondist < 100 & VEGOBS$eval == 'dump', ]$eval <- "keep3"
 #VEGOBS[VEGOBS$Observation_Label==VEGOBS$pedon & VEGOBS$eval == 'dump', ]$eval <- "keep4"
 VEGOBS[VEGOBS$eval == 'dump',]$taxonname <- ""
 VEGOBS[VEGOBS$eval == 'dump',]$taxonclass <- ""
@@ -125,8 +125,10 @@ if (T){
               's20190701.02'
   )
   add <- 'S12062503'
-  sortsoils <- unique(subset(s, (T150_OM >= 10 | grepl('histic',taxsubgrp) |grepl('histosols',taxorder)) & !grepl('Dysic',taxclname), select = 'compname'))[,1]
-  VEGOBS <- subset(VEGOBS,Soil %in% sortsoils & !Observation_Label %in% remove |Observation_Label %in% add )
+  #sortsoils <- unique(subset(s, (T150_OM >= 10 | grepl('histic',taxsubgrp) |grepl('histosols',taxorder)) & !grepl('Dysic',taxclname), select = 'compname'))[,1]
+  sortsoils <- unique(subset(s, (T150_OM >= 10 | grepl('histic',taxsubgrp) |grepl('histosols',taxorder)) , select = 'compname'))[,1]
+  #VEGOBS <- subset(VEGOBS,Soil %in% sortsoils & !Observation_Label %in% remove |Observation_Label %in% add )
+  VEGOBS <- subset(VEGOBS,Soil %in% sortsoils |Observation_Label %in% add )
   ngroups <- 8
   soilgroup <- 'euic_mucks'}
 
@@ -509,28 +511,28 @@ Com.Sp.groups.mean$overunder <- ifelse(Com.Sp.groups.mean$stratum == 3, 1,0)
 #rank
 Com.Sp.groups.mean <- 
   Com.Sp.groups.mean %>%
-  group_by(cluster) %>%
-  mutate(ranks = order(order(Total, decreasing=TRUE)))
+  dplyr::group_by(cluster) %>%
+  dplyr::mutate(ranks = order(order(Total, decreasing=TRUE)))
 
 Com.Sp.groups.mean <- 
   Com.Sp.groups.mean %>%
-  group_by(cluster) %>%
-  mutate(freqranks = order(order(freqcover, decreasing=TRUE)))
+  dplyr::group_by(cluster) %>%
+  dplyr::mutate(freqranks = order(order(freqcover, decreasing=TRUE)))
 
 Com.Sp.groups.mean <- 
   Com.Sp.groups.mean %>%
-  group_by(cluster) %>%
-  mutate(affranks = order(order(affinity, decreasing=TRUE)))
+  dplyr::group_by(cluster) %>%
+  dplyr::mutate(affranks = order(order(affinity, decreasing=TRUE)))
 
 Com.Sp.groups.mean <- 
   Com.Sp.groups.mean %>%
-  group_by(cluster, stratum) %>%
-  mutate(subranks = order(order(freqcover, decreasing=TRUE)))
+  dplyr::group_by(cluster, stratum) %>%
+  dplyr::mutate(subranks = order(order(freqcover, decreasing=TRUE)))
 
 Com.Sp.groups.mean <- 
   Com.Sp.groups.mean %>%
-  group_by(cluster, overunder) %>%
-  mutate(overunderranks = order(order(freqcover, decreasing=TRUE)))
+  dplyr::group_by(cluster, overunder) %>%
+  dplyr::mutate(overunderranks = order(order(freqcover, decreasing=TRUE)))
 
 Com.rank <- subset(Com.Sp.groups.mean, !stratum %in% 0)
 
@@ -565,13 +567,13 @@ Com.Ass <- Com.rankA
 Com.Ass <- Com.Ass[,c('cluster', 'taxon', 'stratum', 'freqcover')]
 Com.Ass <- 
   Com.Ass %>%
-  group_by(cluster, stratum) %>%
-  mutate(ranks = order(order(freqcover, decreasing=FALSE)))
+  dplyr::group_by(cluster, stratum) %>%
+  dplyr::mutate(ranks = order(order(freqcover, decreasing=FALSE)))
 Com.Ass$ranks <- Com.Ass$stratum*10+Com.Ass$ranks 
 Com.Ass <- 
   Com.Ass %>%
-  group_by(cluster) %>%
-  mutate(ranks = order(order(ranks, decreasing=TRUE)))
+  dplyr::group_by(cluster) %>%
+  dplyr::mutate(ranks = order(order(ranks, decreasing=TRUE)))
 
 Com.Structure$association <- ""
 

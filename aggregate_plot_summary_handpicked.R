@@ -8,6 +8,8 @@ library(dplyr)
 library(plyr)
 library(dynamicTreeCut)
 library(proxy)
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+
 # functions ----
 substitutesymbols <- as.data.frame(cbind(SYMBOL2=c('2AG','TRBO2','SMLA3','CAREX'), form2=c('Nonvascular','Forb/Herb','Forb/Herb','Grass/grass-like (Graminoids)'), type2=c('Native','Native','Native','Native'), taxon=c('Chara','Lysimachia borealis','Smilax lasioneuron','Carex [ovales]')), stringsAsFactors = FALSE)
 
@@ -159,7 +161,7 @@ obsspp[obsspp$AcSpecies == 'Phalaris' & !is.na(obsspp$AcTaxon) ,]$AcTaxon <- 'Ph
 obsspp <- obsspp[!grepl("\\?", obsspp$AcTaxon) | is.na(obsspp$AcTaxon) ,]
 #obsspp <- subset(obsspp, !is.na(specific_epithet) | AcTaxon %in% c('Sphagnum', 'Chara', 'Cladonia'))
 obsspp <- merge(obsspp, List_Habits[,c('Form','Simple')], by.x = 'Habit', by.y = 'Form', all.x = TRUE)
-obsspp <- subset(obsspp, Observation_ID %in% plots)
+#obsspp <- subset(obsspp, Observation_ID %in% plots)
 
 obsspp[obsspp$BA==0,]$BA <- NA
 obsspp$BA <- BA.fact10usc.metric(obsspp$BA)
