@@ -8,6 +8,7 @@ library(dplyr)
 library(plyr)
 library(dynamicTreeCut)
 library(proxy)
+library(Hmisc)
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 
 # functions ----
@@ -201,7 +202,7 @@ Com.Sp.mean <-subset(Com.Sp.mean, !substr(Species,1,1) %in% '-'& !Species %in% '
 
 ##hand picked phases ----
 
-Com.Sp.groups <- merge(unique(handpicked[,c('Observation_ID', 'phase')]), Com.Sp.mean, by='Observation_ID')
+Com.Sp.groups <- merge(unique(handpicked[,c('Observation_ID', 'phase','wt')]), Com.Sp.mean, by='Observation_ID')
 
 
 
@@ -230,12 +231,12 @@ colnames(Com.Sp.groups.hts) <- c('phase', 'Species', 'Fmin', 'Fmax', 'Smin', 'Sm
 ##frequency spp by phase ----
 
 Com.Sp.prefreq <- Com.Sp.groups
-Com.Sp.prefreq$Total <- ifelse(Com.Sp.prefreq$Total >0, 1,0)
+Com.Sp.prefreq$Total <- ifelse(Com.Sp.prefreq$Total >0, Com.Sp.prefreq$wt,0)
 Com.Sp.freq.sum <- aggregate(Com.Sp.prefreq$Total,
                              by=list(Com.Sp.prefreq$phase, Com.Sp.prefreq$Species), FUN='sum')
 colnames(Com.Sp.freq.sum) <- c('phase', 'Species', 'freq')
-Com.Sp.groups.count <- aggregate(unique(Com.Sp.prefreq[c('phase', 'Observation_ID')])$Observation_ID, 
-                                 by=list(unique(Com.Sp.prefreq[c('phase', 'Observation_ID')])$phase), FUN='length')
+Com.Sp.groups.count <- aggregate(unique(Com.Sp.prefreq[c('phase','wt', 'Observation_ID')])$wt, 
+                                 by=list(unique(Com.Sp.prefreq[c('phase', 'Observation_ID')])$phase), FUN='sum')
 colnames(Com.Sp.groups.count) <- c('phase', 'count')
 Com.Sp.groups.freq <- merge(Com.Sp.freq.sum, Com.Sp.groups.count, by = 'phase')
 Com.Sp.groups.freq$freq <- Com.Sp.groups.freq$freq/Com.Sp.groups.freq$count*100
