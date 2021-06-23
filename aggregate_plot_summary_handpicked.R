@@ -184,6 +184,31 @@ Com.Sp.mean$Subcanopy<-Com.Sp.mean$Subcanopy/Com.Sp.mean$mfreq
 Com.Sp.mean$Tree<-Com.Sp.mean$Tree/Com.Sp.mean$mfreq
 rm(Com.max.freq)
 # heights ----
+#transfer canopy heights to appropriate stratum
+obsspp[!is.na(obsspp$Hmax) & obsspp$Hmax > 15 & is.na(obsspp$Tmax) & !grepl('^H',obsspp$Habit),]$Tmax <- 
+  obsspp[!is.na(obsspp$Hmax) & obsspp$Hmax > 15 & is.na(obsspp$Tmax) & !grepl('^H',obsspp$Habit),]$Hmax
+
+obsspp[!is.na(obsspp$Hmax) & obsspp$Hmax > 15 & is.na(obsspp$Tmin) & !grepl('^H',obsspp$Habit),]$Tmin <- 
+  obsspp[!is.na(obsspp$Hmax) & obsspp$Hmax > 15 & is.na(obsspp$Tmin) & !grepl('^H',obsspp$Habit),]$Hmin
+
+obsspp[!is.na(obsspp$Hmax) & obsspp$Hmax > 5 & obsspp$Hmax <= 15 & is.na(obsspp$SCmax) & !grepl('^H',obsspp$Habit),]$SCmax <- 
+  obsspp[!is.na(obsspp$Hmax) & obsspp$Hmax > 5 & obsspp$Hmax <= 15 & is.na(obsspp$SCmax) & !grepl('^H',obsspp$Habit),]$Hmax
+
+obsspp[!is.na(obsspp$Hmax) & obsspp$Hmax > 5 & obsspp$Hmax <= 15 & is.na(obsspp$SCmin) & !grepl('^H',obsspp$Habit),]$SCmin <- 
+  obsspp[!is.na(obsspp$Hmax) & obsspp$Hmax > 5 & obsspp$Hmax <= 15 & is.na(obsspp$SCmin) & !grepl('^H',obsspp$Habit),]$Hmin
+
+obsspp[!is.na(obsspp$Hmax) & obsspp$Hmax > 0.5 & obsspp$Hmax <= 5 & is.na(obsspp$Smax) & !grepl('^H',obsspp$Habit),]$Smax <- 
+  obsspp[!is.na(obsspp$Hmax) & obsspp$Hmax > 0.5 & obsspp$Hmax <= 5 & is.na(obsspp$Smax) & !grepl('^H',obsspp$Habit),]$Hmax
+
+obsspp[!is.na(obsspp$Hmax) & obsspp$Hmax > 0.5 & obsspp$Hmax <= 5 & is.na(obsspp$Smin) & !grepl('^H',obsspp$Habit),]$Smin <- 
+  obsspp[!is.na(obsspp$Hmax) & obsspp$Hmax > 0.5 & obsspp$Hmax <= 5 & is.na(obsspp$Smin) & !grepl('^H',obsspp$Habit),]$Hmin
+
+obsspp[!is.na(obsspp$Hmax) & obsspp$Hmax > 0 & obsspp$Hmax <= 0.5 & is.na(obsspp$Fmax) | grepl('^H',obsspp$Habit),]$Fmax <- 
+  obsspp[!is.na(obsspp$Hmax) & obsspp$Hmax > 0 & obsspp$Hmax <= 0.5 & is.na(obsspp$Fmax) | grepl('^H',obsspp$Habit),]$Hmax
+
+obsspp[!is.na(obsspp$Hmax) & obsspp$Hmax > 0 & obsspp$Hmax <= 0.5 & is.na(obsspp$Fmin)  | grepl('^H',obsspp$Habit),]$Fmin <- 
+  obsspp[!is.na(obsspp$Hmax) & obsspp$Hmax > 0 & obsspp$Hmax <= 0.5 & is.na(obsspp$Fmin)  | grepl('^H',obsspp$Habit),]$Hmin
+
 Com.Sp.hts<-aggregate(obsspp[,c('Fmin', 'Fmax', 'Smin', 'Smax', 'SCmin', 'SCmax','Tmin', 'Tmax', 'Dmin', 'Dmax')], by=list(obsspp$Observation_Label, obsspp$AcTaxon, obsspp$Simple), FUN=mean, na.action = na.omit) #sum within plot
 colnames(Com.Sp.hts)<-c('Observation_Label', 'Species', 'Simple', 'Fmin', 'Fmax', 'Smin', 'Smax', 'SCmin', 'SCmax','Tmin', 'Tmax', 'Dmin', 'Dmax') #restore column names
 

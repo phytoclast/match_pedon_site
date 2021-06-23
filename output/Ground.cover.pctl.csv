@@ -35,4 +35,4 @@
 "bog","Grass/Grasslike",10,10,10,5,5
 "bog","Nonvascular",15,30,45,10,25
 "bog","Shrub/Vine",55,90,95,35,75
-"bog","Tree",5,5,40,2,25
+"bog","Tree",4,5,40,1.5,25
