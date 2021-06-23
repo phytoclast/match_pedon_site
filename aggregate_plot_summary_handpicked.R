@@ -225,7 +225,7 @@ Com.Sp.groups.mean$under <- 100*(1-10^(apply(log10(1-(Com.Sp.groups.mean[,c('Fie
 
 
 Com.Sp.groups.hts <- aggregate(Com.Sp.groups[,c('Fmin', 'Fmax', 'Smin', 'Smax', 'SCmin', 'SCmax', 'Tmin', 'Tmax', 'Dmin', 'Dmax')],
-                               by=list(Com.Sp.groups$phase, Com.Sp.groups$Species), FUN='mean')
+                               by=list(Com.Sp.groups$phase, Com.Sp.groups$Species), FUN='mean', na.rm=TRUE)
 colnames(Com.Sp.groups.hts) <- c('phase', 'Species', 'Fmin', 'Fmax', 'Smin', 'Smax', 'SCmin', 'SCmax','Tmin', 'Tmax', 'Dmin', 'Dmax')
 
 ##frequency spp by phase ----

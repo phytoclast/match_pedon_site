@@ -7,12 +7,12 @@
 "02silver maple green ash swamp","Grass/Grasslike",0.5,5,20,0.3,10
 "02silver maple green ash swamp","Nonvascular",1,1,3,0.3,1.5
 "02silver maple green ash swamp","Shrub/Vine",1.5,10,55,0.5,35
-"02silver maple green ash swamp","Tree",60,85,95,40,75
+"02silver maple green ash swamp","Tree",55,85,95,35,75
 "04tamarack","Forb",35,55,80,20,60
 "04tamarack","Grass/Grasslike",3,20,50,1,30
 "04tamarack","Nonvascular",0.4,1,45,0.2,25
-"04tamarack","Shrub/Vine",10,20,55,5,35
-"04tamarack","Tree",10,30,75,5,55
+"04tamarack","Shrub/Vine",10,15,55,5,35
+"04tamarack","Tree",10,30,60,4,40
 "06fen","Forb",10,25,50,4,30
 "06fen","Grass/Grasslike",30,60,80,15,60
 "06fen","Nonvascular",60,60,60,40,40
@@ -25,12 +25,12 @@
 "08wet meadow","Forb",5,30,90,3,70
 "08wet meadow","Grass/Grasslike",45,80,90,25,70
 "08wet meadow","Shrub/Vine",0.4,5,55,0.2,35
-"08wet meadow","Tree",0,1,10,0,5
+"08wet meadow","Tree",5,15,20,3,10
 "09reed canary grass","Forb",1.5,5,25,0.5,10
 "09reed canary grass","Grass/Grasslike",75,90,100,55,80
 "09reed canary grass","Nonvascular",2,2,2,1,1
 "09reed canary grass","Shrub/Vine",1,5,35,0.5,20
-"09reed canary grass","Tree",2,10,30,1,15
+"09reed canary grass","Tree",1,20,35,0.4,20
 "bog","Forb",3,5,30,1,15
 "bog","Grass/Grasslike",10,10,10,5,5
 "bog","Nonvascular",15,30,45,10,25
