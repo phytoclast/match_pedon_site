@@ -1056,7 +1056,8 @@ Eurybia integrifolia	1
 Eurybia macrophylla	1.5
 Euthamia occidentalis	2
 Eutrochium fistulosum	2
-Eutrochium maculatum	2
+Eutrochium maculatum	1.5
+Eutrochium pupureum	1
 Exostema caribaeum	12
 Exothea paniculata	20
 Eysenhardtia orthocarpa	12
@@ -2307,10 +2308,10 @@ Rubus odoratus	1.5
 Rubus parviflorus	1
 Rubus spectabilis	4
 Rubus ursinus	0.6
-Rudbeckia hirta	0.3
-Rudbeckia laciniata	2.5
-Rudbeckia maxima	3
-Rudbeckia nitida	1.5
+Rudbeckia hirta	0.6
+Rudbeckia laciniata	1
+Rudbeckia maxima	1.5
+Rudbeckia nitida	1
 Ruellia humilis	0.8
 Ruellia strepens	1
 Rumex arcticus	0.3
@@ -2500,7 +2501,7 @@ Solidago canadensis	1
 Solidago canadensis var. scabra	1.5
 Solidago fistulosa	2
 Solidago flexicaulis	1
-Solidago gigantea	2.5
+Solidago gigantea	1.5
 Solidago missouriensis	1
 Solidago multiradiata	0.3
 Solidago nemoralis	0.6

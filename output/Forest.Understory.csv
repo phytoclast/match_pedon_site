@@ -250,9 +250,9 @@
 "04tamarack","Impatiens capensis",6,17.9748202517975,"IMCA","Forb/Herb","Native",0.3,50,0.3,0.5
 "04tamarack","Symplocarpus foetidus",6,9.21065789342107,"SYFO","Forb/Herb","Native",0.4,10,0.2,0.3
 "04tamarack","Saururus cernuus",6,6.99993000069999,"SACE","Forb/Herb","Native",0,5,0.1,0.5
-"04tamarack","Eutrochium maculatum",6,3.5249647503525,"EUMA9","Forb/Herb","Native",0,5,1,2
+"04tamarack","Eutrochium maculatum",6,3.5249647503525,"EUMA9","Forb/Herb","Native",0,5,1,1.5
 "04tamarack","Eupatorium perfoliatum",6,2.59997400026,"EUPE3","Forb/Herb","Native",0,4,0.1,0.5
-"04tamarack","Rudbeckia laciniata",6,1.61248387516125,"RULA3","Forb/Herb","Native",0,2,1.5,3
+"04tamarack","Rudbeckia laciniata",6,1.61248387516125,"RULA3","Forb/Herb","Native",0,2,0.5,1
 "04tamarack","Symphyotrichum puniceum",6,1.38573614263857,"SYPU","Forb/Herb","Native",0,3,0.3,0.5
 "04tamarack","Chrysosplenium americanum",6,1.25998740012599,"CHAM2","Forb/Herb","Native",0,1,0.1,0.5
 "04tamarack","Solidago patula",6,0.762992370076299,"SOPA2","Forb/Herb","Native",0,1.5,0.5,1
@@ -336,7 +336,7 @@
 "04tamarack","Maianthemum stellatum",6,0.00499995000049491,"MAST4","Forb/Herb","Native",0,0,0.1,0.5
 "04tamarack","Mentha arvensis",6,0.00499995000049491,"MEAR4","Forb/Herb","Native",0,0,0.4,1
 "04tamarack","Osmorhiza claytonii",6,0.00499995000049491,"OSCL","Forb/Herb","Native",0,0,0.1,0.5
-"04tamarack","Solidago gigantea",6,0.00499995000049491,"SOGI","Forb/Herb","Native",0,0,1.5,3
+"04tamarack","Solidago gigantea",6,0.00499995000049491,"SOGI","Forb/Herb","Native",0,0,1,1.5
 "04tamarack","Lycopus americanus",6,0.00324996750032946,"LYAM","Forb/Herb","Native",0,0,0.3,0.5
 "04tamarack","Symphyotrichum lanceolatum",6,0.00324996750032946,"SYLA6","Forb/Herb","Native",0,0,0.1,0.5
 "04tamarack","Osmundastrum cinnamomeum",7,7.37067629323707,"OSCI2","Fern/fern ally","Native",0,10,0.5,1.5
@@ -414,7 +414,7 @@
 "06fen","Arnoglossum plantagineum",6,0.0749992500075014,"ARPL4","Forb/Herb","Native",0,0.1,0.3,0.5
 "06fen","Triantha glutinosa",6,0.0749992500075014,"TRGL5","Forb/Herb","Native",0,0.1,0.1,0.2
 "06fen","Cirsium muticum",6,0.0437495625043804,"CIMU","Forb/Herb","Native",0,0.1,0.1,0.5
-"06fen","Solidago gigantea",6,0.0374996250037452,"SOGI","Forb/Herb","Native",0,0.1,1.5,3
+"06fen","Solidago gigantea",6,0.0374996250037452,"SOGI","Forb/Herb","Native",0,0.1,1,1.5
 "06fen","Cypripedium candidum",6,0.0124998750012484,"CYCA5","Forb/Herb","Native",0,0,0.1,0.5
 "06fen","Symphyotrichum lanceolatum",6,0.0124998750012484,"SYLA6","Forb/Herb","Native",0,0,0.1,0.5
 "06fen","Thelypteris palustris",7,0.68749312506875,"THPA","Fern/fern ally","Native",0.1,1.5,0.3,0.5
@@ -443,7 +443,7 @@
 "07marsh","Phragmites australis",5,0.0499995000050046,"PHAU7","Grass/grass-like (Graminoids)","Native",0,0.1,2,4
 "07marsh","Schoenoplectus acutus",5,0.0499995000050046,"SCAC3","Grass/grass-like (Graminoids)","Native",0,0.1,0.1,0.5
 "07marsh","Symphyotrichum lanceolatum",6,3.9749602503975,"SYLA6","Forb/Herb","Native",0,5,0.1,0.5
-"07marsh","Eutrochium maculatum",6,0.399996000040004,"EUMA9","Forb/Herb","Native",0,0.5,1,2
+"07marsh","Eutrochium maculatum",6,0.399996000040004,"EUMA9","Forb/Herb","Native",0,0.5,1,1.5
 "07marsh","Mentha arvensis",6,0.399996000040004,"MEAR4","Forb/Herb","Native",0,0.5,0.4,1
 "07marsh","Persicaria punctata",6,0.399996000040004,"PEPU18","Forb/Herb","Native",0,0.5,0.1,0.5
 "07marsh","Xanthium strumarium",6,0.1749982500175,"XAST","Forb/Herb","Native",0,0.3,0.1,0.5
@@ -529,7 +529,7 @@
 "08wet meadow","Cyperus",5,0.0055555000005536,"CYPER","Grass/grass-like (Graminoids)","Unknown",0,0,0.1,0.5
 "08wet meadow","Phleum pratense",5,0.0055555000005536,"PHPR3","Grass/grass-like (Graminoids)","Introduced",0,0,0.5,1
 "08wet meadow","Symphyotrichum puniceum",6,25.9133519775913,"SYPU","Forb/Herb","Native",1,95,0.1,0.5
-"08wet meadow","Eutrochium maculatum",6,7.40825925074082,"EUMA9","Forb/Herb","Native",0.2,25,1,2
+"08wet meadow","Eutrochium maculatum",6,7.40825925074082,"EUMA9","Forb/Herb","Native",0.2,25,1,1.5
 "08wet meadow","Euthamia graminifolia",6,1.49526282514952,"EUGR5","Forb/Herb","Native",0,5,0.1,0.5
 "08wet meadow","Persicaria sagittata",6,1.38443060013844,"PESA20","Forb/Herb","Native",0,4,0.1,0.5
 "08wet meadow","Symphyotrichum lanceolatum",6,1.31109800013111,"SYLA6","Forb/Herb","Native",0,3,0.1,0.5
@@ -547,7 +547,7 @@
 "08wet meadow","Pycnanthemum virginianum",6,0.554716675055467,"PYVI","Forb/Herb","Native",0,1.5,0.1,0.5
 "08wet meadow","Penthorum sedoides",6,0.505550500050556,"PESE6","Forb/Herb","Native",0,1.5,0.4,1
 "08wet meadow","Bidens frondosa",6,0.499995000050002,"BIFR","Forb/Herb","Native",0,0.5,0.5,1
-"08wet meadow","Solidago gigantea",6,0.492495075049248,"SOGI","Forb/Herb","Native",0.1,1,1.5,3
+"08wet meadow","Solidago gigantea",6,0.492495075049248,"SOGI","Forb/Herb","Native",0.1,1,1,1.5
 "08wet meadow","Urtica dioica",6,0.433329000043337,"URDI","Forb/Herb","Native",0,1,0.1,0.5
 "08wet meadow","Lycopus americanus",6,0.415829175041582,"LYAM","Forb/Herb","Native",0.1,1,0.3,0.5
 "08wet meadow","Cirsium arvense",6,0.393051625039309,"CIAR4","Forb/Herb","Introduced",0,1,0.1,0.5
