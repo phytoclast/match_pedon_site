@@ -147,12 +147,12 @@
 "04tamarack","Alnus incana",1,0.0699993000069954,"ALIN2","Tree","Native",0,0.1,1.5,3
 "04tamarack","Liriodendron tulipifera",1,0.0499995000050046,"LITU","Tree","Native",0,0,1,5
 "04tamarack","Prunus serotina",1,0.0449995500044986,"PRSE2","Tree","Native",0,0,2,5
-"04tamarack","Quercus rubra",1,0.0382463050700776,"QURU","Tree","Native",0,0,0.4,0.4
+"04tamarack","Quercus rubra",1,0.0382463050700776,"QURU","Tree","Native",0,0,0.4,5
 "04tamarack","Quercus rubra",1,0.0382463050700776,"QURU","Tree","Native",0,0,0.2,0.4
 "04tamarack","Acer rubrum",1,0.0247497525024731,"ACRU","Tree","Native",0,0.1,0.1,0.5
 "04tamarack","Nyssa sylvatica",1,0.0147498525014722,"NYSY","Tree","Native",0,0,0.1,0.3
 "04tamarack","Thuja occidentalis",1,0.00999990000100093,"THOC2","Tree","Native",0,0.1,0,0.1
-"04tamarack","Sassafras albidum",1,0.00974969125520087,"SAAL5","Tree","Native",0,0,0.5,0.5
+"04tamarack","Sassafras albidum",1,0.00974969125520087,"SAAL5","Tree","Native",0,0,0.5,5
 "04tamarack","Sassafras albidum",1,0.00974969125520087,"SAAL5","Tree","Native",0,0,0.3,0.5
 "04tamarack","Fagus grandifolia",1,0.00324996750032946,"FAGR","Tree","Native",0,0,0.1,0.5
 "04tamarack","Quercus alba",1,0.00324996750032946,"QUAL","Tree","Native",0,0,2,5
@@ -171,8 +171,8 @@
 "04tamarack","Rosa palustris",3,0.941490585094151,"ROPA","Shrub/Subshrub","Native",0,1.5,0.5,1.5
 "04tamarack","Sambucus nigra",3,0.704822953470441,"SANI4","Shrub/Subshrub","Native",0,1,0.5,2
 "04tamarack","Sambucus nigra",3,0.704822953470441,"SANI4","Shrub/Subshrub","Native",0,0,0,0.3
+"04tamarack","Cornus obliqua",3,0.699792004089939,"COOB9","Shrub/Subshrub","Native",0,1,0.5,2
 "04tamarack","Cornus obliqua",3,0.699792004089939,"COOB9","Shrub/Subshrub","Native",0,0,0,0.5
-"04tamarack","Cornus obliqua",3,0.699792004089939,"COOB9","Shrub/Subshrub","Native",0,1,0.5,0.5
 "04tamarack","Frangula alnus",3,0.382130807345638,"FRAL4","Shrub/Subshrub","Introduced",0,0.2,0.5,0.5
 "04tamarack","Frangula alnus",3,0.382130807345638,"FRAL4","Shrub/Subshrub","Introduced",0,0.2,0,0.3
 "04tamarack","Rubus pubescens",3,0.355746442535576,"RUPU","Shrub/Subshrub","Native",0.2,1,0,0.1
@@ -182,7 +182,7 @@
 "04tamarack","Betula pumila",3,0.299997000029995,"BEPU4","Shrub/Subshrub","Native",0,0.2,0.5,2
 "04tamarack","Rhamnus alnifolia",3,0.299997000029995,"RHAL","Shrub/Subshrub","Native",0,0.2,0.5,1
 "04tamarack","Spiraea alba",3,0.229997700022999,"SPAL2","Shrub/Subshrub","Native",0.2,1.5,0.5,1
-"04tamarack","Berberis thunbergii",3,0.204987950220492,"BETH","Shrub/Subshrub","Introduced",0.1,1.5,0.5,0.5
+"04tamarack","Berberis thunbergii",3,0.204987950220492,"BETH","Shrub/Subshrub","Introduced",0.1,1.5,0.5,2
 "04tamarack","Berberis thunbergii",3,0.204987950220492,"BETH","Shrub/Subshrub","Introduced",0,0,0.3,0.5
 "04tamarack","Cornus sericea",3,0.199998000019996,"COSE16","Shrub/Subshrub","Native",0.5,1.5,0.5,2
 "04tamarack","Salix discolor",3,0.199998000019996,"SADI","Shrub/Subshrub","Native",0,0.2,0.5,2
@@ -358,7 +358,7 @@
 "06fen","Juniperus virginiana",1,1.27812943728345,"JUVI","Tree","Native",0.1,2,1,2
 "06fen","Juniperus virginiana",1,1.27812943728345,"JUVI","Tree","Native",0,0.5,0.1,0.5
 "06fen","Larix laricina",1,0.0749992500075014,"LALA","Tree","Native",0,0.1,0.1,0.3
-"06fen","Dasiphora fruticosa",3,36.7602594786344,"DAFR6","Shrub/Subshrub","Native",0,50,0.4,0.4
+"06fen","Dasiphora fruticosa",3,36.7602594786344,"DAFR6","Shrub/Subshrub","Native",0,50,0.4,2
 "06fen","Dasiphora fruticosa",3,36.7602594786344,"DAFR6","Shrub/Subshrub","Native",1,35,0.3,0.4
 "06fen","Frangula alnus",3,2.2543212883488,"FRAL4","Shrub/Subshrub","Introduced",0.1,1,0.5,1
 "06fen","Frangula alnus",3,2.2543212883488,"FRAL4","Shrub/Subshrub","Introduced",0.2,5,0.3,0.5

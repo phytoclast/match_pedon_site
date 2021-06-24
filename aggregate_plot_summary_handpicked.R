@@ -252,6 +252,9 @@ Com.Sp.groups.mean$under <- 100*(1-10^(apply(log10(1-(Com.Sp.groups.mean[,c('Fie
 Com.Sp.groups.hts <- aggregate(Com.Sp.groups[,c('Fmin', 'Fmax', 'Smin', 'Smax', 'SCmin', 'SCmax', 'Tmin', 'Tmax', 'Dmin', 'Dmax')],
                                by=list(Com.Sp.groups$phase, Com.Sp.groups$Species), FUN='mean', na.rm=TRUE)
 colnames(Com.Sp.groups.hts) <- c('phase', 'Species', 'Fmin', 'Fmax', 'Smin', 'Smax', 'SCmin', 'SCmax','Tmin', 'Tmax', 'Dmin', 'Dmax')
+for (i in 1:ncol(Com.Sp.groups.hts)){#i=3
+Com.Sp.groups.hts[is.nan(Com.Sp.groups.hts[,i]),i] <- NA
+  }#clean up NaNs
 
 ##frequency spp by phase ----
 
@@ -347,6 +350,15 @@ Forest.Overstory[is.na(Forest.Overstory$Canopy.Top) & Forest.Overstory$Plant.Typ
 Forest.Overstory[is.na(Forest.Overstory$Canopy.Bottom),]$
   Canopy.Bottom <- 15
 
+Forest.Overstory$Canopy.Top <- ifelse(!is.na(Forest.Overstory$maxHt) & Forest.Overstory$maxHt > 15,
+                                      pmin(Forest.Overstory$Canopy.Top,
+                                           Forest.Overstory$maxHt),
+                                      Forest.Overstory$Canopy.Top)
+Forest.Overstory$Canopy.Bottom <- ifelse(!is.na(Forest.Overstory$maxHt & Forest.Overstory$maxHt > 15),
+                                      pmin(Forest.Overstory$Canopy.Bottom,
+                                           Forest.Overstory$maxHt),
+                                      Forest.Overstory$Canopy.Bottom)
+
 Forest.Overstory.sub<- Group.Summary[Group.Summary$sc75 >0,c( 'phase','Taxon', 'Plant.Symbol', 'Plant.Type','Nativity','sc25', 'sc75','SCmin', 'SCmax', 'Dmin','Dmax','b05','b95', 'maxHt', 'over')]
 Forest.Overstory.sub[,c('Dmin','Dmax','b05','b95')]<- NA
 colnames(Forest.Overstory.sub) <- c('phase','Taxon', 'Plant.Symbol', 'Plant.Type','Nativity', 'Cover.Low', 'Cover.High','Canopy.Bottom', 'Canopy.Top','Diam.Low','Diam.High','BA.Low','BA.High','maxHt', 'over')
@@ -361,16 +373,16 @@ Forest.Overstory.sub[is.na(Forest.Overstory.sub$Canopy.Top) & Forest.Overstory.s
 Forest.Overstory.sub[is.na(Forest.Overstory.sub$Canopy.Bottom),]$
   Canopy.Bottom <- 5
 
+Forest.Overstory.sub$Canopy.Top <- ifelse(!is.na(Forest.Overstory.sub$maxHt) & Forest.Overstory.sub$maxHt > 5,
+                                      pmin(Forest.Overstory.sub$Canopy.Top,
+                                           Forest.Overstory.sub$maxHt),
+                                      Forest.Overstory$Canopy.Top)
+Forest.Overstory.sub$Canopy.Bottom <- ifelse(!is.na(Forest.Overstory.sub$maxHt & Forest.Overstory.sub$maxHt > 5),
+                                         pmin(Forest.Overstory.sub$Canopy.Bottom,
+                                              Forest.Overstory.sub$maxHt),
+                                         Forest.Overstory.sub$Canopy.Bottom)
 Forest.Overstory <- rbind(Forest.Overstory, Forest.Overstory.sub)
 
-Forest.Overstory$Canopy.Top <- ifelse(!is.na(Forest.Overstory$maxHt),
-                                      pmin(Forest.Overstory$Canopy.Top,
-                                           Forest.Overstory$maxHt),
-                                      Forest.Overstory$Canopy.Top)
-Forest.Overstory$Canopy.Bottom <- ifelse(!is.na(Forest.Overstory$maxHt),
-                                      pmin(Forest.Overstory$Canopy.Bottom,
-                                           Forest.Overstory$maxHt),
-                                      Forest.Overstory$Canopy.Bottom)
 
 
 Forest.Understory <- Group.Summary[Group.Summary$s75 >0,c( 'phase','Taxon', 'Plant.Symbol', 'Plant.Type','Nativity', 's25', 's75','Smin', 'Smax', 'maxHt', 'under')]
@@ -385,6 +397,15 @@ Forest.Understory[is.na(Forest.Understory$Canopy.Top) & Forest.Understory$Plant.
   Canopy.Top <- 5
 Forest.Understory[is.na(Forest.Understory$Canopy.Bottom),]$
   Canopy.Bottom <- 0.5
+
+Forest.Understory$Canopy.Top <- ifelse(!is.na(Forest.Understory$maxHt) & Forest.Understory$maxHt > 0.5,
+                                      pmin(Forest.Understory$Canopy.Top,
+                                           Forest.Understory$maxHt),
+                                      Forest.Understory$Canopy.Top)
+Forest.Understory$Canopy.Bottom <- ifelse(!is.na(Forest.Understory$maxHt & Forest.Understory$maxHt > 0.5),
+                                         pmin(Forest.Understory$Canopy.Bottom,
+                                              Forest.Understory$maxHt),
+                                         Forest.Understory$Canopy.Bottom)
 
 
 Forest.Understory.sub <- Group.Summary[Group.Summary$f75 >0,c( 'phase','Taxon','Plant.Symbol', 'Plant.Type','Nativity', 'f25', 'f75','Fmin', 'Fmax', 'maxHt', 'under')]
@@ -404,16 +425,17 @@ Forest.Understory.sub[is.na(Forest.Understory.sub$Canopy.Top) & Forest.Understor
 Forest.Understory.sub[is.na(Forest.Understory.sub$Canopy.Bottom),]$
   Canopy.Bottom <- 0
 
+Forest.Understory.sub$Canopy.Top <- ifelse(!is.na(Forest.Understory.sub$maxHt),
+                                       pmin(Forest.Understory.sub$Canopy.Top,
+                                            Forest.Understory.sub$maxHt),
+                                       Forest.Understory.sub$Canopy.Top)
+Forest.Understory.sub$Canopy.Bottom <- ifelse(!is.na(Forest.Understory.sub$maxHt),
+                                          pmin(Forest.Understory.sub$Canopy.Bottom,
+                                               Forest.Understory.sub$maxHt),
+                                          Forest.Understory.sub$Canopy.Bottom)
 Forest.Understory <- rbind(Forest.Understory, Forest.Understory.sub)
 
-Forest.Understory$Canopy.Top <- ifelse(!is.na(Forest.Understory$maxHt),
-                                      pmin(Forest.Understory$Canopy.Top,
-                                           Forest.Understory$maxHt),
-                                      Forest.Understory$Canopy.Top)
-Forest.Understory$Canopy.Bottom <- ifelse(!is.na(Forest.Understory$maxHt),
-                                         pmin(Forest.Understory$Canopy.Bottom,
-                                              Forest.Understory$maxHt),
-                                         Forest.Understory$Canopy.Bottom)
+
 
 Forest.Overstory[,c('Cover.Low', 'Cover.High', 'Canopy.Bottom', 'Canopy.Top', 'Diam.Low', 'Diam.High', 'BA.Low', 'BA.High')] <- lapply(Forest.Overstory[,c('Cover.Low', 'Cover.High', 'Canopy.Bottom', 'Canopy.Top', 'Diam.Low', 'Diam.High', 'BA.Low', 'BA.High')], FUN=roundF)
 
