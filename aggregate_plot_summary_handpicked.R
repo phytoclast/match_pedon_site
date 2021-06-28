@@ -58,7 +58,7 @@ makeplot <- function(a,d,t,k){
   
 }
 roundF<-function(p){
-  p<-ifelse(p<0.5, floor(p/0.1+0.5)*0.1,ifelse(p<2, floor(p/0.5+0.5)*0.5, ifelse(p<5, floor(p+0.5),floor(p/5+0.5)*5)))
+  p<-ifelse(p<0.5, floor(p/0.1+0.5)*0.1,ifelse(p<5, floor(p/0.5+0.5)*0.5, ifelse(p<15, floor(p+0.5),floor(p/5+0.5)*5)))
 }
 tofoliar <- function(c){
   f <- (0.41*c/100 + 0.41*(c/100)^2)*100
@@ -412,7 +412,8 @@ Forest.Understory.sub <- Group.Summary[Group.Summary$f75 >0,c( 'phase','Taxon','
 colnames(Forest.Understory.sub) <- c('phase','Taxon','Plant.Symbol', 'Plant.Type','Nativity', 'Cover.Low', 'Cover.High','Canopy.Bottom', 'Canopy.Top', 'maxHt', 'under')
 Forest.Understory.sub[is.na(Forest.Understory.sub$Canopy.Bottom) & Forest.Understory.sub$Plant.Type %in% c('Nonvascular'),]$Canopy.Bottom <- 0.0
 
-Forest.Understory.sub[is.na(Forest.Understory.sub$Canopy.Top) & !is.na(Forest.Understory.sub$maxHt) & Forest.Understory.sub$Plant.Type %in% c('Grass/grass-like (Graminoids)','Fern/fern ally','Forb/Herb'),]$Canopy.Top <- Forest.Understory.sub[is.na(Forest.Understory.sub$Canopy.Top) & !is.na(Forest.Understory.sub$maxHt) & Forest.Understory.sub$Plant.Type %in% c('Grass/grass-like (Graminoids)','Fern/fern ally','Forb/Herb'),]$maxHt
+Forest.Understory.sub[is.na(Forest.Understory.sub$Canopy.Top) & !is.na(Forest.Understory.sub$maxHt) & Forest.Understory.sub$Plant.Type %in% c('Grass/grass-like (Graminoids)','Fern/fern ally','Forb/Herb'),]$Canopy.Top <- 
+  pmin(Forest.Understory.sub[is.na(Forest.Understory.sub$Canopy.Top) & !is.na(Forest.Understory.sub$maxHt) & Forest.Understory.sub$Plant.Type %in% c('Grass/grass-like (Graminoids)','Fern/fern ally','Forb/Herb'),]$maxHt, 1.5)
 
 Forest.Understory.sub[is.na(Forest.Understory.sub$Canopy.Bottom) & !is.na(Forest.Understory.sub$Canopy.Top) & Forest.Understory.sub$Plant.Type %in% c('Grass/grass-like (Graminoids)','Fern/fern ally','Forb/Herb'),]$Canopy.Bottom <- Forest.Understory.sub[is.na(Forest.Understory.sub$Canopy.Bottom) & !is.na(Forest.Understory.sub$Canopy.Top) & Forest.Understory.sub$Plant.Type %in% c('Grass/grass-like (Graminoids)','Fern/fern ally','Forb/Herb'),]$Canopy.Top/2#4+.05
 

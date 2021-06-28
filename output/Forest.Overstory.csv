@@ -1,28 +1,28 @@
 "phase","Taxon","order","over","Plant.Symbol","Plant.Type","Nativity","Cover.Low","Cover.High","Canopy.Bottom","Canopy.Top","Diam.Low","Diam.High","BA.Low","BA.High"
-"01drained swamp","Ulmus americana",1,23.8241899138193,"ULAM","Tree","Native",0,10,10,25,,,1,10
+"01drained swamp","Ulmus americana",1,23.8241899138193,"ULAM","Tree","Native",0,12,10,25,,,1,8
 "01drained swamp","Ulmus americana",1,23.8241899138193,"ULAM","Tree","Native",5,50,5,15,,,,
-"01drained swamp","Celtis occidentalis",1,20.679793202068,"CEOC","Tree","Native",4,55,5,15,,,,
+"01drained swamp","Celtis occidentalis",1,20.679793202068,"CEOC","Tree","Native",3.5,55,5,15,,,,
 "01drained swamp","Quercus palustris",1,16.379836201638,"QUPA2","Tree","Native",3,30,10,25,,,0.2,1.5
-"01drained swamp","Acer saccharinum",1,14.4963762710249,"ACSA2","Tree","Native",3,35,10,25,,,0.2,10
+"01drained swamp","Acer saccharinum",1,14.4963762710249,"ACSA2","Tree","Native",2.5,35,10,25,,,0.2,8
 "01drained swamp","Acer saccharinum",1,14.4963762710249,"ACSA2","Tree","Native",0,3,5,15,,,,
 "01drained swamp","Acer negundo",1,10.159898401016,"ACNE2","Tree","Native",5,20,5,15,,,,
-"01drained swamp","Quercus bicolor",1,8.51071678481323,"QUBI","Tree","Native",0.3,10,10,25,,,0,0
-"01drained swamp","Quercus bicolor",1,8.51071678481323,"QUBI","Tree","Native",1,5,5,15,,,,
-"01drained swamp","Morus alba",1,4.33995660043399,"MOAL","Tree","Introduced",0,5,5,15,,,,
-"01drained swamp","Acer rubrum",1,2.21997780022199,"ACRU","Tree","Native",0,3,5,15,,,,
-"01drained swamp","Prunus serotina",1,0.979990200098002,"PRSE2","Tree","Native",0.1,2,5,15,,,,
+"01drained swamp","Quercus bicolor",1,8.51071678481323,"QUBI","Tree","Native",0.3,11,10,25,,,0,0
+"01drained swamp","Quercus bicolor",1,8.51071678481323,"QUBI","Tree","Native",1,7,5,15,,,,
+"01drained swamp","Morus alba",1,4.33995660043399,"MOAL","Tree","Introduced",0,7,5,15,,,,
+"01drained swamp","Acer rubrum",1,2.21997780022199,"ACRU","Tree","Native",0,3.5,5,15,,,,
+"01drained swamp","Prunus serotina",1,0.979990200098002,"PRSE2","Tree","Native",0.1,2.5,5,15,,,,
 "01drained swamp","Salix nigra",1,0.0399996000040037,"SANI","Tree","Native",0,0.1,10,25,,,0,0
 "01drained swamp","Vitis riparia",4,1.079989200108,"VIRI","Vine/Liana","Native",0.2,3,2,25,,,,
 "01drained swamp","Parthenocissus quinquefolia",4,0.0799992000079963,"PAQU2","Vine/Liana","Native",0,0.3,2,25,,,,
-"02silver maple green ash swamp","Acer saccharinum",1,56.8128743070805,"ACSA2","Tree","Native",25,95,10,30,20,70,5,35
+"02silver maple green ash swamp","Acer saccharinum",1,56.8128743070805,"ACSA2","Tree","Native",25,95,10,30,20,70,4.5,35
 "02silver maple green ash swamp","Acer saccharinum",1,56.8128743070805,"ACSA2","Tree","Native",0,5,5,15,,,,
 "02silver maple green ash swamp","Fraxinus pennsylvanica",1,10.9271634556382,"FRPE","Tree","Native",0,25,1,25,,,0,1.5
-"02silver maple green ash swamp","Quercus palustris",1,6.99426978332639,"QUPA2","Tree","Native",0,10,10,25,,,0,1
+"02silver maple green ash swamp","Quercus palustris",1,6.99426978332639,"QUPA2","Tree","Native",0,9,10,25,,,0,1
 "02silver maple green ash swamp","Quercus palustris",1,6.99426978332639,"QUPA2","Tree","Native",0,0.1,5,15,,,,
-"02silver maple green ash swamp","Acer rubrum",1,5.88423892620329,"ACRU","Tree","Native",0,5,10,25,,,0,0
+"02silver maple green ash swamp","Acer rubrum",1,5.88423892620329,"ACRU","Tree","Native",0,4.5,10,25,,,0,0
 "02silver maple green ash swamp","Acer rubrum",1,5.88423892620329,"ACRU","Tree","Native",0,0.4,5,15,,,,
 "02silver maple green ash swamp","Ulmus americana",1,5.46302691246916,"ULAM","Tree","Native",0,5,10,20,,30,0,4
-"02silver maple green ash swamp","Ulmus americana",1,5.46302691246916,"ULAM","Tree","Native",0,10,5,10,,,,
+"02silver maple green ash swamp","Ulmus americana",1,5.46302691246916,"ULAM","Tree","Native",0,9,5,10,,,,
 "02silver maple green ash swamp","Quercus bicolor",1,1.86361772745909,"QUBI","Tree","Native",0,1.5,10,25,,,0,0.3
 "02silver maple green ash swamp","Fagus grandifolia",1,0.572721545511823,"FAGR","Tree","Native",0,0.5,5,15,,,,
 "02silver maple green ash swamp","Carya ovata",1,0.181816363654541,"CAOV2","Tree","Native",0,0.1,10,25,,,0,0
@@ -32,23 +32,23 @@
 "02silver maple green ash swamp","Parthenocissus quinquefolia",4,0.118180636375453,"PAQU2","Vine/Liana","Native",0,1,2,20,,,,
 "02silver maple green ash swamp","Vitis riparia",4,0.0181816363654552,"VIRI","Vine/Liana","Native",0,0,2,25,,,,
 "04tamarack","Acer rubrum",1,13.8453520765739,"ACRU","Tree","Native",0,1,10,25,,20,0,20
-"04tamarack","Acer rubrum",1,13.8453520765739,"ACRU","Tree","Native",0.3,25,4,10,,,,
+"04tamarack","Acer rubrum",1,13.8453520765739,"ACRU","Tree","Native",0.3,25,3.5,11,,,,
 "04tamarack","Fraxinus pennsylvanica",1,11.0295115586659,"FRPE","Tree","Native",0,25,3,25,,,0,0
 "04tamarack","Fraxinus pennsylvanica",1,11.0295115586659,"FRPE","Tree","Native",0,5,3,25,,,,
-"04tamarack","Thuja occidentalis",1,7.02924471440279,"THOC2","Tree","Native",3,40,2,15,20,45,0.2,10
-"04tamarack","Thuja occidentalis",1,7.02924471440279,"THOC2","Tree","Native",1,15,5,15,,,,
-"04tamarack","Larix laricina",1,3.36077324919895,"LALA","Tree","Native",0,1,5,15,10,20,0,2
-"04tamarack","Larix laricina",1,3.36077324919895,"LALA","Tree","Native",0,4,3,10,,,,
+"04tamarack","Thuja occidentalis",1,7.02924471440279,"THOC2","Tree","Native",3,40,2,15,20,45,0.2,9
+"04tamarack","Thuja occidentalis",1,7.02924471440279,"THOC2","Tree","Native",1,14,5,15,,,,
+"04tamarack","Larix laricina",1,3.36077324919895,"LALA","Tree","Native",0,1,5,15,11,20,0,2
+"04tamarack","Larix laricina",1,3.36077324919895,"LALA","Tree","Native",0,4,3,11,,,,
 "04tamarack","Pinus strobus",1,2.49459305288948,"PIST","Tree","Native",0,3,10,25,,,0,1
 "04tamarack","Pinus strobus",1,2.49459305288948,"PIST","Tree","Native",0,0.2,5,15,,,,
 "04tamarack","Fraxinus nigra",1,2.18741051157103,"FRNI","Tree","Native",0,1.5,10,25,,,0,3
-"04tamarack","Fraxinus nigra",1,2.18741051157103,"FRNI","Tree","Native",0,4,5,15,,,,
-"04tamarack","Betula papyrifera",1,1.939980600194,"BEPA","Tree","Native",5,15,5,15,20,20,2,5
-"04tamarack","Betula alleghaniensis",1,1.6390166695027,"BEAL2","Tree","Native",0,0.5,5,25,,10,0,1
+"04tamarack","Fraxinus nigra",1,2.18741051157103,"FRNI","Tree","Native",0,4,7,13,,,,
+"04tamarack","Betula papyrifera",1,1.939980600194,"BEPA","Tree","Native",6,15,5,15,20,20,2,5
+"04tamarack","Betula alleghaniensis",1,1.6390166695027,"BEAL2","Tree","Native",0,0.5,5,25,,11,0,1
 "04tamarack","Betula alleghaniensis",1,1.6390166695027,"BEAL2","Tree","Native",0,2,5,25,,,,
-"04tamarack","Populus tremuloides",1,1.39598608013881,"POTR5","Tree","Native",0.5,5,10,20,,10,0,2
-"04tamarack","Populus tremuloides",1,1.39598608013881,"POTR5","Tree","Native",0.2,3,5,10,,,,
-"04tamarack","Ulmus americana",1,1.149988500115,"ULAM","Tree","Native",0,5,2,25,,,,
+"04tamarack","Populus tremuloides",1,1.39598608013881,"POTR5","Tree","Native",0.5,7,10,20,,11,0,2
+"04tamarack","Populus tremuloides",1,1.39598608013881,"POTR5","Tree","Native",0.2,3,5,9,,,,
+"04tamarack","Ulmus americana",1,1.149988500115,"ULAM","Tree","Native",0,5,2.5,25,,,,
 "04tamarack","Acer saccharinum",1,1.01998980010199,"ACSA2","Tree","Native",0,1.5,10,25,,,0,0
 "04tamarack","Quercus bicolor",1,0.918315833591499,"QUBI","Tree","Native",0,1,5,25,,,0,0.5
 "04tamarack","Quercus bicolor",1,0.918315833591499,"QUBI","Tree","Native",0,0.4,5,25,,,,
@@ -58,22 +58,22 @@
 "04tamarack","Tilia americana",1,0.0999990000099982,"TIAM","Tree","Native",0,0.1,10,25,,,0,0
 "04tamarack","Fagus grandifolia",1,0.0499995000050046,"FAGR","Tree","Native",0,0,5,15,,,,
 "04tamarack","Populus deltoides",1,0.0199998000020019,"PODE3","Tree","Native",0,0,10,25,,,0,0
-"04tamarack","Viburnum lentago",1,0.00999990000100093,"VILE","Tree","Native",0,0,4,20,,,,
+"04tamarack","Viburnum lentago",1,0.00999990000100093,"VILE","Tree","Native",0,0,4.5,20,,,,
 "04tamarack","Toxicodendron vernix",3,0.0699993000069954,"TOVE","Shrub/Subshrub","Native",0,0,2,25,,,,
 "04tamarack","Vitis riparia",4,0.224997750022504,"VIRI","Vine/Liana","Native",0,0.5,2,25,,,,
 "04tamarack","Parthenocissus quinquefolia",4,0.0202497975020255,"PAQU2","Vine/Liana","Native",0,0.1,2,20,,,,
-"07marsh","Larix laricina",1,2.54997450025499,"LALA","Tree","Native",0.4,5,10,20,,,0,0
+"07marsh","Larix laricina",1,2.54997450025499,"LALA","Tree","Native",0.4,6,10,20,,,0,0
 "07marsh","Liriodendron tulipifera",1,0.0249997500024968,"LITU","Tree","Native",0,0,10,25,,,0,0
 "07marsh","Tilia americana",1,0.0249997500024968,"TIAM","Tree","Native",0,0,10,25,,,0,0
 "08wet meadow","Populus tremuloides",1,2.76540456817531,"POTR5","Tree","Native",0,1.5,10,25,,,0,1.5
-"08wet meadow","Populus tremuloides",1,2.76540456817531,"POTR5","Tree","Native",0,5,5,15,,,,
+"08wet meadow","Populus tremuloides",1,2.76540456817531,"POTR5","Tree","Native",0,6,5,15,,,,
 "08wet meadow","Acer saccharinum",1,0.111110000011116,"ACSA2","Tree","Native",0,0.4,2,25,,,0,0
 "08wet meadow","Fraxinus nigra",1,0.0222220000022255,"FRNI","Tree","Native",0,0,10,20,,,0,0
 "09reed canary grass","Salix nigra",1,10.3011982750044,"SANI","Tree","Native",0,30,10,25,,,0,0
-"09reed canary grass","Salix nigra",1,10.3011982750044,"SANI","Tree","Native",0,4,5,15,,,,
+"09reed canary grass","Salix nigra",1,10.3011982750044,"SANI","Tree","Native",0,4.5,5,15,,,,
 "09reed canary grass","Acer saccharinum",1,3.22675396459803,"ACSA2","Tree","Native",0,5,2,20,25,35,0,3
-"09reed canary grass","Acer saccharinum",1,3.22675396459803,"ACSA2","Tree","Native",0,3,5,15,,,,
-"09reed canary grass","Quercus bicolor",1,2.609973900261,"QUBI","Tree","Native",0,10,20,25,80,90,0,2
+"09reed canary grass","Acer saccharinum",1,3.22675396459803,"ACSA2","Tree","Native",0,3.5,5,15,,,,
+"09reed canary grass","Quercus bicolor",1,2.609973900261,"QUBI","Tree","Native",0,8,20,25,80,90,0,2
 "09reed canary grass","Juglans nigra",1,1.09696806052909,"JUNI","Tree","Native",0,1.5,20,25,,60,0,1.5
 "09reed canary grass","Juglans nigra",1,1.09696806052909,"JUNI","Tree","Native",0,1.5,5,15,,,,
 "09reed canary grass","Fraxinus pennsylvanica",1,0.823538279152058,"FRPE","Tree","Native",0,1.5,4,25,,,0,3
@@ -85,6 +85,6 @@
 "bog","Larix laricina",1,0.999990000100004,"LALA","Tree","Native",0,0.5,10,20,,,0,0
 "bog","Picea mariana",1,0.999990000100004,"PIMA","Tree","Native",0,0.5,10,20,,,0,0
 "bog","Ulmus americana",1,0.999990000100004,"ULAM","Tree","Native",0,0.5,10,25,,,0,0
-"bog","Populus tremuloides",1,0.499995000050002,"POTR5","Tree","Native",1.5,3,5,15,,,,
-"bog","Prunus serotina",1,0.499995000050002,"PRSE2","Tree","Native",1.5,3,5,5,,,,
+"bog","Populus tremuloides",1,0.499995000050002,"POTR5","Tree","Native",1.5,2.5,5,13,,,,
+"bog","Prunus serotina",1,0.499995000050002,"PRSE2","Tree","Native",1.5,2.5,5,6,,,,
 "bog","Nyssa sylvatica",1,0.199998000019996,"NYSY","Tree","Native",0,0.1,10,25,,,0,0
