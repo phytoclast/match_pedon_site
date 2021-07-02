@@ -176,7 +176,7 @@ Com.Sp.freq<-aggregate(obsspp[,c('AcTaxon')], by=list(obsspp$Observation_Label, 
 colnames(Com.Sp.freq)<- c('Observation_Label', 'Species', 'freq')
 Com.max.freq<-aggregate(Com.Sp.freq[,c('freq')], by=list(Com.Sp.freq$Observation_Label), FUN=max) #freq within plot
 colnames(Com.max.freq)<- c('Observation_Label', 'mfreq')
-Com.max.freq$mfreq<-ifelse(Com.max.freq$mfreq>4,4,Com.max.freq$mfreq)#effectively ensureing values do not exceed 4. Species listed 5 times might occur if surveyer was unaware of species already counted in subplots, but this only adds a trace amount.
+Com.max.freq$mfreq<-ifelse(Com.max.freq$mfreq>4,4,Com.max.freq$mfreq)#effectively ensuring values do not exceed 4. Species listed 5 times might occur if surveyer was unaware of species already counted in subplots, but this only adds a trace amount.
 Com.Sp.mean<-merge(Com.Sp.sum, Com.max.freq[,c("Observation_Label","mfreq")], by="Observation_Label")
 Com.Sp.mean$Field<-Com.Sp.mean$Field/Com.Sp.mean$mfreq
 Com.Sp.mean$Shrub<-Com.Sp.mean$Shrub/Com.Sp.mean$mfreq
@@ -339,11 +339,13 @@ Group.Summary[Group.Summary$Plant.Type %in% 'Vine/Liana',]$maxHt <- NA
 
 Forest.Overstory <- Group.Summary[Group.Summary$t75 >0,c( 'phase','Taxon',  'Plant.Symbol', 'Plant.Type','Nativity', 't25', 't75','Tmin', 'Tmax','Dmin','Dmax','b05','b95', 'maxHt', 'over')]
 colnames(Forest.Overstory) <- c('phase','Taxon',  'Plant.Symbol', 'Plant.Type','Nativity', 'Cover.Low', 'Cover.High','Canopy.Bottom', 'Canopy.Top','Diam.Low','Diam.High','BA.Low','BA.High', 'maxHt', 'over')
-Forest.Overstory[is.na(Forest.Overstory$Canopy.Bottom & Forest.Overstory$Plant.Type %in% c('Shrub/Subshrub','Vine/Liana')),]$
+Forest.Overstory[is.na(Forest.Overstory$Canopy.Bottom) & Forest.Overstory$Plant.Type %in% c('Shrub/Subshrub','Vine/Liana'),]$
   Canopy.Bottom <- 5
 Forest.Overstory[is.na(Forest.Overstory$Canopy.Bottom) & Forest.Overstory$Plant.Type %in% c('Tree'),]$
   Canopy.Bottom <- 10
-Forest.Overstory[is.na(Forest.Overstory$Canopy.Top) & Forest.Overstory$Plant.Type %in% c('Shrub/Subshrub','Vine/Liana'),]$
+Forest.Overstory[is.na(Forest.Overstory$Canopy.Top) & Forest.Overstory$Plant.Type %in% c('Shrub/Subshrub'),]$
+  Canopy.Top <- 17
+Forest.Overstory[is.na(Forest.Overstory$Canopy.Top) & Forest.Overstory$Plant.Type %in% c('Vine/Liana'),]$
   Canopy.Top <- 20
 Forest.Overstory[is.na(Forest.Overstory$Canopy.Top) & Forest.Overstory$Plant.Type %in% c('Tree'),]$
   Canopy.Top <- 25
@@ -354,7 +356,7 @@ Forest.Overstory$Canopy.Top <- ifelse(!is.na(Forest.Overstory$maxHt) & Forest.Ov
                                       pmin(Forest.Overstory$Canopy.Top,
                                            Forest.Overstory$maxHt),
                                       Forest.Overstory$Canopy.Top)
-Forest.Overstory$Canopy.Bottom <- ifelse(!is.na(Forest.Overstory$maxHt & Forest.Overstory$maxHt > 15),
+Forest.Overstory$Canopy.Bottom <- ifelse(!is.na(Forest.Overstory$maxHt) & Forest.Overstory$maxHt > 15,
                                       pmin(Forest.Overstory$Canopy.Bottom,
                                            Forest.Overstory$maxHt),
                                       Forest.Overstory$Canopy.Bottom)
@@ -362,12 +364,12 @@ Forest.Overstory$Canopy.Bottom <- ifelse(!is.na(Forest.Overstory$maxHt & Forest.
 Forest.Overstory.sub<- Group.Summary[Group.Summary$sc75 >0,c( 'phase','Taxon', 'Plant.Symbol', 'Plant.Type','Nativity','sc25', 'sc75','SCmin', 'SCmax', 'Dmin','Dmax','b05','b95', 'maxHt', 'over')]
 Forest.Overstory.sub[,c('Dmin','Dmax','b05','b95')]<- NA
 colnames(Forest.Overstory.sub) <- c('phase','Taxon', 'Plant.Symbol', 'Plant.Type','Nativity', 'Cover.Low', 'Cover.High','Canopy.Bottom', 'Canopy.Top','Diam.Low','Diam.High','BA.Low','BA.High','maxHt', 'over')
-Forest.Overstory.sub[is.na(Forest.Overstory.sub$Canopy.Bottom & Forest.Overstory.sub$Plant.Type %in% c('Shrub/Subshrub','Vine/Liana')),]$
+Forest.Overstory.sub[is.na(Forest.Overstory.sub$Canopy.Bottom) & Forest.Overstory.sub$Plant.Type %in% c('Shrub/Subshrub','Vine/Liana'),]$
   Canopy.Bottom <- 2
-Forest.Overstory.sub[is.na(Forest.Overstory.sub$Canopy.Bottom & Forest.Overstory.sub$Plant.Type %in% c('Tree')),]$
+Forest.Overstory.sub[is.na(Forest.Overstory.sub$Canopy.Bottom) & Forest.Overstory.sub$Plant.Type %in% c('Tree'),]$
   Canopy.Bottom <- 5
 Forest.Overstory.sub[is.na(Forest.Overstory.sub$Canopy.Top) & Forest.Overstory.sub$Plant.Type %in% c('Shrub/Subshrub'),]$
-  Canopy.Top <- 10
+  Canopy.Top <- 6
 Forest.Overstory.sub[is.na(Forest.Overstory.sub$Canopy.Top) & Forest.Overstory.sub$Plant.Type %in% c('Tree','Vine/Liana'),]$
   Canopy.Top <- 15
 Forest.Overstory.sub[is.na(Forest.Overstory.sub$Canopy.Bottom),]$
@@ -376,8 +378,8 @@ Forest.Overstory.sub[is.na(Forest.Overstory.sub$Canopy.Bottom),]$
 Forest.Overstory.sub$Canopy.Top <- ifelse(!is.na(Forest.Overstory.sub$maxHt) & Forest.Overstory.sub$maxHt > 5,
                                       pmin(Forest.Overstory.sub$Canopy.Top,
                                            Forest.Overstory.sub$maxHt),
-                                      Forest.Overstory$Canopy.Top)
-Forest.Overstory.sub$Canopy.Bottom <- ifelse(!is.na(Forest.Overstory.sub$maxHt & Forest.Overstory.sub$maxHt > 5),
+                                      Forest.Overstory.sub$Canopy.Top)
+Forest.Overstory.sub$Canopy.Bottom <- ifelse(!is.na(Forest.Overstory.sub$maxHt) & Forest.Overstory.sub$maxHt > 5,
                                          pmin(Forest.Overstory.sub$Canopy.Bottom,
                                               Forest.Overstory.sub$maxHt),
                                          Forest.Overstory.sub$Canopy.Bottom)
@@ -402,7 +404,7 @@ Forest.Understory$Canopy.Top <- ifelse(!is.na(Forest.Understory$maxHt) & Forest.
                                       pmin(Forest.Understory$Canopy.Top,
                                            Forest.Understory$maxHt),
                                       Forest.Understory$Canopy.Top)
-Forest.Understory$Canopy.Bottom <- ifelse(!is.na(Forest.Understory$maxHt & Forest.Understory$maxHt > 0.5),
+Forest.Understory$Canopy.Bottom <- ifelse(!is.na(Forest.Understory$maxHt) & Forest.Understory$maxHt > 0.5,
                                          pmin(Forest.Understory$Canopy.Bottom,
                                               Forest.Understory$maxHt),
                                          Forest.Understory$Canopy.Bottom)

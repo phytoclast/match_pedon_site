@@ -8,7 +8,7 @@ Adrian.gs20180813.02	GRR.GJS.2018.13	02silver maple green ash swamp	3	1	688421	A
 Palms.W2015062502	GRR.GJS.2015.13	02silver maple green ash swamp	3	1	688421	Acer (rubrum, saccharinum) - Fraxinus spp. - Ulmus americana Swamp Forest
 Aurelius.s20190820.02	GRR.GJS.2019.11	02silver maple green ash swamp	3	1	686814	Acer saccharinum - Fraxinus pennsylvanica - Ulmus americana Floodplain Forest
 Carlisle.W14090801	GRR.GJS.2014.39	02silver maple green ash swamp	3	1	686814	Acer saccharinum - Fraxinus pennsylvanica - Ulmus americana Floodplain Forest
-Linwood.s20210525.03	GRR.GJS.2021.3	02silver maple green ash swamp	3	10	686814	Acer saccharinum - Fraxinus pennsylvanica - Ulmus americana Floodplain Forest
+Linwood.s20210525.03	GRR.GJS.2021.3	02silver maple green ash swamp	3	.10	686814	Acer saccharinum - Fraxinus pennsylvanica - Ulmus americana Floodplain Forest
 Wallkill.2016MI067008	GRR.GJS.2016.30	02silver maple green ash swamp	3	1	686814	Acer saccharinum - Fraxinus pennsylvanica - Ulmus americana Floodplain Forest
 Aurelius.es20170731.02	GRR.GJS.2017.8	02silver maple green ash swamp	3	1	683201	Acer saccharinum - Ulmus americana / Onoclea sensibilis Floodplain Forest
 Edwards.gs20180813.03	GRR.GJS.2018.14	02silver maple green ash swamp	3	1	683201	Acer saccharinum - Ulmus americana / Onoclea sensibilis Floodplain Forest
@@ -23,8 +23,8 @@ Houghton.S12062901	GRR.GJS.2012.40	04tamarack	2	1	892928	Fraxinus nigra - Acer s
 Houghton.DSP.RF2	GRR.GJS.2015.22	04tamarack	2	1	689089	Larix laricina - Acer rubrum / (Rhamnus alnifolia, Vaccinium corymbosum) Swamp Forest
 Houghton.s20200611.01	GRR.GJS.2020.13	04tamarack	2	1	689089	Larix laricina - Acer rubrum / (Rhamnus alnifolia, Vaccinium corymbosum) Swamp Forest
 Houghton.s20200701.01	GRR.GJS.2020.14	04tamarack	2	1	689089	Larix laricina - Acer rubrum / (Rhamnus alnifolia, Vaccinium corymbosum) Swamp Forest
-Houghton.DSP.RF1	GRR.GJS.2015.20	04tamarack	2	1	686788	Pinus strobus - (Acer rubrum) / Osmunda spp. Swamp Forest
-Pinnebog.s20210525.02	GRR.GJS.2021.2	04tamarack	2	10	686932	Populus tremuloides - Betula papyrifera - (Acer rubrum, Fraxinus nigra) Forest
+Houghton.DSP.RF1	GRR.GJS.2015.20	04tamarack	2	10	686788	Pinus strobus - (Acer rubrum) / Osmunda spp. Swamp Forest
+Pinnebog.s20210525.02	GRR.GJS.2021.2	04tamarack	2	.10	686932	Populus tremuloides - Betula papyrifera - (Acer rubrum, Fraxinus nigra) Forest
 Edwards.Lamberton.Lake.Fen	GRR.GJS.2015.24	06fen	7	1	685728	Cladium mariscoides - (Carex lasiocarpa, Hypericum kalmianum, Oligoneuron riddellii, Eleocharis elliptica) Fen
 Edwards.s20200710.02	GRR.GJS.2020.16	06fen	7	1	685728	Cladium mariscoides - (Carex lasiocarpa, Hypericum kalmianum, Oligoneuron riddellii, Eleocharis elliptica) Fen
 Gilford.S12062503	GRR.GJS.2012.36	06fen	7	1	687037	Dasiphora fruticosa ssp. floribunda / Carex sterilis - Andropogon gerardii - Arnoglossum plantagineum Fen
@@ -56,4 +56,4 @@ Napoleon.S12060503	GRR.GJS.2012.28	bog	8	1	686869	Cephalanthus occidentalis / Ca
 Napoleon.S12071304	GRR.GJS.2012.69	bog	8	1	686869	Cephalanthus occidentalis / Carex spp. Northern Shrub Swamp
 Napoleon.S12060501	GRR.GJS.2012.26	bog	8	1	689089	Larix laricina - Acer rubrum / (Rhamnus alnifolia, Vaccinium corymbosum) Swamp Forest
 Napoleon.S12060502	GRR.GJS.2012.27	bog	8	1	689089	Larix laricina - Acer rubrum / (Rhamnus alnifolia, Vaccinium corymbosum) Swamp Forest
-Rifle.s20210525.01	GRR.GJS.2021.1	bog	8	10	800158	Vaccinium myrtilloides / Pteridium aquilinum / Polytrichum spp. Acidic Peatland
+Rifle.s20210525.01	GRR.GJS.2021.1	bog	8	.10	800158	Vaccinium myrtilloides / Pteridium aquilinum / Polytrichum spp. Acidic Peatland
