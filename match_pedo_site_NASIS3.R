@@ -16,8 +16,16 @@ library(foreign)
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 
 #----
-NASISPEDONS <- readRDS("data/NASISPEDONS.RDS")
-fp <- readRDS('data/fp.RDS')
+
+if(F){
+newpedons <- soilDB::fetchNASIS(from = "pedons")
+newsite <- aqp::site(newpedons)
+saveRDS(newsite, "data/NASISPEDONS2.RDS")
+saveRDS(newpedons, 'data/fp2.RDS')
+}
+NASISPEDONS <- readRDS("data/NASISPEDONS2.RDS")
+fp <- readRDS('data/fp2.RDS')
+
 names(NASISPEDONS)[names(NASISPEDONS) == "x_std"] <- 'Std.Longitude'
 names(NASISPEDONS)[names(NASISPEDONS) == "y_std"] <- 'Std.Latitude'
 names(NASISPEDONS)[names(NASISPEDONS) == "taxonname"] <- 'Current.Taxon.Name'
