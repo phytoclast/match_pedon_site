@@ -18,9 +18,9 @@ setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 #----
 
 if(F){
-newpedons <- soilDB::fetchNASIS(from = "pedons")
+newpedons <- soilDB::fetchNASIS(from = "pedons", rmHzErrors = FALSE, SS = FALSE)
 newsite <- aqp::site(newpedons)
-saveRDS(newsite, "data/NASISPEDONS2.RDS")
+saveRDS(newsite, "data/NASISPEDONS2.RDS", )
 saveRDS(newpedons, 'data/fp2.RDS')
 }
 NASISPEDONS <- readRDS("data/NASISPEDONS2.RDS")
