@@ -12,7 +12,7 @@ library(rpart.plot)
 library(goeveg)
 library(proxy)
 library(foreign)
-
+library(optpart)
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 
 #----
@@ -122,23 +122,38 @@ write.csv(VEGOBS, 'output/VEGOBS.csv', row.names = FALSE, na = "")
 
 #----
 #narrow to soil series
-soilgroup <- 'all'
-ngroups <- 18
-if (T){
-  remove <- c('2016MI037002',
-              'S12060501', 
-              'S12060502',
-              'S12060503',
-              'S12071304',
-              's20190701.02'
-  )
-  add <- 'S12062503'
-  #sortsoils <- unique(subset(s, (T150_OM >= 10 | grepl('histic',taxsubgrp) |grepl('histosols',taxorder)) & !grepl('Dysic',taxclname), select = 'compname'))[,1]
-  sortsoils <- unique(subset(s, (T150_OM >= 10 | grepl('histic',taxsubgrp) |grepl('histosols',taxorder)) , select = 'compname'))[,1]
+# soilgroup <- 'all'
+# ngroups <- 18
+# if (T){
+#   remove <- c('2016MI037002',
+#               'S12060501', 
+#               'S12060502',
+#               'S12060503',
+#               'S12071304',
+#               's20190701.02'
+#   )
+#   add <- 'S12062503'
+#   #sortsoils <- unique(subset(s, (T150_OM >= 10 | grepl('histic',taxsubgrp) |grepl('histosols',taxorder)) & !grepl('Dysic',taxclname), select = 'compname'))[,1]
+#   sortsoils <- unique(subset(s, (T150_OM >= 10 | grepl('histic',taxsubgrp) |grepl('histosols',taxorder)) , select = 'compname'))[,1]
+#   #VEGOBS <- subset(VEGOBS,Soil %in% sortsoils & !Observation_Label %in% remove |Observation_Label %in% add )
+#   VEGOBS <- subset(VEGOBS,Soil %in% sortsoils |Observation_Label %in% add )
+#   ngroups <- 8
+#   soilgroup <- 'euic_mucks'}
+
+
+#narrow to soil series
+sortsoils <- unique(
+  subset(s, 
+         hydricrating %in% 'yes' &
+           (T50_sand < 70 | T150_sand < 80) &
+           !flood %in% 'flood'&
+           !(T150_OM >= 10 | grepl('histic',taxsubgrp) |grepl('histosols',taxorder))&
+           !compname %in% 'Kingsville', 
+         select = 'compname'))[,1]
   #VEGOBS <- subset(VEGOBS,Soil %in% sortsoils & !Observation_Label %in% remove |Observation_Label %in% add )
-  VEGOBS <- subset(VEGOBS,Soil %in% sortsoils |Observation_Label %in% add )
+  VEGOBS <- subset(VEGOBS,Soil %in% sortsoils & !Observation_Type %in% c('Bogus', 'Floristic','Site Index'))
   ngroups <- 8
-  soilgroup <- 'euic_mucks'}
+  soilgroup <- 'wetloamy'
 
 
 #----
@@ -217,9 +232,10 @@ rm(Com.Sp.wet.agg2,Com.Sp.wet.agg)
 Com.Sp.mean$sqrttotal <- sqrt(Com.Sp.mean$Total)
 #saveRDS(Com.Sp.mean, 'C:/workspace2/USNVC/data/plotdata.RDS')
 
-plotdata <- makecommunitydataset(Com.Sp.mean, row = 'soilplot', column = 'Species', value = 'sqrttotal', drop = TRUE)
-Com.Sp.Agg$sqrttotal <- Com.Sp.Agg$Total^0.5
-plotinputs2 <- makecommunitydataset(Com.Sp.Agg.wet, row = 'soilplot', column = 'Simple', value = 'Total', drop = TRUE)
+#plotdata <- makecommunitydataset(Com.Sp.mean, row = 'soilplot', column = 'Species', value = 'sqrttotal', drop = TRUE)
+Com.Sp.mean$logtotal <- (log10(100*(1-10^(apply(log10(1-(Com.Sp.mean[,c('Field', 'Shrub', 'Subcanopy', 'Tree')]/100.001)), MARGIN = 1, FUN='sum'))))+2)
+
+plotdata <- makecommunitydataset(Com.Sp.mean, row = 'soilplot', column = 'Species', value = 'logtotal', drop = TRUE)
 
 #evaluating methods 
 
@@ -232,12 +248,14 @@ sil.table <-'x'
 silanalysis <- function(input){
   distbray <- vegdist(input, method='bray', binary=FALSE, na.rm=T)
   distjac <- vegdist(input, method='jaccard', binary=FALSE, na.rm=T)
+  distkul <- vegdist(input, method='kulczynski', binary=FALSE, na.rm=T)
   distsim <- as.dist(simil(input,method='Simpson'))
   
   maxcluster <- min(20, nrow(input)-1)
   k <- 2
   klevel <- 0
   sil.bray <- 0
+  sil.flex <- 0
   sil.jac <- 0
   sil.sim <- 0
   sil.ward <- 0
@@ -247,10 +265,14 @@ silanalysis <- function(input){
   sil.complete <- 0
   sil.wardeuc <- 0
   sil.kmeanseuc <- 0
-
+  sil.kul <- 0
+  sil.flexkul <- 0
   for (k in 2:20){
     sil.bray1 <- (distbray %>% agnes(method = 'average') %>% cutree(k=k) %>% silhouette(distbray))[,3]%>% mean
+    sil.flex1 <- (distbray %>% agnes(method="flexible", par.method = c(0.625, 0.625, -0.25)) %>% cutree(k=k) %>% silhouette(distbray))[,3]%>% mean
     sil.jac1 <- (distjac %>% agnes(method = 'average') %>% cutree(k=k) %>% silhouette(distbray))[,3]%>% mean
+    sil.kul1 <- (distkul %>% agnes(method = 'average') %>% cutree(k=k) %>% silhouette(distbray))[,3]%>% mean
+    sil.flexkul1 <- (distkul %>% flexbeta() %>% cutree(k=k) %>% silhouette(distbray))[,3]%>% mean
     sil.sim1 <- (distsim %>% agnes(method = 'average') %>% cutree(k=k) %>% silhouette(distbray))[,3]%>% mean
     sil.ward1 <- (distbray %>% agnes(method = 'ward') %>% cutree(k=k) %>% silhouette(distbray))[,3]%>% mean
     sil.diana1 <- (distbray %>% diana %>% cutree(k=k) %>% silhouette(distbray))[,3]%>% mean
@@ -263,7 +285,10 @@ silanalysis <- function(input){
     
     klevel <- c(klevel, k)
     sil.bray <- c(sil.bray, sil.bray1)
+    sil.flex <- c(sil.flex, sil.flex1)
     sil.jac <- c(sil.jac, sil.jac1)
+    sil.kul <- c(sil.kul, sil.kul1)
+    sil.flexkul <- c(sil.flexkul, sil.flexkul1)
     sil.sim <- c(sil.sim, sil.sim1)
     sil.ward <- c(sil.ward, sil.ward1)
     sil.diana <- c(sil.diana, sil.diana1)
@@ -273,7 +298,7 @@ silanalysis <- function(input){
     sil.wardeuc <- c(sil.wardeuc, sil.wardeuc1)
     sil.kmeanseuc <- c(sil.kmeanseuc, sil.kmeanseuc1)
   }
-  sil.table <- as.data.frame(cbind(klevel,sil.bray,sil.jac,sil.sim,sil.ward,sil.diana,sil.kmeans,sil.single,sil.complete))
+  sil.table <- as.data.frame(cbind(klevel,sil.bray,sil.flex,sil.jac,sil.kul,sil.flexkul,sil.sim,sil.ward,sil.diana,sil.kmeans,sil.single,sil.complete))
   sil.table <- sil.table[-1,]
   sil.table <<- sil.table
   return(sil.table)}
@@ -326,7 +351,7 @@ makeplot <- function(amethod,jacdist,jactree, soilgroup,k){
 
 amethod <- 'bray-agnes' 
 k=16
-if (T){
+if (F){
   amethod <- 'bray-agnes' 
   k=8
   jacdist <- vegdist(plotdata, method='bray', binary=FALSE, na.rm=T)
@@ -334,43 +359,54 @@ if (T){
   makeplot(amethod,jacdist,jactree,soilgroup,k)
 }
 if (T){
+  amethod <- 'bray-flex' 
+  k=8
+  beta =-0.25
+  alpha = (1-beta)
+  alph1 = alpha*0.5
+  alph2 = alpha-alph1
+  jacdist <- vegdist(plotdata, method='bray', binary=FALSE, na.rm=T)
+  jactree <- agnes(jacdist, method="flexible", par.method = c(alph1, alph2, beta))
+  makeplot(amethod,jacdist,jactree,soilgroup,k)
+}
+if (F){
   amethod <- 'bray-single' 
   jacdist <- vegdist(plotdata, method='bray', binary=FALSE, na.rm=T)
   jactree <- agnes(jacdist, method='single')
   makeplot(amethod,jacdist,jactree,soilgroup,k)
 }
-if (T){
+if (F){
   amethod <- 'bray-complete' 
   jacdist <- vegdist(plotdata, method='bray', binary=FALSE, na.rm=T)
   jactree <- agnes(jacdist, method='complete')
   makeplot(amethod,jacdist,jactree,soilgroup,k)
 }
-if (T){
+if (F){
   amethod <- 'bray-diana' 
   jacdist <- vegdist(plotdata, method='bray', binary=FALSE, na.rm=T)
   jactree <- diana(jacdist)
   makeplot(amethod,jacdist,jactree,soilgroup,k)
 }
-if (T){
+if (F){
   amethod <- 'bray-ward'
   k=8
   jacdist <- vegdist(plotdata, method='bray', binary=FALSE, na.rm=T)
   jactree <- agnes(jacdist, method='ward')
   makeplot(amethod,jacdist,jactree,soilgroup,k)
 }
-if (T){
+if (F){
   amethod <- 'jaccard-agnes' 
   jacdist <- vegdist(plotdata, method='jaccard', binary=FALSE, na.rm=T)
   jactree <- agnes(jacdist, method='average')
   makeplot(amethod,jacdist,jactree,soilgroup,k)
 }
-if (T){
+if (F){
   amethod <- 'kulczynski-agnes' 
   jacdist <- vegdist(plotdata, method='kulczynski', binary=FALSE, na.rm=T)
   jactree <- agnes(jacdist, method='average')
   makeplot(amethod,jacdist,jactree,soilgroup,k)
 }
-if (T){
+if (F){
   amethod <- 'kulczynski-ward' 
   jacdist <- vegdist(plotdata, method='kulczynski', binary=FALSE, na.rm=T)
   jactree <- agnes(jacdist, method='ward')
@@ -379,8 +415,8 @@ if (T){
 #----
 #group dominant and indicator species
 k=8
-d <- ((vegdist(plotdata, method='kulczynski', binary=FALSE, na.rm=T)))
-t <- agnes(d, method='ward')
+d <- ((vegdist(plotdata, method='bray', binary=FALSE, na.rm=T)))
+t <- agnes(d, method="flexible", par.method = c(0.625, 0.625, -0.25))
 groups <- cutree(t, k = k)
 
 soilplot <- names(groups)
