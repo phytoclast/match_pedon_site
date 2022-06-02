@@ -2838,3 +2838,4 @@ Zizaniopsis miliacea	2.5
 Ziziphus reticulata	10
 Zoysia japonica	0.1
 Zoysia matrella	0.1
+Mitchella repens	0.1

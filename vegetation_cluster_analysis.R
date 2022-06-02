@@ -1,3 +1,4 @@
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 library(soilDB)
 library(aqp)#load before dplr
 library(stringr)
