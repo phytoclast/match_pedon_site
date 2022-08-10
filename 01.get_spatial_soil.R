@@ -4,14 +4,17 @@ library(sp)
 
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 
-obsspp <- read.delim("data/Observed_Species.txt", encoding = 'UTF-8', na.strings = '')
+#obsspp <- read.delim("data/Observed_Species.txt", encoding = 'UTF-8', na.strings = '')
+obsspp <- read.delim("data/Observed_Species.txt", encoding = 'latin-1', na.strings = '')
 obsspp[obsspp$AcTaxon == 'Phalaris' & !is.na(obsspp$AcTaxon) ,]$AcTaxon <- 'Phalaris arundinacea'
 obsspp <- obsspp[!grepl("\\?", obsspp$AcTaxon) | is.na(obsspp$AcTaxon) ,]
 obsspp <- subset(obsspp, !is.na(specific_epithet) | AcTaxon %in% c('Sphagnum', 'Chara'))
+List_Habits <- read.delim("data/List_Habits.txt", na.strings = '', stringsAsFactors = FALSE)
 
 #listspp <- read.delim("data/List_Species2011.txt", encoding = 'UTF-8', na.strings = '')
 listspp <- readRDS("data/listspp.RDS")
 #saveRDS(listspp, 'data/listspp.RDS')
+#substr(obsspp[3930:4000,]$AcTaxon,1,1)
 obsspp <- subset(obsspp, !substr(AcTaxon,1,1) %in% '-'& !AcTaxon %in% '' & !is.na(Habit))
 obsspp <- merge(obsspp, List_Habits[,c('Form','Simple')], by.x = 'Habit', by.y = 'Form', all.x = TRUE)
 obs <- read.delim("data/Sites.txt")

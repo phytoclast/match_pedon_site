@@ -39,7 +39,8 @@ pedonoverride <- read.delim("data/pedonoverride.txt")
 s <- read.delim("data/s.txt")
 
 List_Habits <- read.delim("data/List_Habits.txt", na.strings = '')
-obsspp <- read.delim("data/Observed_Species.txt", encoding = 'UTF-8', na.strings = '')
+# obsspp <- read.delim("data/Observed_Species.txt", encoding = 'UTF-8', na.strings = '')
+obsspp <- read.delim("data/Observed_Species.txt", encoding = 'latin-1', na.strings = '')
 obsspp[obsspp$AcTaxon == 'Phalaris' & !is.na(obsspp$AcTaxon) ,]$AcTaxon <- 'Phalaris arundinacea'
 obsspp <- obsspp[!grepl("\\?", obsspp$AcTaxon) | is.na(obsspp$AcTaxon) ,]
 obsspp <- subset(obsspp, !is.na(specific_epithet) | AcTaxon %in% c('Sphagnum', 'Chara'))
@@ -52,6 +53,10 @@ obsspp <- merge(obsspp, List_Habits[,c('Form','Simple')], by.x = 'Habit', by.y =
 obs <- read.delim("data/Sites.txt")
 obs <- subset(obs,Observer_Code %in% 'GRR.GJS' & Year >=2011 & !Observation_Type %in% c('Bogus', 'Floristics')) #filter out bogus points
 unique(obs$Observation_Type)
+# Obs.shape <- sf::st_as_sf(x = obs, 
+#                           coords = c('Longitude', 'Latitude'),
+#                           crs = "+proj=longlat +datum=WGS84")
+# sf::write_sf(Obs.shape, 'data/Obs.shape.shp')
 
 obsspp <- merge(obs[,c('Observation_ID','Observation_Label')],obsspp, by='Observation_ID')
 obsspp <- subset(obsspp, Field+Shrub+Subcanopy+Tree > 0)
@@ -151,11 +156,11 @@ sortsoils <- unique(
            !compname %in% 'Kingsville', 
          select = 'compname'))[,1]
   #VEGOBS <- subset(VEGOBS,Soil %in% sortsoils & !Observation_Label %in% remove |Observation_Label %in% add )
-  VEGOBS <- subset(VEGOBS,Soil %in% sortsoils & !Observation_Type %in% c('Bogus', 'Floristic','Site Index'))
+  #
+  obsids <- c('s20210805.02','s20220720.001','s20220719.001','s20220719.002')
+  VEGOBS <- subset(VEGOBS,Soil %in% sortsoils & !Observation_Type %in% c('Bogus', 'Floristic','Site Index') | Observation_Label %in% obsids)
   ngroups <- 8
   soilgroup <- 'wetloamy'
-
-
 #----
 #observed species
 
@@ -233,7 +238,7 @@ Com.Sp.mean$sqrttotal <- sqrt(Com.Sp.mean$Total)
 #saveRDS(Com.Sp.mean, 'C:/workspace2/USNVC/data/plotdata.RDS')
 
 #plotdata <- makecommunitydataset(Com.Sp.mean, row = 'soilplot', column = 'Species', value = 'sqrttotal', drop = TRUE)
-Com.Sp.mean$logtotal <- (log10(100*(1-10^(apply(log10(1-(Com.Sp.mean[,c('Field', 'Shrub', 'Subcanopy', 'Tree')]/100.001)), MARGIN = 1, FUN='sum'))))+2)
+Com.Sp.mean$logtotal <- (log10(100*(1-10^(apply(log10(1-(Com.Sp.mean[,c('Field', 'Shrub', 'Subcanopy', 'Tree')]/100.001)), MARGIN = 1, FUN='sum'))))+2.1)
 
 plotdata <- makecommunitydataset(Com.Sp.mean, row = 'soilplot', column = 'Species', value = 'logtotal', drop = TRUE)
 
@@ -359,9 +364,9 @@ if (F){
   makeplot(amethod,jacdist,jactree,soilgroup,k)
 }
 if (T){
-  amethod <- 'bray-flex' 
-  k=8
-  beta =-0.25
+  amethod <- 'bray-flex20' 
+  k=4
+  beta =-0.20
   alpha = (1-beta)
   alph1 = alpha*0.5
   alph2 = alpha-alph1
@@ -414,9 +419,9 @@ if (F){
 }
 #----
 #group dominant and indicator species
-k=8
+k=4
 d <- ((vegdist(plotdata, method='bray', binary=FALSE, na.rm=T)))
-t <- agnes(d, method="flexible", par.method = c(0.625, 0.625, -0.25))
+t <- flexbeta(d, beta= -0.30)
 groups <- cutree(t, k = k)
 
 soilplot <- names(groups)
@@ -429,9 +434,29 @@ whichrecords <- which(groupdf$clust == 0)
 if (nrow(groupdf[groupdf$clust == 0,]) != 0){
   for (i in 1:numberzeros){ #assign all zero clusters to unique cluster number.
     groupdf[whichrecords[i],]$clust <- maxcluster+i}}
-
-
-
+# narrow to a smaller cluster
+# selectclust <- groupdf[groupdf$clust %in% 2,]$soilplot
+# plotdata2 <- plotdata[rownames(plotdata) %in% selectclust,]
+# k=4
+# d <- ((vegdist(plotdata2, method='bray', binary=FALSE, na.rm=T)))
+# t <- flexbeta(d, beta= -0.2)
+# groups <- cutree(t, k = k)
+# 
+# soilplot <- names(groups)
+# clust <- unname(groups)
+# groupdf <- as.data.frame(cbind(soilplot, clust))
+# groupdf$clust <- (as.numeric(as.character(groupdf$clust)))
+# maxcluster <- max(groupdf$clust)
+# numberzeros <- nrow(groupdf[(groupdf$clust == 0),])
+# whichrecords <- which(groupdf$clust == 0)
+# if (nrow(groupdf[groupdf$clust == 0,]) != 0){
+#   for (i in 1:numberzeros){ #assign all zero clusters to unique cluster number.
+#     groupdf[whichrecords[i],]$clust <- maxcluster+i}}
+# 
+#   
+  
+  
+  
 Com.Sp.groups <- merge(groupdf,  Com.Sp.mean, by='soilplot', all.x=TRUE, all.y = TRUE)
 
 #----
