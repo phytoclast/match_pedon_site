@@ -1,12 +1,22 @@
 
 makeplot <- function(a,d,t,k){
-  filename <- paste0('output/GRIN_',a,'.png')
+  filename <- paste0('output/Vegplot_',a,'.png')
   t <- as.hclust(t)
   #make cuts and reformat dendrogram
   ngroups=k
-  groups <- cutree(t, k = ngroups)
+  # groups <- cutree(t, k = ngroups)
+  # groups <- kmeans(d, centers = ngroups)$cluster
+  # groups = optind$clustering
+  # 
   
-  soilplot <- names(groups)
+  deepSplit <- 2
+  maxCoreScatter <- 0.61 
+  minGap <- (1 - maxCoreScatter) * 3/4
+  
+  groups <- cutreeDynamic(t, minClusterSize=3, method="hybrid", distM=as.matrix(d), 
+                          deepSplit=deepSplit, maxCoreScatter=maxCoreScatter, minGap=minGap, maxAbsCoreScatter=NULL, minAbsGap=NULL)
+  
+  soilplot <- names(d)
   clust <- unname(groups)
   groupdf <- as.data.frame(cbind(soilplot, clust))
   groupdf$clust <- (as.numeric(as.character(groupdf$clust)))
@@ -26,8 +36,8 @@ makeplot <- function(a,d,t,k){
   newtree <- t
   newtree$labels <- newlabels
   
-  dend1 <- color_branches(as.hclust(newtree), k = ngroups)
-  dend1 <- color_labels(dend1, k = ngroups)
+  dend1 <- color_branches(as.dendrogram(as.hclust(newtree)), clusters = groups[order.dendrogram(as.dendrogram(t))])
+  dend1 <- color_labels(dend1, col = get_leaves_branches_col(dend1))
   
   #output file
   
