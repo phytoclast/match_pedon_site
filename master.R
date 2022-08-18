@@ -21,11 +21,50 @@ source('processplot.R')
 source('clusterfunctions.R') 
 
 
+#group parameters ----
+beta= -0.20
+k = 6
+d <- vegdist(plotdata, method='bray', binary=FALSE, na.rm=T)
+t <- d %>% flexbeta(beta= beta)
+tward <- agnes(d, method = 'ward') %>% as.hclust()
+dk <- dynamicK(t, d)
+dkward <- dynamicK(tward, d)
+groups <- cutree(t, k = k)
+maxCoreScatter <- dk[dk$nclust %in% k,]$maxcor 
+minGap <- (1 - maxCoreScatter) * 3/4
+dyngroups <- 
+  cutreeDynamic(tbraydynam, minClusterSize=1, method = 'hybrid', distM=as.matrix(distbray),deepSplit=1, maxCoreScatter=maxCoreScatter, minGap=minGap, maxAbsCoreScatter=NULL, minAbsGap=NULL)
+groups=dyngroups
+
+source('groupplotsummary.R') 
+
+
+Com.Structure[order(as.numeric(as.character(Com.Structure$cluster))),c("cluster", "association", "WetStructure")]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 if (T){
-  a1 <- 'bray-flex25'
-  k=8
+  a1 <- 'bray-flex20'
+  k=6
   d <- ((vegdist(plotdata, method='bray', binary=FALSE, na.rm=T)))
-  t1 <- flexbeta(d, beta= -0.25)
+  t1 <- flexbeta(d, beta= -0.20)
   makeplot(a1,d,t1,k)
 }
 timeA = Sys.time()
@@ -41,6 +80,30 @@ dnilc.table <- indob[[6]]
 sil.table <- indob[[7]]
 lis.table <- indob[[8]]
 Sys.time() - timeA  
+
+
+beta= -0.20
+d <- vegdist(plotdata, method='bray', binary=FALSE, na.rm=T)
+t <- d %>% flexbeta(beta= beta)
+tward <- agnes(d, method = 'ward') %>% as.hclust()
+dk <- dynamicK(t, d)
+dkward <- dynamicK(tward, d)
+timeA = Sys.time()
+indob <- indanalysisdynamicward(plotdata,dk,dkward, beta)
+Sys.time() - timeA  
+
+ind.table <- indob[[1]]
+dni.table <- indob[[2]]
+clu.table <- indob[[3]]
+ulc.table <- indob[[4]]
+clind.table <- indob[[5]]
+dnilc.table <- indob[[6]]
+sil.table <- indob[[7]]
+lis.table <- indob[[8]]
+Sys.time() - timeA  
+
+
+
 
 #sil analysis by branch
 d <- ((vegdist(plotdata, method='bray', binary=FALSE, na.rm=T)))
@@ -64,27 +127,58 @@ sil.table <- sil.table[c(1,
 
 if (T){
   a <- 'flex20'
-  k=4
+  k=5
   d <- ((vegdist(plotdata, method='bray', binary=FALSE, na.rm=T)))
   t <- flexbeta(d, beta= -0.20)
   makeplot(a,d,t,k)
 }
+if (T){
+  a <- 'flex20dynamic'
+  k=6
+  d <- ((vegdist(plotdata, method='bray', binary=FALSE, na.rm=T)))
+  t <- flexbeta(d, beta= -0.20)
+  makeplotdynamic(a,d,t,k)
+}
+if (T){
+  a <- 'warddynamic'
+  k=6
+  d <- ((vegdist(plotdata, method='bray', binary=FALSE, na.rm=T)))
+  t <- agnes(d, method='ward')
+  makeplotdynamic(a,d,t,k)
+}
 groups = cutreeHybrid(t, minClusterSize = 3, distM = as.matrix(d))$labels
 
+dk=dynamicK(t,d)
 
-#dynamicTreeCut
 
-deepSplit <- 1
-maxCoreScatter <- 0.61  
-minGap <- (1 - maxCoreScatter) * 3/4
-for(i in 1:400){#i=2
-  maxCoreScatter <- i/400  
-  minGap <- (1 - maxCoreScatter) * 3/4
-  
-groups <- cutreeDynamic(t, minClusterSize=3, method = 'hybrid', distM=as.matrix(d), 
-              deepSplit=deepSplit, maxCoreScatter=maxCoreScatter, minGap=minGap, maxAbsCoreScatter=NULL, minAbsGap=NULL)
-nclust = length(unique(groups))
-maxcore.table0 = as.data.frame(cbind(maxcor=maxCoreScatter, nclust)) 
-if(i==1){maxcore.table <- maxcore.table0}else{maxcore.table <- rbind(maxcore.table, maxcore.table0)}
-}
-maxcore.table <-  maxcore.table %>% group_by(nclust) %>% summarise(maxcor = mean(maxcor))
+
+agnes(d, method = 'average')
+
+
+
+
+
+cor(cophenetic(agnes(d, method = 'average')), cophenetic(agnes(d, method = 'average')))
+cor(cophenetic(flexbeta(d, beta= -0)), cophenetic(agnes(d, method = 'average')))
+cor(cophenetic(flexbeta(d, beta= -0.05)), cophenetic(agnes(d, method = 'average')))
+cor(cophenetic(flexbeta(d, beta= -0.10)), cophenetic(agnes(d, method = 'average')))
+cor(cophenetic(flexbeta(d, beta= -0.15)), cophenetic(agnes(d, method = 'average')))
+cor(cophenetic(flexbeta(d, beta= -0.20)), cophenetic(agnes(d, method = 'average')))
+cor(cophenetic(flexbeta(d, beta= -0.25)), cophenetic(agnes(d, method = 'average')))
+cor(cophenetic(flexbeta(d, beta= -0.35)), cophenetic(agnes(d, method = 'average')))
+cor(cophenetic(flexbeta(d, beta= -0.40)), cophenetic(agnes(d, method = 'average')))
+
+cor(cophenetic(agnes(d, method = 'average')), cophenetic(agnes(d, method = 'ward')))
+cor(cophenetic(flexbeta(d, beta= -0)), cophenetic(agnes(d, method = 'ward')))
+cor(cophenetic(flexbeta(d, beta= -0.05)), cophenetic(agnes(d, method = 'ward')))
+cor(cophenetic(flexbeta(d, beta= -0.10)), cophenetic(agnes(d, method = 'ward')))
+cor(cophenetic(flexbeta(d, beta= -0.15)), cophenetic(agnes(d, method = 'ward')))
+cor(cophenetic(flexbeta(d, beta= -0.20)), cophenetic(agnes(d, method = 'ward')))
+cor(cophenetic(flexbeta(d, beta= -0.225)), cophenetic(agnes(d, method = 'ward')))
+cor(cophenetic(flexbeta(d, beta= -0.25)), cophenetic(agnes(d, method = 'ward')))
+cor(cophenetic(flexbeta(d, beta= -0.275)), cophenetic(agnes(d, method = 'ward')))
+cor(cophenetic(flexbeta(d, beta= -0.30)), cophenetic(agnes(d, method = 'ward')))
+cor(cophenetic(flexbeta(d, beta= -0.35)), cophenetic(agnes(d, method = 'ward')))
+cor(cophenetic(flexbeta(d, beta= -0.40)), cophenetic(agnes(d, method = 'ward')))
+cor(cophenetic(agnes(d, method = 'ward')), cophenetic(agnes(d, method = 'ward')))
+
