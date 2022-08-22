@@ -13,6 +13,7 @@ library(goeveg)
 library(proxy)
 library(foreign)
 library(optpart)
+library(dendsort)
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 
 # Load Veg tables ---- 
@@ -22,24 +23,84 @@ source('clusterfunctions.R')
 
 
 #group parameters ----
-beta= -0.20
-k = 6
+beta= -0.30
+k = 9
 d <- vegdist(plotdata, method='bray', binary=FALSE, na.rm=T)
-t <- d %>% flexbeta(beta= beta)
+tbeta <- d %>% flexbeta(beta= beta)
 tward <- agnes(d, method = 'ward') %>% as.hclust()
-dk <- dynamicK(t, d)
-dkward <- dynamicK(tward, d)
+t=tbeta
+t=tward
+# t=dendsort(t)
+# dk <- dynamicK(t, d)
+# dkward <- dynamicK(tward, d)
+# groups <- cutree(t, k = k)
+# maxCoreScatter <- dk[dk$nclust %in% k,]$maxcor 
+# minGap <- (1 - maxCoreScatter) * 3/4
+# dyngroups <- 
+#   cutreeDynamic(t, minClusterSize=1, method = 'hybrid', distM=as.matrix(d),deepSplit=1, maxCoreScatter=maxCoreScatter, minGap=minGap, maxAbsCoreScatter=NULL, minAbsGap=NULL)
+# groups=dyngroups
 groups <- cutree(t, k = k)
-maxCoreScatter <- dk[dk$nclust %in% k,]$maxcor 
-minGap <- (1 - maxCoreScatter) * 3/4
-dyngroups <- 
-  cutreeDynamic(tbraydynam, minClusterSize=1, method = 'hybrid', distM=as.matrix(distbray),deepSplit=1, maxCoreScatter=maxCoreScatter, minGap=minGap, maxAbsCoreScatter=NULL, minAbsGap=NULL)
-groups=dyngroups
+groups <- grouporder(t, groups)
+# grouporder <- function(t,groups){
+# soilplot <- names(d)
+# clust <- unname(groups)
+# groupdf <- as.data.frame(cbind(soilplot, clust))
+# groupdf$clust <- (as.numeric(as.character(groupdf$clust)))
+# torder <- as.data.frame(cbind(trow=t$order))
+# torder$torder <- row(torder)[,1]
+# newlabels <- as.data.frame(cbind(labels=t$labels))
+# newlabels$trow <- row(newlabels)[,1]
+# newlabels <- merge(newlabels, groupdf, by.x='labels', by.y ='soilplot')
+# newlabels <- merge(newlabels, torder, by='trow')
+# 
+# grouporder <- newlabels %>% group_by(clust)  %>%  summarise(thisorder = min(torder))
+# grouporder$newgroup <- order(order(grouporder$thisorder))
+# newlabels <- merge(newlabels, grouporder, by='clust')
+# newgroups <- newlabels$newgroup
+# names(newgroups) <- newlabels$labels
+# return(newgroups)
+# }
+# newlabels$newlabels <- paste(newlabels$clust, newlabels$newlabels)
+# newlabels <- newlabels[order(newlabels$row),1]
+# newtree <- t
+# newtree$labels <- newlabels
+
+
+if (T){
+  a <- 'flex'
+  makeplot(a,d,tbeta,k)
+}
+if (T){
+  a <- 'ward'
+  makeplot(a,d,tward,k)
+}
+
+if (T){
+  a <- 'regroup'
+  makeplotgroup(a,d,tward,groups)
+}
 
 source('groupplotsummary.R') 
-
-
 Com.Structure[order(as.numeric(as.character(Com.Structure$cluster))),c("cluster", "association", "WetStructure")]
+
+
+timeA = Sys.time()
+indob <- indanalysis(plotdata)
+Sys.time() - timeA  
+
+ind.table <- indob[[1]]
+dni.table <- indob[[2]]
+clu.table <- indob[[3]]
+ulc.table <- indob[[4]]
+clind.table <- indob[[5]]
+dnilc.table <- indob[[6]]
+sil.table <- indob[[7]]
+lis.table <- indob[[8]]
+Sys.time() - timeA  
+
+
+
+
 
 
 
@@ -134,7 +195,7 @@ if (T){
 }
 if (T){
   a <- 'flex20dynamic'
-  k=6
+  k=5
   d <- ((vegdist(plotdata, method='bray', binary=FALSE, na.rm=T)))
   t <- flexbeta(d, beta= -0.20)
   makeplotdynamic(a,d,t,k)

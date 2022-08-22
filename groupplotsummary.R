@@ -4,7 +4,7 @@
 # t <- flexbeta(d, beta= -0.30)
 # groups <- cutree(t, k = k)
 
-soilplot <- names(groups)
+soilplot <- names(d)
 clust <- unname(groups)
 groupdf <- as.data.frame(cbind(soilplot, clust))
 groupdf$clust <- (as.numeric(as.character(groupdf$clust)))
