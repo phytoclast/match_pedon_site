@@ -23,14 +23,14 @@ source('clusterfunctions.R')
 
 
 #group parameters ----
-beta= -0.30
-k = 9
+beta= -0.25
+k = 7
 d <- vegdist(plotdata, method='bray', binary=FALSE, na.rm=T)
 tbeta <- d %>% flexbeta(beta= beta)
 tward <- agnes(d, method = 'ward') %>% as.hclust()
 t=tbeta
 t=tward
-# t=dendsort(t)
+t=dendsort(t)
 # dk <- dynamicK(t, d)
 # dkward <- dynamicK(tward, d)
 # groups <- cutree(t, k = k)
@@ -77,7 +77,7 @@ if (T){
 
 if (T){
   a <- 'regroup'
-  makeplotgroup(a,d,tward,groups)
+  makeplotgroup(a,d,t,groups)
 }
 
 source('groupplotsummary.R') 

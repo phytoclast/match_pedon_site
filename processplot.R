@@ -134,7 +134,7 @@ write.csv(VEGOBS, 'output/VEGOBS.csv', row.names = FALSE, na = "")
 sortsoils <- unique(
   subset(s, 
          hydricrating %in% 'yes' &
-           (T50_sand < 70 | T150_sand < 80) &
+           (T50_sand < 70 & T150_sand < 80) &
            !flood %in% 'flood'&
            !(T150_OM >= 10 | grepl('histic',taxsubgrp) |grepl('histosols',taxorder))&
            !compname %in% 'Kingsville', 
