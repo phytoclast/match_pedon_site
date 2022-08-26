@@ -24,7 +24,7 @@ source('clusterfunctions.R')
 
 #group parameters ----
 beta= -0.25
-k = 7
+k = 15
 d <- vegdist(plotdata, method='bray', binary=FALSE, na.rm=T)
 tbeta <- d %>% flexbeta(beta= beta)
 tward <- agnes(d, method = 'ward') %>% as.hclust()
@@ -81,8 +81,10 @@ if (T){
 }
 
 source('groupplotsummary.R') 
-Com.Structure[order(as.numeric(as.character(Com.Structure$cluster))),c("cluster", "association", "WetStructure")]
+source('USNVC_compare_specieslists_loop_by_cluster.R') 
 
+Com.Structure[order(as.numeric(as.character(Com.Structure$cluster))),c("cluster", "association", "WetStructure")]
+plotassociations[order(as.numeric(as.character(plotassociations$clust))),c("clust", "scientificname")]
 
 timeA = Sys.time()
 indob <- indanalysis(plotdata)
