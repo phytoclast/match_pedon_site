@@ -912,3 +912,39 @@ indanalysisdynamicward <- function(plotdata,dk,dkward,beta){
   
   listofoutput <- list(ind.table, dni.table, clu.table, ulc.table, clind.table, dnilc.table, sil.table, lis.table)
   return(listofoutput)}
+
+
+indgroup <- function(plotdata, groups){
+  plotdata1 <- plotdata %>% cbind(groups=groups)
+  # plotdata1 <- t(plotdata1)
+  plotdata.group <- plotdata1 %>% group_by(groups) %>% summarise(across(colnames(plotdata)[1:ncol(plotdata1)-1], mean))
+  # plotdata.group.total <- (apply(plotdata.group, MARGIN = 2, FUN = sum))
+  plotdata.group.total <- plotdata.group %>% mutate(across(colnames(plotdata.group)[2:ncol(plotdata.group)], sum))
+  
+  plotdata.affinity <- plotdata.group/plotdata.group.total
+  plotdata.indicator <- plotdata.affinity*plotdata.group
+  plotdata.indicator$groups <- plotdata.group$groups
+  plotdata.indicator.total <- as.data.frame(cbind(groups = plotdata.group$groups, total = apply(plotdata.indicator[,2:ncol(plotdata.indicator)], MARGIN = 1, FUN = sum)))
+  return(plotdata.indicator.total)
+}
+
+
+
+clustvar <- function(d, groups){
+  df <- as.matrix(d)
+  grps <- sort(unique(groups))
+  for(i in 1:length(grps)){#i=3
+    cluster = grps[i]
+    grpclust <- df[which(groups %in% i),which(groups %in% i)]
+    dmean <- mean(grpclust)
+    if(length(grpclust)>1){
+      dmax <- max(apply(grpclust, MARGIN=2, FUN=mean))
+    }else{dmax = max(grpclust)}
+    
+    dmax <- max(df[which(groups %in% i),which(groups %in% i)])
+    
+    dclust0 <- as.data.frame(cbind(cluster,dmean, dmax))
+    if(i==1){dclust=dclust0}else{dclust=rbind(dclust,dclust0)}
+  }
+  return(dclust)
+}
