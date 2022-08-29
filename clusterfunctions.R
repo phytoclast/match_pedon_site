@@ -1044,8 +1044,8 @@ indanalysis2 <- function(plotdata){
     
     ind.jac.1 <-  ind.jac.0[,'total'] %>% mean()
     ind.sim.1 <- ind.sim.0[,'total'] %>% mean()
-    ind.diana.1 <- ind.ward.0[,'total'] %>% mean()
-    ind.kmeans.1 <- ind.diana.0[,'total'] %>% mean()
+    ind.diana.1 <- ind.diana.0[,'total'] %>% mean()
+    ind.kmeans.1 <- ind.kmeans.0[,'total'] %>% mean()
     ind.kulc.1 <- ind.kulc.0[,'total'] %>% mean()
     ind.kward.1 <- ind.kward.0[,'total'] %>% mean()
     
@@ -1061,8 +1061,8 @@ indanalysis2 <- function(plotdata){
     
     weak.jac.1 <-  ind.jac.0[,'maxval'] %>% min()
     weak.sim.1 <- ind.sim.0[,'maxval'] %>% min()
-    weak.diana.1 <- ind.ward.0[,'maxval'] %>% min()
-    weak.kmeans.1 <- ind.diana.0[,'maxval'] %>% min()
+    weak.diana.1 <- ind.diana.0[,'maxval'] %>% min()
+    weak.kmeans.1 <- ind.kmeans.0[,'maxval'] %>% min()
     weak.kulc.1 <- ind.kulc.0[,'maxval'] %>% min()
     weak.kward.1 <- ind.kward.0[,'maxval'] %>% min()
     
