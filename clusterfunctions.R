@@ -1,6 +1,7 @@
 
 grouporder <- function(t,groups){
-  soilplot <- names(d)
+  t=as.hclust(t)
+  soilplot <- names(groups)
   clust <- unname(groups)
   groupdf <- as.data.frame(cbind(soilplot, clust))
   groupdf$clust <- (as.numeric(as.character(groupdf$clust)))
@@ -913,38 +914,213 @@ indanalysisdynamicward <- function(plotdata,dk,dkward,beta){
   listofoutput <- list(ind.table, dni.table, clu.table, ulc.table, clind.table, dnilc.table, sil.table, lis.table)
   return(listofoutput)}
 
-
-indgroup <- function(plotdata, groups){
-  plotdata1 <- plotdata %>% cbind(groups=groups)
+indgroup <- function(plotdata, groups, qualitative){#qualitative=F
+  p.rowmax <- apply(plotdata, MARGIN = 1, FUN=max)
+  p.normal <- plotdata/p.rowmax
+  if(qualitative){p.normal <- as.data.frame((p.normal>0)*1)}
+  
+  plotdata1 <- p.normal %>% cbind(groups=groups)
   # plotdata1 <- t(plotdata1)
   plotdata.group <- plotdata1 %>% group_by(groups) %>% summarise(across(colnames(plotdata)[1:ncol(plotdata1)-1], mean))
   # plotdata.group.total <- (apply(plotdata.group, MARGIN = 2, FUN = sum))
   plotdata.group.total <- plotdata.group %>% mutate(across(colnames(plotdata.group)[2:ncol(plotdata.group)], sum))
   
   plotdata.affinity <- plotdata.group/plotdata.group.total
-  plotdata.indicator <- plotdata.affinity*plotdata.group
+  plotdata.indicator <- (plotdata.affinity*plotdata.group)^0.5
   plotdata.indicator$groups <- plotdata.group$groups
-  plotdata.indicator.total <- as.data.frame(cbind(groups = plotdata.group$groups, total = apply(plotdata.indicator[,2:ncol(plotdata.indicator)], MARGIN = 1, FUN = sum)))
+  plotdata.indicator.total <- as.data.frame(cbind(groups = plotdata.group$groups,
+                                                  total = apply(plotdata.indicator[,2:ncol(plotdata.indicator)], MARGIN = 1, FUN = sum),
+                                                  maxval = apply(plotdata.indicator[,2:ncol(plotdata.indicator)], MARGIN = 1, FUN = max)
+  ))
   return(plotdata.indicator.total)
 }
 
-
-
 clustvar <- function(d, groups){
-  df <- as.matrix(d)
+  df <- as.matrix(d)*-1+1
   grps <- sort(unique(groups))
   for(i in 1:length(grps)){#i=3
     cluster = grps[i]
     grpclust <- df[which(groups %in% i),which(groups %in% i)]
     dmean <- mean(grpclust)
     if(length(grpclust)>1){
-      dmax <- max(apply(grpclust, MARGIN=2, FUN=mean))
+      dmin <- min(apply(grpclust, MARGIN=2, FUN=mean))
     }else{dmax = max(grpclust)}
-    
-    dmax <- max(df[which(groups %in% i),which(groups %in% i)])
-    
-    dclust0 <- as.data.frame(cbind(cluster,dmean, dmax))
+       dclust0 <- as.data.frame(cbind(cluster,dmean, dmin))
     if(i==1){dclust=dclust0}else{dclust=rbind(dclust,dclust0)}
   }
   return(dclust)
 }
+
+indanalysis2 <- function(plotdata){
+  plotdata.total <- apply(plotdata, MARGIN = 2, FUN = 'sum')
+  plotdata.total <- as.data.frame(cbind(name=names(plotdata.total),total=plotdata.total))
+  removetaxon <- plotdata.total[plotdata.total$total %in% 0,]$name
+  plotdata1 <- plotdata[,!colnames(plotdata) %in% removetaxon]
+  
+  distbray <- vegdist(plotdata1, method='bray', binary=FALSE, na.rm=T)# dbray <- as.data.frame(as.matrix(distbray))
+  distjac <- vegdist(plotdata1, method='jaccard', binary=FALSE, na.rm=T)
+  distsim <- as.dist(simil(plotdata1,method='Simpson'))
+  distkulc <- vegdist(plotdata1, method='kulczynski', binary=FALSE, na.rm=T)
+  tbrayagnes <- distbray %>% agnes(method = 'average')
+  tbrayflex05 <- distbray %>% flexbeta(beta= -0.05)
+  tbrayflex10 <- distbray %>% flexbeta(beta= -0.10)
+  tbrayflex15 <- distbray %>% flexbeta(beta= -0.15)
+  tbrayflex20 <- distbray %>% flexbeta(beta= -0.20)
+  tbrayflex25 <- distbray %>% flexbeta(beta= -0.25)
+  tbrayflex30 <- distbray %>% flexbeta(beta= -0.30)
+  tbrayflex35 <- distbray %>% flexbeta(beta= -0.35)
+  tbrayward <- distbray %>% agnes(method = 'ward')
+  tbraydiana <- distbray %>% diana 
+  tsimpagnes <- distsim %>% agnes(method = 'average') 
+  tjacagnes <- distjac %>% agnes(method = 'average') 
+  tkulcagnes <- distkulc %>% agnes(method = 'average')
+  tkulcward <- distkulc %>% agnes(method = 'ward')
+  
+  klevel <- 0
+  
+  ind.upgma <- 0
+  ind.flex05 <- 0
+  ind.flex10 <- 0
+  ind.flex15 <- 0
+  ind.flex20 <- 0
+  ind.flex25 <- 0
+  ind.flex30 <- 0
+  ind.flex35 <- 0
+  ind.ward <- 0
+  
+  ind.jac <- 0
+  ind.sim <- 0
+  ind.diana <- 0
+  ind.kmeans <- 0
+  ind.kulc <- 0
+  ind.kward <- 0
+  
+  
+  weak.upgma <- 0
+  weak.flex05 <- 0
+  weak.flex10 <- 0
+  weak.flex15 <- 0
+  weak.flex20 <- 0
+  weak.flex25 <- 0
+  weak.flex30 <- 0
+  weak.flex35 <- 0
+  weak.ward <- 0
+  
+  weak.jac <- 0
+  weak.sim <- 0
+  weak.diana <- 0
+  weak.kmeans <- 0
+  weak.kulc <- 0
+  weak.kward <- 0
+  
+  for (k in 2:10){
+    
+    ind.upgma.0 <- indgroup(plotdata1, cutree(tbrayagnes, k = k), F)
+    ind.flex05.0 <- indgroup(plotdata1, cutree(tbrayflex05, k = k), F)
+    ind.flex10.0 <- indgroup(plotdata1, cutree(tbrayflex10, k = k), F)
+    ind.flex15.0 <- indgroup(plotdata1, cutree(tbrayflex15, k = k), F)
+    ind.flex20.0 <- indgroup(plotdata1, cutree(tbrayflex20, k = k), F)
+    ind.flex25.0 <- indgroup(plotdata1, cutree(tbrayflex25, k = k), F)
+    ind.flex30.0 <- indgroup(plotdata1, cutree(tbrayflex30, k = k), F)
+    ind.flex35.0 <- indgroup(plotdata1, cutree(tbrayflex35, k = k), F)
+    ind.ward.0 <- indgroup(plotdata1, cutree(tbrayward, k = k), F)
+    
+    ind.jac.0 <- indgroup(plotdata1, cutree(tjacagnes, k = k), F)
+    ind.sim.0 <- indgroup(plotdata1, cutree(tsimpagnes, k = k), F)
+    ind.diana.0 <- indgroup(plotdata1, cutree(tbraydiana, k = k), F)
+    ind.kmeans.0 <- indgroup(plotdata1, kmeans(distbray, centers = k)$cluster, F)
+    ind.kulc.0 <- indgroup(plotdata1, cutree(tkulcagnes, k = k), F)
+    ind.kward.0 <- indgroup(plotdata1, cutree(tkulcward, k = k), F)
+    
+    ind.upgma.1 <- ind.upgma.0[,'total'] %>% mean()
+    ind.flex05.1 <- ind.flex05.0[,'total'] %>% mean()
+    ind.flex10.1 <- ind.flex10.0[,'total'] %>% mean()
+    ind.flex15.1 <- ind.flex15.0[,'total'] %>% mean()
+    ind.flex20.1 <- ind.flex20.0[,'total'] %>% mean()
+    ind.flex25.1 <- ind.flex25.0[,'total'] %>% mean()
+    ind.flex30.1 <- ind.flex30.0[,'total'] %>% mean()
+    ind.flex35.1 <- ind.flex35.0[,'total'] %>% mean()
+    ind.ward.1 <- ind.ward.0[,'total'] %>% mean()
+    
+    ind.jac.1 <-  ind.jac.0[,'total'] %>% mean()
+    ind.sim.1 <- ind.sim.0[,'total'] %>% mean()
+    ind.diana.1 <- ind.ward.0[,'total'] %>% mean()
+    ind.kmeans.1 <- ind.diana.0[,'total'] %>% mean()
+    ind.kulc.1 <- ind.kulc.0[,'total'] %>% mean()
+    ind.kward.1 <- ind.kward.0[,'total'] %>% mean()
+    
+    weak.upgma.1 <- ind.upgma.0[,'maxval'] %>% min()
+    weak.flex05.1 <- ind.flex05.0[,'maxval'] %>% min()
+    weak.flex10.1 <- ind.flex10.0[,'maxval'] %>% min()
+    weak.flex15.1 <- ind.flex15.0[,'maxval'] %>% min()
+    weak.flex20.1 <- ind.flex20.0[,'maxval'] %>% min()
+    weak.flex25.1 <- ind.flex25.0[,'maxval'] %>% min()
+    weak.flex30.1 <- ind.flex30.0[,'maxval'] %>% min()
+    weak.flex35.1 <- ind.flex35.0[,'maxval'] %>% min()
+    weak.ward.1 <- ind.ward.0[,'maxval'] %>% min()
+    
+    weak.jac.1 <-  ind.jac.0[,'maxval'] %>% min()
+    weak.sim.1 <- ind.sim.0[,'maxval'] %>% min()
+    weak.diana.1 <- ind.ward.0[,'maxval'] %>% min()
+    weak.kmeans.1 <- ind.diana.0[,'maxval'] %>% min()
+    weak.kulc.1 <- ind.kulc.0[,'maxval'] %>% min()
+    weak.kward.1 <- ind.kward.0[,'maxval'] %>% min()
+    
+    
+    klevel <- c(klevel, k)
+    
+    ind.upgma <- c(ind.upgma, ind.upgma.1)
+    ind.flex05 <- c(ind.flex05, ind.flex05.1)
+    ind.flex10 <- c(ind.flex10, ind.flex10.1)
+    ind.flex15 <- c(ind.flex15, ind.flex15.1)
+    ind.flex20 <- c(ind.flex20, ind.flex20.1)
+    ind.flex25 <- c(ind.flex25, ind.flex25.1)
+    ind.flex30 <- c(ind.flex30, ind.flex30.1)
+    ind.flex35 <- c(ind.flex35, ind.flex35.1)
+    ind.ward <- c(ind.ward, ind.ward.1)
+    
+    ind.jac <- c(ind.jac, ind.jac.1)
+    ind.sim <- c(ind.sim, ind.sim.1)
+    ind.diana <- c(ind.diana, ind.diana.1)
+    ind.kmeans <- c(ind.kmeans, ind.kmeans.1)
+    ind.kulc <- c(ind.kulc, ind.kulc.1)
+    ind.kward <- c(ind.kward, ind.kward.1)
+    
+    weak.upgma <- c(weak.upgma, weak.upgma.1)
+    weak.flex05 <- c(weak.flex05, weak.flex05.1)
+    weak.flex10 <- c(weak.flex10, weak.flex10.1)
+    weak.flex15 <- c(weak.flex15, weak.flex15.1)
+    weak.flex20 <- c(weak.flex20, weak.flex20.1)
+    weak.flex25 <- c(weak.flex25, weak.flex25.1)
+    weak.flex30 <- c(weak.flex30, weak.flex30.1)
+    weak.flex35 <- c(weak.flex35, weak.flex35.1)
+    weak.ward <- c(weak.ward, weak.ward.1)
+    
+    weak.jac <- c(weak.jac, weak.jac.1)
+    weak.sim <- c(weak.sim, weak.sim.1)
+    weak.diana <- c(weak.diana, weak.diana.1)
+    weak.kmeans <- c(weak.kmeans, weak.kmeans.1)
+    weak.kulc <- c(weak.kulc, weak.kulc.1)
+    weak.kward <- c(weak.kward, weak.kward.1)
+    
+  }    
+  
+  ind.table <- as.data.frame(cbind(klevel,ind.upgma,ind.flex05,ind.flex10,ind.flex15,ind.flex20,ind.flex25,ind.flex30,ind.flex35,ind.ward,ind.jac,ind.sim,ind.diana,ind.kmeans,ind.kulc,ind.kward))
+  ind.table <- ind.table[-1,]
+  
+  weak.table <- as.data.frame(cbind(klevel,weak.upgma,weak.flex05,weak.flex10,weak.flex15,weak.flex20,weak.flex25,weak.flex30,weak.flex35,weak.ward,weak.jac,weak.sim,weak.diana,weak.kmeans,weak.kulc,weak.kward))
+  weak.table <- weak.table[-1,]
+  
+  dni.table <- ind.table[,-1] %>% t() %>% as.data.frame()
+  dni.table <- dni.table %>% mutate(s2to8 = apply(dni.table[,1:7], MARGIN=1, FUN = 'mean'))
+  
+  kaew.table <- weak.table[,-1] %>% t() %>% as.data.frame()
+  kaew.table <- kaew.table %>% mutate(s2to8 = apply(kaew.table[,1:7], MARGIN=1, FUN = 'mean'))
+  
+  listofoutput <- list(ind.table, dni.table, weak.table, kaew.table)
+  return(listofoutput)}
+
+
+
+  
+  

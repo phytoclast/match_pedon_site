@@ -21,16 +21,15 @@ source('processplot.R')
 #load clustering functions ----
 source('clusterfunctions.R') 
 
-
+p.rowmax <- apply(plotdata, MARGIN = 1, FUN=max)
+p.normal <- plotdata/p.rowmax
 #group parameters ----
-beta= -0.25
-k = 15
-d <- vegdist(plotdata, method='bray', binary=FALSE, na.rm=T)
-tbeta <- d %>% flexbeta(beta= beta)
-tward <- agnes(d, method = 'ward') %>% as.hclust()
-t=tbeta
-t=tward
-t=dendsort(t)
+# beta= -0.25
+# k = 4
+# d <- vegdist(plotdata, method='bray', binary=FALSE, na.rm=T)
+# tbeta <- d %>% flexbeta(beta= beta) %>% dendsort()
+# tward <- agnes(d, method = 'ward') %>% as.hclust() %>% dendsort()
+
 # dk <- dynamicK(t, d)
 # dkward <- dynamicK(tward, d)
 # groups <- cutree(t, k = k)
@@ -39,8 +38,8 @@ t=dendsort(t)
 # dyngroups <- 
 #   cutreeDynamic(t, minClusterSize=1, method = 'hybrid', distM=as.matrix(d),deepSplit=1, maxCoreScatter=maxCoreScatter, minGap=minGap, maxAbsCoreScatter=NULL, minAbsGap=NULL)
 # groups=dyngroups
-groups <- cutree(t, k = k)
-groups <- grouporder(t, groups)
+# groups <- cutree(t, k = k)
+# groups <- grouporder(t, groups)
 # grouporder <- function(t,groups){
 # soilplot <- names(d)
 # clust <- unname(groups)
@@ -66,25 +65,51 @@ groups <- grouporder(t, groups)
 # newtree$labels <- newlabels
 
 
+beta= -0.25
+k = 4
+d <- vegdist(p.normal, method='bray', binary=FALSE, na.rm=T)
+tbeta <- d %>% flexbeta(beta= beta) %>% dendsort()
+tward <- agnes(d, method = 'ward') %>% as.hclust() %>% dendsort()
+
+t <- tbeta
+groups <- cutree(t, k = k)
+groups <- grouporder(t, groups)
 if (T){
   a <- 'flex'
-  makeplot(a,d,tbeta,k)
-}
-if (T){
-  a <- 'ward'
-  makeplot(a,d,tward,k)
-}
-
-if (T){
-  a <- 'regroup'
   makeplotgroup(a,d,t,groups)
 }
+
+t <- tward
+groups <- cutree(t, k = k)
+groups <- grouporder(t, groups)
+if (T){
+  a <- 'ward'
+  makeplotgroup(a,d,t,groups)
+}
+indicators <- indgroup(p.normal, groups, F)
+dclust <- clustvar(d, groups)
+
 
 source('groupplotsummary.R') 
 source('USNVC_compare_specieslists_loop_by_cluster.R') 
 
 Com.Structure[order(as.numeric(as.character(Com.Structure$cluster))),c("cluster", "association", "WetStructure")]
 plotassociations[order(as.numeric(as.character(plotassociations$clust))),c("clust", "scientificname")]
+
+
+timeA = Sys.time()
+indob <- indanalysis2(plotdata)
+Sys.time() - timeA  
+
+ind.table <- indob[[1]]
+dni.table <- indob[[2]]
+weak.table <- indob[[3]]
+kaew.table <- indob[[4]]
+Sys.time() - timeA  
+
+
+
+
 
 timeA = Sys.time()
 indob <- indanalysis(plotdata)
