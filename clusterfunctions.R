@@ -1013,7 +1013,7 @@ indanalysis2 <- function(plotdata){
   weak.kulc <- 0
   weak.kward <- 0
   
-  for (k in 2:10){
+  for (k in 2:15){
     
     ind.upgma.0 <- indgroup(plotdata1, cutree(tbrayagnes, k = k), F)
     ind.flex05.0 <- indgroup(plotdata1, cutree(tbrayflex05, k = k), F)

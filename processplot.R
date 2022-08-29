@@ -222,6 +222,29 @@ Com.Sp.mean$sqrttotal <- sqrt(Com.Sp.mean$Total)
 #saveRDS(Com.Sp.mean, 'C:/workspace2/USNVC/data/plotdata.RDS')
 
 #plotdata <- makecommunitydataset(Com.Sp.mean, row = 'soilplot', column = 'Species', value = 'sqrttotal', drop = TRUE)
-Com.Sp.mean$logtotal <- (log10(100*(1-10^(apply(log10(1-(Com.Sp.mean[,c('Field', 'Shrub', 'Subcanopy', 'Tree')]/100.001)), MARGIN = 1, FUN='sum'))))+2.1)
+#
+#
+#
+# (log10(100*(1-10^(
+  mean(log10(1-(10/100.001)),
+       log10(1-(10/100.001)),
+       log10(1-(10/100.001)),
+       log10(1-(10/100.001))
+  )
+#   )+2.1)
+  
+  (log10(100*(1-10^(
+    sum(log10(1-(10/100.001)),
+         
+         log10(1-(10/100.001))
+    )
+    )))+2.1)
+
+Com.Sp.mean$logtotal1 <- (log10(100*(1-10^(apply(log10(1-(Com.Sp.mean[,c('Field', 'Shrub', 'Subcanopy', 'Tree')]/100.001)), MARGIN = 1, FUN='sum'))))+2.1)
+Com.Sp.mean$logtotal2 <- ifelse(apply(Com.Sp.mean[,c('Shrub', 'Subcanopy', 'Tree')], MARGIN = 1, FUN=sum) == 0,0, (log10(100*(1-10^(apply(log10(1-(Com.Sp.mean[,c('Shrub', 'Subcanopy', 'Tree')]/100.001)), MARGIN = 1, FUN='sum'))))+2.1))
+Com.Sp.mean$logtotal3 <- ifelse(apply(Com.Sp.mean[,c('Subcanopy', 'Tree')], MARGIN = 1, FUN=sum) == 0,0,(log10(100*(1-10^(apply(log10(1-(Com.Sp.mean[,c('Subcanopy', 'Tree')]/100.001)), MARGIN = 1, FUN='sum'))))+2.1))
+Com.Sp.mean$logtotal4 <- ifelse(Com.Sp.mean[,c('Tree')] == 0,0,(log10(100*(1-10^(log10(1-(Com.Sp.mean[,c( 'Tree')]/100.001)))))+2.1))
+
+Com.Sp.mean$logtotal <- (Com.Sp.mean$logtotal1+Com.Sp.mean$logtotal2+Com.Sp.mean$logtotal3+Com.Sp.mean$logtotal4)/4
 
 plotdata <- makecommunitydataset(Com.Sp.mean, row = 'soilplot', column = 'Species', value = 'logtotal', drop = TRUE)

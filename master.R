@@ -66,7 +66,7 @@ p.normal <- plotdata/p.rowmax
 
 
 beta= -0.25
-k = 4
+k = 15
 d <- vegdist(p.normal, method='bray', binary=FALSE, na.rm=T)
 tbeta <- d %>% flexbeta(beta= beta) %>% dendsort()
 tward <- agnes(d, method = 'ward') %>% as.hclust() %>% dendsort()
@@ -86,8 +86,65 @@ if (T){
   a <- 'ward'
   makeplotgroup(a,d,t,groups)
 }
+
+distsim <- as.dist(simil(p.normal,method='Simpson'))
+distkulc <- vegdist(p.normal, method='kulczynski', binary=FALSE, na.rm=T)
+distbray <- vegdist(p.normal, method='bray', binary=FALSE, na.rm=T)
+tbrayagnes <- distbray %>% agnes(method = 'average') %>% as.hclust() %>% dendsort()
+tsimpagnes <- distsim %>% agnes(method = 'average') %>% as.hclust() %>% dendsort()
+tkulcagnes <- distkulc %>% agnes(method = 'average')%>% as.hclust() %>% dendsort()
+tbrayflex25 <- distbray %>% flexbeta(beta= -0.25) %>% as.hclust() %>% dendsort()
+tbrayward <- distbray %>% agnes(method = 'ward') %>% as.hclust() %>% dendsort()
+k=4
+
+if (T){
+  a <- 'kulcagnes'
+  t <- tkulcagnes 
+  d <- distkulc
+  groups <- cutree(t, k = k)
+  groups <- grouporder(t, groups)
+  makeplotgroup(a,d,t,groups)}
+
+if (T){
+  a <- 'simpagnes'
+  t <- tsimpagnes 
+  d <- distsim
+  groups <- cutree(t, k = k)
+  groups <- grouporder(t, groups)
+  makeplotgroup(a,d,t,groups)
+}
+
+if (T){
+  a <- 'brayagnes'
+  t <- tbrayagnes
+  d <- distbray
+  groups <- cutree(t, k = k)
+  groups <- grouporder(t, groups)
+  
+  makeplotgroup(a,d,t,groups)}
+
+if (T){
+  a <- 'brayflex25'
+  t <- tbrayflex25
+  d <- distbray
+  groups <- cutree(t, k = k)
+  groups <- grouporder(t, groups)
+  makeplotgroup(a,d,t,groups)}
+
+if (T){
+  a <- 'brayward'
+  t <- tbrayward
+  d <- distbray
+  groups <- cutree(t, k = k)
+  groups <- grouporder(t, groups)
+  makeplotgroup(a,d,t,groups)}
+
+
+
+
+
 indicators <- indgroup(p.normal, groups, F)
-dclust <- clustvar(d, groups)
+#dclust <- clustvar(d, groups)
 
 
 source('groupplotsummary.R') 
@@ -98,7 +155,7 @@ plotassociations[order(as.numeric(as.character(plotassociations$clust))),c("clus
 
 
 timeA = Sys.time()
-indob <- indanalysis2(plotdata)
+indob <- indanalysis2(p.normal)
 Sys.time() - timeA  
 
 ind.table <- indob[[1]]
