@@ -96,6 +96,8 @@ tkulcagnes <- distkulc %>% agnes(method = 'average')%>% as.hclust() %>% dendsort
 tbrayflex25 <- distbray %>% flexbeta(beta= -0.25) %>% as.hclust() %>% dendsort()
 tbrayflex15 <- distbray %>% flexbeta(beta= -0.15) %>% as.hclust() %>% dendsort()
 tbrayward <- distbray %>% agnes(method = 'ward') %>% as.hclust() %>% dendsort()
+tbraydiana <- distbray %>% diana() %>% as.hclust() %>% dendsort()
+
 k=4
 
 if (T){
@@ -150,7 +152,17 @@ if (T){
   groups <- cutree(t, k = k)
   groups <- grouporder(t, groups)
   makeplotgroup(a,d,t,groups)
-  }
+}
+
+if (T){
+  k=6
+  a <- 'braydiana'
+  t <- tbraydiana
+  d <- distbray
+  groups <- cutree(t, k = k)
+  groups <- grouporder(t, groups)
+  makeplotgroup(a,d,t,groups)
+}
 
 
 
