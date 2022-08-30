@@ -94,6 +94,7 @@ tbrayagnes <- distbray %>% agnes(method = 'average') %>% as.hclust() %>% dendsor
 tsimpagnes <- distsim %>% agnes(method = 'average') %>% as.hclust() %>% dendsort()
 tkulcagnes <- distkulc %>% agnes(method = 'average')%>% as.hclust() %>% dendsort()
 tbrayflex25 <- distbray %>% flexbeta(beta= -0.25) %>% as.hclust() %>% dendsort()
+tbrayflex15 <- distbray %>% flexbeta(beta= -0.15) %>% as.hclust() %>% dendsort()
 tbrayward <- distbray %>% agnes(method = 'ward') %>% as.hclust() %>% dendsort()
 k=4
 
@@ -132,18 +133,34 @@ if (T){
   makeplotgroup(a,d,t,groups)}
 
 if (T){
+  #k=15
   a <- 'brayward'
   t <- tbrayward
   d <- distbray
   groups <- cutree(t, k = k)
   groups <- grouporder(t, groups)
-  makeplotgroup(a,d,t,groups)}
+  makeplotgroup(a,d,t,groups)
+  }
 
+if (T){
+  k=6
+  a <- 'brayflex15'
+  t <- tbrayflex15
+  d <- distbray
+  groups <- cutree(t, k = k)
+  groups <- grouporder(t, groups)
+  makeplotgroup(a,d,t,groups)
+  }
 
 
 
 
 indicators <- indgroup(p.normal, groups, F)
+indicators2 <- indgroup2(p.normal, groups, F)
+iplot <- indicators2[[1]]
+gplot <- indicators2[[2]]
+aplot <- indicators2[[3]]
+
 #dclust <- clustvar(d, groups)
 
 

@@ -935,6 +935,27 @@ indgroup <- function(plotdata, groups, qualitative){#qualitative=F
   return(plotdata.indicator.total)
 }
 
+indgroup2 <- function(plotdata, groups, qualitative){#qualitative=F
+  p.rowmax <- apply(plotdata, MARGIN = 1, FUN=max)
+  p.normal <- plotdata/p.rowmax
+  if(qualitative){p.normal <- as.data.frame((p.normal>0)*1)}
+  
+  plotdata1 <- p.normal %>% cbind(groups=groups)
+  # plotdata1 <- t(plotdata1)
+  plotdata.group <- plotdata1 %>% group_by(groups) %>% summarise(across(colnames(plotdata)[1:ncol(plotdata1)-1], mean))
+  # plotdata.group.total <- (apply(plotdata.group, MARGIN = 2, FUN = sum))
+  plotdata.group.total <- plotdata.group %>% mutate(across(colnames(plotdata.group)[2:ncol(plotdata.group)], sum))
+  
+  plotdata.affinity <- plotdata.group/plotdata.group.total
+  plotdata.indicator <- (plotdata.affinity*plotdata.group)^0.5
+  plotdata.indicator$groups <- plotdata.group$groups
+  iplot <- t(plotdata.indicator[,-1]) %>% as.data.frame()
+  gplot <- t(plotdata.group[,-1]) %>% as.data.frame()
+  aplot <- t(plotdata.affinity[,-1]) %>% as.data.frame()
+  indlist <- list(iplot, gplot, aplot)
+  return(indlist)
+}
+
 clustvar <- function(d, groups){
   df <- as.matrix(d)*-1+1
   grps <- sort(unique(groups))
