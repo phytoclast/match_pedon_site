@@ -21,8 +21,23 @@ source('processplot.R')
 #load clustering functions ----
 source('clusterfunctions.R') 
 
-p.rowmax <- apply(plotdata, MARGIN = 1, FUN=max)
-p.normal <- plotdata/p.rowmax
+
+#run seperate open vs forest analyses
+
+newnames <- paste0('t',str_pad(round(overstorycover$overstorycover, 0), 2,'left',0),'s',str_pad(round(overstorycover$shrubcover, 0), 2,'left',0), overstorycover$soilplot)
+
+plotdatax <- plotdata
+rownames(plotdatax) <- newnames
+shrubplots <- subset(overstorycover, shrubcover >= 10 & overstorycover < 10)$soilplot
+plotdata.shrub <- subset(plotdata, rownames(plotdata) %in%  shrubplots )
+openplots <- subset(overstorycover, shrubcover < 10 & overstorycover < 10)$soilplot
+plotdata.open <- subset(plotdata, rownames(plotdata) %in%  openplots )
+openplots <- subset(overstorycover, shrubcover < 10 & overstorycover < 10)$soilplot
+plotdata.open <- subset(plotdata, rownames(plotdata) %in%  c(openplots,shrubplots) )
+forestplots <- subset(overstorycover, overstorycover >= 10)$soilplot
+plotdata.forest <- subset(plotdata, rownames(plotdata) %in%  forestplots )
+
+p.normal <- cleanplotdata(plotdata.open)
 #group parameters ----
 # beta= -0.25
 # k = 4
@@ -66,7 +81,7 @@ p.normal <- plotdata/p.rowmax
 
 
 beta= -0.25
-k = 15
+k = 3
 d <- vegdist(p.normal, method='bray', binary=FALSE, na.rm=T)
 tbeta <- d %>% flexbeta(beta= beta) %>% dendsort()
 tward <- agnes(d, method = 'ward') %>% as.hclust() %>% dendsort()
@@ -98,7 +113,7 @@ tbrayflex15 <- distbray %>% flexbeta(beta= -0.15) %>% as.hclust() %>% dendsort()
 tbrayward <- distbray %>% agnes(method = 'ward') %>% as.hclust() %>% dendsort()
 tbraydiana <- distbray %>% diana() %>% as.hclust() %>% dendsort()
 
-k=4
+
 
 if (T){
   a <- 'kulcagnes'
@@ -135,7 +150,7 @@ if (T){
   makeplotgroup(a,d,t,groups)}
 
 if (T){
-  #k=15
+  k=3
   a <- 'brayward'
   t <- tbrayward
   d <- distbray
@@ -144,7 +159,7 @@ if (T){
   makeplotgroup(a,d,t,groups)
   }
 
-if (T){
+if (F){
   k=6
   a <- 'brayflex15'
   t <- tbrayflex15
@@ -154,7 +169,7 @@ if (T){
   makeplotgroup(a,d,t,groups)
 }
 
-if (T){
+if (F){
   k=6
   a <- 'braydiana'
   t <- tbraydiana
@@ -166,7 +181,8 @@ if (T){
 
 
 
-
+  
+  
 indicators <- indgroup(p.normal, groups, F)
 indicators2 <- indgroup2(p.normal, groups, F)
 iplot <- indicators2[[1]]
@@ -192,9 +208,6 @@ dni.table <- indob[[2]]
 weak.table <- indob[[3]]
 kaew.table <- indob[[4]]
 Sys.time() - timeA  
-
-
-
 
 
 timeA = Sys.time()

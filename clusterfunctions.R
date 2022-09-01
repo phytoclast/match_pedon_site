@@ -977,7 +977,7 @@ indanalysis2 <- function(plotdata){
   plotdata.total <- as.data.frame(cbind(name=names(plotdata.total),total=plotdata.total))
   removetaxon <- plotdata.total[plotdata.total$total %in% 0,]$name
   plotdata1 <- plotdata[,!colnames(plotdata) %in% removetaxon]
-  
+   
   distbray <- vegdist(plotdata1, method='bray', binary=FALSE, na.rm=T)# dbray <- as.data.frame(as.matrix(distbray))
   distjac <- vegdist(plotdata1, method='jaccard', binary=FALSE, na.rm=T)
   distsim <- as.dist(simil(plotdata1,method='Simpson'))
@@ -1034,7 +1034,7 @@ indanalysis2 <- function(plotdata){
   weak.kulc <- 0
   weak.kward <- 0
   
-  for (k in 2:15){
+  for (k in 2:min(nrow(plotdata1)-1,15)){
     
     ind.upgma.0 <- indgroup(plotdata1, cutree(tbrayagnes, k = k), F)
     ind.flex05.0 <- indgroup(plotdata1, cutree(tbrayflex05, k = k), F)
@@ -1143,5 +1143,30 @@ indanalysis2 <- function(plotdata){
 
 
 
-  
-  
+
+adjustcover <- function(cover.est, cover.total){
+  #this function adjusts ocular estimates of individual species to be coherent with the ocular estimate of total cover for a stratum.
+  #cover.est = c(10,50,80) #estimated cover for individual taxa in stratum
+  #cover.total = 80 #estimated cover for whole stratum
+  cover.est = cover.est/100
+  cover.total = cover.total/100
+  cover.agg1 = 1-10^(sum(log10(1-cover.est)))
+  cover.fac1 = (cover.total/cover.agg1)^1.5 #first pass makes a linear adjustment so that relative cover is consistent with field estimate.
+  cover.adj1 = cover.est*cover.fac1
+  cover.agg2 = 1-10^(sum(log10(1-cover.adj1)))
+  cover.fac2 = (log10(1-cover.total)/log10(1-cover.agg2))#second pass fine tunes adjusted cover so that aggregate cover matches ocular total cover.
+  cover.agg3 = 1-10^(cover.fac2*log10(1-cover.adj1))
+  cover.adj  = cover.agg3*100
+  #cover.agg.test <- 100*(1-10^(sum(log10(1-cover.adj/100)))) #produces aggregate of stratum after adjustment; should be the same as cover.total
+  return(cover.adj)
+}
+
+cleanplotdata <- function(plotdata){
+  plotdata.total <- apply(plotdata, MARGIN = 2, FUN = 'sum')
+  plotdata.total <- as.data.frame(cbind(name=names(plotdata.total),total=plotdata.total))
+  removetaxon <- plotdata.total[plotdata.total$total %in% 0,]$name
+  plotdata1 <- plotdata[,!colnames(plotdata) %in% removetaxon]
+  p.rowmax <- apply(plotdata1, MARGIN = 1, FUN=max)
+  p.normal <- plotdata1/p.rowmax
+  return(p.normal)
+}
