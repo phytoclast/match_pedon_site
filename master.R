@@ -37,7 +37,81 @@ plotdata.open <- subset(plotdata, rownames(plotdata) %in%  c(openplots,shrubplot
 forestplots <- subset(overstorycover, overstorycover >= 10)$soilplot
 plotdata.forest <- subset(plotdata, rownames(plotdata) %in%  forestplots )
 
-p.normal <- cleanplotdata(plotdata.open)
+plotdata.open.normal <- cleanplotdata(plotdata.open)
+plotdata.forest.normal <- cleanplotdata(plotdata.forest)
+
+timeA = Sys.time()
+indob <- indanalysis2(plotdata.open.normal)
+Sys.time() - timeA  
+
+open.ind.table <- indob[[1]]
+open.dni.table <- indob[[2]]
+open.weak.table <- indob[[3]]
+open.kaew.table <- indob[[4]]
+Sys.time() - timeA  
+
+timeA = Sys.time()
+indob <- indanalysis2(plotdata.forest.normal)
+Sys.time() - timeA  
+
+forest.ind.table <- indob[[1]]
+forest.dni.table <- indob[[2]]
+forest.weak.table <- indob[[3]]
+forest.kaew.table <- indob[[4]]
+Sys.time() - timeA  
+
+
+#forest ----
+p1=plotdata.forest.normal
+d <- vegdist(p1, method='bray', binary=FALSE, na.rm=T)
+k = 5
+t  <- d %>% flexbeta(beta= -0.15) %>% as.hclust() %>% dendsort()
+groups <- cutree(t, k = k)
+groups <- grouporder(t, groups)
+if (T){
+  a <- 'forest'
+  makeplotgroup(a,d,t,groups)
+}
+
+indicators <- indgroup(p1, groups, F)
+indicators2 <- indgroup2(p1, groups, F)
+iplot <- indicators2[[1]]
+gplot <- indicators2[[2]]
+aplot <- indicators2[[3]]
+
+source('groupplotsummary.R') 
+source('USNVC_compare_specieslists_loop_by_cluster.R') 
+
+Com.Structure[order(as.numeric(as.character(Com.Structure$cluster))),c("cluster", "association", "WetStructure")]
+plotassociations[order(as.numeric(as.character(plotassociations$clust))),c("clust", "scientificname")]
+
+
+#open ----
+p1=plotdata.open.normal
+d <- vegdist(p1, method='kulczynski', binary=FALSE, na.rm=T)
+k = 5
+t  <- d %>% agnes(method = 'ward') %>% as.hclust() %>% dendsort()
+groups <- cutree(t, k = k)
+groups <- grouporder(t, groups)
+if (T){
+  a <- 'open'
+  makeplotgroup(a,d,t,groups)
+}
+
+indicators <- indgroup(p1, groups, F)
+indicators2 <- indgroup2(p1, groups, F)
+iplot <- indicators2[[1]]
+gplot <- indicators2[[2]]
+aplot <- indicators2[[3]]
+
+source('groupplotsummary.R') 
+source('USNVC_compare_specieslists_loop_by_cluster.R') 
+
+Com.Structure[order(as.numeric(as.character(Com.Structure$cluster))),c("cluster", "association", "WetStructure")]
+plotassociations[order(as.numeric(as.character(plotassociations$clust))),c("clust", "scientificname")]
+
+
+
 #group parameters ----
 # beta= -0.25
 # k = 4
@@ -183,8 +257,8 @@ if (F){
 
   
   
-indicators <- indgroup(p.normal, groups, F)
-indicators2 <- indgroup2(p.normal, groups, F)
+indicators <- indgroup(p1, groups, F)
+indicators2 <- indgroup2(p1, groups, F)
 iplot <- indicators2[[1]]
 gplot <- indicators2[[2]]
 aplot <- indicators2[[3]]

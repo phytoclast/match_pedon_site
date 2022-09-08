@@ -1133,10 +1133,15 @@ indanalysis2 <- function(plotdata){
   weak.table <- weak.table[-1,]
   
   dni.table <- ind.table[,-1] %>% t() %>% as.data.frame()
-  dni.table <- dni.table %>% mutate(s2to8 = apply(dni.table[,1:7], MARGIN=1, FUN = 'mean'))
+  dni.table <- dni.table %>% mutate(s2to6 = apply(dni.table[,1:5], MARGIN=1, FUN = 'mean'))
   
   kaew.table <- weak.table[,-1] %>% t() %>% as.data.frame()
-  kaew.table <- kaew.table %>% mutate(s2to8 = apply(kaew.table[,1:7], MARGIN=1, FUN = 'mean'))
+  kaew.table <- kaew.table %>% mutate(s2to6 = apply(kaew.table[,1:5], MARGIN=1, FUN = 'mean'))
+  
+  ind.table <- ((ind.table[,c(2:ncol(ind.table))]) -
+                          (apply(ind.table[,c(2:ncol(ind.table))], MARGIN=2, FUN = 'mean')+0.001))/
+    (apply(ind.table[,c(2:ncol(ind.table))], MARGIN=2, FUN = 'sd')+0.001)
+  
   
   listofoutput <- list(ind.table, dni.table, weak.table, kaew.table)
   return(listofoutput)}
