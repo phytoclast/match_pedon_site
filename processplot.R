@@ -23,17 +23,38 @@ pedonoverride <- read.delim("data/pedonoverride.txt")
 s <- read.delim("data/s.txt")
 
 List_Habits <- read.delim("data/List_Habits.txt", na.strings = '')
+List_Habits[List_Habits$ESIS.Group %in% 'Grass/grass-like',]$ESIS.Group <- 'Grass/grass-like (Graminoids)'
 # obsspp <- read.delim("data/Observed_Species.txt", encoding = 'UTF-8', na.strings = '')
 obsspp <- read.delim("data/Observed_Species.txt", encoding = 'latin-1', na.strings = '')
-obsspp[obsspp$AcTaxon == 'Phalaris' & !is.na(obsspp$AcTaxon) ,]$AcTaxon <- 'Phalaris arundinacea'
+
+obsspp <- obsspp %>% mutate(AcTaxon = 
+                              case_when(
+                                AcTaxon %in% 'Phalaris' ~ 'Phalaris arundinacea',
+                                TRUE ~ AcTaxon
+                              ))
+
+# obsspp <- obsspp %>% mutate(AcTaxon = ifelse(AcTaxon %in% 'Phalaris','Phalaris arundinacea',AcTaxon))
+# 
+# idx <- obsspp$AcTaxon %in% 'Phalaris' %>% which()
+# obsspp[idx,]$AcTaxon <- 'Phalaris arundinacea'[length(idx)>0]
+
+
 obsspp <- obsspp[!grepl("\\?", obsspp$AcTaxon) | is.na(obsspp$AcTaxon) ,]
 obsspp <- subset(obsspp, !is.na(specific_epithet) | AcTaxon %in% c('Sphagnum', 'Chara'))
+obsspp[obsspp$BA %in% 0,]$BA <- NA
+obsspp$BA <- BA.fact10usc.metric(obsspp$BA)
 
-#listspp <- read.delim("data/List_Species2011.txt", encoding = 'UTF-8', na.strings = '')
 listspp <- readRDS("data/listspp.RDS")
 #saveRDS(listspp, 'data/listspp.RDS')
+SBD2 <- c('Ilex verticillata', 'Salix discolor', 'Salix interior', 'Staphylea trifolia', 
+          'Salix bebbiana', 'Salix eriocephala', 'Salix petiolaris', 'Rhamnus cathartica', 'Frangula alnus',
+          'Salix exigua', 'Elaeagnus angustifolia','Ptelea trifoliata', 'Toxicodendron vernix')
+listspp[listspp$AcTaxon %in% SBD2,]$Form <- 'SBD2'
+listspp$Nativity <- ifelse(listspp$Eastern.North.America %in% 'N','Native',ifelse(listspp$Eastern.North.America %in% 'X','Introduced','Unknown'))
+
 obsspp <- subset(obsspp, !substr(AcTaxon,1,1) %in% '-'& !AcTaxon %in% '' & !is.na(Habit))
 obsspp <- merge(obsspp, List_Habits[,c('Form','Simple')], by.x = 'Habit', by.y = 'Form', all.x = TRUE)
+
 obs <- read.delim("data/Sites.txt")
 obs <- subset(obs,Observer_Code %in% 'GRR.GJS' & Year >=2011 & !Observation_Type %in% c('Bogus', 'Floristics')) #filter out bogus points
 unique(obs$Observation_Type)

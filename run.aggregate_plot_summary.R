@@ -1,110 +1,67 @@
-# functions ----
 substitutesymbols <- as.data.frame(cbind(SYMBOL2=c('2AG','TRBO2','SMLA3','CAREX'), form2=c('Nonvascular','Forb/Herb','Forb/Herb','Grass/grass-like (Graminoids)'), type2=c('Native','Native','Native','Native'), taxon=c('Chara','Lysimachia borealis','Smilax lasioneuron','Carex [ovales]')), stringsAsFactors = FALSE)
 
 
-roundF<-function(p){
-  p<-ifelse(p<0.5, floor(p/0.1+0.5)*0.1,ifelse(p<5, floor(p/0.5+0.5)*0.5, ifelse(p<15, floor(p+0.5),floor(p/5+0.5)*5)))
-}
-tofoliar <- function(c){
-  f <- (0.41*c/100 + 0.41*(c/100)^2)*100
-  return(f)
-  }
-BA.fact10usc.metric<-function(p){
-  p*10000/43560*10
-}
-BA.metric.usc.round<-function(p){
-  round(p*43560/10000,1)
-}
-cm.in<-function(p){
-  round(p/2.54,1)
-}
-m.ft.round<-function(p){
-  round(p/0.3048,3)
-}
+
 
 
 # data ----
-
-# process data ----
-List_Habits <- read.delim("data/List_Habits.txt", na.strings = '', stringsAsFactors = FALSE)
 Plant_Heights <- read.delim("data/Plant_Heights.txt", na.strings = '', stringsAsFactors = FALSE, encoding = 'UTF-8')
-List_Habits[List_Habits$ESIS.Group %in% 'Grass/grass-like',]$ESIS.Group <- 'Grass/grass-like (Graminoids)'
-# handpicked  <- read.delim("data/handpicked.txt", na.strings = '', stringsAsFactors = FALSE)
-listspp <- read.delim("data/List_Species2011.txt", encoding = 'UTF-8', na.strings = '', stringsAsFactors = FALSE)
-#listspp <- readRDS("data/listspp.RDS")
-#fix for trees and shrub mismatch
-SBD2 <- c('Ilex verticillata', 'Salix discolor', 'Salix interior', 'Staphylea trifolia', 
-          'Salix bebbiana', 'Salix eriocephala', 'Salix petiolaris', 'Rhamnus cathartica', 'Frangula alnus',
-          'Salix exigua', 'Elaeagnus angustifolia','Ptelea trifoliata', 'Toxicodendron vernix')
-listspp[listspp$AcTaxon %in% SBD2,]$Form <- 'SBD2'
-
-listspp$Nativity <- ifelse(listspp$Eastern.North.America %in% 'N','Native',ifelse(listspp$Eastern.North.America %in% 'X','Introduced','Unknown'))
-# obs <- read.delim("data/Sites.txt")
-# obsspp <- read.delim("data/Observed_Species.txt", encoding = 'UTF-8', na.strings = '')
-
-#obspp.shrub <- unique(subset(obsspp, (Subcanopy > 0 | Tree > 0) & Habit %in% c('SBD2', 'SBE2'), select=c(AcTaxon, Habit)))
-#obspp.tree.a <- unique(subset(obsspp, (Subcanopy == 0 & Tree == 0) & Habit %in% c('TBD1', 'TBE1'), select=c(AcTaxon, Habit)))
-#obspp.tree.b <- unique(subset(obsspp, (Subcanopy > 0 | Tree > 0) & Habit %in% c('TBD1', 'TBE1'), select=c(AcTaxon, Habit)))
-#obspp.tree <- subset(obspp.tree.a, !AcTaxon %in% obspp.tree.b$AcTaxon)
-
-# obsspp <- merge(obs[,c('Observation_ID','Observation_Label')],obsspp, by='Observation_ID')
-obsspp[obsspp$AcSpecies == 'Phalaris' & !is.na(obsspp$AcTaxon) ,]$AcTaxon <- 'Phalaris arundinacea'
-obsspp <- obsspp[!grepl("\\?", obsspp$AcTaxon) | is.na(obsspp$AcTaxon) ,]
-#obsspp <- subset(obsspp, !is.na(specific_epithet) | AcTaxon %in% c('Sphagnum', 'Chara', 'Cladonia'))
-obsspp <- merge(obsspp, List_Habits[,c('Form','Simple')], by.x = 'Habit', by.y = 'Form', all.x = TRUE)
-#obsspp <- subset(obsspp, Observation_ID %in% plots)
-
-obsspp[obsspp$BA %in% 0,]$BA <- NA
-obsspp$BA <- BA.fact10usc.metric(obsspp$BA)
 
 
-# observed species means by plot ----
-Com.Sp.sum<-aggregate(obsspp[,c('Field', 'Shrub', 'Subcanopy', 'Tree', 'BA')], by=list(obsspp$Observation_ID, obsspp$Observation_Label, obsspp$AcTaxon, obsspp$Simple), FUN=sum) #sum within plot
-colnames(Com.Sp.sum)<-c('Observation_ID', 'Observation_Label', 'Species', 'Simple', 'Field', 'Shrub', 'Subcanopy', 'Tree', 'BA') #restore column names
-# freq in subplot ----
-Com.Sp.freq<-aggregate(obsspp[,c('AcTaxon')], by=list(obsspp$Observation_Label, obsspp$AcTaxon), FUN=length) #frequency within plot
-colnames(Com.Sp.freq)<- c('Observation_Label', 'Species', 'freq')
-Com.max.freq<-aggregate(Com.Sp.freq[,c('freq')], by=list(Com.Sp.freq$Observation_Label), FUN=max) #freq within plot
-colnames(Com.max.freq)<- c('Observation_Label', 'mfreq')
-Com.max.freq$mfreq<-ifelse(Com.max.freq$mfreq>4,4,Com.max.freq$mfreq)#effectively ensuring values do not exceed 4. Species listed 5 times might occur if surveyer was unaware of species already counted in subplots, but this only adds a trace amount.
-Com.Sp.mean<-merge(Com.Sp.sum, Com.max.freq[,c("Observation_Label","mfreq")], by="Observation_Label")
-Com.Sp.mean$Field<-Com.Sp.mean$Field/Com.Sp.mean$mfreq
-Com.Sp.mean$Shrub<-Com.Sp.mean$Shrub/Com.Sp.mean$mfreq
-Com.Sp.mean$Subcanopy<-Com.Sp.mean$Subcanopy/Com.Sp.mean$mfreq
-Com.Sp.mean$Tree<-Com.Sp.mean$Tree/Com.Sp.mean$mfreq
-rm(Com.max.freq)
+
+# # observed species means by plot ----
+# Com.Sp.sum<-aggregate(obsspp[,c('Field', 'Shrub', 'Subcanopy', 'Tree', 'BA')], by=list(obsspp$Observation_ID, obsspp$Observation_Label, obsspp$AcTaxon, obsspp$Simple), FUN=sum) #sum within plot
+# colnames(Com.Sp.sum)<-c('Observation_ID', 'Observation_Label', 'Species', 'Simple', 'Field', 'Shrub', 'Subcanopy', 'Tree', 'BA') #restore column names
+# # freq in subplot ----
+# Com.Sp.freq<-aggregate(obsspp[,c('AcTaxon')], by=list(obsspp$Observation_Label, obsspp$AcTaxon), FUN=length) #frequency within plot
+# colnames(Com.Sp.freq)<- c('Observation_Label', 'Species', 'freq')
+# Com.max.freq<-aggregate(Com.Sp.freq[,c('freq')], by=list(Com.Sp.freq$Observation_Label), FUN=max) #freq within plot
+# colnames(Com.max.freq)<- c('Observation_Label', 'mfreq')
+# Com.max.freq$mfreq<-ifelse(Com.max.freq$mfreq>4,4,Com.max.freq$mfreq)#effectively ensuring values do not exceed 4. Species listed 5 times might occur if surveyer was unaware of species already counted in subplots, but this only adds a trace amount.
+# Com.Sp.mean<-merge(Com.Sp.sum, Com.max.freq[,c("Observation_Label","mfreq")], by="Observation_Label")
+# Com.Sp.mean$Field<-Com.Sp.mean$Field/Com.Sp.mean$mfreq
+# Com.Sp.mean$Shrub<-Com.Sp.mean$Shrub/Com.Sp.mean$mfreq
+# Com.Sp.mean$Subcanopy<-Com.Sp.mean$Subcanopy/Com.Sp.mean$mfreq
+# Com.Sp.mean$Tree<-Com.Sp.mean$Tree/Com.Sp.mean$mfreq
+# rm(Com.max.freq)
 # heights ----
 #transfer canopy heights to appropriate stratum
-obsspp[!is.na(obsspp$Hmax) & obsspp$Hmax > 15 & is.na(obsspp$Tmax) & !grepl('^H',obsspp$Habit),]$Tmax <- 
-  obsspp[!is.na(obsspp$Hmax) & obsspp$Hmax > 15 & is.na(obsspp$Tmax) & !grepl('^H',obsspp$Habit),]$Hmax
+#
+obsspp <- obsspp %>% mutate(
+  Tmax = ifelse(
+    !is.na(Hmax) & Hmax > 15 & is.na(Tmax) & !grepl('^H',Habit), Hmax, Tmax),
+  Tmin = ifelse(
+    !is.na(Hmax) & Hmax > 15 & is.na(Tmin) & !grepl('^H',Habit), Hmin, Tmin),
+  SCmax = ifelse(
+    !is.na(Hmax) & Hmax > 5 & Hmax <= 15 & is.na(SCmax) & !grepl('^H',Habit), Hmax, SCmax),
+  SCmin = ifelse(
+    !is.na(Hmax) & Hmax > 5 & Hmax <= 15 & is.na(SCmin) & !grepl('^H',Habit), Hmin, SCmin),
+  Smax = ifelse(
+    !is.na(Hmax) & Hmax > 0.5 & Hmax <= 5 & is.na(Smax) & !grepl('^H',Habit), Hmax, Smax),
+  Smin = ifelse(
+    !is.na(Hmax) & Hmax > 0.5 & Hmax <= 5 & is.na(Smin) & !grepl('^H',Habit), Hmin, Smin),
+  Fmax = ifelse(
+    !is.na(Hmax) & Hmax > 0 & Hmax <= 0.5 & is.na(Fmax) | grepl('^H',Habit), Hmax, Fmax),
+  Fmin = ifelse(
+    !is.na(Hmax) & Hmax > 0 & Hmax <= 0.5 & is.na(Fmin) | grepl('^H',Habit), Hmin, Fmin))
 
-obsspp[!is.na(obsspp$Hmax) & obsspp$Hmax > 15 & is.na(obsspp$Tmin) & !grepl('^H',obsspp$Habit),]$Tmin <- 
-  obsspp[!is.na(obsspp$Hmax) & obsspp$Hmax > 15 & is.na(obsspp$Tmin) & !grepl('^H',obsspp$Habit),]$Hmin
 
-obsspp[!is.na(obsspp$Hmax) & obsspp$Hmax > 5 & obsspp$Hmax <= 15 & is.na(obsspp$SCmax) & !grepl('^H',obsspp$Habit),]$SCmax <- 
-  obsspp[!is.na(obsspp$Hmax) & obsspp$Hmax > 5 & obsspp$Hmax <= 15 & is.na(obsspp$SCmax) & !grepl('^H',obsspp$Habit),]$Hmax
+Com.Sp.hts <- obsspp %>% group_by(Observation_Label, AcTaxon, Simple) %>%
+  summarise(
+    Fmin=mean(Fmin, na.rm=T),
+    Fmax=mean(Fmax, na.rm=T),
+    Smin=mean(Smin, na.rm=T),
+    Smax=mean(Smax, na.rm=T),
+    SCmin=mean(SCmin, na.rm=T),
+    SCmax=mean(SCmax, na.rm=T),
+    Tmin=mean(Tmin, na.rm=T),
+    Tmax=mean(Tmax, na.rm=T),
+    Dmin=mean(Dmin, na.rm=T),
+    Dmax=mean(Dmax, na.rm=T)
+  )
+  
 
-obsspp[!is.na(obsspp$Hmax) & obsspp$Hmax > 5 & obsspp$Hmax <= 15 & is.na(obsspp$SCmin) & !grepl('^H',obsspp$Habit),]$SCmin <- 
-  obsspp[!is.na(obsspp$Hmax) & obsspp$Hmax > 5 & obsspp$Hmax <= 15 & is.na(obsspp$SCmin) & !grepl('^H',obsspp$Habit),]$Hmin
-
-obsspp[!is.na(obsspp$Hmax) & obsspp$Hmax > 0.5 & obsspp$Hmax <= 5 & is.na(obsspp$Smax) & !grepl('^H',obsspp$Habit),]$Smax <- 
-  obsspp[!is.na(obsspp$Hmax) & obsspp$Hmax > 0.5 & obsspp$Hmax <= 5 & is.na(obsspp$Smax) & !grepl('^H',obsspp$Habit),]$Hmax
-
-obsspp[!is.na(obsspp$Hmax) & obsspp$Hmax > 0.5 & obsspp$Hmax <= 5 & is.na(obsspp$Smin) & !grepl('^H',obsspp$Habit),]$Smin <- 
-  obsspp[!is.na(obsspp$Hmax) & obsspp$Hmax > 0.5 & obsspp$Hmax <= 5 & is.na(obsspp$Smin) & !grepl('^H',obsspp$Habit),]$Hmin
-
-obsspp[!is.na(obsspp$Hmax) & obsspp$Hmax > 0 & obsspp$Hmax <= 0.5 & is.na(obsspp$Fmax) | grepl('^H',obsspp$Habit),]$Fmax <- 
-  obsspp[!is.na(obsspp$Hmax) & obsspp$Hmax > 0 & obsspp$Hmax <= 0.5 & is.na(obsspp$Fmax) | grepl('^H',obsspp$Habit),]$Hmax
-
-obsspp[!is.na(obsspp$Hmax) & obsspp$Hmax > 0 & obsspp$Hmax <= 0.5 & is.na(obsspp$Fmin)  | grepl('^H',obsspp$Habit),]$Fmin <- 
-  obsspp[!is.na(obsspp$Hmax) & obsspp$Hmax > 0 & obsspp$Hmax <= 0.5 & is.na(obsspp$Fmin)  | grepl('^H',obsspp$Habit),]$Hmin
-
-Com.Sp.hts<-aggregate(obsspp[,c('Fmin', 'Fmax', 'Smin', 'Smax', 'SCmin', 'SCmax','Tmin', 'Tmax', 'Dmin', 'Dmax')], by=list(obsspp$Observation_Label, obsspp$AcTaxon, obsspp$Simple), FUN=mean, na.action = na.omit) #sum within plot
-colnames(Com.Sp.hts)<-c('Observation_Label', 'Species', 'Simple', 'Fmin', 'Fmax', 'Smin', 'Smax', 'SCmin', 'SCmax','Tmin', 'Tmax', 'Dmin', 'Dmax') #restore column names
-
-#Com.Sp.hts[,c('Fmin', 'Fmax', 'Smin', 'Smax', 'SCmin', 'SCmax','Tmin', 'Tmax', 'Dmin', 'Dmax')]<-   lapply(Com.Sp.hts[,c('Fmin', 'Fmax', 'Smin', 'Smax', 'SCmin', 'SCmax','Tmin', 'Tmax', 'Dmin', 'Dmax')], FUN = roundF)
-
-Com.Sp.mean <- merge(Com.Sp.mean,Com.Sp.hts, by=c('Observation_Label', 'Species', 'Simple'), all.x = T)
+Com.Sp.mean <- Com.Sp.mean %>% left_join(Com.Sp.hts, by=c('Observation_Label'='Observation_Label', 'Species'='AcTaxon', 'Simple'='Simple'))
 
 #ensure not to exceed 100%
 Com.Sp.mean$Field <- ifelse(Com.Sp.mean$Field > 100,100,Com.Sp.mean$Field)
@@ -137,11 +94,21 @@ rm(Com.Sp.groups.sum, Com.Sp.groups.count)
 Com.Sp.groups.mean$over <- 100*(1-10^(apply(log10(1-(Com.Sp.groups.mean[,c('Subcanopy', 'Tree')]/100.001)), MARGIN = 1, FUN='sum')))
 Com.Sp.groups.mean$under <- 100*(1-10^(apply(log10(1-(Com.Sp.groups.mean[,c('Field', 'Shrub')]/100.001)), MARGIN = 1, FUN='sum')))
 ##average heights by phase ----
+Com.Sp.groups.hts <- Com.Sp.groups %>% group_by(phase, Species, Simple) %>%
+  summarise(
+    Fmin=mean(Fmin, na.rm=T),
+    Fmax=mean(Fmax, na.rm=T),
+    Smin=mean(Smin, na.rm=T),
+    Smax=mean(Smax, na.rm=T),
+    SCmin=mean(SCmin, na.rm=T),
+    SCmax=mean(SCmax, na.rm=T),
+    Tmin=mean(Tmin, na.rm=T),
+    Tmax=mean(Tmax, na.rm=T),
+    Dmin=mean(Dmin, na.rm=T),
+    Dmax=mean(Dmax, na.rm=T)
+  )
+Com.Sp.groups.hts <-  as.data.frame(Com.Sp.groups.hts)
 
-
-Com.Sp.groups.hts <- aggregate(Com.Sp.groups[,c('Fmin', 'Fmax', 'Smin', 'Smax', 'SCmin', 'SCmax', 'Tmin', 'Tmax', 'Dmin', 'Dmax')],
-                               by=list(Com.Sp.groups$phase, Com.Sp.groups$Species), FUN='mean', na.rm=TRUE)
-colnames(Com.Sp.groups.hts) <- c('phase', 'Species', 'Fmin', 'Fmax', 'Smin', 'Smax', 'SCmin', 'SCmax','Tmin', 'Tmax', 'Dmin', 'Dmax')
 for (i in 1:ncol(Com.Sp.groups.hts)){#i=3
 Com.Sp.groups.hts[is.nan(Com.Sp.groups.hts[,i]),i] <- NA
   }#clean up NaNs
@@ -149,11 +116,10 @@ Com.Sp.groups.hts[is.nan(Com.Sp.groups.hts[,i]),i] <- NA
 ##frequency spp by phase ----
 
 Com.Sp.prefreq <- Com.Sp.groups
-Com.Sp.prefreq$Total <- ifelse(Com.Sp.prefreq$Total >0, Com.Sp.prefreq$wt,0)
-Com.Sp.freq.sum <- aggregate(Com.Sp.prefreq$Total,
-                             by=list(Com.Sp.prefreq$phase, Com.Sp.prefreq$Species), FUN='sum')
-colnames(Com.Sp.freq.sum) <- c('phase', 'Species', 'freq')
-Com.Sp.groups.count <- aggregate(unique(Com.Sp.prefreq[c('phase','wt', 'Observation_ID')])$wt, 
+Com.Sp.prefreq$wt <- 1
+Com.Sp.freq.sum <- aggregate(list(freq= Com.Sp.prefreq$Total),
+                             by=list(Com.Sp.prefreq$phase, Com.Sp.prefreq$Species, Com.Sp.prefreq$wt), FUN='sum')
+Com.Sp.groups.count <- aggregate(unique(Com.Sp.prefreq[c('phase','Observation_ID')])$wt, 
                                  by=list(unique(Com.Sp.prefreq[c('phase', 'Observation_ID')])$phase), FUN='sum')
 colnames(Com.Sp.groups.count) <- c('phase', 'count')
 Com.Sp.groups.freq <- merge(Com.Sp.freq.sum, Com.Sp.groups.count, by = 'phase')

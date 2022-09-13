@@ -1,4 +1,27 @@
+#simple conversion functions ----
 
+roundF<-function(p){
+  p<-ifelse(p<0.5, floor(p/0.1+0.5)*0.1,ifelse(p<5, floor(p/0.5+0.5)*0.5, ifelse(p<15, floor(p+0.5),floor(p/5+0.5)*5)))
+}
+tofoliar <- function(c){
+  f <- (0.41*c/100 + 0.41*(c/100)^2)*100
+  return(f)
+}
+BA.fact10usc.metric<-function(p){
+  p*10000/43560*10
+}
+BA.metric.usc.round<-function(p){
+  round(p*43560/10000,1)
+}
+cm.in<-function(p){
+  round(p/2.54,1)
+}
+m.ft.round<-function(p){
+  round(p/0.3048,3)
+}
+
+
+#analysis functions ----
 grouporder <- function(t,groups){
   t=as.hclust(t)
   soilplot <- names(groups)

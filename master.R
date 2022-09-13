@@ -22,7 +22,7 @@ source('processplot.R')
 source('clusterfunctions.R') 
 
 
-#run seperate open vs forest analyses
+#run separate open vs forest analyses
 
 newnames <- paste0('t',str_pad(round(overstorycover$overstorycover, 0), 2,'left',0),'s',str_pad(round(overstorycover$shrubcover, 0), 2,'left',0), overstorycover$soilplot)
 
