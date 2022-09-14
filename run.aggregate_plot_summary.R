@@ -61,22 +61,22 @@ Com.Sp.hts <- obsspp %>% group_by(Observation_Label, AcTaxon, Simple) %>%
   )
   
 
-Com.Sp.mean <- Com.Sp.mean %>% left_join(Com.Sp.hts, by=c('Observation_Label'='Observation_Label', 'Species'='AcTaxon', 'Simple'='Simple'))
+Com.Sp.mean.ht <- Com.Sp.mean %>% left_join(Com.Sp.hts, by=c('Observation_Label'='Observation_Label', 'Species'='AcTaxon', 'Simple'='Simple'))
 
 #ensure not to exceed 100%
-Com.Sp.mean$Field <- ifelse(Com.Sp.mean$Field > 100,100,Com.Sp.mean$Field)
-Com.Sp.mean$Shrub <- ifelse(Com.Sp.mean$Shrub > 100,100,Com.Sp.mean$Shrub)
-Com.Sp.mean$Subcanopy <- ifelse(Com.Sp.mean$Subcanopy > 100,100,Com.Sp.mean$Subcanopy)
-Com.Sp.mean$Tree <- ifelse(Com.Sp.mean$Tree > 100,100,Com.Sp.mean$Tree)
+Com.Sp.mean.ht$Field <- ifelse(Com.Sp.mean.ht$Field > 100,100,Com.Sp.mean.ht$Field)
+Com.Sp.mean.ht$Shrub <- ifelse(Com.Sp.mean.ht$Shrub > 100,100,Com.Sp.mean.ht$Shrub)
+Com.Sp.mean.ht$Subcanopy <- ifelse(Com.Sp.mean.ht$Subcanopy > 100,100,Com.Sp.mean.ht$Subcanopy)
+Com.Sp.mean.ht$Tree <- ifelse(Com.Sp.mean.ht$Tree > 100,100,Com.Sp.mean.ht$Tree)
 #average overstory and understory
-Com.Sp.mean$Total <- 100*(1-10^(apply(log10(1-(Com.Sp.mean[,c('Field', 'Shrub', 'Subcanopy', 'Tree')]/100.001)), MARGIN = 1, FUN='sum')))
-Com.Sp.mean <-subset(Com.Sp.mean, !substr(Species,1,1) %in% '-'& !Species %in% '')
+Com.Sp.mean.ht$Total <- 100*(1-10^(apply(log10(1-(Com.Sp.mean.ht[,c('Field', 'Shrub', 'Subcanopy', 'Tree')]/100.001)), MARGIN = 1, FUN='sum')))
+Com.Sp.mean.ht <-subset(Com.Sp.mean.ht, !substr(Species,1,1) %in% '-'& !Species %in% '')
 
-##hand picked phases ----
+##cluster derived phases ----
 
 
 groups1 <- as.data.frame(cbind(soilplot=names(groups), phase=groups))
-Com.Sp.groups <- merge(groups1, Com.Sp.mean, by='soilplot')
+Com.Sp.groups <- merge(groups1, Com.Sp.mean.ht, by='soilplot')
 
 ##average spp by phase ----
 
@@ -114,22 +114,22 @@ Com.Sp.groups.hts[is.nan(Com.Sp.groups.hts[,i]),i] <- NA
   }#clean up NaNs
 
 ##frequency spp by phase ----
-
-Com.Sp.prefreq <- Com.Sp.groups
-Com.Sp.prefreq$wt <- 1
-Com.Sp.freq.sum <- aggregate(list(freq= Com.Sp.prefreq$Total),
-                             by=list(Com.Sp.prefreq$phase, Com.Sp.prefreq$Species, Com.Sp.prefreq$wt), FUN='sum')
-Com.Sp.groups.count <- aggregate(unique(Com.Sp.prefreq[c('phase','Observation_ID')])$wt, 
-                                 by=list(unique(Com.Sp.prefreq[c('phase', 'Observation_ID')])$phase), FUN='sum')
-colnames(Com.Sp.groups.count) <- c('phase', 'count')
-Com.Sp.groups.freq <- merge(Com.Sp.freq.sum, Com.Sp.groups.count, by = 'phase')
-Com.Sp.groups.freq$freq <- Com.Sp.groups.freq$freq/Com.Sp.groups.freq$count*100
-Com.Sp.groups.mean <- merge(Com.Sp.groups.mean, Com.Sp.groups.freq[,c('phase', 'Species', 'freq')], by = c('phase', 'Species'))
-Com.Sp.groups.mean$freqcover <- (Com.Sp.groups.mean$Total+Com.Sp.groups.mean$freq*3)/4
-rm(Com.Sp.freq.sum, Com.Sp.groups.count)
+# 
+# Com.Sp.prefreq <- Com.Sp.groups
+# Com.Sp.prefreq$wt <- 1
+# Com.Sp.freq.sum <- aggregate(list(freq= Com.Sp.prefreq$Total),
+#                              by=list(Com.Sp.prefreq$phase, Com.Sp.prefreq$Species, Com.Sp.prefreq$wt), FUN='sum')
+# Com.Sp.groups.count <- aggregate(unique(Com.Sp.prefreq[c('phase','Observation_ID')])$wt, 
+#                                  by=list(unique(Com.Sp.prefreq[c('phase', 'Observation_ID')])$phase), FUN='sum')
+# colnames(Com.Sp.groups.count) <- c('phase', 'count')
+# Com.Sp.groups.freq <- merge(Com.Sp.freq.sum, Com.Sp.groups.count, by = 'phase')
+# Com.Sp.groups.freq$freq <- Com.Sp.groups.freq$freq/Com.Sp.groups.freq$count*100
+# Com.Sp.groups.mean <- merge(Com.Sp.groups.mean, Com.Sp.groups.freq[,c('phase', 'Species', 'freq')], by = c('phase', 'Species'))
+# Com.Sp.groups.mean$freqcover <- (Com.Sp.groups.mean$Total+Com.Sp.groups.mean$freq*3)/4
+# rm(Com.Sp.freq.sum, Com.Sp.groups.count)
 
 #percentile spp by phase ----
-Com.Sp.groups.pctl <- ddply(Com.Sp.groups, c('phase', 'Species'), summarise,
+Com.Sp.groups.pctl <- Com.Sp.groups %>% group_by(c(phase, Species)) %>% summarise(
                             f25 = quantile(Field, 0.15),
                             f75 = quantile(Field, 0.85),
                             s25 = quantile(Shrub, 0.15),
@@ -325,7 +325,7 @@ write.csv(Forest.Overstory1, 'output/Forest.Overstory.csv', row.names = FALSE, n
 write.csv(Forest.Understory1, 'output/Forest.Understory.csv', row.names = FALSE, na = "")
 
 #wetland indicator status ----
-Com.Sp.mean.wet <- merge(Com.Sp.mean, listspp[,c('AcTaxon', 'Wetness')], by.x = 'Species', by.y = 'AcTaxon')
+Com.Sp.mean.wet <- merge(Com.Sp.mean.ht, listspp[,c('AcTaxon', 'Wetness')], by.x = 'Species', by.y = 'AcTaxon')
 Com.Sp.mean.wet$totalwet <- Com.Sp.mean.wet$Wetness * Com.Sp.mean.wet$Total
 Com.Sp.mean.wet <- subset(Com.Sp.mean.wet, !is.na(totalwet))
 Com.mean.wet <- aggregate(Com.Sp.mean.wet[,c('totalwet','Total')], by=list(Observation_ID = Com.Sp.mean.wet$Observation_ID), FUN = 'sum')
@@ -341,7 +341,7 @@ handpicked.wet <- merge(handpicked, Com.groups.wet[,c('phase','groupwetness')], 
 handpicked.wet <- merge(handpicked.wet, Com.mean.wet[,c('Observation_ID','plotwetness')], by.x = 'Observation_ID', by.y = 'Observation_ID')
 
 #Generic structure ----
-Com.Sp.agg <- aggregate(log10(1-(Com.Sp.mean[,c('Field', 'Shrub', 'Subcanopy', 'Tree')]/100.001)), by=list(Observation_ID = Com.Sp.mean$Observation_ID),  FUN='sum')
+Com.Sp.agg <- aggregate(log10(1-(Com.Sp.mean.ht[,c('Field', 'Shrub', 'Subcanopy', 'Tree')]/100.001)), by=list(Observation_ID = Com.Sp.mean.ht$Observation_ID),  FUN='sum')
 Com.Sp.agg[,c('Field', 'Shrub', 'Subcanopy', 'Tree')] <- 100*(1-10^(Com.Sp.agg[,c('Field', 'Shrub', 'Subcanopy', 'Tree')]))                 
 Com.Sp.agg$over <- 100*(1-10^(apply(log10(1-(Com.Sp.agg[,c('Subcanopy', 'Tree')]/100.001)), MARGIN = 1, FUN='sum')))
 Com.Sp.agg$under <- 100*(1-10^(apply(log10(1-(Com.Sp.agg[,c('Field', 'Shrub')]/100.001)), MARGIN = 1, FUN='sum')))

@@ -15,11 +15,11 @@ library(foreign)
 library(optpart)
 library(dendsort)
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+#load clustering functions ----
+source('clusterfunctions.R') 
 
 # Load Veg tables ---- 
 source('processplot.R') 
-#load clustering functions ----
-source('clusterfunctions.R') 
 
 
 #run separate open vs forest analyses
