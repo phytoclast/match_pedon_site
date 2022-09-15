@@ -1,9 +1,2 @@
 "phase","litter.min","litter.max","logs.min","logs.max","moss.min","moss.max","lichen.min","lichen.max","water.min","water.max","hour1.min","hour1.max","hour10.min","hour10.max","hour100.min","hour100.max","hour1000.min","hour1000.max","hour10000.min","hour10000.max"
-"01drained swamp",25,50,0.2,1,0,2,0,0,0,0,,,,,,,,,,
-"02silver maple green ash swamp",0.2,90,0.2,2,0,10,0,0,0,0,,,,,,,,,,
-"04tamarack",0,30,1,2,5,40,0,0,50,60,,,0,0,1,1,0.4,0.5,,
-"05red maple dogwood lake sedge swamp",0,50,0,0.5,2,5,0,0,0,0,,,,,,,,,,
-"06fen",0,0,0,0,35,45,0,0.2,3,15,,,,,,,,,,
-"07marsh",,,,,,,,,,,,,,,,,,,,
-"08wet meadow",,,,,,,,,,,,,,,,,,,,
-"09reed canary grass",35,45,0,0,0,0,0,0,5,5,,,,,,,,,,
+,10,100,0,2,0,5,0,0,0,0,0.1,0.1,0,0,0.3,1,0.3,1,,

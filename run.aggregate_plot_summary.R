@@ -9,21 +9,7 @@ Plant_Heights <- read.delim("data/Plant_Heights.txt", na.strings = '', stringsAs
 
 
 
-# # observed species means by plot ----
-# Com.Sp.sum<-aggregate(obsspp[,c('Field', 'Shrub', 'Subcanopy', 'Tree', 'BA')], by=list(obsspp$Observation_ID, obsspp$Observation_Label, obsspp$AcTaxon, obsspp$Simple), FUN=sum) #sum within plot
-# colnames(Com.Sp.sum)<-c('Observation_ID', 'Observation_Label', 'Species', 'Simple', 'Field', 'Shrub', 'Subcanopy', 'Tree', 'BA') #restore column names
-# # freq in subplot ----
-# Com.Sp.freq<-aggregate(obsspp[,c('AcTaxon')], by=list(obsspp$Observation_Label, obsspp$AcTaxon), FUN=length) #frequency within plot
-# colnames(Com.Sp.freq)<- c('Observation_Label', 'Species', 'freq')
-# Com.max.freq<-aggregate(Com.Sp.freq[,c('freq')], by=list(Com.Sp.freq$Observation_Label), FUN=max) #freq within plot
-# colnames(Com.max.freq)<- c('Observation_Label', 'mfreq')
-# Com.max.freq$mfreq<-ifelse(Com.max.freq$mfreq>4,4,Com.max.freq$mfreq)#effectively ensuring values do not exceed 4. Species listed 5 times might occur if surveyer was unaware of species already counted in subplots, but this only adds a trace amount.
-# Com.Sp.mean<-merge(Com.Sp.sum, Com.max.freq[,c("Observation_Label","mfreq")], by="Observation_Label")
-# Com.Sp.mean$Field<-Com.Sp.mean$Field/Com.Sp.mean$mfreq
-# Com.Sp.mean$Shrub<-Com.Sp.mean$Shrub/Com.Sp.mean$mfreq
-# Com.Sp.mean$Subcanopy<-Com.Sp.mean$Subcanopy/Com.Sp.mean$mfreq
-# Com.Sp.mean$Tree<-Com.Sp.mean$Tree/Com.Sp.mean$mfreq
-# rm(Com.max.freq)
+
 # heights ----
 #transfer canopy heights to appropriate stratum
 #
@@ -113,36 +99,24 @@ for (i in 1:ncol(Com.Sp.groups.hts)){#i=3
 Com.Sp.groups.hts[is.nan(Com.Sp.groups.hts[,i]),i] <- NA
   }#clean up NaNs
 
-##frequency spp by phase ----
-# 
-# Com.Sp.prefreq <- Com.Sp.groups
-# Com.Sp.prefreq$wt <- 1
-# Com.Sp.freq.sum <- aggregate(list(freq= Com.Sp.prefreq$Total),
-#                              by=list(Com.Sp.prefreq$phase, Com.Sp.prefreq$Species, Com.Sp.prefreq$wt), FUN='sum')
-# Com.Sp.groups.count <- aggregate(unique(Com.Sp.prefreq[c('phase','Observation_ID')])$wt, 
-#                                  by=list(unique(Com.Sp.prefreq[c('phase', 'Observation_ID')])$phase), FUN='sum')
-# colnames(Com.Sp.groups.count) <- c('phase', 'count')
-# Com.Sp.groups.freq <- merge(Com.Sp.freq.sum, Com.Sp.groups.count, by = 'phase')
-# Com.Sp.groups.freq$freq <- Com.Sp.groups.freq$freq/Com.Sp.groups.freq$count*100
-# Com.Sp.groups.mean <- merge(Com.Sp.groups.mean, Com.Sp.groups.freq[,c('phase', 'Species', 'freq')], by = c('phase', 'Species'))
-# Com.Sp.groups.mean$freqcover <- (Com.Sp.groups.mean$Total+Com.Sp.groups.mean$freq*3)/4
-# rm(Com.Sp.freq.sum, Com.Sp.groups.count)
 
 #percentile spp by phase ----
-Com.Sp.groups.pctl <- Com.Sp.groups %>% group_by(c(phase, Species)) %>% summarise(
-                            f25 = quantile(Field, 0.15),
-                            f75 = quantile(Field, 0.85),
-                            s25 = quantile(Shrub, 0.15),
-                            s75 = quantile(Shrub, 0.85),
-                            sc25 = quantile(Subcanopy, 0.15),
-                            sc75 = quantile(Subcanopy, 0.85),
-                            t25 = quantile(Tree, 0.15),
-                            t75 = quantile(Tree, 0.85),
-                            b05 = quantile(BA, 0.05, na.rm = TRUE),
-                            b95 = quantile(BA, 0.95, na.rm = TRUE)
-                            )
-
-Com.Sp.groups.pctl <- merge(Com.Sp.groups.pctl, Com.Sp.groups.freq, by.x=c('phase', 'Species'), by.y=c('phase', 'Species'), all.x = T)
+#
+countbyphase <- subset(Com.Sp.groups, select= c(soilplot, phase)) %>% unique() %>% group_by(phase) %>% summarise(total=length(soilplot))
+Com.Sp.groups.pctl <- Com.Sp.groups %>% group_by(phase, Species) %>% summarise(
+  f25 = quantile(Field, 0.15),
+  f75 = quantile(Field, 0.85),
+  s25 = quantile(Shrub, 0.15),
+  s75 = quantile(Shrub, 0.85),
+  sc25 = quantile(Subcanopy, 0.15),
+  sc75 = quantile(Subcanopy, 0.85),
+  t25 = quantile(Tree, 0.15),
+  t75 = quantile(Tree, 0.85),
+  b05 = quantile(BA, 0.05, na.rm = TRUE),
+  b95 = quantile(BA, 0.95, na.rm = TRUE),
+  freq = sum(Field+Shrub+Subcanopy+Tree>0)
+) %>% left_join(countbyphase)
+Com.Sp.groups.pctl$freq <- Com.Sp.groups.pctl$freq/Com.Sp.groups.pctl$total
 # adjust max min values to frequency
 Com.Sp.groups.pctl$f75 <- pmin(1,Com.Sp.groups.pctl$freq*3/200)*Com.Sp.groups.pctl$f75
 Com.Sp.groups.pctl$s75 <- pmin(1,Com.Sp.groups.pctl$freq*3/200)*Com.Sp.groups.pctl$s75
@@ -195,103 +169,91 @@ Group.Summary[Group.Summary$Plant.Type %in% 'Vine/Liana',]$maxHt <- NA
 
 Forest.Overstory <- Group.Summary[Group.Summary$t75 >0,c( 'phase','Taxon',  'Plant.Symbol', 'Plant.Type','Nativity', 't25', 't75','Tmin', 'Tmax','Dmin','Dmax','b05','b95', 'maxHt', 'over')]
 colnames(Forest.Overstory) <- c('phase','Taxon',  'Plant.Symbol', 'Plant.Type','Nativity', 'Cover.Low', 'Cover.High','Canopy.Bottom', 'Canopy.Top','Diam.Low','Diam.High','BA.Low','BA.High', 'maxHt', 'over')
-Forest.Overstory[is.na(Forest.Overstory$Canopy.Bottom) & Forest.Overstory$Plant.Type %in% c('Shrub/Subshrub','Vine/Liana'),]$
-  Canopy.Bottom <- 5
-Forest.Overstory[is.na(Forest.Overstory$Canopy.Bottom) & Forest.Overstory$Plant.Type %in% c('Tree'),]$
-  Canopy.Bottom <- 10
-Forest.Overstory[is.na(Forest.Overstory$Canopy.Top) & Forest.Overstory$Plant.Type %in% c('Shrub/Subshrub'),]$
-  Canopy.Top <- 17
-Forest.Overstory[is.na(Forest.Overstory$Canopy.Top) & Forest.Overstory$Plant.Type %in% c('Vine/Liana'),]$
-  Canopy.Top <- 20
-Forest.Overstory[is.na(Forest.Overstory$Canopy.Top) & Forest.Overstory$Plant.Type %in% c('Tree'),]$
-  Canopy.Top <- 25
-Forest.Overstory[is.na(Forest.Overstory$Canopy.Bottom),]$
-  Canopy.Bottom <- 15
 
-Forest.Overstory$Canopy.Top <- ifelse(!is.na(Forest.Overstory$maxHt) & Forest.Overstory$maxHt > 15,
-                                      pmin(Forest.Overstory$Canopy.Top,
-                                           Forest.Overstory$maxHt),
-                                      Forest.Overstory$Canopy.Top)
-Forest.Overstory$Canopy.Bottom <- ifelse(!is.na(Forest.Overstory$maxHt) & Forest.Overstory$maxHt > 15,
-                                      pmin(Forest.Overstory$Canopy.Bottom,
-                                           Forest.Overstory$maxHt),
-                                      Forest.Overstory$Canopy.Bottom)
+
+Forest.Overstory <- Forest.Overstory %>% mutate(
+  Canopy.Bottom = ifelse(
+    is.na(Canopy.Bottom) & Plant.Type %in% c('Shrub/Subshrub','Vine/Liana'), 5, Canopy.Bottom),
+  Canopy.Bottom = ifelse(
+    is.na(Canopy.Bottom) & Plant.Type %in% c('Tree'), 10, Canopy.Bottom),
+  Canopy.Top = ifelse(
+    is.na(Canopy.Top) & Plant.Type %in% c('Shrub/Subshrub'), 17, Canopy.Top),
+  Canopy.Top = ifelse(
+    is.na(Canopy.Top) & Plant.Type %in% c('Vine/Liana'), 20, Canopy.Top),
+  Canopy.Top = ifelse(
+    is.na(Canopy.Top) & Plant.Type %in% c('Tree'), 25, Canopy.Top),
+  Canopy.Bottom = ifelse(
+    is.na(Canopy.Bottom), 15, Canopy.Bottom),
+  Canopy.Top = ifelse(
+    !is.na(maxHt) & maxHt > 15, pmin(Canopy.Top, maxHt),Canopy.Top),
+  Canopy.Bottom = ifelse(
+    !is.na(maxHt) & maxHt > 15, pmin(Canopy.Bottom, maxHt), Canopy.Bottom))
+
 
 Forest.Overstory.sub<- Group.Summary[Group.Summary$sc75 >0,c( 'phase','Taxon', 'Plant.Symbol', 'Plant.Type','Nativity','sc25', 'sc75','SCmin', 'SCmax', 'Dmin','Dmax','b05','b95', 'maxHt', 'over')]
 Forest.Overstory.sub[,c('Dmin','Dmax','b05','b95')]<- NA
 colnames(Forest.Overstory.sub) <- c('phase','Taxon', 'Plant.Symbol', 'Plant.Type','Nativity', 'Cover.Low', 'Cover.High','Canopy.Bottom', 'Canopy.Top','Diam.Low','Diam.High','BA.Low','BA.High','maxHt', 'over')
-Forest.Overstory.sub[is.na(Forest.Overstory.sub$Canopy.Bottom) & Forest.Overstory.sub$Plant.Type %in% c('Shrub/Subshrub','Vine/Liana'),]$
-  Canopy.Bottom <- 2
-Forest.Overstory.sub[is.na(Forest.Overstory.sub$Canopy.Bottom) & Forest.Overstory.sub$Plant.Type %in% c('Tree'),]$
-  Canopy.Bottom <- 5
-Forest.Overstory.sub[is.na(Forest.Overstory.sub$Canopy.Top) & Forest.Overstory.sub$Plant.Type %in% c('Shrub/Subshrub'),]$
-  Canopy.Top <- 6
-Forest.Overstory.sub[is.na(Forest.Overstory.sub$Canopy.Top) & Forest.Overstory.sub$Plant.Type %in% c('Tree','Vine/Liana'),]$
-  Canopy.Top <- 15
-Forest.Overstory.sub[is.na(Forest.Overstory.sub$Canopy.Bottom),]$
-  Canopy.Bottom <- 5
 
-Forest.Overstory.sub$Canopy.Top <- ifelse(!is.na(Forest.Overstory.sub$maxHt) & Forest.Overstory.sub$maxHt > 5,
-                                      pmin(Forest.Overstory.sub$Canopy.Top,
-                                           Forest.Overstory.sub$maxHt),
-                                      Forest.Overstory.sub$Canopy.Top)
-Forest.Overstory.sub$Canopy.Bottom <- ifelse(!is.na(Forest.Overstory.sub$maxHt) & Forest.Overstory.sub$maxHt > 5,
-                                         pmin(Forest.Overstory.sub$Canopy.Bottom,
-                                              Forest.Overstory.sub$maxHt),
-                                         Forest.Overstory.sub$Canopy.Bottom)
+Forest.Overstory.sub <- Forest.Overstory.sub %>% mutate(
+  Canopy.Bottom = ifelse(
+    is.na(Canopy.Bottom) & Plant.Type %in% c('Shrub/Subshrub','Vine/Liana'), 2, Canopy.Bottom),
+  Canopy.Bottom = ifelse(
+    is.na(Canopy.Bottom) & Plant.Type %in% c('Tree'), 5, Canopy.Bottom),
+  Canopy.Top = ifelse(
+    is.na(Canopy.Top) & Plant.Type %in% c('Shrub/Subshrub'), 6, Canopy.Top),
+  Canopy.Top = ifelse(
+    is.na(Canopy.Top) & Plant.Type %in% c('Vine/Liana','Tree'), 15, Canopy.Top),
+  Canopy.Bottom = ifelse(
+    is.na(Canopy.Bottom), 5, Canopy.Bottom),
+  Canopy.Top = ifelse(
+    !is.na(maxHt) & maxHt > 5, pmin(Canopy.Top, maxHt),Canopy.Top),
+  Canopy.Bottom = ifelse(
+    !is.na(maxHt) & maxHt > 5, pmin(Canopy.Bottom, maxHt), Canopy.Bottom))
+
 Forest.Overstory <- rbind(Forest.Overstory, Forest.Overstory.sub)
 
 
 
 Forest.Understory <- Group.Summary[Group.Summary$s75 >0,c( 'phase','Taxon', 'Plant.Symbol', 'Plant.Type','Nativity', 's25', 's75','Smin', 'Smax', 'maxHt', 'under')]
 colnames(Forest.Understory) <- c('phase','Taxon','Plant.Symbol', 'Plant.Type','Nativity', 'Cover.Low', 'Cover.High','Canopy.Bottom', 'Canopy.Top', 'maxHt', 'under')
-Forest.Understory[is.na(Forest.Understory$Canopy.Bottom) & Forest.Understory$Plant.Type %in% c('Shrub/Subshrub'),]$
-  Canopy.Bottom <- 0.5
-Forest.Understory[is.na(Forest.Understory$Canopy.Bottom) & Forest.Understory$Plant.Type %in% c('Tree','Vine/Liana'),]$
-  Canopy.Bottom <- 1
-Forest.Understory[is.na(Forest.Understory$Canopy.Top) & Forest.Understory$Plant.Type %in% c('Shrub/Subshrub'),]$
-  Canopy.Top <- 2
-Forest.Understory[is.na(Forest.Understory$Canopy.Top) & Forest.Understory$Plant.Type %in% c('Tree','Vine/Liana'),]$
-  Canopy.Top <- 5
-Forest.Understory[is.na(Forest.Understory$Canopy.Bottom),]$
-  Canopy.Bottom <- 0.5
 
-Forest.Understory$Canopy.Top <- ifelse(!is.na(Forest.Understory$maxHt) & Forest.Understory$maxHt > 0.5,
-                                      pmin(Forest.Understory$Canopy.Top,
-                                           Forest.Understory$maxHt),
-                                      Forest.Understory$Canopy.Top)
-Forest.Understory$Canopy.Bottom <- ifelse(!is.na(Forest.Understory$maxHt) & Forest.Understory$maxHt > 0.5,
-                                         pmin(Forest.Understory$Canopy.Bottom,
-                                              Forest.Understory$maxHt),
-                                         Forest.Understory$Canopy.Bottom)
+Forest.Understory <- Forest.Understory %>% mutate(
+  Canopy.Bottom = ifelse(
+    is.na(Canopy.Bottom) & Plant.Type %in% c('Shrub/Subshrub'), 0.5, Canopy.Bottom),
+  Canopy.Bottom = ifelse(
+    is.na(Canopy.Bottom) & Plant.Type %in% c('Tree','Vine/Liana'), 1, Canopy.Bottom),
+  Canopy.Top = ifelse(
+    is.na(Canopy.Top) & Plant.Type %in% c('Shrub/Subshrub'), 2, Canopy.Top),
+  Canopy.Top = ifelse(
+    is.na(Canopy.Top) & Plant.Type %in% c('Tree','Vine/Liana'), 5, Canopy.Top),
+  Canopy.Bottom = ifelse(
+    is.na(Canopy.Bottom), 0.5, Canopy.Bottom),
+  Canopy.Top = ifelse(
+    !is.na(maxHt) & maxHt > 0.5, pmin(Canopy.Top, maxHt),Canopy.Top),
+  Canopy.Bottom = ifelse(
+    !is.na(maxHt) & maxHt > 0.5, pmin(Canopy.Bottom, maxHt), Canopy.Bottom))
 
 
 Forest.Understory.sub <- Group.Summary[Group.Summary$f75 >0,c( 'phase','Taxon','Plant.Symbol', 'Plant.Type','Nativity', 'f25', 'f75','Fmin', 'Fmax', 'maxHt', 'under')]
 colnames(Forest.Understory.sub) <- c('phase','Taxon','Plant.Symbol', 'Plant.Type','Nativity', 'Cover.Low', 'Cover.High','Canopy.Bottom', 'Canopy.Top', 'maxHt', 'under')
-Forest.Understory.sub[is.na(Forest.Understory.sub$Canopy.Bottom) & Forest.Understory.sub$Plant.Type %in% c('Nonvascular'),]$Canopy.Bottom <- 0.0
 
-Forest.Understory.sub[is.na(Forest.Understory.sub$Canopy.Top) & !is.na(Forest.Understory.sub$maxHt) & Forest.Understory.sub$Plant.Type %in% c('Grass/grass-like (Graminoids)','Fern/fern ally','Forb/Herb'),]$Canopy.Top <- 
-  pmin(Forest.Understory.sub[is.na(Forest.Understory.sub$Canopy.Top) & !is.na(Forest.Understory.sub$maxHt) & Forest.Understory.sub$Plant.Type %in% c('Grass/grass-like (Graminoids)','Fern/fern ally','Forb/Herb'),]$maxHt, 1.5)
 
-Forest.Understory.sub[is.na(Forest.Understory.sub$Canopy.Bottom) & !is.na(Forest.Understory.sub$Canopy.Top) & Forest.Understory.sub$Plant.Type %in% c('Grass/grass-like (Graminoids)','Fern/fern ally','Forb/Herb'),]$Canopy.Bottom <- Forest.Understory.sub[is.na(Forest.Understory.sub$Canopy.Bottom) & !is.na(Forest.Understory.sub$Canopy.Top) & Forest.Understory.sub$Plant.Type %in% c('Grass/grass-like (Graminoids)','Fern/fern ally','Forb/Herb'),]$Canopy.Top/2#4+.05
+Forest.Understory.sub <- Forest.Understory.sub %>% mutate(
+  Canopy.Bottom = ifelse(
+    is.na(Forest.Understory.sub$Canopy.Bottom) & Forest.Understory.sub$Plant.Type %in% c('Nonvascular'), 0, Canopy.Bottom),
+  Canopy.Top = ifelse(
+    is.na(Canopy.Top) & !is.na(maxHt) & Plant.Type %in% c('Grass/grass-like (Graminoids)','Fern/fern ally','Forb/Herb'), 1.5, Canopy.Top),
+  Canopy.Bottom = ifelse(
+    is.na(Canopy.Bottom) & !is.na(Canopy.Top) & Plant.Type %in% c('Grass/grass-like (Graminoids)','Fern/fern ally','Forb/Herb'), Canopy.Top/2, Canopy.Bottom),
+  Canopy.Bottom = ifelse(
+    is.na(Canopy.Bottom) & Plant.Type %in% c('Tree','Vine/Liana','Grass/grass-like (Graminoids)','Fern/fern ally','Forb/Herb', 'Nonvascular'), 0, Canopy.Bottom),
+  Canopy.Top = ifelse(
+    !is.na(maxHt) & maxHt > 0.5, pmin(Canopy.Top, maxHt),Canopy.Top),
+  Canopy.Bottom = ifelse(
+    !is.na(maxHt) & maxHt > 0.5, pmin(Canopy.Bottom, maxHt), Canopy.Bottom))
 
-Forest.Understory.sub[is.na(Forest.Understory.sub$Canopy.Bottom) & Forest.Understory.sub$Plant.Type %in% c('Tree','Vine/Liana','Grass/grass-like (Graminoids)','Fern/fern ally','Forb/Herb', 'Nonvascular'),]$Canopy.Bottom <- 0.1
 
-Forest.Understory.sub[is.na(Forest.Understory.sub$Canopy.Top) & Forest.Understory.sub$Plant.Type %in% c('Nonvascular'),]$Canopy.Top <- 0.05
-Forest.Understory.sub[is.na(Forest.Understory.sub$Canopy.Top) & Forest.Understory.sub$Plant.Type %in% c('Grass/grass-like (Graminoids)','Fern/fern ally','Forb/Herb'),]$Canopy.Top <- 0.6
-Forest.Understory.sub[is.na(Forest.Understory.sub$Canopy.Top) & Forest.Understory.sub$Plant.Type %in% c('Shrub/Subshrub'),]$Canopy.Top <- 0.3
-Forest.Understory.sub[is.na(Forest.Understory.sub$Canopy.Top) & Forest.Understory.sub$Plant.Type %in% c('Tree','Vine/Liana'),]$Canopy.Top <- 0.5
-Forest.Understory.sub[is.na(Forest.Understory.sub$Canopy.Bottom),]$
-  Canopy.Bottom <- 0
 
-Forest.Understory.sub$Canopy.Top <- ifelse(!is.na(Forest.Understory.sub$maxHt),
-                                       pmin(Forest.Understory.sub$Canopy.Top,
-                                            Forest.Understory.sub$maxHt),
-                                       Forest.Understory.sub$Canopy.Top)
-Forest.Understory.sub$Canopy.Bottom <- ifelse(!is.na(Forest.Understory.sub$maxHt),
-                                          pmin(Forest.Understory.sub$Canopy.Bottom,
-                                               Forest.Understory.sub$maxHt),
-                                          Forest.Understory.sub$Canopy.Bottom)
 Forest.Understory <- rbind(Forest.Understory, Forest.Understory.sub)
 
 
@@ -323,39 +285,17 @@ Forest.Understory1 <- Forest.Understory1[order(
 
 write.csv(Forest.Overstory1, 'output/Forest.Overstory.csv', row.names = FALSE, na = "")
 write.csv(Forest.Understory1, 'output/Forest.Understory.csv', row.names = FALSE, na = "")
-
-#wetland indicator status ----
-Com.Sp.mean.wet <- merge(Com.Sp.mean.ht, listspp[,c('AcTaxon', 'Wetness')], by.x = 'Species', by.y = 'AcTaxon')
-Com.Sp.mean.wet$totalwet <- Com.Sp.mean.wet$Wetness * Com.Sp.mean.wet$Total
-Com.Sp.mean.wet <- subset(Com.Sp.mean.wet, !is.na(totalwet))
-Com.mean.wet <- aggregate(Com.Sp.mean.wet[,c('totalwet','Total')], by=list(Observation_ID = Com.Sp.mean.wet$Observation_ID), FUN = 'sum')
-Com.mean.wet$plotwetness <- Com.mean.wet$totalwet / Com.mean.wet$Total
-
-Com.Sp.groups.wet <- merge(Com.Sp.groups.mean, listspp[,c('AcTaxon', 'Wetness')], by.x = 'Species', by.y = 'AcTaxon')
-Com.Sp.groups.wet$totalwet <- Com.Sp.groups.wet$Wetness * Com.Sp.groups.wet$Total
-Com.Sp.groups.wet <- subset(Com.Sp.groups.wet, !is.na(totalwet))
-Com.groups.wet <- aggregate(Com.Sp.groups.wet[,c('totalwet','Total')], by=list(phase = Com.Sp.groups.wet$phase), FUN = 'sum')
-Com.groups.wet$groupwetness <- Com.groups.wet$totalwet / Com.groups.wet$Total
-
-handpicked.wet <- merge(handpicked, Com.groups.wet[,c('phase','groupwetness')], by.x = 'phase', by.y = 'phase')
-handpicked.wet <- merge(handpicked.wet, Com.mean.wet[,c('Observation_ID','plotwetness')], by.x = 'Observation_ID', by.y = 'Observation_ID')
-
-#Generic structure ----
-Com.Sp.agg <- aggregate(log10(1-(Com.Sp.mean.ht[,c('Field', 'Shrub', 'Subcanopy', 'Tree')]/100.001)), by=list(Observation_ID = Com.Sp.mean.ht$Observation_ID),  FUN='sum')
-Com.Sp.agg[,c('Field', 'Shrub', 'Subcanopy', 'Tree')] <- 100*(1-10^(Com.Sp.agg[,c('Field', 'Shrub', 'Subcanopy', 'Tree')]))                 
-Com.Sp.agg$over <- 100*(1-10^(apply(log10(1-(Com.Sp.agg[,c('Subcanopy', 'Tree')]/100.001)), MARGIN = 1, FUN='sum')))
-Com.Sp.agg$under <- 100*(1-10^(apply(log10(1-(Com.Sp.agg[,c('Field', 'Shrub')]/100.001)), MARGIN = 1, FUN='sum')))
-
-handpicked.wet <- merge(handpicked.wet, Com.Sp.agg[,c('Observation_ID', 'over','under')], by.x = 'Observation_ID', by.y = 'Observation_ID')
 #ESIS profile ----
 
 ESIS <- rbind(Forest.Understory[,c('phase','Taxon','Plant.Symbol','Plant.Type','Nativity','Cover.Low','Cover.High','Canopy.Bottom','Canopy.Top')], Forest.Overstory[,c('phase','Taxon','Plant.Symbol','Plant.Type','Nativity','Cover.Low','Cover.High','Canopy.Bottom','Canopy.Top')])
-ESIS$Plant.Type2 <- 'Forb'
-ESIS[ESIS$Plant.Type %in% c('Grass/grass-like (Graminoids)'),]$Plant.Type2 <- 'Grass/Grasslike'
-ESIS[ESIS$Plant.Type %in% c('Vine/Liana', 	'Shrub/Subshrub'),]$Plant.Type2 <- 'Shrub/Vine'
-ESIS[ESIS$Plant.Type %in% c('Tree', 	'Tree Fern'),]$Plant.Type2 <- 'Tree'
-ESIS[ESIS$Plant.Type %in% c('Nonvascular'),]$Plant.Type2 <- 'Nonvascular'
-
+ESIS <- ESIS %>% mutate(Plant.Type2 = case_when(
+  Plant.Type %in% c('Grass/grass-like (Graminoids)') ~ 'Grass/Grasslike',
+  Plant.Type %in% c('Vine/Liana', 'Shrub/Subshrub') ~ 'Shrub/Vine',
+  Plant.Type %in% c('Tree', 'Tree Fern') ~ 'Tree',
+  Plant.Type %in% c('Nonvascular') ~ 'Nonvascular',
+  TRUE ~ 'Forb'))
+                                                
+                                      
 ESIS.01 <- subset(ESIS, Canopy.Top <= 0.5| Plant.Type %in% c('Grass/grass-like (Graminoids)', 'Fern/fern ally', 'Forb/Herb'))
 ESIS.01 <- merge(ESIS.01, Com.Sp.groups[,c('Observation_ID','phase','Observation_Label','Species','Simple','Field')], by.x = c('phase','Taxon'),  by.y = c('phase','Species') )
 names(ESIS.01)[names(ESIS.01) == 'Field'] <- 'Cover'
@@ -369,7 +309,7 @@ ESIS.04 <- subset(ESIS, Canopy.Top > 15 & !Plant.Type %in% c('Grass/grass-like (
 ESIS.04 <- merge(ESIS.04, Com.Sp.groups[,c('Observation_ID','phase','Observation_Label','Species','Simple','Tree')], by.x = c('phase','Taxon'),  by.y = c('phase','Species') )
 names(ESIS.04)[names(ESIS.04) == 'Tree'] <- 'Cover'
 ESIS <- rbind(ESIS.01, ESIS.02, ESIS.03, ESIS.04)
-ESIS[ESIS$Simple %in% 'Forb',]$Plant.Type2 <- 'Forb'
+
 
 #set the stratum breaks
 ESIS.Stratum <- c('f1', 'f2', 'f3', 's1', 's2', 't1', 't2', 't3', 't4')
@@ -408,14 +348,10 @@ ESIS.zero2 <- unique(ESIS.z[,c('Plant.Type2', 'Macrostratum', 'Stratum')])
 ESIS.zero <- merge(ESIS.zero1, ESIS.zero2)
 ESIS.zero$Cover <- 0
 ESIS.z <- rbind(ESIS.z, ESIS.zero)
-ESIS.z <- ddply(ESIS.z, c('phase', 'Observation_ID', 'Plant.Type2', 'Macrostratum', 'Stratum'), summarise,
-                    Cover = max(Cover)
-)
+ESIS.z <- ESIS.z %>% group_by(phase, Observation_ID, Plant.Type2, Macrostratum, Stratum) %>% summarise(Cover = max(Cover))
 #get percentiles
-ESIS.quantile <- ddply(ESIS.z, c('phase', 'Plant.Type2', 'Macrostratum', 'Stratum'), summarise,
-                       c15 = quantile(Cover, 0.15),
-                       c85 = quantile(Cover, 0.85)
-)
+ESIS.quantile <- ESIS.z %>% group_by(phase,Plant.Type2,Macrostratum,Stratum) %>% summarise(c15 = quantile(Cover, 0.15),c85 = quantile(Cover, 0.85))
+
 ESIS.quantile[,c('c15','c85')] <- lapply(ESIS.quantile[,c('c15','c85')], FUN = roundF) #rounding
 
 #rearrange quantiles
@@ -444,9 +380,8 @@ ESIS.Macrostratum <- ESIS
 ESIS.Macrostratum$Macrostratum <- ifelse(ESIS.Macrostratum$Canopy.Top >5, 'over','under')
 ESIS.Macrostratum <- aggregate(list(Cover = log10(1-(ESIS.Macrostratum$Cover/100.001))), by=list(phase = ESIS.Macrostratum$phase, Observation_ID = ESIS.Macrostratum$Observation_ID, Plant.Type2 = ESIS.Macrostratum$Plant.Type2, Macrostratum = ESIS.Macrostratum$Macrostratum),  FUN='sum')
 ESIS.Macrostratum$Cover <- 100*(1-10^(ESIS.Macrostratum$Cover))
-ESIS.Macrostratum.quantile <- ddply(ESIS.Macrostratum, c('phase', 'Plant.Type2', 'Macrostratum'), summarise,
-                       c15 = quantile(Cover, 0.15),
-                       c85 = quantile(Cover, 0.85)
+ESIS.Macrostratum.quantile <- ESIS.Macrostratum %>% group_by(phase,Plant.Type2,Macrostratum) %>% 
+  summarise(c15 = quantile(Cover, 0.15),c85 = quantile(Cover, 0.85)
 )
 ESIS.stratiles <- merge(ESIS.Macrostratum.quantile, ESIS.stratiles, by=c('phase', 'Plant.Type2', 'Macrostratum'))
 ESIS.stratiles[,c('c15','c85')] <- ESIS.stratiles[,c('c15','c85')]*ESIS.stratiles$RCover
@@ -471,9 +406,9 @@ write.csv(ESIS.table2, 'output/ESIS.table2.csv', na = "", row.names = F)
 
 
 # DWD and Litter ----
-obs.litter <- merge(obs, handpicked, by= 'Observation_ID')
+obs.litter <- left_join(obs, groups1)
 
-obs.litter.pctl <- ddply(obs.litter, c('phase'), summarise,
+obs.litter.pctl <- obs.litter %>% group_by(phase) %>% summarise(
                             litter.min = quantile(Litter_Cover, 0.15, na.rm = TRUE),
                             litter.max = quantile(Litter_Cover, 0.85, na.rm = TRUE),
                             logs.min = quantile(Log_Cover, 0.15, na.rm = TRUE),
@@ -508,7 +443,7 @@ Ground.cover <- aggregate(list(Cover = log10(1-(Ground$Cover/100.001))), by=list
 
 Ground.cover$Cover <- 100*(1-10^(Ground.cover$Cover))
 
-Ground.cover.pctl <- ddply(Ground.cover, c('phase', 'Plant.Type2'), summarise,
+Ground.cover.pctl <- Ground.cover %>% group_by(phase, Plant.Type2) %>% summarise(
                            cover.min = quantile(Cover, 0.15, na.rm = TRUE),
                            cover.mid = quantile(Cover, 0.5, na.rm = TRUE),
                          cover.max = quantile(Cover, 0.85, na.rm = TRUE))
@@ -520,8 +455,8 @@ Ground.cover.pctl[,c('cover.min', 'cover.mid', 'cover.max', 'foliar.min', 'folia
 write.csv(Ground.cover.pctl, 'output/Ground.cover.pctl.csv', na = "", row.names = F)
 
 # snags ----
-Snags <- subset(obsspp, grepl('-snag', Genus), select = c('Observation_ID', 'Genus', 'BA', 'Dmin', 'Dmax'))
-Snags <- merge(Snags, handpicked, by= 'Observation_ID')
+Snags <- subset(obsspp, grepl('-snag', Genus), select = c('Observation_ID','Soilplot', 'Genus', 'BA', 'Dmin', 'Dmax'))
+Snags <- left_join(Snags, obs[,c('Observation_ID', 'soilplot')])
 Snags$D <- ifelse(!is.na(Snags$Dmax),ifelse(!is.na(Snags$Dmin), (Snags$Dmin+Snags$Dmax)/2, Snags$Dmax), 20)
 Snags$D.area <- (Snags$D/200)^2*3.141592
 Snags$Snags.Ha <- Snags$BA/Snags$D.area

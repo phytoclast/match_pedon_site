@@ -38,7 +38,7 @@ obsspp <- obsspp %>% mutate(AcTaxon =
 # idx <- obsspp$AcTaxon %in% 'Phalaris' %>% which()
 # obsspp[idx,]$AcTaxon <- 'Phalaris arundinacea'[length(idx)>0]
 
-
+obsspp <- obsspp %>% mutate(AcTaxon= ifelse(grepl('Lonicera.*bella',AcTaxon),'Lonicera.bella', AcTaxon))
 obsspp <- obsspp[!grepl("\\?", obsspp$AcTaxon) | is.na(obsspp$AcTaxon) ,]
 obsspp <- subset(obsspp, !is.na(specific_epithet) | AcTaxon %in% c('Sphagnum', 'Chara'))
 obsspp[obsspp$BA %in% 0,]$BA <- NA
@@ -115,14 +115,21 @@ VEGOBS_mukeys <- readRDS('output/ssurgo.RDS')
 VEGOBS_soilnames <- merge(VEGOBS_mukeys[,c('obs.id','mukey')], mu[,c('lmapunitiid', 'muname')], by.x='mukey', by.y= 'lmapunitiid')
 VEGOBS <- merge(VEGOBS, VEGOBS_soilnames[,c('obs.id', 'muname')], by.x='Observation_ID', by.y= 'obs.id')
 
-VEGOBS$eval <- "dump"
-VEGOBS[VEGOBS$pedondist < 50,]$eval <- "keep1" 
-VEGOBS[(str_split_fixed(VEGOBS$muname, " ",2)[,1])==VEGOBS$taxonname & VEGOBS$pedondist < 1000 & VEGOBS$eval == 'dump', ]$eval <- "keep2"
-VEGOBS[VEGOBS$pedondate==VEGOBS$Year & VEGOBS$pedondist < 100 & VEGOBS$eval == 'dump', ]$eval <- "keep3"
-#VEGOBS[VEGOBS$Observation_Label==VEGOBS$pedon & VEGOBS$eval == 'dump', ]$eval <- "keep4"
-VEGOBS[VEGOBS$eval == 'dump',]$taxonname <- ""
-VEGOBS[VEGOBS$eval == 'dump',]$taxonclass <- ""
-VEGOBS[VEGOBS$eval == 'dump',]$pedon <- ""
+VEGOBS <- VEGOBS %>% mutate(
+  eval=case_when(
+  pedondist < 50 ~ "dump",
+  pedondist < 50 ~ "keep1",
+  TRUE~''),
+  eval=case_when(
+  (str_split_fixed(muname, " ",2)[,1]) %in% taxonname & pedondist < 1000 & eval  %in%  'dump' ~ "keep2",
+  pedondate %in% Year & pedondist < 100 & eval %in% 'dump'~ "keep3",
+  TRUE~eval),
+
+  taxonname=ifelse(eval %in% 'dump',"", taxonname),
+  taxonclass=ifelse(eval %in% 'dump',"", taxonclass),
+  pedon=ifelse(eval %in% 'dump',"", pedon)
+  )
+
 VEGOBS$Soil <- VEGOBS$taxonname
 for (i in 1:nrow(pedonoverride)){ #replace known soils that disagree with map unit and don't have pedon records
   VEGOBS[VEGOBS$Observation_Label %in% pedonoverride$sitelabel[i],]$Soil <- as.character(pedonoverride$soil[i])}
@@ -169,8 +176,8 @@ soilgroup <- 'wetloamy'
 #----
 #observed species
 
-Com.Sp.sum<-aggregate(obsspp[,c('Field', 'Shrub', 'Subcanopy', 'Tree')], by=list(obsspp$Observation_ID,obsspp$Observation_Label, obsspp$AcTaxon, obsspp$Simple), FUN=sum) #sum within plot
-colnames(Com.Sp.sum)<-c('Observation_ID', 'Observation_Label', 'Species', 'Simple', 'Field', 'Shrub', 'Subcanopy', 'Tree') #restore column names
+Com.Sp.sum<-aggregate(obsspp[,c('Field', 'Shrub', 'Subcanopy', 'Tree', 'BA')], by=list(obsspp$Observation_ID,obsspp$Observation_Label, obsspp$AcTaxon, obsspp$Simple), FUN=sum) #sum within plot
+colnames(Com.Sp.sum)<-c('Observation_ID', 'Observation_Label', 'Species', 'Simple', 'Field', 'Shrub', 'Subcanopy', 'Tree', 'BA') #restore column names
 
 Com.Sp.freq<-aggregate(obsspp[,c('AcTaxon')], by=list(obsspp$Observation_Label, obsspp$AcTaxon), FUN=length) #frequency within plot
 colnames(Com.Sp.freq)<- c('Observation_Label', 'Species', 'freq')
@@ -200,6 +207,13 @@ Com.Sp.mean$soilplot <- str_replace_all(Com.Sp.mean$soilplot, ',', '.')
 Com.Sp.mean$soilplot <- str_replace_all(Com.Sp.mean$soilplot, ':', '.')
 Com.Sp.mean$soilplot <- str_replace_all(Com.Sp.mean$soilplot, ';', '.')
 Com.Sp.mean$soilplot <- str_replace_all(Com.Sp.mean$soilplot, '&', '.')
+obs$soilplot <- paste(obs$Soil , obs$Observation_Label)
+obs$soilplot <- str_replace_all(obs$soilplot, ' ', '.')
+obs$soilplot <- str_replace_all(obs$soilplot, '-', '.')
+obs$soilplot <- str_replace_all(obs$soilplot, ',', '.')
+obs$soilplot <- str_replace_all(obs$soilplot, ':', '.')
+obs$soilplot <- str_replace_all(obs$soilplot, ';', '.')
+obs$soilplot <- str_replace_all(obs$soilplot, '&', '.')
 #----
 #need formula for aggregating within strata... 
 Com.Sp.preagg <- Com.Sp.mean
