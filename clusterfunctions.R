@@ -1019,6 +1019,7 @@ indanalysis2 <- function(plotdata){
   tjacagnes <- distjac %>% agnes(method = 'average') 
   tkulcagnes <- distkulc %>% agnes(method = 'average')
   tkulcward <- distkulc %>% agnes(method = 'ward')
+  tkulcflex25 <- distkulc %>% flexbeta(beta= -0.25)
   
   klevel <- 0
   
@@ -1038,6 +1039,7 @@ indanalysis2 <- function(plotdata){
   ind.kmeans <- 0
   ind.kulc <- 0
   ind.kward <- 0
+  ind.kflex25 <- 0
   
   
   weak.upgma <- 0
@@ -1056,6 +1058,7 @@ indanalysis2 <- function(plotdata){
   weak.kmeans <- 0
   weak.kulc <- 0
   weak.kward <- 0
+  weak.kflex25 <- 0
   
   for (k in 2:min(nrow(plotdata1)-1,15)){
     
@@ -1075,6 +1078,7 @@ indanalysis2 <- function(plotdata){
     ind.kmeans.0 <- indgroup(plotdata1, kmeans(distbray, centers = k)$cluster, F)
     ind.kulc.0 <- indgroup(plotdata1, cutree(tkulcagnes, k = k), F)
     ind.kward.0 <- indgroup(plotdata1, cutree(tkulcward, k = k), F)
+    ind.kflex25.0 <- indgroup(plotdata1, cutree(tkulcflex25, k = k), F)
     
     ind.upgma.1 <- ind.upgma.0[,'total'] %>% mean()
     ind.flex05.1 <- ind.flex05.0[,'total'] %>% mean()
@@ -1092,6 +1096,7 @@ indanalysis2 <- function(plotdata){
     ind.kmeans.1 <- ind.kmeans.0[,'total'] %>% mean()
     ind.kulc.1 <- ind.kulc.0[,'total'] %>% mean()
     ind.kward.1 <- ind.kward.0[,'total'] %>% mean()
+    ind.kflex25.1 <- ind.kflex25.0[,'total'] %>% mean()
     
     weak.upgma.1 <- ind.upgma.0[,'maxval'] %>% min()
     weak.flex05.1 <- ind.flex05.0[,'maxval'] %>% min()
@@ -1109,6 +1114,7 @@ indanalysis2 <- function(plotdata){
     weak.kmeans.1 <- ind.kmeans.0[,'maxval'] %>% min()
     weak.kulc.1 <- ind.kulc.0[,'maxval'] %>% min()
     weak.kward.1 <- ind.kward.0[,'maxval'] %>% min()
+    weak.kflex25.1 <- ind.kflex25.0[,'maxval'] %>% min()
     
     
     klevel <- c(klevel, k)
@@ -1129,6 +1135,7 @@ indanalysis2 <- function(plotdata){
     ind.kmeans <- c(ind.kmeans, ind.kmeans.1)
     ind.kulc <- c(ind.kulc, ind.kulc.1)
     ind.kward <- c(ind.kward, ind.kward.1)
+    ind.kflex25 <- c(ind.kflex25, ind.kflex25.1)
     
     weak.upgma <- c(weak.upgma, weak.upgma.1)
     weak.flex05 <- c(weak.flex05, weak.flex05.1)
@@ -1146,13 +1153,14 @@ indanalysis2 <- function(plotdata){
     weak.kmeans <- c(weak.kmeans, weak.kmeans.1)
     weak.kulc <- c(weak.kulc, weak.kulc.1)
     weak.kward <- c(weak.kward, weak.kward.1)
+    weak.kflex25 <- c(weak.kflex25, weak.kflex25.1)
     
   }    
   
-  ind.table <- as.data.frame(cbind(klevel,ind.upgma,ind.flex05,ind.flex10,ind.flex15,ind.flex20,ind.flex25,ind.flex30,ind.flex35,ind.ward,ind.jac,ind.sim,ind.diana,ind.kmeans,ind.kulc,ind.kward))
+  ind.table <- as.data.frame(cbind(klevel,ind.upgma,ind.flex05,ind.flex10,ind.flex15,ind.flex20,ind.flex25,ind.flex30,ind.flex35,ind.ward,ind.jac,ind.sim,ind.diana,ind.kmeans,ind.kulc,ind.kward,ind.kflex25))
   ind.table <- ind.table[-1,]
   
-  weak.table <- as.data.frame(cbind(klevel,weak.upgma,weak.flex05,weak.flex10,weak.flex15,weak.flex20,weak.flex25,weak.flex30,weak.flex35,weak.ward,weak.jac,weak.sim,weak.diana,weak.kmeans,weak.kulc,weak.kward))
+  weak.table <- as.data.frame(cbind(klevel,weak.upgma,weak.flex05,weak.flex10,weak.flex15,weak.flex20,weak.flex25,weak.flex30,weak.flex35,weak.ward,weak.jac,weak.sim,weak.diana,weak.kmeans,weak.kulc,weak.kward,weak.kflex25))
   weak.table <- weak.table[-1,]
   
   dni.table <- ind.table[,-1] %>% t() %>% as.data.frame()

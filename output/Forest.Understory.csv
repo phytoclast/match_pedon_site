@@ -1,432 +1,165 @@
 "phase","Taxon","order","under","Plant.Symbol","Plant.Type","Nativity","Cover.Low","Cover.High","Canopy.Bottom","Canopy.Top"
-"1","Quercus alba",1,2.52248501879737,"QUAL","Tree","Native",0,0.1,0.5,2.5
-"1","Quercus alba",1,2.52248501879737,"QUAL","Tree","Native",0,0,0.1,0.5
-"1","Cornus florida",1,2.22693096115808,"COFL2","Tree","Native",0,0,0.5,4.5
-"1","Cornus florida",1,2.22693096115808,"COFL2","Tree","Native",0,0,0.1,0.5
-"1","Fraxinus americana",1,1.69635807266891,"FRAM2","Tree","Native",0,0,1,5
-"1","Fraxinus americana",1,1.69635807266891,"FRAM2","Tree","Native",0,0,0,
-"1","Fraxinus pennsylvanica",1,1.49998500014999,"FRPE","Tree","Native",0,0,1,5
-"1","Prunus serotina",1,0.87932794460317,"PRSE2","Tree","Native",0,0,0.5,1.5
-"1","Prunus serotina",1,0.87932794460317,"PRSE2","Tree","Native",0,0,0.1,0.4
-"1","Sassafras albidum",1,0.561779936220097,"SAAL5","Tree","Native",0,0,0.5,2.5
-"1","Sassafras albidum",1,0.561779936220097,"SAAL5","Tree","Native",0,0,0.1,0.5
-"1","Quercus velutina",1,0.437093679957701,"QUVE","Tree","Native",0,0,1.5,5
-"1","Quercus velutina",1,0.437093679957701,"QUVE","Tree","Native",0,0,0.1,0.5
-"1","Acer rubrum",1,0.337324753471202,"ACRU","Tree","Native",0,0,1,1.5
-"1","Acer rubrum",1,0.337324753471202,"ACRU","Tree","Native",0,0,0.1,0.3
-"1","Ostrya virginiana",1,0.0999740005100058,"OSVI","Tree","Native",0,0,1,5
-"1","Ostrya virginiana",1,0.0999740005100058,"OSVI","Tree","Native",0,0,0,
-"1","Carya glabra",1,0.0499995000050046,"CAGL8","Tree","Native",0,0,0,
-"1","Fagus grandifolia",1,0.0499995000050046,"FAGR","Tree","Native",0,0,0.5,1
-"1","Quercus rubra",1,0.0499995000050046,"QURU","Tree","Native",0,0,0,
-"1","Ulmus americana",1,0.0312481250343666,"ULAM","Tree","Native",0,0,2,5
-"1","Ulmus americana",1,0.0312481250343666,"ULAM","Tree","Native",0,0,0,0.1
-"1","Pinus strobus",1,0.0187490312674954,"PIST","Tree","Native",0,0,0.5,1
-"1","Pinus strobus",1,0.0187490312674954,"PIST","Tree","Native",0,0,0.3,0.5
-"1","Amelanchier arborea",1,0.0124998750012484,"AMAR3","Tree","Native",0,0,1,2
-"1","Juglans nigra",1,0.0124998750012484,"JUNI","Tree","Native",0,0,0.3,0.5
-"1","Berberis thunbergii",3,1.24998750012499,"BETH","Shrub/Subshrub","Introduced",0,0,,
-"1","Rosa multiflora",3,0.499995000050002,"ROMU","Shrub/Subshrub","Introduced",0,0,0.5,2
-"1","Rubus allegheniensis",3,0.299872002529966,"RUAL","Shrub/Subshrub","Native",0,0,0.5,2
-"1","Rubus allegheniensis",3,0.299872002529966,"RUAL","Shrub/Subshrub","Native",0,0,,
-"1","Lindera benzoin",3,0.249997500025001,"LIBE3","Shrub/Subshrub","Native",0,0,,
-"1","Cornus racemosa",3,0.0624958594515612,"CORA6","Shrub/Subshrub","Native",0,0,0.5,1
-"1","Cornus racemosa",3,0.0624958594515612,"CORA6","Shrub/Subshrub","Native",0,0,0.1,0.5
-"1","Lonicera maackii",3,0.0499995000050046,"LOMA6","Shrub/Subshrub","Introduced",0,0,0.5,2
-"1","Rosa carolina",3,0.0187498125018726,"ROCA4","Shrub/Subshrub","Native",0,0,0.1,0.3
-"1","Prunus virginiana",3,0.0124998750012484,"PRVI","Shrub/Subshrub","Native",0,0,1,2
-"1","Rubus flagellaris",3,0.0124998750012484,"RUFL","Shrub/Subshrub","Native",0,0,0.1,0.3
-"1","Viburnum recognitum",3,0.0124998750012484,"VIRE7","Shrub/Subshrub","Native",0,0,0.5,1
-"1","Parthenocissus quinquefolia",4,0.499995000050002,"PAQU2","Vine/Liana","Native",0,0,0,
-"1","Toxicodendron radicans",4,0.231220344319993,"TORA2","Vine/Liana","Native",0,0,1,2
-"1","Toxicodendron radicans",4,0.231220344319993,"TORA2","Vine/Liana","Native",0,0,0.2,0.4
-"1","Vitis riparia",4,0.0499995000050046,"VIRI","Vine/Liana","Native",0,0,0,
-"1","Carex pensylvanica",5,3.20621793782062,"CAPE6","Grass/grass-like (Graminoids)","Native",0,0.1,0,
-"1","Carex swanii",5,1.29998700013,"CASW","Grass/grass-like (Graminoids)","Native",0,0,0,
-"1","Brachyelytrum erectum",5,0.249997500025001,"BRER2","Grass/grass-like (Graminoids)","Native",0,0,0,
-"1","Carex gracillima",5,0.249997500025001,"CAGR2","Grass/grass-like (Graminoids)","Native",0,0,1,1
-"1","Carex normalis",5,0.249997500025001,"CANO","Grass/grass-like (Graminoids)","Native",0,0,1,1.5
-"1","Piptochaetium avenaceum",5,0.0187498125018726,"PIAV","Grass/grass-like (Graminoids)","Native",0,0,0,
-"1","Poa compressa",5,0.0124998750012484,"POCO","Grass/grass-like (Graminoids)","Introduced",0,0,0.5,0.5
-"1","Dichanthelium commutatum",5,0.00624993750062419,"DICO2","Grass/grass-like (Graminoids)","Native",0,0,1,1.5
-"1","Elymus trachycaulus",5,0.00624993750062419,"ELTR7","Grass/grass-like (Graminoids)","Native",0,0,1,1
-"1","Podophyllum peltatum",6,3.49996500034999,"POPE","Forb/Herb","Native",0,0.1,0,
-"1","Circaea canadensis",6,2.9999700003,"CICA13","Forb/Herb","Native",0,0.1,0,
-"1","Amphicarpaea bracteata",6,0.499995000050002,"AMBR2","Forb/Herb","Native",0,0,0,
-"1","Maianthemum canadense",6,0.499995000050002,"MACA4","Forb/Herb","Native",0,0,0,
-"1","Geranium maculatum",6,0.30624693753063,"GEMA","Forb/Herb","Native",0,0,0,
-"1","Nabalus albus",6,0.299997000029995,"NAAL2","Forb/Herb","Native",0,0,0,
-"1","Potentilla simplex",6,0.268747312526874,"POSI2","Forb/Herb","Native",0,0,0,
-"1","Alliaria petiolata",6,0.249997500025001,"ALPE4","Forb/Herb","Introduced",0,0,0,
-"1","Galium lanceolatum",6,0.249997500025001,"GALA3","Forb/Herb","Native",0,0,0,
-"1","Maianthemum racemosum",6,0.0562494375056288,"MARA7","Forb/Herb","Native",0,0,0,
-"1","Agrimonia gryposepala",6,0.0499995000050046,"AGGR2","Forb/Herb","Native",0,0,1,1.5
-"1","Collinsonia canadensis",6,0.0499995000050046,"COCA4","Forb/Herb","Native",0,0,0,
-"1","Laportea canadensis",6,0.0499995000050046,"LACA3","Forb/Herb","Native",0,0,0,
-"1","Persicaria virginiana",6,0.0499995000050046,"PEVI13","Forb/Herb","Native",0,0,0,
-"1","Solidago caesia",6,0.0499995000050046,"SOCA4","Forb/Herb","Native",0,0,1,1
-"1","Euphorbia corollata",6,0.0249997500024968,"EUCO10","Forb/Herb","Native",0,0,0,
-"1","Polygonatum biflorum",6,0.0249997500024968,"POBI2","Forb/Herb","Native",0,0,0,
-"1","Aquilegia canadensis",6,0.00624993750062419,"AQCA","Forb/Herb","Native",0,0,0,
-"1","Aralia nudicaulis",6,0.00624993750062419,"ARNU2","Forb/Herb","Native",0,0,1,1.5
-"1","Campanula rotundifolia",6,0.00624993750062419,"CARO2","Forb/Herb","Native",0,0,0,
-"1","Galium circaezans",6,0.00624993750062419,"GACI2","Forb/Herb","Native",0,0,0,
-"1","Helianthus divaricatus",6,0.00624993750062419,"HEDI2","Forb/Herb","Native",0,0,0,
-"1","Pedicularis canadensis",6,0.00624993750062419,"PECA","Forb/Herb","Native",0,0,1,1.5
-"1","Taraxacum officinale",6,0.00624993750062419,"TAOF","Forb/Herb","Introduced",0,0,1,1.5
-"1","Pteridium aquilinum",7,0.356246437535623,"PTAQ","Fern/fern ally","Native",0,0,1,1.5
-"1","Osmunda claytoniana",7,0.249997500025001,"OSCL2","Fern/fern ally","Native",0,0,1,1
-"1","Athyrium angustum",7,0.0499995000050046,"ATAN2","Fern/fern ally","Native",0,0,0,
-"2","Fraxinus pennsylvanica",1,12.9207018846702,"FRPE","Tree","Native",0,0.5,1,5
-"2","Fraxinus pennsylvanica",1,12.9207018846702,"FRPE","Tree","Native",0,0,0,
-"2","Carya ovata",1,0.0199998000020019,"CAOV2","Tree","Native",0,0,0,
-"2","Cornus alternifolia",1,0.0199998000020019,"COAL2","Tree","Native",0,0,0,
-"2","Acer rubrum",1,0.00999990000100093,"ACRU","Tree","Native",0,0,0,
-"2","Liriodendron tulipifera",1,0.00999990000100093,"LITU","Tree","Native",0,0,0,
-"2","Sassafras albidum",1,0.00999990000100093,"SAAL5","Tree","Native",0,0,0,
-"2","Rosa multiflora",3,3.63117787607936,"ROMU","Shrub/Subshrub","Introduced",0,0.1,0.5,2
-"2","Rosa multiflora",3,3.63117787607936,"ROMU","Shrub/Subshrub","Introduced",0,0,,
-"2","Cornus obliqua",3,1.49998500014999,"COOB9","Shrub/Subshrub","Native",0,0,0.5,2
-"2","Lonicera maackii",3,1.19998800012,"LOMA6","Shrub/Subshrub","Introduced",0,0,0.5,2
-"2","Cornus racemosa",3,1.0989890201097,"CORA6","Shrub/Subshrub","Native",0,0,0.5,2
-"2","Cornus racemosa",3,1.0989890201097,"CORA6","Shrub/Subshrub","Native",0,0,,
-"2","Rubus canadensis",3,0.499995000050002,"RUCA16","Shrub/Subshrub","Native",0,0,,
-"2","Zanthoxylum americanum",3,0.499995000050002,"ZAAM","Shrub/Subshrub","Native",0,0,0.5,2
-"2","Ilex verticillata",3,0.309966900630987,"ILVE","Shrub/Subshrub","Native",0,0,0.5,2
-"2","Ilex verticillata",3,0.309966900630987,"ILVE","Shrub/Subshrub","Native",0,0,,
-"2","Rosa palustris",3,0.299997000029995,"ROPA","Shrub/Subshrub","Native",0,0,0.5,2
-"2","Ligustrum vulgare",3,0.199998000019996,"LIVU","Shrub/Subshrub","Introduced",0,0,0.5,2
-"2","Elaeagnus umbellata",3,0.159938401215975,"ELUM","Shrub/Subshrub","Introduced",0,0,0.5,2
-"2","Elaeagnus umbellata",3,0.159938401215975,"ELUM","Shrub/Subshrub","Introduced",0,0,,
-"2","Lindera benzoin",3,0.129998700013001,"LIBE3","Shrub/Subshrub","Native",0,0,,
-"2","Berberis thunbergii",3,0.0999990000099982,"BETH","Shrub/Subshrub","Introduced",0,0,,
-"2","Spiraea alba",3,0.0499995000050046,"SPAL2","Shrub/Subshrub","Native",0,0,0.5,1
-"2","Ribes cynosbati",3,0.0199998000020019,"RICY","Shrub/Subshrub","Native",0,0,0.5,2
-"2","Parthenocissus quinquefolia",4,1.89818103618946,"PAQU2","Vine/Liana","Native",0,0,1,5
-"2","Parthenocissus quinquefolia",4,1.89818103618946,"PAQU2","Vine/Liana","Native",0,0,0,
-"2","Toxicodendron radicans",4,1.71998280017199,"TORA2","Vine/Liana","Native",0,0.1,0,
-"2","Vitis riparia",4,1.69838303216951,"VIRI","Vine/Liana","Native",0,0,1,5
-"2","Vitis riparia",4,1.69838303216951,"VIRI","Vine/Liana","Native",0,0,0,
-"2","Euonymus obovatus",4,0.0199998000020019,"EUOB8","Vine/Liana","Native",0,0,0,
-"2","Phalaris arundinacea",5,7.69992300076999,"PHAR3","Grass/grass-like (Graminoids)","Native",0,0.2,1,1.5
-"2","Glyceria striata",5,7.09992900070999,"GLST","Grass/grass-like (Graminoids)","Native",0,0.1,1,1.5
-"2","Carex lacustris",5,3.99996000039999,"CALA16","Grass/grass-like (Graminoids)","Native",0,0.1,1,1.5
-"2","Carex gracillima",5,1.61998380016199,"CAGR2","Grass/grass-like (Graminoids)","Native",0,0,1,1
-"2","Poa trivialis",5,1.49998500014999,"POTR2","Grass/grass-like (Graminoids)","Introduced",0,0,1,1
-"2","Leersia oryzoides",5,1.29998700013,"LEOR","Grass/grass-like (Graminoids)","Native",0,0,1,1.5
-"2","Carex rosea",5,0.59999400006,"CARO22","Grass/grass-like (Graminoids)","Native",0,0,0,
-"2","Elymus hystrix",5,0.59999400006,"ELHY","Grass/grass-like (Graminoids)","Native",0,0,0,
-"2","Carex cristatella",5,0.499995000050002,"CACR7","Grass/grass-like (Graminoids)","Native",0,0,1,1
-"2","Bromus inermis",5,0.0999990000099982,"BRIN2","Grass/grass-like (Graminoids)","Introduced",0,0,1,1.5
-"2","Carex blanda",5,0.0999990000099982,"CABL","Grass/grass-like (Graminoids)","Native",0,0,0.5,0.5
-"2","Carex intumescens",5,0.0999990000099982,"CAIN12","Grass/grass-like (Graminoids)","Native",0,0,1,1
-"2","Carex swanii",5,0.0999990000099982,"CASW","Grass/grass-like (Graminoids)","Native",0,0,0,
-"2","Carex tuckermanii",5,0.0999990000099982,"CATU2","Grass/grass-like (Graminoids)","Native",0,0,0,
-"2","Dactylis glomerata",5,0.0999990000099982,"DAGL","Grass/grass-like (Graminoids)","Introduced",0,0,1,1
-"2","Leersia virginica",5,0.0599994000059945,"LEVI2","Grass/grass-like (Graminoids)","Native",0,0,1,1
-"2","Carex bebbii",5,0.0199998000020019,"CABE2","Grass/grass-like (Graminoids)","Native",0,0,1,1
-"2","Carex lupulina",5,0.0199998000020019,"CALU4","Grass/grass-like (Graminoids)","Native",0,0,1,1.5
-"2","Solidago gigantea",6,4.9999500005,"SOGI","Forb/Herb","Native",0,0.1,1,1.5
-"2","Impatiens capensis",6,2.49997500025,"IMCA","Forb/Herb","Native",0,0.1,1,1.5
-"2","Persicaria virginiana",6,1.779982200178,"PEVI13","Forb/Herb","Native",0,0.1,0,
-"2","Persicaria hydropiperoides",6,1.29998700013,"PEHY7","Forb/Herb","Native",0,0,0,
-"2","Persicaria pensylvanica",6,1.29998700013,"PEPE19","Forb/Herb","Native",0,0,0,
-"2","Boehmeria cylindrica",6,0.699993000069998,"BOCY","Forb/Herb","Native",0,0,1,1
-"2","Solidago altissima",6,0.699993000069998,"SOAL6","Forb/Herb","Native",0,0,1,1
-"2","Podophyllum peltatum",6,0.519994800052004,"POPE","Forb/Herb","Native",0,0,0,
-"2","Geum canadense",6,0.419995800041995,"GECA7","Forb/Herb","Native",0,0,1,1
-"2","Erigeron philadelphicus",6,0.299997000029995,"ERPH","Forb/Herb","Native",0,0,1,1
-"2","Fragaria virginiana",6,0.299997000029995,"FRVI","Forb/Herb","Native",0,0,0,
-"2","Lemna turionifera",6,0.299997000029995,"LETU2","Forb/Herb","Native",0,0,0,
-"2","Symphyotrichum lanceolatum",6,0.299997000029995,"SYLA6","Forb/Herb","Native",0,0,0,
-"2","Galium aparine",6,0.199998000019996,"GAAP2","Forb/Herb","Native",0,0,1,1.5
-"2","Viola sororia",6,0.199998000019996,"VISO","Forb/Herb","Native",0,0,1,1.5
-"2","Arisaema triphyllum",6,0.119998800012,"ARTR","Forb/Herb","Native",0,0,1,1.5
-"2","Circaea canadensis",6,0.119998800012,"CICA13","Forb/Herb","Native",0,0,0,
-"2","Asclepias syriaca",6,0.0999990000099982,"ASSY","Forb/Herb","Native",0,0,0,
-"2","Cirsium arvense",6,0.0999990000099982,"CIAR4","Forb/Herb","Introduced",0,0,0,
-"2","Clinopodium vulgare",6,0.0999990000099982,"CLVU","Forb/Herb","Native",0,0,0,
-"2","Maianthemum canadense",6,0.0999990000099982,"MACA4","Forb/Herb","Native",0,0,0,
-"2","Polygonatum pubescens",6,0.0999990000099982,"POPU4","Forb/Herb","Native",0,0,0,
-"2","Ranunculus hispidus",6,0.0999990000099982,"RAHI","Forb/Herb","Native",0,0,1,1
-"2","Ranunculus pensylvanicus",6,0.0999990000099982,"RAPE2","Forb/Herb","Native",0,0,1,1
-"2","Scutellaria lateriflora",6,0.0999990000099982,"SCLA2","Forb/Herb","Native",0,0,0,
-"2","Thalictrum dasycarpum",6,0.0999990000099982,"THDA","Forb/Herb","Native",0,0,0,
-"2","Urtica dioica",6,0.0999990000099982,"URDI","Forb/Herb","Native",0,0,0,
-"2","Bidens tripartita",6,0.0499995000050046,"BITR","Forb/Herb","Native",0,0,1,1
-"2","Penthorum sedoides",6,0.0499995000050046,"PESE6","Forb/Herb","Native",0,0,1,1
-"2","Alliaria petiolata",6,0.0399996000040037,"ALPE4","Forb/Herb","Introduced",0,0,0,
-"2","Maianthemum racemosum",6,0.0399996000040037,"MARA7","Forb/Herb","Native",0,0,0,
-"2","Hackelia virginiana",6,0.0199998000020019,"HAVI2","Forb/Herb","Native",0,0,0,
-"2","Laportea canadensis",6,0.0199998000020019,"LACA3","Forb/Herb","Native",0,0,0,
-"2","Onoclea sensibilis",7,1.109988900111,"ONSE","Fern/fern ally","Native",0,0,0,
-"2","Thelypteris palustris",7,0.509994900051003,"THPA","Fern/fern ally","Native",0,0,0,
-"2","Equisetum arvense",7,0.499995000050002,"EQAR","Fern/fern ally","Native",0,0,1,1.5
-"2","Dryopteris carthusiana",7,0.0199998000020019,"DRCA11","Fern/fern ally","Native",0,0,0,
-"2","Athyrium angustum",7,0.00999990000100093,"ATAN2","Fern/fern ally","Native",0,0,0,
-"2","Osmunda spectabilis",7,0.00999990000100093,"OSSP3","Fern/fern ally","Native",0,0,0,
-"2","Sphagnum",8,0.499995000050002,"SPHAG2","Nonvascular","Unknown",0,0,0,
-"3","Fraxinus pennsylvanica",1,4.376628216998,"FRPE","Tree","Native",0,0.1,1,5
-"3","Fraxinus pennsylvanica",1,4.376628216998,"FRPE","Tree","Native",0,0,0,
-"3","Carpinus caroliniana",1,1.24998750012499,"CACA18","Tree","Native",0,0,1,5
-"3","Acer nigrum",1,0.787210880703659,"ACNI5","Tree","Native",0,0,1,5
-"3","Acer nigrum",1,0.787210880703659,"ACNI5","Tree","Native",0,0,0,
-"3","Fraxinus nigra",1,0.762398626951222,"FRNI","Tree","Native",0,0,1,5
-"3","Fraxinus nigra",1,0.762398626951222,"FRNI","Tree","Native",0,0,0,0.5
-"3","Liriodendron tulipifera",1,0.287294004091188,"LITU","Tree","Native",0,0,1,5
-"3","Liriodendron tulipifera",1,0.287294004091188,"LITU","Tree","Native",0,0,0,
-"3","Fagus grandifolia",1,0.26246612565124,"FAGR","Tree","Native",0,0,1,5
-"3","Fagus grandifolia",1,0.26246612565124,"FAGR","Tree","Native",0,0,0,
-"3","Acer saccharum",1,0.162451500953731,"ACSA3","Tree","Native",0,0,1,5
-"3","Acer saccharum",1,0.162451500953731,"ACSA3","Tree","Native",0,0,0,
-"3","Tilia americana",1,0.162451500953731,"TIAM","Tree","Native",0,0,1,5
-"3","Tilia americana",1,0.162451500953731,"TIAM","Tree","Native",0,0,0,
-"3","Hamamelis virginiana",1,0.124998750012495,"HAVI4","Tree","Native",0,0,1,2
-"3","Prunus serotina",1,0.124998750012495,"PRSE2","Tree","Native",0,0,0,
-"3","Quercus rubra",1,0.124998750012495,"QURU","Tree","Native",0,0,0,
-"3","Carya cordiformis",1,0.0749851877887342,"CACO15","Tree","Native",0,0,1,5
-"3","Carya cordiformis",1,0.0749851877887342,"CACO15","Tree","Native",0,0,0,
-"3","Cornus alternifolia",1,0.0374996250037452,"COAL2","Tree","Native",0,0,0,
-"3","Acer rubrum",1,0.0124998750012484,"ACRU","Tree","Native",0,0,0,
-"3","Quercus macrocarpa",1,0.0124998750012484,"QUMA2","Tree","Native",0,0,0,
-"3","Rosa multiflora",3,1.9999800002,"ROMU","Shrub/Subshrub","Introduced",0,0.1,0.5,2
-"3","Zanthoxylum americanum",3,1.9999800002,"ZAAM","Shrub/Subshrub","Native",0,0,0.5,2
-"3","Lindera benzoin",3,1.66248337516625,"LIBE3","Shrub/Subshrub","Native",0,0,0.5,1
-"3","Rubus allegheniensis",3,1.6249837501625,"RUAL","Shrub/Subshrub","Native",0,0,0.5,2
-"3","Sambucus racemosa",3,0.374996250037496,"SARA2","Shrub/Subshrub","Native",0,0,0.5,2
-"3","Ribes cynosbati",3,0.249841253149941,"RICY","Shrub/Subshrub","Native",0,0,0.5,1
-"3","Ribes cynosbati",3,0.249841253149941,"RICY","Shrub/Subshrub","Native",0,0,,
-"3","Berberis thunbergii",3,0.0374996250037452,"BETH","Shrub/Subshrub","Introduced",0,0,0.5,2
-"3","Viburnum opulus",3,0.0374996250037452,"VIOP","Shrub/Subshrub","Native",0,0,,
-"3","Rubus pubescens",3,0.0124998750012484,"RUPU","Shrub/Subshrub","Native",0,0,,0.1
-"3","Parthenocissus quinquefolia",4,3.74996250037499,"PAQU2","Vine/Liana","Native",0,0.1,0,
-"3","Vitis riparia",4,1.6249837501625,"VIRI","Vine/Liana","Native",0,0,0,
-"3","Toxicodendron radicans",4,1.61873387516063,"TORA2","Vine/Liana","Native",0,0,1,5
-"3","Toxicodendron radicans",4,1.61873387516063,"TORA2","Vine/Liana","Native",0,0,0,
-"3","Parthenocissus inserta",4,0.999990000100004,"PAIN10","Vine/Liana","Native",0,0,0,
-"3","Menispermum canadense",4,0.249997500025001,"MECA3","Vine/Liana","Native",0,0,1,2
-"3","Euonymus obovatus",4,0.0374996250037452,"EUOB8","Vine/Liana","Native",0,0,0,
-"3","Solanum dulcamara",4,0.0374996250037452,"SODU","Vine/Liana","Introduced",0,0,0,
-"3","Leersia virginica",5,15.49984500155,"LEVI2","Grass/grass-like (Graminoids)","Native",0,0.4,1,1
-"3","Carex vulpinoidea",5,6.74993250067499,"CAVU2","Grass/grass-like (Graminoids)","Native",0,0.1,1,1
-"3","Cinna arundinacea",5,5.63744362556374,"CIAR2","Grass/grass-like (Graminoids)","Native",0,0.2,0.3,0.5
-"3","Carex lupulina",5,3.6249637503625,"CALU4","Grass/grass-like (Graminoids)","Native",0,0.1,1,1.5
-"3","Carex grayi",5,0.912490875091254,"CAGR5","Grass/grass-like (Graminoids)","Native",0,0,1,1
-"3","Elymus virginicus",5,0.874991250087498,"ELVI3","Grass/grass-like (Graminoids)","Native",0,0,1,1
-"3","Agrostis gigantea",5,0.749992500075003,"AGGI2","Grass/grass-like (Graminoids)","Introduced",0,0,0.5,0.5
-"3","Carex crawfordii",5,0.749992500075003,"CACR4","Grass/grass-like (Graminoids)","Native",0,0,0,
-"3","Carex squarrosa",5,0.749992500075003,"CASQ2","Grass/grass-like (Graminoids)","Native",0,0,1,1
-"3","Carex gracillima",5,0.374996250037496,"CAGR2","Grass/grass-like (Graminoids)","Native",0,0,0.1,0.3
-"3","Elymus hystrix",5,0.0374996250037452,"ELHY","Grass/grass-like (Graminoids)","Native",0,0,0.5,1
-"3","Carex intumescens",5,0.0124998750012484,"CAIN12","Grass/grass-like (Graminoids)","Native",0,0,0.3,0.5
-"3","Glyceria striata",5,0.0124998750012484,"GLST","Grass/grass-like (Graminoids)","Native",0,0,0.1,0.3
-"3","Poa saltuensis",5,0.0124998750012484,"POSA","Grass/grass-like (Graminoids)","Native",0,0,0.3,0.5
-"3","Laportea canadensis",6,14.0373596264037,"LACA3","Forb/Herb","Native",0,0.4,0.5,1
-"3","Persicaria virginiana",6,13.09986900131,"PEVI13","Forb/Herb","Native",0,0.3,0.1,0.3
-"3","Impatiens capensis",6,12.3748762512375,"IMCA","Forb/Herb","Native",0,0.4,0.3,0.5
-"3","Hydrophyllum canadense",6,11.1248887511125,"HYCA3","Forb/Herb","Native",0,0.2,0.3,0.5
-"3","Boehmeria cylindrica",6,5.91244087559124,"BOCY","Forb/Herb","Native",0,0.2,1,1
-"3","Thalictrum dasycarpum",6,3.74996250037499,"THDA","Forb/Herb","Native",0,0.1,0,
-"3","Asarum canadense",6,2.62497375026249,"ASCA","Forb/Herb","Native",0,0,0.1,0.1
-"3","Pilea pumila",6,1.8749812501875,"PIPU2","Forb/Herb","Native",0,0,0,
-"3","Eupatorium perfoliatum",6,1.49998500014999,"EUPE3","Forb/Herb","Native",0,0,0,
-"3","Solidago altissima",6,1.49998500014999,"SOAL6","Forb/Herb","Native",0,0,1,1
-"3","Pilea fontana",6,0.874991250087498,"PIFO","Forb/Herb","Native",0,0,0,
-"3","Solidago canadensis",6,0.874991250087498,"SOCA6","Forb/Herb","Native",0,0,1,1
-"3","Symphyotrichum lanceolatum",6,0.874991250087498,"SYLA6","Forb/Herb","Native",0,0,0,
-"3","Torilis japonica",6,0.874991250087498,"TOJA","Forb/Herb","Introduced",0,0,0,
-"3","Bidens vulgata",6,0.749992500075003,"BIVU","Forb/Herb","Native",0,0,0,
-"3","Epilobium coloratum",6,0.749992500075003,"EPCO","Forb/Herb","Native",0,0,1,1
-"3","Alliaria petiolata",6,0.249997500025001,"ALPE4","Forb/Herb","Introduced",0,0,0,
-"3","Arisaema dracontium",6,0.249997500025001,"ARDR3","Forb/Herb","Native",0,0,0,
-"3","Maianthemum stellatum",6,0.249997500025001,"MAST4","Forb/Herb","Native",0,0,0,
-"3","Geum canadense",6,0.199998000019996,"GECA7","Forb/Herb","Native",0,0,1,1
-"3","Symphyotrichum lateriflorum",6,0.199998000019996,"SYLA4","Forb/Herb","Native",0,0,0,
-"3","Geranium maculatum",6,0.187498125018748,"GEMA","Forb/Herb","Native",0,0,0.1,0.3
-"3","Uvularia grandiflora",6,0.137498625013754,"UVGR","Forb/Herb","Native",0,0,0.1,0.3
-"3","Agrimonia gryposepala",6,0.124998750012495,"AGGR2","Forb/Herb","Native",0,0,1,1.5
-"3","Agrimonia parviflora",6,0.124998750012495,"AGPA6","Forb/Herb","Native",0,0,1,1.5
-"3","Bidens tripartita",6,0.124998750012495,"BITR","Forb/Herb","Native",0,0,1,1
-"3","Lobelia cardinalis",6,0.124998750012495,"LOCA2","Forb/Herb","Native",0,0,1,1.5
-"3","Lobelia inflata",6,0.124998750012495,"LOIN","Forb/Herb","Native",0,0,0,
-"3","Penthorum sedoides",6,0.124998750012495,"PESE6","Forb/Herb","Native",0,0,1,1
-"3","Phytolacca americana",6,0.124998750012495,"PHAM4","Forb/Herb","Native",0,0,1,1.5
-"3","Scutellaria lateriflora",6,0.124998750012495,"SCLA2","Forb/Herb","Native",0,0,0,
-"3","Arisaema triphyllum",6,0.0874991250087498,"ARTR","Forb/Herb","Native",0,0,0.1,0.2
-"3","Amphicarpaea bracteata",6,0.062499375006253,"AMBR2","Forb/Herb","Native",0,0,0.3,0.5
-"3","Circaea canadensis",6,0.0499995000050046,"CICA13","Forb/Herb","Native",0,0,0.1,0.2
-"3","Allium canadense",6,0.0374996250037452,"ALCA3","Forb/Herb","Native",0,0,0,
-"3","Allium tricoccum",6,0.0374996250037452,"ALTR3","Forb/Herb","Native",0,0,0,
-"3","Epilobium ciliatum",6,0.0374996250037452,"EPCI","Forb/Herb","Native",0,0,0,
-"3","Erigeron strigosus",6,0.0374996250037452,"ERST3","Forb/Herb","Native",0,0,1,1
-"3","Heracleum maximum",6,0.0374996250037452,"HEMA80","Forb/Herb","Native",0,0,0.5,1.5
-"3","Osmorhiza longistylis",6,0.0374996250037452,"OSLO","Forb/Herb","Native",0,0,0.5,1
-"3","Solidago flexicaulis",6,0.0374996250037452,"SOFL2","Forb/Herb","Native",0,0,1,1
-"3","Chelone glabra",6,0.0124998750012484,"CHGL2","Forb/Herb","Native",0,0,0.1,0.2
-"3","Dioscorea villosa",6,0.0124998750012484,"DIVI4","Forb/Herb","Native",0,0,0.1,0.2
-"3","Maianthemum canadense",6,0.0124998750012484,"MACA4","Forb/Herb","Native",0,0,0.1,0.1
-"3","Maianthemum racemosum",6,0.0124998750012484,"MARA7","Forb/Herb","Native",0,0,0.1,0.2
-"3","Mitchella repens",6,0.0124998750012484,"MIRE","Forb/Herb","Native",0,0,0.1,0.1
-"3","Podophyllum peltatum",6,0.0124998750012484,"POPE","Forb/Herb","Native",0,0,0.2,0.4
-"3","Matteuccia struthiopteris",7,9.12490875091249,"MAST","Fern/fern ally","Native",0,0.1,1,1.5
-"3","Osmundastrum cinnamomeum",7,1.24998750012499,"OSCI2","Fern/fern ally","Native",0,0,0.5,1
-"3","Dryopteris carthusiana",7,1.07498925010749,"DRCA11","Fern/fern ally","Native",0,0,0,
-"3","Athyrium angustum",7,0.374996250037496,"ATAN2","Fern/fern ally","Native",0,0,0.3,0.5
-"3","Equisetum hyemale",7,0.249997500025001,"EQHY","Fern/fern ally","Native",0,0,0,
-"3","Onoclea sensibilis",7,0.137498625013754,"ONSE","Fern/fern ally","Native",0,0,0.3,0.5
-"3","Adiantum pedatum",7,0.062499375006253,"ADPE","Fern/fern ally","Native",0,0,0.3,0.5
-"3","Polystichum acrostichoides",7,0.0374996250037452,"POAC4","Fern/fern ally","Native",0,0,0,
-"3","Osmunda spectabilis",7,0.0124998750012484,"OSSP3","Fern/fern ally","Native",0,0,0.3,0.5
-"4","Fagus grandifolia",1,1.79851264181221,"FAGR","Tree","Native",0,0.1,1,5
-"4","Fagus grandifolia",1,1.79851264181221,"FAGR","Tree","Native",0,0,0,
-"4","Acer saccharum",1,0.485709428619996,"ACSA3","Tree","Native",0,0,0,
-"4","Fraxinus americana",1,0.428567142900005,"FRAM2","Tree","Native",0,0,1,5
-"4","Fraxinus pennsylvanica",1,0.342853714320002,"FRPE","Tree","Native",0,0,0,
-"4","Prunus serotina",1,0.242854714310003,"PRSE2","Tree","Native",0,0,0,
-"4","Quercus macrocarpa",1,0.0857134285800032,"QUMA2","Tree","Native",0,0,0,
-"4","Tilia americana",1,0.0857032247024381,"TIAM","Tree","Native",0,0,1,5
-"4","Tilia americana",1,0.0857032247024381,"TIAM","Tree","Native",0,0,0,
-"4","Carya ovata",1,0.0714278571499971,"CAOV2","Tree","Native",0,0,0,
-"4","Carya cordiformis",1,0.014285571429995,"CACO15","Tree","Native",0,0,0,
-"4","Ostrya virginiana",1,0.014285571429995,"OSVI","Tree","Native",0,0,0,
-"4","Quercus rubra",1,0.014285571429995,"QURU","Tree","Native",0,0,0,
-"4","Lindera benzoin",3,0.0714278571499971,"LIBE3","Shrub/Subshrub","Native",0,0,0.5,2
-"4","Zanthoxylum americanum",3,0.0285691020844747,"ZAAM","Shrub/Subshrub","Native",0,0,0.5,2
-"4","Zanthoxylum americanum",3,0.0285691020844747,"ZAAM","Shrub/Subshrub","Native",0,0,,
-"4","Parthenocissus quinquefolia",4,4.82852314333999,"PAQU2","Vine/Liana","Native",0,0.1,0,
-"4","Toxicodendron radicans",4,3.59894361260459,"TORA2","Vine/Liana","Native",0,0.1,1,5
-"4","Toxicodendron radicans",4,3.59894361260459,"TORA2","Vine/Liana","Native",0,0,0,
-"4","Glyceria striata",5,0.2857114286,"GLST","Grass/grass-like (Graminoids)","Native",0,0,1,1.5
-"4","Carex radiata",5,0.0714278571499971,"CARA8","Grass/grass-like (Graminoids)","Native",0,0,0,
-"4","Cinna arundinacea",5,0.0714278571499971,"CIAR2","Grass/grass-like (Graminoids)","Native",0,0,1,1.5
-"4","Carex blanda",5,0.0285711428600011,"CABL","Grass/grass-like (Graminoids)","Native",0,0,0.5,0.5
-"4","Carex lupuliformis",5,0.0285711428600011,"CALU3","Grass/grass-like (Graminoids)","Native",0,0,0,
-"4","Carex gracillima",5,0.014285571429995,"CAGR2","Grass/grass-like (Graminoids)","Native",0,0,1,1
-"4","Carex hirtifolia",5,0.014285571429995,"CAHI5","Grass/grass-like (Graminoids)","Native",0,0,0,
-"4","Carex laxiflora",5,0.014285571429995,"CALA19","Grass/grass-like (Graminoids)","Native",0,0,0,
-"4","Arisaema triphyllum",6,0.942847714380002,"ARTR","Forb/Herb","Native",0,0,1,1.5
-"4","Persicaria virginiana",6,0.88570542866,"PEVI13","Forb/Herb","Native",0,0,0,
-"4","Circaea canadensis",6,0.357139285749997,"CICA13","Forb/Herb","Native",0,0,0,
-"4","Geranium maculatum",6,0.142855714300005,"GEMA","Forb/Herb","Native",0,0,0,
-"4","Monotropa uniflora",6,0.142855714300005,"MOUN3","Forb/Herb","Native",0,0,0,
-"4","Anemone quinquefolia",6,0.114284571440004,"ANQU","Forb/Herb","Native",0,0,0,
-"4","Viola sororia",6,0.0857134285800032,"VISO","Forb/Herb","Native",0,0,1,1.5
-"4","Asarum canadense",6,0.0714278571499971,"ASCA","Forb/Herb","Native",0,0,0,
-"4","Geum canadense",6,0.0714278571499971,"GECA7","Forb/Herb","Native",0,0,1,1
-"4","Laportea canadensis",6,0.0714278571499971,"LACA3","Forb/Herb","Native",0,0,0,
-"4","Cardamine concatenata",6,0.0571422857200021,"CACO26","Forb/Herb","Native",0,0,0,
-"4","Fragaria virginiana",6,0.014285571429995,"FRVI","Forb/Herb","Native",0,0,0,
-"4","Galium circaezans",6,0.014285571429995,"GACI2","Forb/Herb","Native",0,0,0,
-"4","Maianthemum racemosum",6,0.014285571429995,"MARA7","Forb/Herb","Native",0,0,0,
-"4","Sanguinaria canadensis",6,0.014285571429995,"SACA13","Forb/Herb","Native",0,0,0,
-"4","Viola canadensis",6,0.014285571429995,"VICA4","Forb/Herb","Native",0,0,0,
-"4","Athyrium angustum",7,0.214283571450002,"ATAN2","Fern/fern ally","Native",0,0,0,
-"4","Dryopteris carthusiana",7,0.0857134285800032,"DRCA11","Fern/fern ally","Native",0,0,0,
-"4","Polystichum acrostichoides",7,0.0571422857200021,"POAC4","Fern/fern ally","Native",0,0,0,
-"5","Fraxinus pennsylvanica",1,5.1302427007554,"FRPE","Tree","Native",0,0.1,1,4.5
-"5","Fraxinus pennsylvanica",1,5.1302427007554,"FRPE","Tree","Native",0,0,0,
-"5","Carpinus caroliniana",1,1.428557143,"CACA18","Tree","Native",0,0,1,5
-"5","Ulmus americana",1,0.837855569335444,"ULAM","Tree","Native",0,0,1,5
-"5","Acer saccharinum",1,0.685707428640003,"ACSA2","Tree","Native",0,0,0,
-"5","Carya ovata",1,0.461757288617581,"CAOV2","Tree","Native",0,0,1,5
-"5","Carya ovata",1,0.461757288617581,"CAOV2","Tree","Native",0,0,0,
-"5","Carya cordiformis",1,0.195227072763282,"CACO15","Tree","Native",0,0,1,5
-"5","Carya cordiformis",1,0.195227072763282,"CACO15","Tree","Native",0,0,0,
-"5","Fraxinus nigra",1,0.0952371428666665,"FRNI","Tree","Native",0,0,1,5
-"5","Viburnum lentago",1,0.0476185714333388,"VILE","Tree","Native",0,0,1,5
-"5","Quercus macrocarpa",1,0.0333330000033327,"QUMA2","Tree","Native",0,0,0,
-"5","Quercus bicolor",1,0.0285711428600011,"QUBI","Tree","Native",0,0,0,
-"5","Acer saccharum",1,0.0190474285733377,"ACSA3","Tree","Native",0,0,0,
-"5","Celtis occidentalis",1,0.00952371428666332,"CEOC","Tree","Native",0,0,1,5
-"5","Fagus grandifolia",1,0.00476185714333166,"FAGR","Tree","Native",0,0,0,
-"5","Rosa multiflora",3,1.94759961924144,"ROMU","Shrub/Subshrub","Introduced",0,0.1,0.5,1
-"5","Rosa multiflora",3,1.94759961924144,"ROMU","Shrub/Subshrub","Introduced",0,0,,
-"5","Zanthoxylum americanum",3,1.04760857153333,"ZAAM","Shrub/Subshrub","Native",0,0,0.5,2
-"5","Lindera benzoin",3,0.733326000073331,"LIBE3","Shrub/Subshrub","Native",0,0,0.5,2
-"5","Cephalanthus occidentalis",3,0.342821968923168,"CEOC2","Shrub/Subshrub","Native",0,0,0.5,2
-"5","Cephalanthus occidentalis",3,0.342821968923168,"CEOC2","Shrub/Subshrub","Native",0,0,,
-"5","Ilex verticillata",3,0.333330000033338,"ILVE","Shrub/Subshrub","Native",0,0,0.5,2
-"5","Rubus allegheniensis",3,0.190474285733333,"RUAL","Shrub/Subshrub","Native",0,0,0.5,2
-"5","Berberis thunbergii",3,0.0952371428666665,"BETH","Shrub/Subshrub","Introduced",0,0,0.5,2
-"5","Cornus racemosa",3,0.0571377506633164,"CORA6","Shrub/Subshrub","Native",0,0,0.5,2
-"5","Cornus racemosa",3,0.0571377506633164,"CORA6","Shrub/Subshrub","Native",0,0,,
-"5","Lonicera morrowii",3,0.0476185714333388,"LOMO2","Shrub/Subshrub","Introduced",0,0,,
-"5","Ribes americanum",3,0.0476185714333388,"RIAM2","Shrub/Subshrub","Native",0,0,,
-"5","Rubus occidentalis",3,0.0190474285733377,"RUOC","Shrub/Subshrub","Native",0,0,,
-"5","Ligustrum vulgare",3,0.00952371428666332,"LIVU","Shrub/Subshrub","Introduced",0,0,0.5,2
-"5","Sambucus nigra",3,0.00952371428666332,"SANI4","Shrub/Subshrub","Native",0,0,0.5,2
-"5","Parthenocissus quinquefolia",4,4.37408553145742,"PAQU2","Vine/Liana","Native",0,0,1,5
-"5","Parthenocissus quinquefolia",4,4.37408553145742,"PAQU2","Vine/Liana","Native",0,0.1,0,
-"5","Toxicodendron radicans",4,1.37054503340672,"TORA2","Vine/Liana","Native",0,0,1,2.5
-"5","Toxicodendron radicans",4,1.37054503340672,"TORA2","Vine/Liana","Native",0,0,0,0.3
-"5","Vitis riparia",4,0.11901241565816,"VIRI","Vine/Liana","Native",0,0,1,5
-"5","Vitis riparia",4,0.11901241565816,"VIRI","Vine/Liana","Native",0,0,0,
-"5","Menispermum canadense",4,0.104733646813193,"MECA3","Vine/Liana","Native",0,0,1,5
-"5","Menispermum canadense",4,0.104733646813193,"MECA3","Vine/Liana","Native",0,0,0,0.5
-"5","Euonymus obovatus",4,0.0190474285733377,"EUOB8","Vine/Liana","Native",0,0,0,
-"5","Smilax hispida",4,0.00952371428666332,"SMHI","Vine/Liana","Native",0,0,1,5
-"5","Glyceria striata",5,7.97611071508333,"GLST","Grass/grass-like (Graminoids)","Native",0,0.3,0.2,0.4
-"5","Carex grayi",5,5.43804085768667,"CAGR5","Grass/grass-like (Graminoids)","Native",0,0.1,0.2,0.4
-"5","Carex bromoides",5,3.95234142896667,"CABR14","Grass/grass-like (Graminoids)","Native",0,0.1,0.1,0.3
-"5","Cinna arundinacea",5,3.39996600033999,"CIAR2","Grass/grass-like (Graminoids)","Native",0,0.1,0.4,1
-"5","Phalaris arundinacea",5,2.4285471431,"PHAR3","Grass/grass-like (Graminoids)","Native",0,0.1,1,1.5
-"5","Carex lupulina",5,0.942847714380002,"CALU4","Grass/grass-like (Graminoids)","Native",0,0,1,1.5
-"5","Carex vulpinoidea",5,0.942847714380002,"CAVU2","Grass/grass-like (Graminoids)","Native",0,0,1,1
-"5","Elymus virginicus",5,0.809515714366671,"ELVI3","Grass/grass-like (Graminoids)","Native",0,0,0.2,0.4
-"5","Carex lacustris",5,0.257140285739998,"CALA16","Grass/grass-like (Graminoids)","Native",0,0,1,1.5
-"5","Carex bebbii",5,0.252378428596667,"CABE2","Grass/grass-like (Graminoids)","Native",0,0,0.2,0.4
-"5","Leersia virginica",5,0.199998000019996,"LEVI2","Grass/grass-like (Graminoids)","Native",0,0,0.1,0.3
-"5","Carex cristatella",5,0.152379428586669,"CACR7","Grass/grass-like (Graminoids)","Native",0,0,1,1
-"5","Elymus hystrix",5,0.0952371428666665,"ELHY","Grass/grass-like (Graminoids)","Native",0,0,0,
-"5","Carex gracillima",5,0.0476185714333388,"CAGR2","Grass/grass-like (Graminoids)","Native",0,0,1,1
-"5","Carex scoparia",5,0.0380948571466644,"CASC11","Grass/grass-like (Graminoids)","Native",0,0,1,1
-"5","Carex intumescens",5,0.0238092857166694,"CAIN12","Grass/grass-like (Graminoids)","Native",0,0,1,1
-"5","Carex radiata",5,0.00952371428666332,"CARA8","Grass/grass-like (Graminoids)","Native",0,0,0,
-"5","Carex tuckermanii",5,0.00952371428666332,"CATU2","Grass/grass-like (Graminoids)","Native",0,0,0,
-"5","Boehmeria cylindrica",6,3.89996100039,"BOCY","Forb/Herb","Native",0,0.1,0.3,0.5
-"5","Impatiens capensis",6,2.19045428593333,"IMCA","Forb/Herb","Native",0,0.1,0.2,0.4
-"5","Persicaria virginiana",6,2.07140785734999,"PEVI13","Forb/Herb","Native",0,0.1,0.2,0.3
-"5","Pilea pumila",6,1.5714128573,"PIPU2","Forb/Herb","Native",0,0.1,0.1,0.2
-"5","Laportea canadensis",6,1.33332000013333,"LACA3","Forb/Herb","Native",0,0,0.3,0.5
-"5","Phytolacca americana",6,1.04760857153333,"PHAM4","Forb/Herb","Native",0,0,1,1.5
-"5","Iris virginica",6,0.952371428666665,"IRVI","Forb/Herb","Native",0,0,1,1
-"5","Arisaema triphyllum",6,0.833325000083329,"ARTR","Forb/Herb","Native",0,0,0.1,0.3
-"5","Lysimachia nummularia",6,0.809515714366671,"LYNU","Forb/Herb","Introduced",0,0,0.1,0.1
-"5","Circaea canadensis",6,0.676183714353329,"CICA13","Forb/Herb","Native",0,0,0,
-"5","Geum canadense",6,0.538089857196666,"GECA7","Forb/Herb","Native",0,0,0.1,0.3
-"5","Solidago gigantea",6,0.380948571466666,"SOGI","Forb/Herb","Native",0,0,0.3,0.5
-"5","Symphyotrichum ontarionis",6,0.319044428603332,"SYON2","Forb/Herb","Native",0,0,0,
-"5","Scutellaria lateriflora",6,0.18095057144667,"SCLA2","Forb/Herb","Native",0,0,0.2,0.4
-"5","Urtica dioica",6,0.161903142873332,"URDI","Forb/Herb","Native",0,0,0.5,1
-"5","Alliaria petiolata",6,0.142855714300005,"ALPE4","Forb/Herb","Introduced",0,0,0,
-"5","Solidago rugosa",6,0.142855714300005,"SORU2","Forb/Herb","Native",0,0,1,1
-"5","Symphyotrichum lanceolatum",6,0.114284571440004,"SYLA6","Forb/Herb","Native",0,0,0,
-"5","Bidens tripartita",6,0.10476085715333,"BITR","Forb/Herb","Native",0,0,1,1
-"5","Myosotis scorpioides",6,0.0952371428666665,"MYSC","Forb/Herb","Introduced",0,0,0.1,0.1
-"5","Agrimonia gryposepala",6,0.0571422857200021,"AGGR2","Forb/Herb","Native",0,0,1,1.5
-"5","Epilobium coloratum",6,0.0476185714333388,"EPCO","Forb/Herb","Native",0,0,1,1
-"5","Podophyllum peltatum",6,0.0476185714333388,"POPE","Forb/Herb","Native",0,0,0,
-"5","Polymnia canadensis",6,0.0476185714333388,"POCA11","Forb/Herb","Native",0,0,0,
-"5","Lycopus americanus",6,0.042856714289996,"LYAM","Forb/Herb","Native",0,0,0.1,0.2
-"5","Eupatorium perfoliatum",6,0.0380948571466644,"EUPE3","Forb/Herb","Native",0,0,0,
-"5","Galium aparine",6,0.0285711428600011,"GAAP2","Forb/Herb","Native",0,0,1,1.5
-"5","Geranium maculatum",6,0.0285711428600011,"GEMA","Forb/Herb","Native",0,0,0,
-"5","Lysimachia ciliata",6,0.0285711428600011,"LYCI","Forb/Herb","Native",0,0,0,
-"5","Hesperis matronalis",6,0.0238092857166694,"HEMA3","Forb/Herb","Introduced",0,0,1,1.5
-"5","Acorus calamus",6,0.0190474285733377,"ACCA4","Forb/Herb","Introduced",0,0,1,1.5
-"5","Caltha palustris",6,0.0190474285733377,"CAPA5","Forb/Herb","Native",0,0,0.5,0.5
-"5","Acalypha rhomboidea",6,0.00952371428666332,"ACRH","Forb/Herb","Native",0,0,0,
-"5","Angelica atropurpurea",6,0.00952371428666332,"ANAT","Forb/Herb","Native",0,0,0.5,1
-"5","Arctium minus",6,0.00952371428666332,"ARMI2","Forb/Herb","Introduced",0,0,0,
-"5","Cicuta maculata",6,0.00952371428666332,"CIMA2","Forb/Herb","Native",0,0,0.1,0.3
-"5","Cryptotaenia canadensis",6,0.00952371428666332,"CRCA9","Forb/Herb","Native",0,0,0.1,0.3
-"5","Eutrochium purpureum",6,0.00952371428666332,"EUPU21","Forb/Herb","Native",0,0,0.3,0.5
-"5","Persicaria sagittata",6,0.00952371428666332,"PESA20","Forb/Herb","Native",0,0,0,
-"5","Rumex crispus",6,0.00952371428666332,"RUCR","Forb/Herb","Introduced",0,0,0.3,0.5
-"5","Sanicula odorata",6,0.00952371428666332,"SAOD","Forb/Herb","Native",0,0,0.1,0.3
-"5","Senecio hieraciifolius",6,0.00952371428666332,"SEHI3","Forb/Herb","Native",0,0,0,
-"5","Symphyotrichum lateriflorum",6,0.00952371428666332,"SYLA4","Forb/Herb","Native",0,0,0,
-"5","Torilis japonica",6,0.00952371428666332,"TOJA","Forb/Herb","Introduced",0,0,0,
-"5","Dryopteris carthusiana",7,0.54761357148333,"DRCA11","Fern/fern ally","Native",0,0,0,
-"5","Onoclea sensibilis",7,0.304758857173337,"ONSE","Fern/fern ally","Native",0,0,0.1,0.3
-"5","Athyrium angustum",7,0.00952371428666332,"ATAN2","Fern/fern ally","Native",0,0,0,
+"1","Quercus macrocarpa",1,0.333330000033338,"QUMA2","Tree","Native",0,0.5,1,2
+"1","Fraxinus pennsylvanica",1,0.244392618296041,"FRPE","Tree","Native",0,0.5,1,1.5
+"1","Fraxinus pennsylvanica",1,0.244392618296041,"FRPE","Tree","Native",0,0.1,0,
+"1","Salix amygdaloides",1,0.222220000022222,"SAAM2","Tree","Native",0,0.3,1,2
+"1","Ulmus americana",1,0.222220000022222,"ULAM","Tree","Native",0,0.5,1,5
+"1","Acer rubrum",1,0.111110000011116,"ACRU","Tree","Native",0,0.2,0,
+"1","Acer saccharinum",1,0.111110000011116,"ACSA2","Tree","Native",0,0.2,0,
+"1","Ostrya virginiana",1,0.111110000011116,"OSVI","Tree","Native",0,0.2,1,5
+"1","Quercus bicolor",1,0.111110000011116,"QUBI","Tree","Native",0,0.2,1,5
+"1","Populus deltoides",1,0.0333330000033327,"PODE3","Tree","Native",0,0,1,1
+"1","Rhus typhina",1,0.0333330000033327,"RHTY","Tree","Native",0,0,0,
+"1","Rubus allegheniensis",3,0.55555000005556,"RUAL","Shrub/Subshrub","Native",0,1,0.5,2
+"1","Salix petiolaris",3,0.55555000005556,"SAPE5","Shrub/Subshrub","Native",0,1,0.5,2
+"1","Rubus occidentalis",3,0.333330000033338,"RUOC","Shrub/Subshrub","Native",0,0.5,0.5,1
+"1","Rosa multiflora",3,0.333083091391284,"ROMU","Shrub/Subshrub","Introduced",0,0.5,0.5,1
+"1","Rosa multiflora",3,0.333083091391284,"ROMU","Shrub/Subshrub","Introduced",0,0.3,,
+"1","Salix sericea",3,0.222096545701211,"SASE","Shrub/Subshrub","Native",0,0.2,0.5,2
+"1","Salix sericea",3,0.222096545701211,"SASE","Shrub/Subshrub","Native",0,0.2,,
+"1","Sambucus nigra",3,0.111110000011116,"SANI4","Shrub/Subshrub","Native",0,0.2,0.5,2
+"1","Sambucus racemosa",3,0.111110000011116,"SARA2","Shrub/Subshrub","Native",0,0.2,,
+"1","Toxicodendron radicans",4,0.333330000033338,"TORA2","Vine/Liana","Native",0,0.5,0,0.3
+"1","Phalaris arundinacea",5,65.9993400065999,"PHAR3","Grass/grass-like (Graminoids)","Native",13,100,1,1.5
+"1","Leersia oryzoides",5,10.3332300010333,"LEOR","Grass/grass-like (Graminoids)","Native",0,15,1,1.5
+"1","Cinna arundinacea",5,5.44439000054444,"CIAR2","Grass/grass-like (Graminoids)","Native",0,8,1,1.5
+"1","Glyceria striata",5,3.13330200031333,"GLST","Grass/grass-like (Graminoids)","Native",0.1,9,1,1.5
+"1","Carex gracillima",5,2.33331000023334,"CAGR2","Grass/grass-like (Graminoids)","Native",0,3.5,1,1
+"1","Poa trivialis",5,2.33331000023334,"POTR2","Grass/grass-like (Graminoids)","Introduced",0,3.5,1,1
+"1","Agrostis gigantea",5,1.11110000011111,"AGGI2","Grass/grass-like (Graminoids)","Introduced",0,1.5,0.5,0.5
+"1","Carex lacustris",5,0.777770000077782,"CALA16","Grass/grass-like (Graminoids)","Native",0,1.5,1,1.5
+"1","Carex cristatella",5,0.444440000044444,"CACR7","Grass/grass-like (Graminoids)","Native",0,1,0.3,0.5
+"1","Carex lupulina",5,0.355552000035553,"CALU4","Grass/grass-like (Graminoids)","Native",0,1,1,1.5
+"1","Scirpus atrovirens",5,0.333330000033338,"SCAT2","Grass/grass-like (Graminoids)","Native",0,0.5,1,2
+"1","Carex stipata",5,0.222220000022222,"CAST5","Grass/grass-like (Graminoids)","Native",0,0.3,1,1
+"1","Elymus virginicus",5,0.144443000014449,"ELVI3","Grass/grass-like (Graminoids)","Native",0,0.3,0.4,1
+"1","Carex intumescens",5,0.111110000011116,"CAIN12","Grass/grass-like (Graminoids)","Native",0,0.2,1,1
+"1","Carex tuckermanii",5,0.111110000011116,"CATU2","Grass/grass-like (Graminoids)","Native",0,0.2,0,
+"1","Carex vulpinoidea",5,0.111110000011116,"CAVU2","Grass/grass-like (Graminoids)","Native",0,0.2,1,1
+"1","Juncus greenei",5,0.111110000011116,"JUGR","Grass/grass-like (Graminoids)","Native",0,0.2,0,
+"1","Phleum pratense",5,0.111110000011116,"PHPR3","Grass/grass-like (Graminoids)","Introduced",0,0.2,1,1
+"1","Carex grayi",5,0.0333330000033327,"CAGR5","Grass/grass-like (Graminoids)","Native",0,0,0.3,0.5
+"1","Carex retrorsa",5,0.0333330000033327,"CARE4","Grass/grass-like (Graminoids)","Native",0,0,0.5,1
+"1","Poa compressa",5,0.0333330000033327,"POCO","Grass/grass-like (Graminoids)","Introduced",0,0,0.5,0.5
+"1","Scirpus pendulus",5,0.0222220000022255,"SCPE4","Grass/grass-like (Graminoids)","Native",0,0,1,1
+"1","Typha angustifolia",5,0.0222220000022255,"TYAN","Grass/grass-like (Graminoids)","Introduced",0,0,1,1.5
+"1","Solidago gigantea",6,11.5554400011555,"SOGI","Forb/Herb","Native",0,30,0.5,1
+"1","Solidago canadensis",6,4.9999500005,"SOCA6","Forb/Herb","Native",0,13,0.4,1
+"1","Symphyotrichum ontarionis",6,3.55552000035555,"SYON2","Forb/Herb","Native",0,8,0.4,1
+"1","Impatiens capensis",6,2.88886000028888,"IMCA","Forb/Herb","Native",0,4.5,1,1.5
+"1","Daucus carota",6,1.66665000016667,"DACA6","Forb/Herb","Introduced",0,2.5,0.5,1
+"1","Bidens frondosa",6,1.55554000015555,"BIFR","Forb/Herb","Native",0,2.5,1,1
+"1","Symphyotrichum lanceolatum",6,1.55554000015555,"SYLA6","Forb/Herb","Native",0,2.5,0.5,1
+"1","Cirsium arvense",6,1.33332000013333,"CIAR4","Forb/Herb","Introduced",0,3.5,0.5,1
+"1","Ambrosia artemisiifolia",6,1.11110000011111,"AMAR2","Forb/Herb","Native",0,1.5,0,
+"1","Ambrosia trifida",6,0.888880000088887,"AMTR","Forb/Herb","Native",0,1.5,0.5,1
+"1","Boehmeria cylindrica",6,0.888880000088887,"BOCY","Forb/Herb","Native",0,2,1,1
+"1","Epilobium coloratum",6,0.666660000066666,"EPCO","Forb/Herb","Native",0,1,1,1
+"1","Urtica dioica",6,0.55555000005556,"URDI","Forb/Herb","Native",0,1,1,2
+"1","Penthorum sedoides",6,0.333330000033338,"PESE6","Forb/Herb","Native",0,0.5,1,1
+"1","Verbena urticifolia",6,0.333330000033338,"VEUR","Forb/Herb","Native",0,0.5,0,
+"1","Helianthus giganteus",6,0.222220000022222,"HEGI","Forb/Herb","Native",0,0.3,0.5,1
+"1","Solidago altissima",6,0.222220000022222,"SOAL6","Forb/Herb","Native",0,0.3,1,1
+"1","Trifolium pratense",6,0.222220000022222,"TRPR2","Forb/Herb","Introduced",0,0.3,0.5,0.5
+"1","Lythrum salicaria",6,0.144443000014449,"LYSA2","Forb/Herb","Introduced",0,0.3,0.5,1
+"1","Asclepias incarnata",6,0.111110000011116,"ASIN","Forb/Herb","Native",0,0.2,1,1.5
+"1","Cirsium vulgare",6,0.111110000011116,"CIVU","Forb/Herb","Introduced",0,0.2,0.5,1
+"1","Eupatorium perfoliatum",6,0.111110000011116,"EUPE3","Forb/Herb","Native",0,0.2,0,
+"1","Euthamia graminifolia",6,0.111110000011116,"EUGR5","Forb/Herb","Native",0,0.2,0.4,1
+"1","Fragaria virginiana",6,0.111110000011116,"FRVI","Forb/Herb","Native",0,0.2,0.1,0.3
+"1","Iris virginica",6,0.111110000011116,"IRVI","Forb/Herb","Native",0,0.2,1,1
+"1","Lemna minor",6,0.111110000011116,"LEMI3","Forb/Herb","Native",0,0.2,1,1.5
+"1","Persicaria pensylvanica",6,0.111110000011116,"PEPE19","Forb/Herb","Native",0,0.2,0,
+"1","Persicaria virginiana",6,0.111110000011116,"PEVI13","Forb/Herb","Native",0,0.2,0.3,0.5
+"1","Rumex crispus",6,0.111110000011116,"RUCR","Forb/Herb","Introduced",0,0.2,0,
+"1","Verbena hastata",6,0.111110000011116,"VEHA2","Forb/Herb","Native",0,0.2,0,
+"1","Hypericum punctatum",6,0.0333330000033327,"HYPU","Forb/Herb","Native",0,0,1,1
+"1","Persicaria maculosa",6,0.0333330000033327,"PEMA24","Forb/Herb","Introduced",0,0,0.5,1
+"1","Physalis longifolia",6,0.0333330000033327,"PHLO4","Forb/Herb","Native",0,0,0.4,1
+"1","Erigeron philadelphicus",6,0.0222220000022255,"ERPH","Forb/Herb","Native",0,0,1,1
+"1","Athyrium angustum",7,0.111110000011116,"ATAN2","Fern/fern ally","Native",0,0.2,0,
+"1","Onoclea sensibilis",7,0.111110000011116,"ONSE","Fern/fern ally","Native",0,0.2,0,
+"2","Juniperus virginiana",1,0.249997500025001,"JUVI","Tree","Native",0,0.4,1,5
+"2","Cephalanthus occidentalis",3,23.749762502375,"CEOC2","Shrub/Subshrub","Native",0,35,0.5,2
+"2","Salix interior",3,23.749762502375,"SAIN3","Shrub/Subshrub","Native",0,35,0.5,2
+"2","Dasiphora fruticosa",3,22.49977500225,"DAFR6","Shrub/Subshrub","Native",0,35,0.5,0.5
+"2","Decodon verticillatus",3,8.24991750082499,"DEVE","Shrub/Subshrub","Native",0,12,0.5,2
+"2","Spiraea alba",3,4.24995750042499,"SPAL2","Shrub/Subshrub","Native",0,6,0.5,1
+"2","Frangula alnus",3,0.249997500025001,"FRAL4","Shrub/Subshrub","Introduced",0,0.4,,
+"2","Rhamnus alnifolia",3,0.249997500025001,"RHAL","Shrub/Subshrub","Native",0,0.4,0.5,1
+"2","Salix eriocephala",3,0.249997500025001,"SAER","Shrub/Subshrub","Native",0,0.4,0.5,2
+"2","Salix petiolaris",3,0.249997500025001,"SAPE5","Shrub/Subshrub","Native",0,0.4,0.5,2
+"2","Cornus obliqua",3,0.0499995000050046,"COOB9","Shrub/Subshrub","Native",0,0.1,0.5,2
+"2","Agrostis gigantea",5,12.49987500125,"AGGI2","Grass/grass-like (Graminoids)","Introduced",0,20,0.5,0.5
+"2","Poa pratensis",5,12.49987500125,"POPR","Grass/grass-like (Graminoids)","Native",0,20,0.5,0.5
+"2","Carex comosa",5,8.24991750082499,"CACO8","Grass/grass-like (Graminoids)","Native",0,12,1,1.5
+"2","Carex pellita",5,2.49997500025,"CAPE42","Grass/grass-like (Graminoids)","Native",0,4,0,
+"2","Glyceria striata",5,1.49998500014999,"GLST","Grass/grass-like (Graminoids)","Native",0.4,3.5,1,1.5
+"2","Dulichium arundinaceum",5,0.499995000050002,"DUAR3","Grass/grass-like (Graminoids)","Native",0,1,1,1
+"2","Scirpus cyperinus",5,0.499995000050002,"SCCY","Grass/grass-like (Graminoids)","Native",0,1,1,1.5
+"2","Juncus dudleyi",5,0.249997500025001,"JUDU2","Grass/grass-like (Graminoids)","Native",0,0.4,0,
+"2","Leersia virginica",5,0.249997500025001,"LEVI2","Grass/grass-like (Graminoids)","Native",0,0.4,1,1
+"2","Carex flava",5,0.0499995000050046,"CAFL4","Grass/grass-like (Graminoids)","Native",0,0.1,0,
+"2","Liatris spicata",6,14.9998500015,"LISP","Forb/Herb","Native",0,25,1,1.5
+"2","Bidens cernua",6,8.24991750082499,"BICE","Forb/Herb","Native",0,12,1,1
+"2","Eupatorium perfoliatum",6,8.24991750082499,"EUPE3","Forb/Herb","Native",0,12,0,
+"2","Impatiens capensis",6,1.24998750012499,"IMCA","Forb/Herb","Native",0,2,1,1.5
+"2","Pilea pumila",6,1.24998750012499,"PIPU2","Forb/Herb","Native",0,2,0,
+"2","Solidago altissima",6,1.24998750012499,"SOAL6","Forb/Herb","Native",0,2,1,1
+"2","Brasenia schreberi",6,0.499995000050002,"BRSC","Forb/Herb","Native",0,1,0,
+"2","Eutrochium maculatum",6,0.299997000029995,"EUMA9","Forb/Herb","Native",0.1,0.5,1,1.5
+"2","Lobelia spicata",6,0.249997500025001,"LOSP","Forb/Herb","Native",0,0.4,0,
+"2","Persicaria virginiana",6,0.249997500025001,"PEVI13","Forb/Herb","Native",0,0.4,0,
+"2","Thalictrum dasycarpum",6,0.249997500025001,"THDA","Forb/Herb","Native",0,0.4,0,
+"2","Asclepias incarnata",6,0.0499995000050046,"ASIN","Forb/Herb","Native",0,0.1,1,1.5
+"2","Asclepias syriaca",6,0.0499995000050046,"ASSY","Forb/Herb","Native",0,0.1,0,
+"2","Dipsacus fullonum",6,0.0499995000050046,"DIFU2","Forb/Herb","Introduced",0,0.1,0,
+"2","Hesperis matronalis",6,0.0499995000050046,"HEMA3","Forb/Herb","Introduced",0,0.1,1,1.5
+"2","Thelypteris palustris",7,4.24995750042499,"THPA","Fern/fern ally","Native",0,6,0,
+"3","Fraxinus pennsylvanica",1,6.24993750062499,"FRPE","Tree","Native",1.5,14,1,5
+"3","Populus deltoides",1,0.249997500025001,"PODE3","Tree","Native",0,0.4,0,
+"3","Cornus racemosa",3,5.249947500525,"CORA6","Shrub/Subshrub","Native",0,8,0.5,2
+"3","Salix eriocephala",3,0.999990000100004,"SAER","Shrub/Subshrub","Native",0,1.5,0.5,2
+"3","Parthenocissus quinquefolia",4,0.499995000050002,"PAQU2","Vine/Liana","Native",0,1,0,
+"3","Toxicodendron radicans",4,0.0999990000099982,"TORA2","Vine/Liana","Native",0,0.2,0,
+"3","Vitis riparia",4,0.0999990000099982,"VIRI","Vine/Liana","Native",0,0.2,1,5
+"3","Phleum pratense",5,35.249647503525,"PHPR3","Grass/grass-like (Graminoids)","Introduced",12,75,1,1
+"3","Poa palustris",5,25.749742502575,"POPA2","Grass/grass-like (Graminoids)","Native",6,60,1,1
+"3","Phalaris arundinacea",5,22.9997700023,"PHAR3","Grass/grass-like (Graminoids)","Native",0,35,1,1.5
+"3","Schedonorus arundinaceus",5,9.99990000099999,"SCAR7","Grass/grass-like (Graminoids)","Introduced",0,15,1,1
+"3","Elymus repens",5,6.74993250067499,"ELRE4","Grass/grass-like (Graminoids)","Introduced",1.5,15,1,1
+"3","Glyceria striata",5,2.749972500275,"GLST","Grass/grass-like (Graminoids)","Native",0,4,1,1.5
+"3","Bromus inermis",5,1.49998500014999,"BRIN2","Grass/grass-like (Graminoids)","Introduced",0.5,3,1,1.5
+"3","Panicum dichotomiflorum",5,0.499995000050002,"PADI","Grass/grass-like (Graminoids)","Native",0,1,1,1
+"3","Poa pratensis",5,0.499995000050002,"POPR","Grass/grass-like (Graminoids)","Native",0,1,0.5,0.5
+"3","Echinochloa crus-galli",5,0.349996500034999,"ECCR","Grass/grass-like (Graminoids)","Introduced",0.1,0.5,0,
+"3","Lolium perenne",5,0.249997500025001,"LOPE","Grass/grass-like (Graminoids)","Introduced",0,0.4,1,1
+"3","Pycreus esculentus",5,0.249997500025001,,"Grass/grass-like (Graminoids)","Native",0,0.4,0,
+"3","Pycreus esculentus",5,0.249997500025001,,"Grass/grass-like (Graminoids)","Introduced",0,0.4,0,
+"3","Pycreus esculentus",5,0.249997500025001,,"Grass/grass-like (Graminoids)","Native",0,0.4,0,
+"3","Scirpus atrovirens",5,0.0999990000099982,"SCAT2","Grass/grass-like (Graminoids)","Native",0,0.2,1,1.5
+"3","Apocynum cannabinum",6,15.249847501525,"APCA","Forb/Herb","Native",6,30,1,1
+"3","Solidago altissima",6,12.749872501275,"SOAL6","Forb/Herb","Native",4,25,1,1
+"3","Daucus carota",6,6.49993500064999,"DACA6","Forb/Herb","Introduced",2,14,0,
+"3","Solidago gigantea",6,5.249947500525,"SOGI","Forb/Herb","Native",0,8,1,1.5
+"3","Ambrosia artemisiifolia",6,2.49997500025,"AMAR2","Forb/Herb","Native",1.5,4,0,
+"3","Persicaria pensylvanica",6,2.49997500025,"PEPE19","Forb/Herb","Native",0,4,0,
+"3","Amaranthus retroflexus",6,1.24998750012499,"AMRE","Forb/Herb","Introduced",0,2,0,
+"3","Silene latifolia",6,1.24998750012499,"SILA21","Forb/Herb","Introduced",0,2,0,
+"3","Symphyotrichum lanceolatum",6,0.999990000100004,"SYLA6","Forb/Herb","Native",0,1.5,0,
+"3","Arctium minus",6,0.499995000050002,"ARMI2","Forb/Herb","Introduced",0.3,1,0,
+"3","Barbarea vulgaris",6,0.499995000050002,"BAVU","Forb/Herb","Introduced",0,1,0,
+"3","Dipsacus fullonum",6,0.499995000050002,"DIFU2","Forb/Herb","Introduced",0,1,0,
+"3","Erigeron strigosus",6,0.499995000050002,"ERST3","Forb/Herb","Native",0,1,1,1
+"3","Persicaria hydropiper",6,0.499995000050002,"PEHY6","Forb/Herb","Introduced",0,1,0,
+"3","Solidago canadensis",6,0.499995000050002,"SOCA6","Forb/Herb","Native",0,1,1,1
+"3","Symphyotrichum pilosum",6,0.499995000050002,"SYPI2","Forb/Herb","Native",0,1,0,
+"3","Symphyotrichum puniceum",6,0.499995000050002,"SYPU","Forb/Herb","Native",0,1,0,
+"3","Euthamia graminifolia",6,0.349996500034999,"EUGR5","Forb/Herb","Native",0.1,0.5,0,
+"3","Abutilon theophrasti",6,0.249997500025001,"ABTH","Forb/Herb","Introduced",0,0.4,0,
+"3","Chenopodium album",6,0.249997500025001,"CHAL7","Forb/Herb","Native",0,0.4,0,
+"3","Cichorium intybus",6,0.249997500025001,"CIIN","Forb/Herb","Introduced",0,0.4,0.5,0.5
+"3","Cirsium vulgare",6,0.249997500025001,"CIVU","Forb/Herb","Introduced",0,0.4,0,
+"3","Lepidium campestre",6,0.249997500025001,"LECA5","Forb/Herb","Introduced",0,0.4,0,
+"3","Potentilla norvegica",6,0.249997500025001,"PONO3","Forb/Herb","Native",0,0.4,0,
+"3","Sonchus asper",6,0.249997500025001,"SOAS","Forb/Herb","Introduced",0,0.4,0,

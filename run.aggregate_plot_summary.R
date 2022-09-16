@@ -116,7 +116,7 @@ Com.Sp.groups.pctl <- Com.Sp.groups %>% group_by(phase, Species) %>% summarise(
   b95 = quantile(BA, 0.95, na.rm = TRUE),
   freq = sum(Field+Shrub+Subcanopy+Tree>0)
 ) %>% left_join(countbyphase)
-Com.Sp.groups.pctl$freq <- Com.Sp.groups.pctl$freq/Com.Sp.groups.pctl$total
+Com.Sp.groups.pctl$freq <- Com.Sp.groups.pctl$freq/Com.Sp.groups.pctl$total*100
 # adjust max min values to frequency
 Com.Sp.groups.pctl$f75 <- pmin(1,Com.Sp.groups.pctl$freq*3/200)*Com.Sp.groups.pctl$f75
 Com.Sp.groups.pctl$s75 <- pmin(1,Com.Sp.groups.pctl$freq*3/200)*Com.Sp.groups.pctl$s75
@@ -404,68 +404,68 @@ ESIS.table2 <- merge(ESIS.table2,ESIS.table.Tree2, by=c('phase', 'Stratum'), all
 ESIS.table2 <- ESIS.table2[,c('phase', 'Stratum', 'Tree.min', 'Tree.max', 'Shrub.min', 'Shrub.max', 'Grass.min', 'Grass.max', 'Forb.min', 'Forb.max')]
 write.csv(ESIS.table2, 'output/ESIS.table2.csv', na = "", row.names = F)
 
+# 
+# # DWD and Litter ----
+# obs.litter <- left_join(obs, groups1)
+# 
+# obs.litter.pctl <- obs.litter %>% group_by(phase) %>% summarise(
+#                             litter.min = quantile(Litter_Cover, 0.15, na.rm = TRUE),
+#                             litter.max = quantile(Litter_Cover, 0.85, na.rm = TRUE),
+#                             logs.min = quantile(Log_Cover, 0.15, na.rm = TRUE),
+#                             logs.max = quantile(Log_Cover, 0.85, na.rm = TRUE),
+#                             moss.min = quantile(Moss_Cover, 0.15, na.rm = TRUE),
+#                             moss.max = quantile(Moss_Cover, 0.85, na.rm = TRUE),
+#                             lichen.min = quantile(Lichen_Cover, 0.15, na.rm = TRUE),
+#                             lichen.max = quantile(Lichen_Cover, 0.85, na.rm = TRUE),
+#                          water.min = quantile(Water_Cover, 0.15, na.rm = TRUE),
+#                          water.max = quantile(Water_Cover, 0.85, na.rm = TRUE),
+#                          hour1.min = quantile(DWD_Hits1*0.5/Transect_Length , 0.15, na.rm = TRUE),
+#                          hour1.max = quantile(DWD_Hits1*0.5/Transect_Length , 0.85, na.rm = TRUE),
+#                          hour10.min = quantile(DWD_Hits2*1.75/Transect_Length , 0.15, na.rm = TRUE),
+#                          hour10.max = quantile(DWD_Hits2*1.75/Transect_Length , 0.85, na.rm = TRUE),
+#                          hour100.min = quantile(DWD_Hits3*6.25/Transect_Length , 0.15, na.rm = TRUE),
+#                          hour100.max = quantile(DWD_Hits3*6.25/Transect_Length , 0.85, na.rm = TRUE),
+#                          hour1000.min = quantile(DWD_Hits4*17.5/Transect_Length , 0.15, na.rm = TRUE),
+#                          hour1000.max = quantile(DWD_Hits4*17.5/Transect_Length , 0.85, na.rm = TRUE),
+#                          hour10000.min = quantile(DWD_Hits5*37.5/Transect_Length , 0.15, na.rm = TRUE),
+#                          hour10000.max = quantile(DWD_Hits5*37.5/Transect_Length , 0.85, na.rm = TRUE)
+# )
+# nums <- unlist(lapply(obs.litter.pctl, is.numeric)) #identify all numeric columns
+# obs.litter.pctl[,nums] <- lapply(obs.litter.pctl[,nums], FUN = roundF) #rounding
+# 
+# write.csv(obs.litter.pctl, 'output/obs.litter.pctl.csv', na = "", row.names = F)
+# 
+# # Total Crown Cover for ground cover ----
+# Ground <- subset(ESIS, (Plant.Type2 %in% 'Tree' & Canopy.Top > 5)|(!Plant.Type2 %in% 'Tree') )
+# 
+# 
+# Ground.cover <- aggregate(list(Cover = log10(1-(Ground$Cover/100.001))), by=list(phase = Ground$phase, Observation_ID = Ground$Observation_ID, Plant.Type2 = Ground$Plant.Type2),  FUN='sum')
+# 
+# Ground.cover$Cover <- 100*(1-10^(Ground.cover$Cover))
+# 
+# Ground.cover.pctl <- Ground.cover %>% group_by(phase, Plant.Type2) %>% summarise(
+#                            cover.min = quantile(Cover, 0.15, na.rm = TRUE),
+#                            cover.mid = quantile(Cover, 0.5, na.rm = TRUE),
+#                          cover.max = quantile(Cover, 0.85, na.rm = TRUE))
+# Ground.cover.pctl$foliar.min <- tofoliar(Ground.cover.pctl$cover.min)
+# Ground.cover.pctl$foliar.max <- tofoliar(Ground.cover.pctl$cover.max)
+# 
+# Ground.cover.pctl[,c('cover.min', 'cover.mid', 'cover.max', 'foliar.min', 'foliar.max')] <- lapply(Ground.cover.pctl[,c('cover.min', 'cover.mid', 'cover.max', 'foliar.min', 'foliar.max')], FUN = roundF) #rounding
+# 
+# write.csv(Ground.cover.pctl, 'output/Ground.cover.pctl.csv', na = "", row.names = F)
 
-# DWD and Litter ----
-obs.litter <- left_join(obs, groups1)
-
-obs.litter.pctl <- obs.litter %>% group_by(phase) %>% summarise(
-                            litter.min = quantile(Litter_Cover, 0.15, na.rm = TRUE),
-                            litter.max = quantile(Litter_Cover, 0.85, na.rm = TRUE),
-                            logs.min = quantile(Log_Cover, 0.15, na.rm = TRUE),
-                            logs.max = quantile(Log_Cover, 0.85, na.rm = TRUE),
-                            moss.min = quantile(Moss_Cover, 0.15, na.rm = TRUE),
-                            moss.max = quantile(Moss_Cover, 0.85, na.rm = TRUE),
-                            lichen.min = quantile(Lichen_Cover, 0.15, na.rm = TRUE),
-                            lichen.max = quantile(Lichen_Cover, 0.85, na.rm = TRUE),
-                         water.min = quantile(Water_Cover, 0.15, na.rm = TRUE),
-                         water.max = quantile(Water_Cover, 0.85, na.rm = TRUE),
-                         hour1.min = quantile(DWD_Hits1*0.5/Transect_Length , 0.15, na.rm = TRUE),
-                         hour1.max = quantile(DWD_Hits1*0.5/Transect_Length , 0.85, na.rm = TRUE),
-                         hour10.min = quantile(DWD_Hits2*1.75/Transect_Length , 0.15, na.rm = TRUE),
-                         hour10.max = quantile(DWD_Hits2*1.75/Transect_Length , 0.85, na.rm = TRUE),
-                         hour100.min = quantile(DWD_Hits3*6.25/Transect_Length , 0.15, na.rm = TRUE),
-                         hour100.max = quantile(DWD_Hits3*6.25/Transect_Length , 0.85, na.rm = TRUE),
-                         hour1000.min = quantile(DWD_Hits4*17.5/Transect_Length , 0.15, na.rm = TRUE),
-                         hour1000.max = quantile(DWD_Hits4*17.5/Transect_Length , 0.85, na.rm = TRUE),
-                         hour10000.min = quantile(DWD_Hits5*37.5/Transect_Length , 0.15, na.rm = TRUE),
-                         hour10000.max = quantile(DWD_Hits5*37.5/Transect_Length , 0.85, na.rm = TRUE)
-)
-nums <- unlist(lapply(obs.litter.pctl, is.numeric)) #identify all numeric columns
-obs.litter.pctl[,nums] <- lapply(obs.litter.pctl[,nums], FUN = roundF) #rounding
-
-write.csv(obs.litter.pctl, 'output/obs.litter.pctl.csv', na = "", row.names = F)
-
-# Total Crown Cover for ground cover ----
-Ground <- subset(ESIS, (Plant.Type2 %in% 'Tree' & Canopy.Top > 5)|(!Plant.Type2 %in% 'Tree') )
-
-
-Ground.cover <- aggregate(list(Cover = log10(1-(Ground$Cover/100.001))), by=list(phase = Ground$phase, Observation_ID = Ground$Observation_ID, Plant.Type2 = Ground$Plant.Type2),  FUN='sum')
-
-Ground.cover$Cover <- 100*(1-10^(Ground.cover$Cover))
-
-Ground.cover.pctl <- Ground.cover %>% group_by(phase, Plant.Type2) %>% summarise(
-                           cover.min = quantile(Cover, 0.15, na.rm = TRUE),
-                           cover.mid = quantile(Cover, 0.5, na.rm = TRUE),
-                         cover.max = quantile(Cover, 0.85, na.rm = TRUE))
-Ground.cover.pctl$foliar.min <- tofoliar(Ground.cover.pctl$cover.min)
-Ground.cover.pctl$foliar.max <- tofoliar(Ground.cover.pctl$cover.max)
-
-Ground.cover.pctl[,c('cover.min', 'cover.mid', 'cover.max', 'foliar.min', 'foliar.max')] <- lapply(Ground.cover.pctl[,c('cover.min', 'cover.mid', 'cover.max', 'foliar.min', 'foliar.max')], FUN = roundF) #rounding
-
-write.csv(Ground.cover.pctl, 'output/Ground.cover.pctl.csv', na = "", row.names = F)
-
-# snags ----
-Snags <- subset(obsspp, grepl('-snag', Genus), select = c('Observation_ID','Soilplot', 'Genus', 'BA', 'Dmin', 'Dmax'))
-Snags <- left_join(Snags, obs[,c('Observation_ID', 'soilplot')])
-Snags$D <- ifelse(!is.na(Snags$Dmax),ifelse(!is.na(Snags$Dmin), (Snags$Dmin+Snags$Dmax)/2, Snags$Dmax), 20)
-Snags$D.area <- (Snags$D/200)^2*3.141592
-Snags$Snags.Ha <- Snags$BA/Snags$D.area
-
-Snags.pctl <- ddply(Snags, c('phase'), summarise,
-                    Snags.min = quantile(Snags.Ha, 0.15, na.rm = TRUE),
-                    Snags.mid = quantile(Snags.Ha, 0.5, na.rm = TRUE),
-                    Snags.max = quantile(Snags.Ha, 0.85, na.rm = TRUE))
-Snags.pctl[,c('Snags.min', 'Snags.mid', 'Snags.max')] <- lapply(Snags.pctl[,c('Snags.min', 'Snags.mid', 'Snags.max')], FUN = roundF) #rounding
-
-write.csv(Snags.pctl, 'output/Snags.pctl.csv', na = "", row.names = F)
-
+# # snags ----
+# Snags <- subset(obsspp, grepl('snag', Genus)|grepl('<snag', Genus), select = c('Observation_ID','soilplot', 'Genus', 'BA', 'Dmin', 'Dmax'))
+# Snags <- left_join(Snags, obs[,c('Observation_ID', 'soilplot')])
+# Snags$D <- ifelse(!is.na(Snags$Dmax),ifelse(!is.na(Snags$Dmin), (Snags$Dmin+Snags$Dmax)/2, Snags$Dmax), 20)
+# Snags$D.area <- (Snags$D/200)^2*3.141592
+# Snags$Snags.Ha <- Snags$BA/Snags$D.area
+# 
+# Snags.pctl <- ddply(Snags, c('phase'), summarise,
+#                     Snags.min = quantile(Snags.Ha, 0.15, na.rm = TRUE),
+#                     Snags.mid = quantile(Snags.Ha, 0.5, na.rm = TRUE),
+#                     Snags.max = quantile(Snags.Ha, 0.85, na.rm = TRUE))
+# Snags.pctl[,c('Snags.min', 'Snags.mid', 'Snags.max')] <- lapply(Snags.pctl[,c('Snags.min', 'Snags.mid', 'Snags.max')], FUN = roundF) #rounding
+# 
+# write.csv(Snags.pctl, 'output/Snags.pctl.csv', na = "", row.names = F)
+# 

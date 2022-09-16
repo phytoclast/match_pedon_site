@@ -64,8 +64,9 @@ Sys.time() - timeA
 #forest ----
 p1=plotdata.forest.normal
 d <- vegdist(p1, method='bray', binary=FALSE, na.rm=T)
-k = 5
-t  <- d %>% flexbeta(beta= -0.15) %>% as.hclust() %>% dendsort()
+k = 3
+t  <- d %>% flexbeta(beta= -0.1) %>% as.hclust() %>% dendsort()
+# t  <- d %>% agnes(method = 'ward') %>% as.hclust() %>% dendsort()
 groups <- cutree(t, k = k)
 groups <- grouporder(t, groups)
 if (T){
@@ -81,6 +82,7 @@ aplot <- indicators2[[3]]
 
 source('groupplotsummary.R') 
 source('USNVC_compare_specieslists_loop_by_cluster.R') 
+source('run.aggregate_plot_summary.R') 
 
 Com.Structure[order(as.numeric(as.character(Com.Structure$cluster))),c("cluster", "association", "WetStructure")]
 plotassociations[order(as.numeric(as.character(plotassociations$clust))),c("clust", "scientificname")]
@@ -88,8 +90,9 @@ plotassociations[order(as.numeric(as.character(plotassociations$clust))),c("clus
 
 #open ----
 p1=plotdata.open.normal
-d <- vegdist(p1, method='kulczynski', binary=FALSE, na.rm=T)
-k = 5
+d <- vegdist(p1, method='bray', binary=FALSE, na.rm=T)
+# d <- vegdist(p1, method='kulczynski', binary=FALSE, na.rm=T)
+k = 3
 t  <- d %>% agnes(method = 'ward') %>% as.hclust() %>% dendsort()
 groups <- cutree(t, k = k)
 groups <- grouporder(t, groups)
@@ -106,9 +109,12 @@ aplot <- indicators2[[3]]
 
 source('groupplotsummary.R') 
 source('USNVC_compare_specieslists_loop_by_cluster.R') 
+source('run.aggregate_plot_summary.R') 
 
 Com.Structure[order(as.numeric(as.character(Com.Structure$cluster))),c("cluster", "association", "WetStructure")]
 plotassociations[order(as.numeric(as.character(plotassociations$clust))),c("clust", "scientificname")]
+
+
 
 
 

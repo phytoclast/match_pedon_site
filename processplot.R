@@ -46,9 +46,7 @@ obsspp$BA <- BA.fact10usc.metric(obsspp$BA)
 
 listspp <- readRDS("data/listspp.RDS")
 #saveRDS(listspp, 'data/listspp.RDS')
-SBD2 <- c('Ilex verticillata', 'Salix discolor', 'Salix interior', 'Staphylea trifolia', 
-          'Salix bebbiana', 'Salix eriocephala', 'Salix petiolaris', 'Rhamnus cathartica', 'Frangula alnus',
-          'Salix exigua', 'Elaeagnus angustifolia','Ptelea trifoliata', 'Toxicodendron vernix')
+SBD2 <- c('Viburnum lentago', 'Ilex verticillata', 'Salix discolor', 'Salix interior', 'Staphylea trifolia', 'Salix bebbiana', 'Salix eriocephala', 'Salix petiolaris', 'Rhamnus cathartica', 'Frangula alnus', 'Salix exigua', 'Elaeagnus angustifolia','Ptelea trifoliata', 'Toxicodendron vernix')
 listspp[listspp$AcTaxon %in% SBD2,]$Form <- 'SBD2'
 listspp$Nativity <- ifelse(listspp$Eastern.North.America %in% 'N','Native',ifelse(listspp$Eastern.North.America %in% 'X','Introduced','Unknown'))
 
@@ -115,15 +113,27 @@ VEGOBS_mukeys <- readRDS('output/ssurgo.RDS')
 VEGOBS_soilnames <- merge(VEGOBS_mukeys[,c('obs.id','mukey')], mu[,c('lmapunitiid', 'muname')], by.x='mukey', by.y= 'lmapunitiid')
 VEGOBS <- merge(VEGOBS, VEGOBS_soilnames[,c('obs.id', 'muname')], by.x='Observation_ID', by.y= 'obs.id')
 
+
+
+VEGOBS$eval <- "dump"
+# VEGOBS[VEGOBS$pedondist < 50,]$eval <- "keep1" 
+# VEGOBS[(str_split_fixed(VEGOBS$muname, " ",2)[,1])==VEGOBS$taxonname & VEGOBS$pedondist < 1000 & VEGOBS$eval == 'dump', ]$eval <- "keep2"
+# VEGOBS[VEGOBS$pedondate==VEGOBS$Year & VEGOBS$pedondist < 100 & VEGOBS$eval == 'dump', ]$eval <- "keep3"
+# #VEGOBS[VEGOBS$Observation_Label==VEGOBS$pedon & VEGOBS$eval == 'dump', ]$eval <- "keep4"
+# VEGOBS[VEGOBS$eval == 'dump',]$taxonname <- ""
+# VEGOBS[VEGOBS$eval == 'dump',]$taxonclass <- ""
+# VEGOBS[VEGOBS$eval == 'dump',]$pedon <- ""
+
 VEGOBS <- VEGOBS %>% mutate(
-  eval=case_when(
-  pedondist < 50 ~ "dump",
+  eval = case_when(
   pedondist < 50 ~ "keep1",
-  TRUE~''),
-  eval=case_when(
+  TRUE ~ eval),
+  eval = case_when(
   (str_split_fixed(muname, " ",2)[,1]) %in% taxonname & pedondist < 1000 & eval  %in%  'dump' ~ "keep2",
+  TRUE ~ eval),
+  eval = case_when(
   pedondate %in% Year & pedondist < 100 & eval %in% 'dump'~ "keep3",
-  TRUE~eval),
+  TRUE ~ eval),
 
   taxonname=ifelse(eval %in% 'dump',"", taxonname),
   taxonclass=ifelse(eval %in% 'dump',"", taxonclass),
@@ -207,13 +217,13 @@ Com.Sp.mean$soilplot <- str_replace_all(Com.Sp.mean$soilplot, ',', '.')
 Com.Sp.mean$soilplot <- str_replace_all(Com.Sp.mean$soilplot, ':', '.')
 Com.Sp.mean$soilplot <- str_replace_all(Com.Sp.mean$soilplot, ';', '.')
 Com.Sp.mean$soilplot <- str_replace_all(Com.Sp.mean$soilplot, '&', '.')
-obs$soilplot <- paste(obs$Soil , obs$Observation_Label)
-obs$soilplot <- str_replace_all(obs$soilplot, ' ', '.')
-obs$soilplot <- str_replace_all(obs$soilplot, '-', '.')
-obs$soilplot <- str_replace_all(obs$soilplot, ',', '.')
-obs$soilplot <- str_replace_all(obs$soilplot, ':', '.')
-obs$soilplot <- str_replace_all(obs$soilplot, ';', '.')
-obs$soilplot <- str_replace_all(obs$soilplot, '&', '.')
+# obs$soilplot <- paste(obs$Soil , obs$Observation_Label)
+# obs$soilplot <- str_replace_all(obs$soilplot, ' ', '.')
+# obs$soilplot <- str_replace_all(obs$soilplot, '-', '.')
+# obs$soilplot <- str_replace_all(obs$soilplot, ',', '.')
+# obs$soilplot <- str_replace_all(obs$soilplot, ':', '.')
+# obs$soilplot <- str_replace_all(obs$soilplot, ';', '.')
+# obs$soilplot <- str_replace_all(obs$soilplot, '&', '.')
 #----
 #need formula for aggregating within strata... 
 Com.Sp.preagg <- Com.Sp.mean
