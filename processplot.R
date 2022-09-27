@@ -285,3 +285,4 @@ overstorycover <- overstorycover %>% group_by(soilplot) %>% summarise(overstoryc
                                                                       shrubberstorycover = 100*(1-10^(sum(shrubberstorycover))),
                                                                       shrubcover = shrubberstorycover - overstorycover)
 
+

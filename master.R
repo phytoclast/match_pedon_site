@@ -20,8 +20,9 @@ source('clusterfunctions.R')
 
 # Load Veg tables ---- 
 source('processplot.R') 
+source('functionalveg.R') 
 
-
+buttonbush  = functionalcover %>% cbind(subset(plotdata, select=Cephalanthus.occidentalis))
 #run separate open vs forest analyses
 
 newnames <- paste0('t',str_pad(round(overstorycover$overstorycover, 0), 2,'left',0),'s',str_pad(round(overstorycover$shrubcover, 0), 2,'left',0), overstorycover$soilplot)
@@ -60,6 +61,11 @@ forest.weak.table <- indob[[3]]
 forest.kaew.table <- indob[[4]]
 Sys.time() - timeA  
 
+
+p1=plotdata.forest.normal
+d <- vegdist(p1, method='bray', binary=FALSE, na.rm=T)
+k = 3
+t  <- d %>% flexbeta(beta= -0.1) %>% as.hclust() %>% dendsort()
 
 #forest ----
 p1=plotdata.forest.normal
@@ -114,8 +120,45 @@ source('run.aggregate_plot_summary.R')
 Com.Structure[order(as.numeric(as.character(Com.Structure$cluster))),c("cluster", "association", "WetStructure")]
 plotassociations[order(as.numeric(as.character(plotassociations$clust))),c("clust", "scientificname")]
 
+#functional ----
+
+functionalcover2 <- buttonbush %>% mutate(overstorycover = ifelse(overstorycover >= 10, 200,0),
+                                               Exotic = ifelse(Exotic >= 10, 200,0),
+                                               wetness = ifelse(wetness >= 50, 200,0),
+                                          #Deciduous = ifelse(Deciduous >= 10, 100,0),
+                                          Cephalanthus.occidentalis = ifelse(Cephalanthus.occidentalis >= 2, 500,0)
+                                               )
+fd <- vegdist(functionalcover2, method = 'euclidean') 
+d.y = vegdist(plotdata, method='bray', binary=FALSE, na.rm=T) 
+d.x <- (fd - min(as.matrix(fd)))/(max(as.matrix(fd))-min(as.matrix(fd))) 
+w=0.5
+d <-  (w * d.x) + ((1 - w) * d.y)
 
 
+dtable <- d %>% as.matrix()
+fdtable <- fd %>% as.matrix()
+k = 7
+t  <- d %>% agnes(method = 'ward') %>% as.hclust() %>% dendsort()
+groups <- cutree(t, k = k)
+groups <- grouporder(t, groups)
+if (T){
+  a <- 'functional groups'
+  makeplotgroup(a,d,t,groups)
+}
+source('groupplotsummary.R') 
+source('USNVC_compare_specieslists_loop_by_cluster.R') 
+source('run.aggregate_plot_summary.R') 
+
+Com.Structure[order(as.numeric(as.character(Com.Structure$cluster))),c("cluster", "association", "WetStructure")]
+plotassociations[order(as.numeric(as.character(plotassociations$clust))),c("clust", "scientificname")]
+
+functionalcover.groups <- buttonbush %>% mutate(soilplot = rownames(functionalcover))
+functionalcover.groups <- cbind(functionalcover.groups, groups)
+functionalcover.summary <- functionalcover.groups %>% group_by(groups) %>% summarise(Exotic=mean(Exotic),
+                                                                                       wetness=mean(wetness),
+                                                                                       Deciduous=mean(Deciduous),
+                                                                                       Evergreen=mean(Evergreen),
+                                                                                       Trees=mean(overstorycover))
 
 
 #group parameters ----
