@@ -258,6 +258,7 @@ Arundinaria gigantea	8
 Arundinaria gigantea ssp. tecta	8
 Arundinaria tecta	4
 Arundo donax	2.5
+Asarum canadense	0.2
 Asclepias incarnata	1.5
 Asclepias speciosa	2
 Asclepias tuberosa	0.6

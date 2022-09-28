@@ -57,7 +57,6 @@
 "6","Carya ovata",1,0.333330000033338,"CAOV2","Tree","Native",0,1,5,15,,,,
 "6","Liriodendron tulipifera",1,0.333330000033338,"LITU","Tree","Native",0,0.5,10,25,,,0,0.4
 "6","Quercus velutina",1,0.222220000022222,"QUVE","Tree","Native",0,0.3,10,25,,,,
-"6","Asimina triloba",1,0.0111110000011072,"ASTR","Tree","Native",0,0,5,12,,,,
 "7","Acer saccharinum",1,46.0383247391055,"ACSA2","Tree","Native",7,90,12,25,25,60,1.5,40
 "7","Acer saccharinum",1,46.0383247391055,"ACSA2","Tree","Native",0,5,5,15,,,,
 "7","Ulmus americana",1,8.85956559555723,"ULAM","Tree","Native",0,9,7,25,7,15,1.5,6
@@ -87,11 +86,5 @@
 "7","Acer nigrum",1,0.342853714320002,"ACNI5","Tree","Native",0,1,5,15,,,,
 "7","Platanus occidentalis",1,0.199998000019996,"PLOC","Tree","Native",0,0.3,10,25,,,0,0.1
 "7","Asimina triloba",1,0.171426857159995,"ASTR","Tree","Native",0,0.3,5,12,,,,
-"7","Carya cordiformis",1,0.122846118575548,"CACO15","Tree","Native",0,0,10,25,,,,
 "7","Carya cordiformis",1,0.122846118575548,"CACO15","Tree","Native",0,0.4,5,15,,,,
 "7","Sassafras albidum",1,0.114284571440004,"SAAL5","Tree","Native",0,0.2,10,25,,,0,0.1
-"7","Carya laciniosa",1,0.0285711428600011,"CALA21","Tree","Native",0,0,10,25,,,,
-"7","Nyssa sylvatica",1,0.0285711428600011,"NYSY","Tree","Native",0,0,5,15,,,,
-"7","Fraxinus nigra",1,0.0114284571440026,"FRNI","Tree","Native",0,0,5,10,,,,
-"7","Menispermum canadense",4,0.00571422857199577,"MECA3","Vine/Liana","Native",0,0,2,15,,,,
-"7","Vitis aestivalis",4,0.00571422857199577,"VIAE","Vine/Liana","Native",0,0,5,20,,,,

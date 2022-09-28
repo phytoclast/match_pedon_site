@@ -423,7 +423,7 @@ Forest.Understory.sub[is.na(Forest.Understory.sub$Canopy.Bottom) & Forest.Unders
 
 Forest.Understory.sub[is.na(Forest.Understory.sub$Canopy.Top) & Forest.Understory.sub$Plant.Type %in% c('Nonvascular'),]$Canopy.Top <- 0.05
 Forest.Understory.sub[is.na(Forest.Understory.sub$Canopy.Top) & Forest.Understory.sub$Plant.Type %in% c('Grass/grass-like (Graminoids)','Fern/fern ally','Forb/Herb'),]$Canopy.Top <- 0.6
-Forest.Understory.sub[is.na(Forest.Understory.sub$Canopy.Top) & Forest.Understory.sub$Plant.Type %in% c('Shrub/Subshrub'),]$Canopy.Top <- 0.3
+Forest.Understory.sub[is.na(Forest.Understory.sub$Canopy.Top) & Forest.Understory.sub$Plant.Type %in% c('Shrub/Subshrub'),]$Canopy.Top <- 0.5
 Forest.Understory.sub[is.na(Forest.Understory.sub$Canopy.Top) & Forest.Understory.sub$Plant.Type %in% c('Tree','Vine/Liana'),]$Canopy.Top <- 0.5
 Forest.Understory.sub[is.na(Forest.Understory.sub$Canopy.Bottom),]$
   Canopy.Bottom <- 0

@@ -22,7 +22,6 @@ source('clusterfunctions.R')
 source('processplot.R') 
 source('functionalveg.R') 
 
-buttonbush  = functionalcover %>% cbind(subset(plotdata, select=Cephalanthus.occidentalis))
 #run separate open vs forest analyses
 
 newnames <- paste0('t',str_pad(round(overstorycover$overstorycover, 0), 2,'left',0),'s',str_pad(round(overstorycover$shrubcover, 0), 2,'left',0), overstorycover$soilplot)
@@ -121,13 +120,14 @@ Com.Structure[order(as.numeric(as.character(Com.Structure$cluster))),c("cluster"
 plotassociations[order(as.numeric(as.character(plotassociations$clust))),c("clust", "scientificname")]
 
 #functional ----
-
+buttonbush  = functionalcover %>% cbind(subset(plotdata, select=Cephalanthus.occidentalis))
 functionalcover2 <- buttonbush %>% mutate(overstorycover = ifelse(overstorycover >= 10, 200,0),
                                                Exotic = ifelse(Exotic >= 10, 200,0),
                                                wetness = ifelse(wetness >= 50, 200,0),
                                           #Deciduous = ifelse(Deciduous >= 10, 100,0),
                                           Cephalanthus.occidentalis = ifelse(Cephalanthus.occidentalis >= 2, 500,0)
                                                )
+functionalcover2 <- subset(functionalcover2, select = -c(Deciduous, Evergreen,Forb,Graminoid,Nonvascular))
 fd <- vegdist(functionalcover2, method = 'euclidean') 
 d.y = vegdist(plotdata, method='bray', binary=FALSE, na.rm=T) 
 d.x <- (fd - min(as.matrix(fd)))/(max(as.matrix(fd))-min(as.matrix(fd))) 
@@ -139,6 +139,7 @@ dtable <- d %>% as.matrix()
 fdtable <- fd %>% as.matrix()
 k = 7
 t  <- d %>% agnes(method = 'ward') %>% as.hclust() %>% dendsort()
+# t  <- d %>% flexbeta(beta= -0.25) %>% as.hclust() %>% dendsort()
 groups <- cutree(t, k = k)
 groups <- grouporder(t, groups)
 if (T){

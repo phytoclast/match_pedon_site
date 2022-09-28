@@ -1,5 +1,8 @@
 #simple conversion functions ----
 
+roundH<-function(p){
+  p<-ifelse(p<1.5, floor(p/0.1+0.5)*0.1,ifelse(p<5, floor(p/0.5+0.5)*0.5, ifelse(p<15, floor(p+0.5),floor(p/5+0.5)*5)))
+}
 roundF<-function(p){
   p<-ifelse(p<0.5, floor(p/0.1+0.5)*0.1,ifelse(p<5, floor(p/0.5+0.5)*0.5, ifelse(p<15, floor(p+0.5),floor(p/5+0.5)*5)))
 }

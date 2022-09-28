@@ -187,7 +187,9 @@ Forest.Overstory <- Forest.Overstory %>% mutate(
   Canopy.Top = ifelse(
     !is.na(maxHt) & maxHt > 15, pmin(Canopy.Top, maxHt),Canopy.Top),
   Canopy.Bottom = ifelse(
-    !is.na(maxHt) & maxHt > 15, pmin(Canopy.Bottom, maxHt), Canopy.Bottom))
+    !is.na(maxHt) & maxHt > 15, pmin(Canopy.Bottom, maxHt), Canopy.Bottom),
+  Cover.Low = ifelse(
+    Cover.Low == Cover.High, pmax(0, Cover.Low*.75-5) ,Cover.Low))
 
 
 Forest.Overstory.sub<- Group.Summary[Group.Summary$sc75 >0,c( 'phase','Taxon', 'Plant.Symbol', 'Plant.Type','Nativity','sc25', 'sc75','SCmin', 'SCmax', 'Dmin','Dmax','b05','b95', 'maxHt', 'over')]
@@ -208,7 +210,9 @@ Forest.Overstory.sub <- Forest.Overstory.sub %>% mutate(
   Canopy.Top = ifelse(
     !is.na(maxHt) & maxHt > 5, pmin(Canopy.Top, maxHt),Canopy.Top),
   Canopy.Bottom = ifelse(
-    !is.na(maxHt) & maxHt > 5, pmin(Canopy.Bottom, maxHt), Canopy.Bottom))
+    !is.na(maxHt) & maxHt > 5, pmin(Canopy.Bottom, maxHt), Canopy.Bottom),
+  Cover.Low = ifelse(
+    Cover.Low == Cover.High, pmax(0, Cover.Low*.75-5) ,Cover.Low))
 
 Forest.Overstory <- rbind(Forest.Overstory, Forest.Overstory.sub)
 
@@ -231,36 +235,45 @@ Forest.Understory <- Forest.Understory %>% mutate(
   Canopy.Top = ifelse(
     !is.na(maxHt) & maxHt > 0.5, pmin(Canopy.Top, maxHt),Canopy.Top),
   Canopy.Bottom = ifelse(
-    !is.na(maxHt) & maxHt > 0.5, pmin(Canopy.Bottom, maxHt), Canopy.Bottom))
-
+    !is.na(maxHt) & maxHt > 0.5, pmin(Canopy.Bottom, maxHt), Canopy.Bottom),
+  Cover.Low = ifelse(
+    Cover.Low == Cover.High, pmax(0, Cover.Low*.75-5) ,Cover.Low))
 
 Forest.Understory.sub <- Group.Summary[Group.Summary$f75 >0,c( 'phase','Taxon','Plant.Symbol', 'Plant.Type','Nativity', 'f25', 'f75','Fmin', 'Fmax', 'maxHt', 'under')]
 colnames(Forest.Understory.sub) <- c('phase','Taxon','Plant.Symbol', 'Plant.Type','Nativity', 'Cover.Low', 'Cover.High','Canopy.Bottom', 'Canopy.Top', 'maxHt', 'under')
 
 
 Forest.Understory.sub <- Forest.Understory.sub %>% mutate(
-  Canopy.Bottom = ifelse(
-    is.na(Forest.Understory.sub$Canopy.Bottom) & Forest.Understory.sub$Plant.Type %in% c('Nonvascular'), 0, Canopy.Bottom),
   Canopy.Top = ifelse(
-    is.na(Canopy.Top) & !is.na(maxHt) & Plant.Type %in% c('Grass/grass-like (Graminoids)','Fern/fern ally','Forb/Herb'), 1.5, Canopy.Top),
+    Plant.Type %in% c('Nonvascular'), 0 ,Canopy.Top),
   Canopy.Bottom = ifelse(
-    is.na(Canopy.Bottom) & !is.na(Canopy.Top) & Plant.Type %in% c('Grass/grass-like (Graminoids)','Fern/fern ally','Forb/Herb'), Canopy.Top/2, Canopy.Bottom),
-  Canopy.Bottom = ifelse(
-    is.na(Canopy.Bottom) & Plant.Type %in% c('Tree','Vine/Liana','Grass/grass-like (Graminoids)','Fern/fern ally','Forb/Herb', 'Nonvascular'), 0, Canopy.Bottom),
+    Plant.Type %in% c('Nonvascular'), 0 ,Canopy.Bottom),
+  
   Canopy.Top = ifelse(
-    !is.na(maxHt) & maxHt > 0.5, pmin(Canopy.Top, maxHt),Canopy.Top),
+    is.na(Canopy.Top) & !is.na(maxHt) & Plant.Type %in% c('Grass/grass-like (Graminoids)','Fern/fern ally','Forb/Herb'), pmin(maxHt, 1.5), Canopy.Top),
+  Canopy.Top = ifelse(
+    is.na(Canopy.Top) & Plant.Type %in% c('Grass/grass-like (Graminoids)','Fern/fern ally','Forb/Herb'), 0.6, Canopy.Top),
+  Canopy.Top = ifelse(
+    is.na(Canopy.Top) & Plant.Type %in% c('Shrub/Subshrub'), 0.3, Canopy.Top),
+  Canopy.Top = ifelse(
+    is.na(Canopy.Top), 0.5 ,Canopy.Top),
   Canopy.Bottom = ifelse(
-    !is.na(maxHt) & maxHt > 0.5, pmin(Canopy.Bottom, maxHt), Canopy.Bottom))
-
+    is.na(Canopy.Bottom), Canopy.Top/2 ,Canopy.Bottom),
+  Canopy.Bottom = ifelse(
+    Canopy.Bottom == Canopy.Top, Canopy.Top*.75 ,Canopy.Bottom),
+  Cover.Low = ifelse(
+    Cover.Low == Cover.High, pmax(0, Cover.Low*.75-5) ,Cover.Low))
 
 
 Forest.Understory <- rbind(Forest.Understory, Forest.Understory.sub)
 
+Forest.Overstory[,c('Cover.Low', 'Cover.High', 'Diam.Low', 'Diam.High', 'BA.Low', 'BA.High')] <- lapply(Forest.Overstory[,c('Cover.Low', 'Cover.High', 'Diam.Low', 'Diam.High', 'BA.Low', 'BA.High')], FUN=roundF)
 
+Forest.Overstory[,c('Canopy.Bottom', 'Canopy.Top')] <- lapply(Forest.Overstory[,c('Canopy.Bottom', 'Canopy.Top')], FUN=roundH)
 
-Forest.Overstory[,c('Cover.Low', 'Cover.High', 'Canopy.Bottom', 'Canopy.Top', 'Diam.Low', 'Diam.High', 'BA.Low', 'BA.High')] <- lapply(Forest.Overstory[,c('Cover.Low', 'Cover.High', 'Canopy.Bottom', 'Canopy.Top', 'Diam.Low', 'Diam.High', 'BA.Low', 'BA.High')], FUN=roundF)
+Forest.Understory[,c('Cover.Low', 'Cover.High')] <- lapply(Forest.Understory[,c('Cover.Low', 'Cover.High')], FUN=roundF)
 
-Forest.Understory[,c('Cover.Low', 'Cover.High', 'Canopy.Bottom', 'Canopy.Top')] <- lapply(Forest.Understory[,c('Cover.Low', 'Cover.High', 'Canopy.Bottom', 'Canopy.Top')], FUN=roundF)
+Forest.Understory[,c('Canopy.Bottom', 'Canopy.Top')] <- lapply(Forest.Understory[,c('Canopy.Bottom', 'Canopy.Top')], FUN=roundH)
 
 Sort_Habits <- read.delim("data/Sort_Habits.txt", na.strings = '', stringsAsFactors = FALSE)
 
@@ -282,6 +295,10 @@ Forest.Understory1 <- Forest.Understory1[order(
   -Forest.Understory1$Canopy.Top
 ),c('phase',	'Taxon', 'order', 'under', 'Plant.Symbol',	'Plant.Type',	'Nativity',	'Cover.Low',	'Cover.High',	'Canopy.Bottom',	'Canopy.Top')]
 
+Forest.Overstory1 <- subset(Forest.Overstory1, Cover.High > 0)
+# Forest.Overstory1$Cover.High <- pmax(0.1, Forest.Overstory1$Cover.High)
+Forest.Understory1 <- subset(Forest.Understory1, Cover.High > 0)
+# Forest.Understory1$Cover.High <- pmax(0.1, Forest.Understory1$Cover.High)
 
 write.csv(Forest.Overstory1, 'output/Forest.Overstory.csv', row.names = FALSE, na = "")
 write.csv(Forest.Understory1, 'output/Forest.Understory.csv', row.names = FALSE, na = "")
