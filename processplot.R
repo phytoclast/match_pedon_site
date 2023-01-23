@@ -7,8 +7,20 @@ if(F){
   saveRDS(newsite, "data/NASISPEDONS2.RDS", )
   saveRDS(newpedons, 'data/fp2.RDS')
 }
-NASISPEDONS <- readRDS("data/NASISPEDONS2.RDS")
-fp <- readRDS('data/fp2.RDS')
+NASISPEDONS <- readRDS("data/NASISPEDONS3.RDS")
+fp <- readRDS('data/fp3.RDS')
+
+if(F){
+  newpedons <- soilDB::fetchNASIS(from = "pedons", rmHzErrors = FALSE, SS = FALSE)
+  newsite <- aqp::site(newpedons)
+  NASISPEDONS.m <- NASISPEDONS %>% subset(!siteiid %in%  newsite$siteiid)
+  newsite$erocl <- as.character(newsite$erocl)
+  NASISPEDONS.m2 <- NASISPEDONS.m %>% dplyr::bind_rows(newsite)
+  fp.m <- fp %>% subset(!siteiid %in%  newpedons$siteiid)
+  fp.m <- fp.m %>% aqp::combine(newpedons)
+  saveRDS(NASISPEDONS.m, "data/NASISPEDONS3.RDS", )
+  saveRDS(fp.m, 'data/fp3.RDS')
+}
 
 names(NASISPEDONS)[names(NASISPEDONS) == "x_std"] <- 'Std.Longitude'
 names(NASISPEDONS)[names(NASISPEDONS) == "y_std"] <- 'Std.Latitude'
@@ -61,14 +73,14 @@ unique(obs$Observation_Type)
 #                           crs = "+proj=longlat +datum=WGS84")
 # sf::write_sf(Obs.shape, 'data/Obs.shape.shp')
 
-obsspp <- merge(obs[,c('Observation_ID','Observation_Label')],obsspp, by='Observation_ID')
+obsspp <- merge(obs[,c('Observation_ID','Observation_Label','User_Plot_ID')],obsspp, by='Observation_ID')
 obsspp <- subset(obsspp, Field+Shrub+Subcanopy+Tree > 0)
 if (F){ #if true, remove ambiguous taxa
   obsspp <- subset(obsspp, grepl(' ', AcTaxon) & !grepl('\\?', AcTaxon))}
 if (F){ #if true, remove bad invasives
   obsspp <- subset(obsspp, !grepl('Phalaris', AcTaxon) | grepl('Rosa multiflora', AcTaxon))}
 #VEGOBS <- read.delim("data/VEGOBS.txt")
-VEGOBS <- subset(obs, !(Latitude == 0 & Longitude == 0) & Year > 1990 & Mon > 0, select = c("Observation_ID", "Observation_Label", "Observation_Type","Latitude","Longitude","Year","Mon","Day","State","County", "Soil.Series" ))
+VEGOBS <- subset(obs, !(Latitude == 0 & Longitude == 0) & Year > 1990 & Mon > 0, select = c("Observation_ID", "Observation_Label", "Observation_Type","Latitude","Longitude","Year","Mon","Day","State","County", "Soil.Series", "User_Plot_ID"))
 VEGOBS$Soil.Series <- str_replace_all(VEGOBS$Soil.Series, ',', ' ')
 VEGOBS$Soil.Series <- str_replace_all(VEGOBS$Soil.Series, '\\?', ' ')
 VEGOBS$Soil.Series <- str_replace_all(VEGOBS$Soil.Series, '/', ' ')
@@ -110,8 +122,8 @@ for (i in 1:n){
 mu <- readRDS(file='data/mu.RDS')
 
 VEGOBS_mukeys <- readRDS('output/ssurgo.RDS')
-VEGOBS_soilnames <- merge(VEGOBS_mukeys[,c('obs.id','mukey')], mu[,c('lmapunitiid', 'muname')], by.x='mukey', by.y= 'lmapunitiid')
-VEGOBS <- merge(VEGOBS, VEGOBS_soilnames[,c('obs.id', 'muname')], by.x='Observation_ID', by.y= 'obs.id')
+VEGOBS_soilnames <- merge(VEGOBS_mukeys[,c('obs.id','mukey')], mu[,c('lmapunitiid', 'muname')], by.x='mukey', by.y= 'lmapunitiid', all.x = T)
+VEGOBS <- merge(VEGOBS, VEGOBS_soilnames[,c('obs.id', 'muname')], by.x='Observation_ID', by.y= 'obs.id', all.x = T)
 
 
 
@@ -178,16 +190,19 @@ sortsoils <- unique(
            !compname %in% 'Kingsville', 
          select = 'compname'))[,1]
 #VEGOBS <- subset(VEGOBS,Soil %in% sortsoils & !Observation_Label %in% remove |Observation_Label %in% add )
-#
+
 obsids <- c('s20210805.02','s20220720.001','s20220719.001','s20220719.002')
-VEGOBS <- subset(VEGOBS,Soil %in% sortsoils & !Observation_Type %in% c('Bogus', 'Floristic','Site Index') | Observation_Label %in% obsids)
+ALLVEGOBS <- VEGOBS
+# VEGOBS <- subset(VEGOBS,Soil %in% sortsoils & !Observation_Type %in% c('Bogus', 'Floristic','Site Index') | Observation_Label %in% obsids)
+VEGOBS <- subset(VEGOBS,grepl('2022MI165', User_Plot_ID))
 ngroups <- 8
-soilgroup <- 'wetloamy'
+# soilgroup <- 'wetloamy'
+soilgroup <- 'ELTP'
 #----
 #observed species
 
-Com.Sp.sum<-aggregate(obsspp[,c('Field', 'Shrub', 'Subcanopy', 'Tree', 'BA')], by=list(obsspp$Observation_ID,obsspp$Observation_Label, obsspp$AcTaxon, obsspp$Simple), FUN=sum) #sum within plot
-colnames(Com.Sp.sum)<-c('Observation_ID', 'Observation_Label', 'Species', 'Simple', 'Field', 'Shrub', 'Subcanopy', 'Tree', 'BA') #restore column names
+Com.Sp.sum<-aggregate(obsspp[,c('Field', 'Shrub', 'Subcanopy', 'Tree', 'BA')], by=list(obsspp$Observation_ID,obsspp$Observation_Label,obsspp$User_Plot_ID, obsspp$AcTaxon, obsspp$Simple), FUN=sum) #sum within plot
+colnames(Com.Sp.sum)<-c('Observation_ID', 'Observation_Label','User_Plot_ID', 'Species', 'Simple', 'Field', 'Shrub', 'Subcanopy', 'Tree', 'BA') #restore column names
 
 Com.Sp.freq<-aggregate(obsspp[,c('AcTaxon')], by=list(obsspp$Observation_Label, obsspp$AcTaxon), FUN=length) #frequency within plot
 colnames(Com.Sp.freq)<- c('Observation_Label', 'Species', 'freq')
@@ -210,7 +225,8 @@ Com.Sp.mean$Tree <- ifelse(Com.Sp.mean$Tree > 100,100,Com.Sp.mean$Tree)
 Com.Sp.mean$Total <- 100*(1-10^(apply(log10(1-(Com.Sp.mean[,c('Field', 'Shrub', 'Subcanopy', 'Tree')]/100.001)), MARGIN = 1, FUN='sum')))
 Com.Sp.mean <- merge(Com.Sp.mean, VEGOBS[,c('Observation_Label', 'Soil')], by='Observation_Label')
 Com.Sp.mean <-subset(Com.Sp.mean, !substr(Species,1,1) %in% '-'& !Species %in% '')
-Com.Sp.mean$soilplot <- paste(Com.Sp.mean$Soil , Com.Sp.mean$Observation_Label)
+# Com.Sp.mean$soilplot <- paste(Com.Sp.mean$Soil , Com.Sp.mean$Observation_Label)
+Com.Sp.mean$soilplot <- paste0("Plot.",Com.Sp.mean$User_Plot_ID)
 Com.Sp.mean$soilplot <- str_replace_all(Com.Sp.mean$soilplot, ' ', '.')
 Com.Sp.mean$soilplot <- str_replace_all(Com.Sp.mean$soilplot, '-', '.')
 Com.Sp.mean$soilplot <- str_replace_all(Com.Sp.mean$soilplot, ',', '.')
