@@ -18,13 +18,25 @@ setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 #----
 
 if(F){
-newpedons <- soilDB::fetchNASIS(from = "pedons", rmHzErrors = FALSE, SS = FALSE)
-newsite <- aqp::site(newpedons)
-saveRDS(newsite, "data/NASISPEDONS2.RDS", )
-saveRDS(newpedons, 'data/fp2.RDS')
+  newpedons <- soilDB::fetchNASIS(from = "pedons", rmHzErrors = FALSE, SS = FALSE)
+  newsite <- aqp::site(newpedons)
+  saveRDS(newsite, "data/NASISPEDONS3.RDS", )
+  saveRDS(newpedons, 'data/fp3.RDS')
 }
-NASISPEDONS <- readRDS("data/NASISPEDONS2.RDS")
-fp <- readRDS('data/fp2.RDS')
+NASISPEDONS <- readRDS("data/NASISPEDONS3.RDS")
+fp <- readRDS('data/fp3.RDS')
+
+if(F){
+  newpedons <- soilDB::fetchNASIS(from = "pedons", rmHzErrors = FALSE, SS = FALSE)
+  newsite <- aqp::site(newpedons)
+  NASISPEDONS.m <- NASISPEDONS %>% subset(!siteiid %in%  newsite$siteiid)
+  newsite$erocl <- as.character(newsite$erocl)
+  NASISPEDONS.m2 <- NASISPEDONS.m %>% dplyr::bind_rows(newsite)
+  fp.m <- fp %>% subset(!siteiid %in%  newpedons$siteiid)
+  fp.m <- fp.m %>% aqp::combine(newpedons)
+  saveRDS(NASISPEDONS.m, "data/NASISPEDONS3.RDS", )
+  saveRDS(fp.m, 'data/fp3.RDS')
+}
 
 names(NASISPEDONS)[names(NASISPEDONS) == "x_std"] <- 'Std.Longitude'
 names(NASISPEDONS)[names(NASISPEDONS) == "y_std"] <- 'Std.Latitude'
@@ -158,6 +170,7 @@ sortsoils <- unique(
   #VEGOBS <- subset(VEGOBS,Soil %in% sortsoils & !Observation_Label %in% remove |Observation_Label %in% add )
   #
   obsids <- c('s20210805.02','s20220720.001','s20220719.001','s20220719.002')
+  ALLVEGOBS  <- VEGOBS
   VEGOBS <- subset(VEGOBS,Soil %in% sortsoils & !Observation_Type %in% c('Bogus', 'Floristic','Site Index') | Observation_Label %in% obsids)
   ngroups <- 8
   soilgroup <- 'wetloamy'
