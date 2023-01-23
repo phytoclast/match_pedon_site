@@ -35,8 +35,9 @@ for (i in 1:nrow(obs.geom2)){#i=400 length(db)
     geomIntersection = FALSE,
     db = c("SSURGO")
   )
+  if(class(ssurgo.i)[1] %in% "try-error"){ssurgo.i <- cbind(mukey="try-error", muname="try-error")}
   if(!is.null(ssurgo.i)){
-    ssurgo.i <-  cbind(list(obs.id = obs.geom.i$Observation_ID[1]), ssurgo.i)}
+    ssurgo.i <-  cbind(list(obs.id = obs.geom.i$Observation_ID[1]), ssurgo.i) %>% as.data.frame()}
   else{
     ssurgo.i <-  list(obs.id = obs.geom.i$Observation_ID[1], mukey = NA, muname = NA)}
   if(is.null(ssurgo)){
