@@ -10,7 +10,8 @@ Run  03.USNVC_compare_specieslists_loop_by_plot.R in USNVC project
 
 Run "04.aggregate_plot_summary_handpicked.R" to summarize species composition by group.
 
-
+#alternative ----
+Run "Master.R" for consolidated scripts. But may need to Run "01.get_spatial_soil.R" to refresh ssurgo.RDS lookup after new plot data is recorded.
 
 
 NASIS Query:
